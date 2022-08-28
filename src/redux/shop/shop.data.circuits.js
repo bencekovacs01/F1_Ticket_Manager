@@ -2,7 +2,8 @@ const CIRCUIT_DATA = {
   circuits: [
     {
       circuitId: 'albert_park',
-      url: 'http://en.wikipedia.org/wiki/Melbourne_Grand_Prix_Circuit',
+      // url: 'http://en.wikipedia.org/wiki/Melbourne_Grand_Prix_Circuit',
+      url: 'https://i.ibb.co/ZYW3VTp/brown-brim.png',
       CircuitName: 'Albert Park Grand Prix Circuit',
       lat: '-37.8497',
       long: '144.968',

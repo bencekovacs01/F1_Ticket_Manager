@@ -45,7 +45,7 @@ export const addCollectionAndDocuments = async (
   objectsToAdd
 ) => {
   const collectionRef = firestore.collection(collectionKey);
-  console.log(collectionRef);
+  // console.log(collectionRef);
 
   const batch = firestore.batch();
   // const newDocRef = collectionKey.doc();
@@ -60,13 +60,16 @@ export const addCollectionAndDocuments = async (
 
 export const convertCollectionsSnapshotToMap = collections => {
   const tranformedCollection = collections.docs.map(doc => {
-    const { CircuitName, Country } = doc.data();
+    const { CircuitName, Country, Locality, url } = doc.data();
+    // console.log('Snapshot info: ' + CircuitName);
 
     return {
       // routeName: encodeURI(title.toLowerCase()),
       id: doc.id,
       CircuitName,
       Country,
+      Locality,
+      url,
     };
   });
 
