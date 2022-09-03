@@ -17,7 +17,7 @@ export function* fetchCollectionsAsync() {
 
   try {
     const collectionRef = firestore.collection('Circuits');
-    console.log(collectionRef);
+    // console.log(collectionRef);
     const snapshot = yield collectionRef.get();
     // console.log(snapshot);
 
@@ -25,7 +25,13 @@ export function* fetchCollectionsAsync() {
       convertCollectionsSnapshotToMap,
       snapshot
     );
-    yield put(fetchCollectionsSuccess(collectionsMap));
+    const finalCollectionsMap = Object.values(collectionsMap);
+    finalCollectionsMap.sort((circuitA, circuitB) =>
+      circuitA.round > circuitB.round ? 1 : -1
+    );
+    console.log(finalCollectionsMap);
+
+    yield put(fetchCollectionsSuccess(finalCollectionsMap));
   } catch (error) {
     yield put(fetchCollectionsFailure(error.message));
   }

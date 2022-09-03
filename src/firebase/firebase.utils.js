@@ -48,20 +48,18 @@ export const addCollectionAndDocuments = async (
   // console.log(collectionRef);
 
   const batch = firestore.batch();
-  // const newDocRef = collectionKey.doc();
-  // batch.set(newDocRef, objectToAdd);
+
   objectsToAdd.forEach(obj => {
     const newDocRef = collectionRef.doc();
     batch.set(newDocRef, obj);
   });
-
   return await batch.commit();
 };
 
 export const convertCollectionsSnapshotToMap = collections => {
   const tranformedCollection = collections.docs.map(doc => {
-    const { CircuitName, Country, Locality, url } = doc.data();
-    // console.log('Snapshot info: ' + CircuitName);
+    const { CircuitName, Country, Locality, url, circuitId, round } =
+      doc.data();
 
     return {
       // routeName: encodeURI(title.toLowerCase()),
@@ -69,12 +67,14 @@ export const convertCollectionsSnapshotToMap = collections => {
       CircuitName,
       Country,
       Locality,
+      circuitId,
       url,
+      round,
     };
   });
 
   return tranformedCollection.reduce((accumulator, collection) => {
-    accumulator[collection.CircuitName.toLowerCase()] = collection;
+    accumulator[collection.circuitId] = collection;
     return accumulator;
   }, {});
 };
