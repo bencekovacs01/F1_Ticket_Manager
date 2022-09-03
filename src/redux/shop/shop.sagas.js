@@ -13,7 +13,7 @@ import {
 } from './shop.actions';
 
 export function* fetchCollectionsAsync() {
-  yield console.log('I am fired');
+  yield console.log('Fetching Circuits from database...');
 
   try {
     const collectionRef = firestore.collection('Circuits');
@@ -25,11 +25,12 @@ export function* fetchCollectionsAsync() {
       convertCollectionsSnapshotToMap,
       snapshot
     );
+
+    // Convert collectionsMap Object to List
     const finalCollectionsMap = Object.values(collectionsMap);
     finalCollectionsMap.sort((circuitA, circuitB) =>
       circuitA.round > circuitB.round ? 1 : -1
     );
-    console.log(finalCollectionsMap);
 
     yield put(fetchCollectionsSuccess(finalCollectionsMap));
   } catch (error) {

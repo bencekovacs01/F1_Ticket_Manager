@@ -1,4 +1,6 @@
 .collections-overview {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  flex-direction: row;
+  // justify-content: space-evenly;
 }

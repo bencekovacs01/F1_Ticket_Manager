@@ -13,7 +13,6 @@ const CollectionItem = ({ item }) => {
     <div className="collection-item">
       <div className="image" style={{ backgroundImage: `url(${url})` }}></div>
       <div className="collection-footer">
-        {/* {console.log(url)} */}
         <span className="name">{circuitId}</span>
         <span className="price">{Locality}</span>
       </div>

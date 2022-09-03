@@ -22,10 +22,6 @@ class App extends React.Component {
   componentDidMount() {
     const { checkUserSession, collectionsArray } = this.props;
     checkUserSession();
-
-    // collectionsArray[0].forEach(obj => {
-    //   console.log(obj.circuitId);
-    // });
     // addCollectionAndDocuments('Circuits', collectionsArray[0]);
   }
 

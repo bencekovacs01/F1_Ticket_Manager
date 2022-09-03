@@ -1,6 +1,8 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 
+import Logo from '../../assets/F1.svg';
+
 const StripeCheckoutButton = ({ price }) => {
   const priceForStripe = price * 100;
   const publishableKey =
@@ -13,11 +15,10 @@ const StripeCheckoutButton = ({ price }) => {
   return (
     <StripeCheckout
       label="Pay Now"
-      name="CRWN Clothing Ltd."
+      name="F1 Ticket Manager™"
       billingAddress
       shippingAddress
-      image="https://sendeyo.com/up/d/f3eb2117da
-      "
+      image={Logo}
       description={`Your total is $${price}`}
       amount={priceForStripe}
       panelLabel="Pay Now"

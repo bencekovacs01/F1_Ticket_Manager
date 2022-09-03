@@ -1,17 +1,23 @@
 .collection-item {
-  width: 22vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  height: 350px;
+  height: 25vw;
   align-items: center;
   position: relative;
+  overflow: visible;
 
   .image {
     width: 100%;
-    height: 95%;
+    height: 100%;
+    // background-color: black;
     background-size: cover;
     background-position: center;
-    margin-bottom: 5px;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 
   .custom-button {

@@ -2,8 +2,7 @@ const CIRCUIT_DATA = {
   circuits: [
     {
       circuitId: 'albert_park',
-      // url: 'http://en.wikipedia.org/wiki/Melbourne_Grand_Prix_Circuit',
-      url: 'https://i.ibb.co/ZYW3VTp/brown-brim.png',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Australia_Circuit.png.transform/7col/image.png',
       CircuitName: 'Albert Park Grand Prix Circuit',
       Locality: 'Melbourne',
       Country: 'Australia',
@@ -11,7 +10,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'americas',
-      url: 'http://en.wikipedia.org/wiki/Circuit_of_the_Americas',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/USA_Circuit.png.transform/7col/image.png',
       CircuitName: 'Circuit of the Americas',
       Locality: 'Austin',
       Country: 'USA',
@@ -19,7 +18,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'bahrain',
-      url: 'http://en.wikipedia.org/wiki/Bahrain_International_Circuit',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Bahrain_Circuit.png.transform/9col/image.png',
       CircuitName: 'Bahrain International Circuit',
       Locality: 'Sakhir',
       Country: 'Bahrain',
@@ -27,7 +26,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'baku',
-      url: 'http://en.wikipedia.org/wiki/Baku_City_Circuit',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Baku_Circuit.png.transform/7col/image.png',
       CircuitName: 'Baku City Circuit',
       Locality: 'Baku',
       Country: 'Azerbaijan',
@@ -35,7 +34,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'catalunya',
-      url: 'http://en.wikipedia.org/wiki/Circuit_de_Barcelona-Catalunya',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Spain_Circuit.png.transform/7col/image.png',
       CircuitName: 'Circuit de Barcelona-Catalunya',
       Locality: 'Montmeló',
       Country: 'Spain',
@@ -43,7 +42,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'hungaroring',
-      url: 'http://en.wikipedia.org/wiki/Hungaroring',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Hungary_Circuit.png.transform/7col/image.png',
       CircuitName: 'Hungaroring',
       Locality: 'Budapest',
       Country: 'Hungary',
@@ -51,7 +50,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'imola',
-      url: 'http://en.wikipedia.org/wiki/Autodromo_Enzo_e_Dino_Ferrari',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Emilia_Romagna_Circuit.png.transform/7col/image.png',
       CircuitName: 'Autodromo Enzo e Dino Ferrari',
       Locality: 'Imola',
       Country: 'Italy',
@@ -59,7 +58,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'interlagos',
-      url: 'http://en.wikipedia.org/wiki/Aut%C3%B3dromo_Jos%C3%A9_Carlos_Pace',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Brazil_Circuit.png.transform/7col/image.png',
       CircuitName: 'Autódromo José Carlos Pace',
       Locality: 'São Paulo',
       Country: 'Brazil',
@@ -67,7 +66,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'jeddah',
-      url: 'http://en.wikipedia.org/wiki/Jeddah_Street_Circuit',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Saudi_Arabia_Circuit.png.transform/7col/image.png',
       CircuitName: 'Jeddah Corniche Circuit',
       Locality: 'Jeddah',
       Country: 'Saudi Arabia',
@@ -75,7 +74,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'marina_bay',
-      url: 'http://en.wikipedia.org/wiki/Marina_Bay_Street_Circuit',
+      url: 'https://www.formula1.com/content/dam/fom-website/manual/races/Singapore/singapore_track.png.transform/7col/image.png',
       CircuitName: 'Marina Bay Street Circuit',
       Locality: 'Marina Bay',
       Country: 'Singapore',
@@ -83,7 +82,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'miami',
-      url: 'http://en.wikipedia.org/wiki/Miami_International_Autodrome',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Miami_Circuit.png.transform/7col/image.png',
       CircuitName: 'Miami International Autodrome',
       Locality: 'Miami',
       Country: 'USA',
