@@ -29,7 +29,7 @@ const Header = ({ currentUser, hidden, signOutStart }) => (
       <Logo className="logo"></Logo>
     </LogoContainer>
     <OptionsContainer>
-      <OptionLink to="/shop">SHOP</OptionLink>
+      <OptionLink to="/shop">SCHEDULE</OptionLink>
       <OptionLink to="/shop">CONTACT</OptionLink>
       {currentUser ? (
         <OptionLink as="div" onClick={signOutStart /*() => auth.signOut()*/}>

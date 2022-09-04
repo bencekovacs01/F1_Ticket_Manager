@@ -6,22 +6,24 @@ import CustomButton from '../custom-button/custom-button.component';
 import { addItem } from '../../redux/cart/cart.actions';
 
 import './collection-item.styles.scss';
+import { withRouter } from 'react-router-dom';
 
-const CollectionItem = ({ item }) => {
-  const { circuitId, url, Locality } = item;
+const CollectionItem = ({ item, history, match }) => {
+  const { circuitId, url, round } = item;
   return (
     <div className="collection-item">
       <div className="image" style={{ backgroundImage: `url(${url})` }}></div>
-      <div className="collection-footer">
+      {/* <div className="collection-footer">
         <span className="name">{circuitId}</span>
         <span className="price">{Locality}</span>
-      </div>
+      </div> */}
       <CustomButton
         className="custom-button"
+        onClick={() => history.push(`${match.url}/${round}`)}
         // onClick={() => addItem(item)}
         inverted
       >
-        Add to cart
+        Browse tickets
       </CustomButton>
     </div>
   );
@@ -31,4 +33,4 @@ const mapDispatchToProps = dispatch => ({
   // addItem: item => dispatch(addItem(item)),
 });
 
-export default connect(null, mapDispatchToProps)(CollectionItem);
+export default withRouter(connect(null, mapDispatchToProps)(CollectionItem));

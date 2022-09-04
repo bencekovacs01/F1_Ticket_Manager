@@ -32,7 +32,7 @@ class ShopPage extends React.Component {
           // )} /*component={CollectionsOverview}*/
         />
         <Route
-          path={`${match.path}/:collectionId`}
+          path={`${match.path}/:round`}
           component={CollectionPageContainer}
           // render={props => (
           //   <CollectionPageWithSpinner

@@ -90,7 +90,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'monaco',
-      url: 'http://en.wikipedia.org/wiki/Circuit_de_Monaco',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Monoco_Circuit.png.transform/7col/image.png',
       CircuitName: 'Circuit de Monaco',
       Locality: 'Monte-Carlo',
       Country: 'Monaco',
@@ -98,7 +98,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'monza',
-      url: 'http://en.wikipedia.org/wiki/Autodromo_Nazionale_Monza',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Italy_Circuit.png.transform/7col/image.png',
       CircuitName: 'Autodromo Nazionale di Monza',
       Locality: 'Monza',
       Country: 'Italy',
@@ -106,7 +106,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'red_bull_ring',
-      url: 'http://en.wikipedia.org/wiki/Red_Bull_Ring',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Austria_Circuit.png.transform/7col/image.png',
       CircuitName: 'Red Bull Ring',
       Locality: 'Spielberg',
       Country: 'Austria',
@@ -114,7 +114,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'ricard',
-      url: 'http://en.wikipedia.org/wiki/Paul_Ricard_Circuit',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/France_Circuit.png.transform/7col/image.png',
       CircuitName: 'Circuit Paul Ricard',
       Locality: 'Le Castellet',
       Country: 'France',
@@ -122,7 +122,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'rodriguez',
-      url: 'http://en.wikipedia.org/wiki/Aut%C3%B3dromo_Hermanos_Rodr%C3%ADguez',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Mexico_Circuit.png.transform/7col/image.png',
       CircuitName: 'Autódromo Hermanos Rodríguez',
       Locality: 'Mexico City',
       Country: 'Mexico',
@@ -130,7 +130,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'silverstone',
-      url: 'http://en.wikipedia.org/wiki/Silverstone_Circuit',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Great_Britain_Circuit.png.transform/7col/image.png',
       CircuitName: 'Silverstone Circuit',
       Locality: 'Silverstone',
       Country: 'UK',
@@ -138,7 +138,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'spa',
-      url: 'http://en.wikipedia.org/wiki/Circuit_de_Spa-Francorchamps',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Belgium_Circuit.png.transform/7col/image.png',
       CircuitName: 'Circuit de Spa-Francorchamps',
       Locality: 'Spa',
       Country: 'Belgium',
@@ -146,7 +146,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'suzuka',
-      url: 'http://en.wikipedia.org/wiki/Suzuka_Circuit',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Japan_Circuit.png.transform/7col/image.png',
       CircuitName: 'Suzuka Circuit',
       Locality: 'Suzuka',
       Country: 'Japan',
@@ -154,7 +154,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'villeneuve',
-      url: 'http://en.wikipedia.org/wiki/Circuit_Gilles_Villeneuve',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Canada_Circuit.png.transform/7col/image.png',
       CircuitName: 'Circuit Gilles Villeneuve',
       Locality: 'Montreal',
       Country: 'Canada',
@@ -162,7 +162,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'yas_marina',
-      url: 'http://en.wikipedia.org/wiki/Yas_Marina_Circuit',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Abu_Dhabi_Circuit.png.transform/7col/image.png',
       CircuitName: 'Yas Marina Circuit',
       Locality: 'Abu Dhabi',
       Country: 'UAE',
@@ -170,7 +170,7 @@ const CIRCUIT_DATA = {
     },
     {
       circuitId: 'zandvoort',
-      url: 'http://en.wikipedia.org/wiki/Circuit_Zandvoort',
+      url: 'https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Netherlands_Circuit.png.transform/7col/image.png',
       CircuitName: ' Circuit Park Zandvoort',
       Locality: 'Zandvoort',
       Country: 'Netherlands',
