@@ -1,33 +1,35 @@
+import f1Logo from '../../assets/F1_black.svg';
+
 const INITIAL_STATE = {
   sections: [
     {
-      title: 'hats',
-      imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
+      title: 'TO BE MODIFIED',
+      imageUrl: f1Logo,
       id: 1,
       linkUrl: 'shop/hats',
     },
     {
-      title: 'jackets',
-      imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
+      title: 'TO BE MODIFIED',
+      imageUrl: f1Logo,
       id: 2,
       linkUrl: 'shop/jackets',
     },
     {
-      title: 'sneakers',
-      imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
+      title: 'TO BE MODIFIED',
+      imageUrl: f1Logo,
       id: 3,
       linkUrl: 'shop/sneakers',
     },
     {
-      title: 'womens',
-      imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
+      title: 'TO BE MODIFIED',
+      imageUrl: f1Logo,
       size: 'large',
       id: 4,
       linkUrl: 'shop/womens',
     },
     {
-      title: 'mens',
-      imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
+      title: 'TO BE MODIFIED',
+      imageUrl: f1Logo,
       size: 'large',
       id: 5,
       linkUrl: 'shop/mens',

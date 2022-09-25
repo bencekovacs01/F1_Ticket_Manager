@@ -62,7 +62,6 @@ export const convertCollectionsSnapshotToMap = collections => {
       doc.data();
 
     return {
-      // routeName: encodeURI(title.toLowerCase()),
       id: doc.id,
       CircuitName,
       Country,
@@ -78,24 +77,6 @@ export const convertCollectionsSnapshotToMap = collections => {
     return accumulator;
   }, {});
 };
-
-// export const convertCollectionsSnapshotToMap = collections => {
-//   const tranformedCollection = collections.docs.map(doc => {
-//     const { title, items } = doc.data();
-
-//     return {
-//       routeName: encodeURI(title.toLowerCase()),
-//       id: doc.id,
-//       title,
-//       items,
-//     };
-//   });
-
-//   return tranformedCollection.reduce((accumulator, collection) => {
-//     accumulator[collection.title.toLowerCase()] = collection;
-//     return accumulator;
-//   }, {});
-// };
 
 export const getCurrentUser = () => {
   return new Promise((resolve, reject) => {

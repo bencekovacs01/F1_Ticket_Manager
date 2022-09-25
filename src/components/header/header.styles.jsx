@@ -35,4 +35,8 @@ export const OptionLink = styled(Link)`
   font-size: 15px;
   // mix-blend-mode: difference;
   color: black;
+
+  &:hover {
+    color: red;
+  }
 `;
