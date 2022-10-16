@@ -1,5 +1,15 @@
-.collections-overview {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+@media (max-width: 2000px) {
+  .collections-overview {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 768px) {
+  .collections-overview {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
 }
