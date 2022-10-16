@@ -6,18 +6,15 @@ import './homepage.styles.scss';
 
 import { HomePageContainer } from './homepage.styles';
 
-import background_video from '../../assets/background_video.webm';
-
 const HomePage = () => (
   //  <HomePageContainer>
   <div className="homepage">
-    <video id="bgVideo" loop muted>
-      <source src={background_video} type="video/webm" />
-    </video>
-    <Directory />
-    {/* <button onClick={useRef().refs.backgroundVideo.play().bind(this)}>
-      PLAY
-    </button> */}
+    <div className="welcomeMessage">
+      <h1>WELCOME TO F1 Ticket Manager!</h1>
+      <h1>SELL YOUR TICKETS HERE</h1>
+    </div>
+
+    {/* <Directory /> */}
   </div>
 
   // </HomePageContainer>
