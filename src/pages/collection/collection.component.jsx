@@ -7,6 +7,8 @@ import { selectCollection } from '../../redux/shop/shop.selectors';
 
 import './collection.styles.scss';
 
+// import { ReactComponent as Data } from '../../assets/data.svg';
+
 const CollectionPage = ({ circuit }) => {
   const { CircuitName, Country } = circuit;
   return (
@@ -14,6 +16,7 @@ const CollectionPage = ({ circuit }) => {
       <h2 className="title">{CircuitName}</h2>
       <h2 className="title">{Country}</h2>
       <div className="items">
+        {/* <Data /> */}
         {/* {items.map(item => (
           <CollectionItem key={item.id} item={item} />
         ))} */}
