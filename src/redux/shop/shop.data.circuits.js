@@ -7,6 +7,16 @@ const CIRCUIT_DATA = {
       Locality: 'Melbourne',
       Country: 'Australia',
       round: 3,
+      packages: [
+        {
+          name: 'HERO',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'americas',

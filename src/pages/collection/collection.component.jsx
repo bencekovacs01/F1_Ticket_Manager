@@ -7,7 +7,11 @@ import { selectCollection } from '../../redux/shop/shop.selectors';
 
 import './collection.styles.scss';
 
-// import { ReactComponent as Data } from '../../assets/data.svg';
+// import { ReactComponent as Track } from './track.svg';
+
+// import './styles.scss';
+
+import Package from '../../components/packages/packages.component';
 
 const CollectionPage = ({ circuit }) => {
   const { CircuitName, Country } = circuit;
@@ -15,12 +19,13 @@ const CollectionPage = ({ circuit }) => {
     <div className="collection-page">
       <h2 className="title">{CircuitName}</h2>
       <h2 className="title">{Country}</h2>
-      <div className="items">
-        {/* <Data /> */}
-        {/* {items.map(item => (
-          <CollectionItem key={item.id} item={item} />
-        ))} */}
-      </div>
+      <p>HERO THURSDAY - SUNDAY</p>
+      <p>Champions Club 3-Days FRIDAY - SUNDAY</p>
+      <p>Champions Club Super Gold 3-Days FRIDAY - SUNDAY</p>
+      <Package {...circuit} />
+      {/* <div className="rightsidemapbg">
+        <Track className="track" />
+      </div> */}
     </div>
   );
 };

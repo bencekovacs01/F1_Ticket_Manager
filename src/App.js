@@ -18,6 +18,8 @@ import { checkUserSession } from './redux/user/user.actions';
 import { addCollectionAndDocuments } from './firebase/firebase.utils';
 import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
 
+// import ModalWindow from '../src/pages/homepage/modal/Modal';
+
 class App extends React.Component {
   componentDidMount() {
     const { checkUserSession, collectionsArray } = this.props;
@@ -28,6 +30,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        {/* <ModalWindow /> */}
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
