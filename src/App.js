@@ -18,7 +18,7 @@ import { checkUserSession } from './redux/user/user.actions';
 import { addCollectionAndDocuments } from './firebase/firebase.utils';
 import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
 
-// import ModalWindow from '../src/pages/homepage/modal/Modal';
+import ModalWindow from '../src/pages/homepage/modal/ModalWindow';
 
 class App extends React.Component {
   componentDidMount() {
@@ -30,7 +30,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {/* <ModalWindow /> */}
+        {/* <div className="attentionBox">
+          <ModalWindow />
+        </div> */}
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />

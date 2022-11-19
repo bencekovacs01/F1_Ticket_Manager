@@ -6,3 +6,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.attentionBox {
+  font-family: 'f1_1';
+  font-size: 30px;
+  text-align: center;
+}

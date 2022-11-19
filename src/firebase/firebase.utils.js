@@ -58,7 +58,7 @@ export const addCollectionAndDocuments = async (
 
 export const convertCollectionsSnapshotToMap = collections => {
   const tranformedCollection = collections.docs.map(doc => {
-    const { CircuitName, Country, Locality, url, circuitId, round } =
+    const { CircuitName, Country, Locality, url, circuitId, round, packages } =
       doc.data();
 
     return {
@@ -69,6 +69,7 @@ export const convertCollectionsSnapshotToMap = collections => {
       circuitId,
       url,
       round,
+      packages,
     };
   });
 

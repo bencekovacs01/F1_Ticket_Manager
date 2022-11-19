@@ -1,0 +1,12 @@
+.packages {
+  width: 500px;
+  display: grid;
+  align-items: center;
+  flex-direction: column;
+  //   border: 5px dotted black;
+}
+
+.package {
+  width: 50%;
+  height: 150px;
+}

@@ -33,6 +33,16 @@ const CIRCUIT_DATA = {
       Locality: 'Sakhir',
       Country: 'Bahrain',
       round: 1,
+      packages: [
+        {
+          name: 'HERO',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'baku',
