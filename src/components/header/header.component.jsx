@@ -24,7 +24,7 @@ import {
   OptionLink,
 } from './header.styles';
 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const Header = ({ currentUser, hidden, signOutStart }) => {
   let timeout;
@@ -49,7 +49,7 @@ const Header = ({ currentUser, hidden, signOutStart }) => {
   return (
     <div className="header">
       {/* <HeaderContainer> */}
-      <Link className="logo-container" to="/">
+      <Link className="logo-container" to="/F1_Ticket_Manager">
         {/* <LogoContainer to="/"> */}
         <Logo className="logo"></Logo>
         {/* </LogoContainer> */}
@@ -70,6 +70,7 @@ const Header = ({ currentUser, hidden, signOutStart }) => {
           // </OptionLink>
           <Link
             className="option"
+            to="/F1_Ticket_Manager"
             as="div"
             onClick={signOutStart /*() => auth.signOut()*/}
           >

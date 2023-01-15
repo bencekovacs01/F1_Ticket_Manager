@@ -11,4 +11,5 @@ a {
   font-family: 'f1_1';
   font-size: 30px;
   text-align: center;
+  z-index: 10;
 }

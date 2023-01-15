@@ -22,8 +22,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UserActionTypes.SIGN_UP_FAILURE:
     case UserActionTypes.SIGN_OUT_FAILURE:
     case UserActionTypes.SIGN_IN_FAILURE:
-      if (action.payload.code.includes('user-not-found')) {
-        alert('user is not registered! Please sign up first!');
+      if (
+        action.payload.code.includes('user-not-found') ||
+        action.payload.code.includes('wrong-password')
+      ) {
+        alert('Wrong Email or Password! Please try again or register!');
       }
       return {
         ...state,
