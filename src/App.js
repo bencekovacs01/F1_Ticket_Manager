@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -11,18 +11,14 @@ import CheckoutPage from './pages/checkout/checkout.component';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 
-// import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 
-import { addCollectionAndDocuments } from './firebase/firebase.utils';
-import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
-
-import ModalWindow from '../src/pages/homepage/modal/ModalWindow';
+// import { addCollectionAndDocuments } from './firebase/firebase.utils';
 
 class App extends React.Component {
   componentDidMount() {
-    const { checkUserSession, collectionsArray } = this.props;
+    const { checkUserSession } = this.props;
     checkUserSession();
     // addCollectionAndDocuments('Circuits', collectionsArray[0]);
   }
@@ -42,7 +38,7 @@ class App extends React.Component {
             exact
             path="/signin"
             render={() =>
-              this.props.checkUserSession ? (
+              this.props.currentUser ? (
                 <Redirect to="/F1_Ticket_Manager" />
               ) : (
                 <SignInAndSignUpPage />
@@ -57,7 +53,6 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  collectionsArray: selectCollectionsForPreview,
 });
 
 const mapDispatchToProps = dispatch => ({
