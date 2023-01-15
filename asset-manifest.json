@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/F1_Ticket_Manager/static/css/main.ccf2f47b.css",
-    "main.js": "/F1_Ticket_Manager/static/js/main.78cd530b.js",
+    "main.js": "/F1_Ticket_Manager/static/js/main.ceca2a78.js",
     "static/media/bg_22.jpg": "/F1_Ticket_Manager/static/media/bg_22.de65b7702a05aca3067e.jpg",
     "static/media/f1_3.ttf": "/F1_Ticket_Manager/static/media/f1_3.eb4817363f5ec9d88064.ttf",
     "static/media/f1_2.ttf": "/F1_Ticket_Manager/static/media/f1_2.a10812e5dfa71f8496d3.ttf",
@@ -11,10 +11,10 @@
     "static/media/F1.svg": "/F1_Ticket_Manager/static/media/F1.071f00fcc01d19842d2863342f93dd65.svg",
     "index.html": "/F1_Ticket_Manager/index.html",
     "main.ccf2f47b.css.map": "/F1_Ticket_Manager/static/css/main.ccf2f47b.css.map",
-    "main.78cd530b.js.map": "/F1_Ticket_Manager/static/js/main.78cd530b.js.map"
+    "main.ceca2a78.js.map": "/F1_Ticket_Manager/static/js/main.ceca2a78.js.map"
   },
   "entrypoints": [
     "static/css/main.ccf2f47b.css",
-    "static/js/main.78cd530b.js"
+    "static/js/main.ceca2a78.js"
   ]
 }
