@@ -1,3 +1,8 @@
+import { useState } from 'react';
+import { getUserCart } from '../../firebase/firebase.utils';
+import { establishCart } from '../cart/cart.actions';
+import { addItemToCart } from '../cart/cart.utils';
+import { store } from '../store';
 import UserActionTypes from './user.types';
 
 const INITIAL_STATE = {
@@ -8,6 +13,13 @@ const INITIAL_STATE = {
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case UserActionTypes.SIGN_IN_SUCCESS:
+      getUserCart().then(cart => {
+        if (cart) {
+          store.dispatch(establishCart(cart));
+        } else {
+          alert('Could not load cart!');
+        }
+      });
       return {
         ...state,
         currentUser: action.payload,

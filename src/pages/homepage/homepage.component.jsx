@@ -15,7 +15,7 @@ const HomePage = () => (
       <ModalWindow />
     </div>
     <div className="welcomeMessage">
-      <h1>WELCOME TO F1 Ticket Manager!</h1>
+      <h1>Welcome to F1 Ticket Manager!</h1>
     </div>
     {/* <Directory /> */}
   </div>

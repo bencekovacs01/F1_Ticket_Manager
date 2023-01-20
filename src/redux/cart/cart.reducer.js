@@ -1,3 +1,6 @@
+import { connect } from 'react-redux';
+import { getUserCart, updateUserCart } from '../../firebase/firebase.utils';
+import { establishCart } from './cart.actions';
 import { CartActionTypes } from './cart.types';
 import { addItemToCart, removeItemFromCart } from './cart.utils';
 
@@ -6,15 +9,25 @@ const INITIAL_STATE = {
   cartItems: [],
 };
 
-const cartReducer = (state = INITIAL_STATE, action) => {
+const CartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case CartActionTypes.ESTABLISH_CART: {
+      return {
+        ...state,
+        cartItems: action.payload,
+      };
+    }
     case CartActionTypes.TOGGLE_CART_HIDDEN:
       return {
         ...state,
         hidden: !state.hidden,
       };
     case CartActionTypes.ADD_ITEM:
-      // alert(`Item ${action.payload} added to cart!`);
+      updateUserCart({
+        type: action.payload[0],
+        interval: action.payload[1],
+        quantity: 1,
+      });
       return {
         ...state,
         cartItems: addItemToCart(state.cartItems, action.payload),
@@ -41,4 +54,4 @@ const cartReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default cartReducer;
+export default CartReducer;

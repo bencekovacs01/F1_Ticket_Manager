@@ -56,6 +56,41 @@ export const addCollectionAndDocuments = async (
   return await batch.commit();
 };
 
+export const getUserCart = async () => {
+  const docRef = firestore.collection('users').doc(auth.currentUser.uid);
+  try {
+    const doc = await docRef.get();
+    return doc.data().cart;
+  } catch (error) {
+    console.error('Error getting cart: ', error);
+    return null;
+  }
+};
+
+export const updateUserCart = async updates => {
+  const docRef = firestore.collection('users').doc(auth.currentUser.uid);
+
+  try {
+    const doc = await docRef.get();
+    let cart = doc.data().cart || [];
+    let found = false;
+
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i].type === updates.type) {
+        found = true;
+        cart[i].quantity += updates.quantity;
+        break;
+      }
+    }
+    if (!found) {
+      cart.push(updates);
+    }
+    await docRef.update({ cart });
+  } catch (error) {
+    console.error('Error updating document: ', error);
+  }
+};
+
 export const convertCollectionsSnapshotToMap = collections => {
   const tranformedCollection = collections.docs.map(doc => {
     const { CircuitName, Country, Locality, url, circuitId, round, packages } =

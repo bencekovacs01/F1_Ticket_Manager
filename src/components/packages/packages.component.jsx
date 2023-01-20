@@ -19,7 +19,11 @@ const Package = ({ packages, addItem }) => {
             <li key={item[0]}>{item[0]}</li>
             <li key={item[1]}>{item[1]}</li>
           </ul>
-          <CustomButton className="custom-button" onClick={() => addItem(item)}>
+          <CustomButton
+            key={item.className}
+            className="custom-button"
+            onClick={() => addItem(item)}
+          >
             ORDER!
           </CustomButton>
         </div>
