@@ -16,16 +16,16 @@ const CheckoutPage = ({ cartItems, total }) => (
   <div className="checkout-page">
     <div className="checkout-header">
       <div className="header-block">
-        <span>Product</span>
+        <span>Circuit</span>
       </div>
       <div className="header-block">
-        <span>Description</span>
+        <span>Ticket Type</span>
       </div>
       <div className="header-block">
         <span>Quantity</span>
       </div>
       <div className="header-block">
-        <span>Price</span>
+        <span>Interval</span>
       </div>
       <div className="header-block">
         <span>Remove</span>
@@ -36,14 +36,15 @@ const CheckoutPage = ({ cartItems, total }) => (
     ))}
 
     <div className="total">
-      <span>TOTAL: ${total}</span>
+      {/* <span>TOTAL: ${total}</span> */}
+      <span>TOTAL: $TBD</span>
     </div>
     <div className="test-warning">
       *Please use the following credit card for payments*
       <br />
       4242 4242 4242 4242 - Exp: 12/34 - CVV: 123
     </div>
-    <StripeCheckoutButton price={total} />
+    <StripeCheckoutButton price=/*{total}*/'TBD' />
   </div>
 );
 

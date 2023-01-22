@@ -14,12 +14,23 @@ import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 
-// import { addCollectionAndDocuments } from './firebase/firebase.utils';
+import { addCollectionAndDocuments } from './firebase/firebase.utils';
+import {
+  selectCollection,
+  selectCollections,
+  selectCollectionsForPreview,
+} from './redux/shop/shop.selectors';
 
 class App extends React.Component {
   componentDidMount() {
-    const { checkUserSession } = this.props;
+    const { checkUserSession, collectionsArray } = this.props;
     checkUserSession();
+
+    // console.log('Collections:' + collectionsArray[0]);
+
+    // collectionsArray[0].forEach(element => {
+    //   console.log(element.packages[1]);
+    // });
     // addCollectionAndDocuments('Circuits', collectionsArray[0]);
   }
 
@@ -53,6 +64,7 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  collectionsArray: selectCollectionsForPreview,
 });
 
 const mapDispatchToProps = dispatch => ({

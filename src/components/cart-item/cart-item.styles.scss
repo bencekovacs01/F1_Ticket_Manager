@@ -3,9 +3,11 @@
   display: flex;
   height: 80px;
   margin-bottom: 15px;
+  font-family: f1_2;
 
   img {
     width: 30%;
+    padding: 10px;
   }
 
   .item-details {
@@ -14,7 +16,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    padding: 10px 20px;
+    padding: 10px 5px 0px 0px;
 
     .name {
       font-size: 16px;

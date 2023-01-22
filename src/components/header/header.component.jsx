@@ -82,7 +82,7 @@ const Header = ({ currentUser, hidden, signOutStart }) => {
             SIGN IN
           </Link>
         )}
-        <CartIcon />
+        {currentUser ? <CartIcon /> : null}
         {/* </OptionsContainer> */}
       </div>
       {hidden ? null : <CartDropdown />}

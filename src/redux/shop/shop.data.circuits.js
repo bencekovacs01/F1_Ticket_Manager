@@ -9,11 +9,11 @@ const CIRCUIT_DATA = {
       round: 3,
       packages: [
         {
-          name: 'HERO',
+          name: 'HERO_1',
           period: 'THURSDAY - SUNDAY',
         },
         {
-          name: 'Champions Club 3-Days',
+          name: 'Champions Club 3-Days - 1',
           period: 'FRIDAY - SUNDAY',
         },
       ],
@@ -25,6 +25,16 @@ const CIRCUIT_DATA = {
       Locality: 'Austin',
       Country: 'USA',
       round: 19,
+      packages: [
+        {
+          name: 'HERO_2',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 2',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'bahrain',
@@ -35,11 +45,11 @@ const CIRCUIT_DATA = {
       round: 1,
       packages: [
         {
-          name: 'HERO',
+          name: 'HERO_3',
           period: 'THURSDAY - SUNDAY',
         },
         {
-          name: 'Champions Club 3-Days',
+          name: 'Champions Club 3-Days - 3',
           period: 'FRIDAY - SUNDAY',
         },
       ],
@@ -51,6 +61,16 @@ const CIRCUIT_DATA = {
       Locality: 'Baku',
       Country: 'Azerbaijan',
       round: 8,
+      packages: [
+        {
+          name: 'HERO_4',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 4',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'catalunya',
@@ -59,6 +79,16 @@ const CIRCUIT_DATA = {
       Locality: 'Montmeló',
       Country: 'Spain',
       round: 6,
+      packages: [
+        {
+          name: 'HERO_5',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 5',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'hungaroring',
@@ -67,6 +97,16 @@ const CIRCUIT_DATA = {
       Locality: 'Budapest',
       Country: 'Hungary',
       round: 13,
+      packages: [
+        {
+          name: 'HERO_6',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 6',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'imola',
@@ -75,6 +115,16 @@ const CIRCUIT_DATA = {
       Locality: 'Imola',
       Country: 'Italy',
       round: 4,
+      packages: [
+        {
+          name: 'HERO_7',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 7',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'interlagos',
@@ -83,6 +133,16 @@ const CIRCUIT_DATA = {
       Locality: 'São Paulo',
       Country: 'Brazil',
       round: 21,
+      packages: [
+        {
+          name: 'HERO_8',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 8',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'jeddah',
@@ -91,6 +151,16 @@ const CIRCUIT_DATA = {
       Locality: 'Jeddah',
       Country: 'Saudi Arabia',
       round: 2,
+      packages: [
+        {
+          name: 'HERO_9',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 9',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'marina_bay',
@@ -99,6 +169,16 @@ const CIRCUIT_DATA = {
       Locality: 'Marina Bay',
       Country: 'Singapore',
       round: 17,
+      packages: [
+        {
+          name: 'HERO_10',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 10',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'miami',
@@ -107,6 +187,16 @@ const CIRCUIT_DATA = {
       Locality: 'Miami',
       Country: 'USA',
       round: 5,
+      packages: [
+        {
+          name: 'HERO_11',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 11',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'monaco',
@@ -115,6 +205,16 @@ const CIRCUIT_DATA = {
       Locality: 'Monte-Carlo',
       Country: 'Monaco',
       round: 7,
+      packages: [
+        {
+          name: 'HERO_12',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 12',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'monza',
@@ -123,6 +223,16 @@ const CIRCUIT_DATA = {
       Locality: 'Monza',
       Country: 'Italy',
       round: 16,
+      packages: [
+        {
+          name: 'HERO_13',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 13',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'red_bull_ring',
@@ -131,6 +241,16 @@ const CIRCUIT_DATA = {
       Locality: 'Spielberg',
       Country: 'Austria',
       round: 11,
+      packages: [
+        {
+          name: 'HERO_14',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 14',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'ricard',
@@ -139,6 +259,16 @@ const CIRCUIT_DATA = {
       Locality: 'Le Castellet',
       Country: 'France',
       round: 12,
+      packages: [
+        {
+          name: 'HERO_15',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 15',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'rodriguez',
@@ -147,6 +277,16 @@ const CIRCUIT_DATA = {
       Locality: 'Mexico City',
       Country: 'Mexico',
       round: 20,
+      packages: [
+        {
+          name: 'HERO_16',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 16',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'silverstone',
@@ -155,6 +295,16 @@ const CIRCUIT_DATA = {
       Locality: 'Silverstone',
       Country: 'UK',
       round: 10,
+      packages: [
+        {
+          name: 'HERO_17',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 17',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'spa',
@@ -163,6 +313,16 @@ const CIRCUIT_DATA = {
       Locality: 'Spa',
       Country: 'Belgium',
       round: 14,
+      packages: [
+        {
+          name: 'HERO_18',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 18',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'suzuka',
@@ -171,6 +331,16 @@ const CIRCUIT_DATA = {
       Locality: 'Suzuka',
       Country: 'Japan',
       round: 18,
+      packages: [
+        {
+          name: 'HERO_19',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 19',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'villeneuve',
@@ -179,6 +349,16 @@ const CIRCUIT_DATA = {
       Locality: 'Montreal',
       Country: 'Canada',
       round: 9,
+      packages: [
+        {
+          name: 'HERO_20',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 20',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'yas_marina',
@@ -187,6 +367,16 @@ const CIRCUIT_DATA = {
       Locality: 'Abu Dhabi',
       Country: 'UAE',
       round: 22,
+      packages: [
+        {
+          name: 'HERO_21',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 21',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
     {
       circuitId: 'zandvoort',
@@ -195,6 +385,16 @@ const CIRCUIT_DATA = {
       Locality: 'Zandvoort',
       Country: 'Netherlands',
       round: 15,
+      packages: [
+        {
+          name: 'HERO_22',
+          period: 'THURSDAY - SUNDAY',
+        },
+        {
+          name: 'Champions Club 3-Days - 22',
+          period: 'FRIDAY - SUNDAY',
+        },
+      ],
     },
   ],
 };

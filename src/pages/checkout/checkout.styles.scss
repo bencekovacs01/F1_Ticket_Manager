@@ -1,21 +1,24 @@
 .checkout-page {
-  width: 55%;
+  width: 80%;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 50px auto 0;
+  font-family: f1_2;
 
   .checkout-header {
+    font-size: 20px;
+    font-family: f1_1;
     width: 100%;
     padding: 10px 0;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid darkgrey;
+    border-bottom: 2px solid darkgrey;
 
     .header-block {
       text-transform: capitalize;
-      width: 23%;
+      width: 100%;
 
       &:last-child {
         width: 8%;
@@ -26,7 +29,8 @@
   .total {
     margin-top: 30px;
     margin-left: auto;
-    font-size: 36px;
+    font-size: 33px;
+    font-family: f1_2;
   }
 
   button {

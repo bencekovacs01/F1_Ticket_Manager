@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import { getUserCart } from '../../firebase/firebase.utils';
 import { establishCart } from '../cart/cart.actions';
-import { addItemToCart } from '../cart/cart.utils';
 import { store } from '../store';
 import UserActionTypes from './user.types';
 
@@ -17,7 +15,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         if (cart) {
           store.dispatch(establishCart(cart));
         } else {
-          alert('Could not load cart!');
+          console.log('Could not load cart OR is empty!');
         }
       });
       return {

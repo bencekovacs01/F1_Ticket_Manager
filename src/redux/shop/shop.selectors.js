@@ -14,7 +14,6 @@ export const selectCollectionsForPreview = createSelector(
 );
 
 export const selectCollection = round =>
-  // console.log(collectionUrlParam);
   createSelector([selectCollections], collections =>
     collections ? collections[round - 1] : null
   );

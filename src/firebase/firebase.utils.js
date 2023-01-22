@@ -45,8 +45,6 @@ export const addCollectionAndDocuments = async (
   objectsToAdd
 ) => {
   const collectionRef = firestore.collection(collectionKey);
-  // console.log(collectionRef);
-
   const batch = firestore.batch();
 
   objectsToAdd.forEach(obj => {
@@ -60,7 +58,7 @@ export const getUserCart = async () => {
   const docRef = firestore.collection('users').doc(auth.currentUser.uid);
   try {
     const doc = await docRef.get();
-    return doc.data().cart;
+    return await doc.data().cart.filter(item => item.quantity !== 0);
   } catch (error) {
     console.error('Error getting cart: ', error);
     return null;
@@ -68,24 +66,44 @@ export const getUserCart = async () => {
 };
 
 export const updateUserCart = async updates => {
+  if (updates.type == null) {
+    return;
+  }
+  console.log('TYPE');
+  console.log(updates.type);
   const docRef = firestore.collection('users').doc(auth.currentUser.uid);
 
   try {
     const doc = await docRef.get();
     let cart = doc.data().cart || [];
+    // console.log('CART:');
+    // console.log(cart);
     let found = false;
+
+    console.log('!!UPDATES:');
+    console.log(updates);
 
     for (let i = 0; i < cart.length; i++) {
       if (cart[i].type === updates.type) {
         found = true;
-        cart[i].quantity += updates.quantity;
+        cart[i].url = updates.url;
+        if (updates.quantity === 0) {
+          cart[i].quantity = 0;
+        } else {
+          cart[i].quantity += updates.quantity;
+        }
         break;
       }
     }
     if (!found) {
       cart.push(updates);
     }
-    await docRef.update({ cart });
+
+    // Removing 0 quantity items
+    cart = cart.filter(item => item.quantity !== 0);
+    await docRef.set({ cart });
+    console.log(cart);
+    console.log('CART UPDATED');
   } catch (error) {
     console.error('Error updating document: ', error);
   }

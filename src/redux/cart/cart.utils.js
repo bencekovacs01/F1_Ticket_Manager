@@ -1,31 +1,40 @@
+import { updateUserCart } from '../../firebase/firebase.utils';
+
 export const addItemToCart = (cartItems, cartItemToAdd) => {
-  // console.log(cartItemToAdd[0]);
   const existingCartItem = cartItems.find(
-    // cartItem => cartItem.id === cartItemToAdd.id
-    cartItem => cartItem[0] === cartItemToAdd[0]
+    cartItem => cartItem.type === cartItemToAdd.type
   );
 
   if (existingCartItem) {
     return cartItems.map(cartItem =>
-      cartItem[0] === cartItemToAdd[0]
+      cartItem.type === cartItemToAdd.type
         ? { ...cartItem, quantity: cartItem.quantity + 1 }
         : cartItem
     );
   }
-  return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
+  // return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
+  return [];
 };
 
 export const removeItemFromCart = (cartItems, cartItemToRemove) => {
+  updateUserCart({
+    type: cartItemToRemove.type,
+    interval: cartItemToRemove.interval,
+    url: cartItemToRemove.url,
+    quantity: -1,
+  });
   const existingCartItem = cartItems.find(
-    cartItem => cartItem.id === cartItemToRemove.id
+    cartItem => cartItem.type === cartItemToRemove.type
   );
 
   if (existingCartItem.quantity === 1) {
-    return cartItems.filter(cartItem => cartItem.id !== cartItemToRemove.id);
+    return cartItems.filter(
+      cartItem => cartItem.type !== cartItemToRemove.type
+    );
   }
 
   return cartItems.map(cartItem =>
-    cartItem.id === cartItemToRemove.id
+    cartItem.type === cartItemToRemove.type
       ? { ...cartItem, quantity: cartItem.quantity - 1 }
       : cartItem
   );

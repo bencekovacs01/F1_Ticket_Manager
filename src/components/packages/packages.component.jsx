@@ -6,10 +6,10 @@ import CustomButton from '../custom-button/custom-button.component';
 
 import './packages.styles.scss';
 
-const Package = ({ packages, addItem }) => {
+const Package = ({ url, packages, addItem }) => {
   const items = [];
   for (let i = 0; i < packages.length; i++) {
-    items.push([packages[i].name, packages[i].period]);
+    items.push([packages[i].name, packages[i].period, url]);
   }
   return (
     <div className="packages">
@@ -18,13 +18,22 @@ const Package = ({ packages, addItem }) => {
           <ul className="list-items">
             <li key={item[0]}>{item[0]}</li>
             <li key={item[1]}>{item[1]}</li>
+            <img
+              className="picture"
+              key={item[2]}
+              src={item[2]}
+              alt="Circuit"
+              hidden={true}
+            />
           </ul>
           <CustomButton
             key={item.className}
             className="custom-button"
-            onClick={() => addItem(item)}
+            onClick={() =>
+              addItem({ type: item[0], interval: item[1], url: item[2] })
+            }
           >
-            ORDER!
+            Add to cart
           </CustomButton>
         </div>
       ))}

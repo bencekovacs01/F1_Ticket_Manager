@@ -9,8 +9,9 @@ import { selectCartItems } from '../../redux/cart/cart.selectors';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
 import './cart-dropdown.styles.scss';
+import { v4 as uuidv4 } from 'uuid';
 
-const CartDropdown = ({ cartItems, history, dispatch }) => (
+const CartDropdown = ({ v4 = uuidv4(), cartItems, history, dispatch }) => (
   <div className="cart-dropdown">
     <div className="cart-items">
       {cartItems.length ? (
@@ -18,7 +19,18 @@ const CartDropdown = ({ cartItems, history, dispatch }) => (
           <CartItem key={cartItem.id} item={cartItem} />
         ))
       ) : (
-        <span className="empty-message">Your cart is empty</span>
+        <div className="loader" />
+        // <span className="empty-message">
+        //   {/* {setInterval(() => {
+        //     v4 = uuidv4();
+        //     console.log('RELOADED');
+        //   }, 5000)} */}
+        //   {cartItems.length === 0 ? (
+        //     <div className="loader" />
+        //   ) : (
+        //     'Your cart is empty or failed to load!'
+        //   )}
+        // </span>
       )}
     </div>
     <CustomButton

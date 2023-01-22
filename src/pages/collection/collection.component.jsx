@@ -19,9 +19,6 @@ const CollectionPage = ({ circuit }) => {
     <div className="collection-page">
       <h2 className="title">{CircuitName}</h2>
       <h2 className="title">{Country}</h2>
-      {/* <p>HERO THURSDAY - SUNDAY</p>
-      <p>Champions Club 3-Days FRIDAY - SUNDAY</p>
-      <p>Champions Club Super Gold 3-Days FRIDAY - SUNDAY</p> */}
       <Package {...circuit} />
       {/* <div className="rightsidemapbg">
         <Track className="track" />
