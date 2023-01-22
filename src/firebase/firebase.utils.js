@@ -101,7 +101,7 @@ export const updateUserCart = async updates => {
 
     // Removing 0 quantity items
     cart = cart.filter(item => item.quantity !== 0);
-    await docRef.set({ cart });
+    await docRef.update({ cart });
     console.log(cart);
     console.log('CART UPDATED');
   } catch (error) {
