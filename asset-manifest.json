@@ -1,20 +1,21 @@
 {
   "files": {
-    "main.css": "/F1_Ticket_Manager/static/css/main.be5281d0.css",
-    "main.js": "/F1_Ticket_Manager/static/js/main.e2e4e62f.js",
+    "main.css": "/F1_Ticket_Manager/static/css/main.96bd34d9.css",
+    "main.js": "/F1_Ticket_Manager/static/js/main.16895e2a.js",
     "static/media/bg_22.jpg": "/F1_Ticket_Manager/static/media/bg_22.de65b7702a05aca3067e.jpg",
     "static/media/f1_3.ttf": "/F1_Ticket_Manager/static/media/f1_3.eb4817363f5ec9d88064.ttf",
     "static/media/f1_2.ttf": "/F1_Ticket_Manager/static/media/f1_2.a10812e5dfa71f8496d3.ttf",
     "static/media/f1_1.ttf": "/F1_Ticket_Manager/static/media/f1_1.7d77e146d9a9f5d930aa.ttf",
+    "static/media/remove.png": "/F1_Ticket_Manager/static/media/remove.c9905959564083764497.png",
     "static/media/F1_black.svg": "/F1_Ticket_Manager/static/media/F1_black.f086b4ab1562c76160ae29c3bd39fe76.svg",
     "static/media/shopping-bag.svg": "/F1_Ticket_Manager/static/media/shopping-bag.a688874f6f1507316bdfa420328a4a53.svg",
     "static/media/F1.svg": "/F1_Ticket_Manager/static/media/F1.071f00fcc01d19842d2863342f93dd65.svg",
     "index.html": "/F1_Ticket_Manager/index.html",
-    "main.be5281d0.css.map": "/F1_Ticket_Manager/static/css/main.be5281d0.css.map",
-    "main.e2e4e62f.js.map": "/F1_Ticket_Manager/static/js/main.e2e4e62f.js.map"
+    "main.96bd34d9.css.map": "/F1_Ticket_Manager/static/css/main.96bd34d9.css.map",
+    "main.16895e2a.js.map": "/F1_Ticket_Manager/static/js/main.16895e2a.js.map"
   },
   "entrypoints": [
-    "static/css/main.be5281d0.css",
-    "static/js/main.e2e4e62f.js"
+    "static/css/main.96bd34d9.css",
+    "static/js/main.16895e2a.js"
   ]
 }
