@@ -49,7 +49,7 @@ const Header = ({ currentUser, hidden, signOutStart }) => {
   return (
     <div className="header">
       {/* <HeaderContainer> */}
-      <Link className="logo-container" to="/">
+      <Link className="logo-container" to="/home">
         {/* <LogoContainer to="/"> */}
         <Logo className="logo"></Logo>
         {/* </LogoContainer> */}
@@ -70,7 +70,7 @@ const Header = ({ currentUser, hidden, signOutStart }) => {
           // </OptionLink>
           <Link
             className="option"
-            to="/"
+            to="/home"
             as="div"
             onClick={signOutStart /*() => auth.signOut()*/}
           >

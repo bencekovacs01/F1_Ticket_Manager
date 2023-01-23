@@ -19,7 +19,7 @@ import { store, persistor } from './redux/store';
 const root = ReactDOMClient.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/F1_Ticket_Manager">
       <PersistGate persistor={persistor}>
         <App />
       </PersistGate>
