@@ -70,7 +70,7 @@ const Header = ({ currentUser, hidden, signOutStart }) => {
           // </OptionLink>
           <Link
             className="option"
-            to="/F1_Ticket_Manager"
+            to="/"
             as="div"
             onClick={signOutStart /*() => auth.signOut()*/}
           >
