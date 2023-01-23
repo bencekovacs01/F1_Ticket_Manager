@@ -49,7 +49,7 @@ const Header = ({ currentUser, hidden, signOutStart }) => {
   return (
     <div className="header">
       {/* <HeaderContainer> */}
-      <Link className="logo-container" to="/F1_Ticket_Manager">
+      <Link className="logo-container" to="/">
         {/* <LogoContainer to="/"> */}
         <Logo className="logo"></Logo>
         {/* </LogoContainer> */}
