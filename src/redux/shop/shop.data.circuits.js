@@ -11,10 +11,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_1',
           period: 'THURSDAY - SUNDAY',
+          price: 1,
         },
         {
           name: 'Champions Club 3-Days - 1',
           period: 'FRIDAY - SUNDAY',
+          price: 11,
         },
       ],
     },
@@ -29,10 +31,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_2',
           period: 'THURSDAY - SUNDAY',
+          price: 2,
         },
         {
           name: 'Champions Club 3-Days - 2',
           period: 'FRIDAY - SUNDAY',
+          price: 12,
         },
       ],
     },
@@ -47,10 +51,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_3',
           period: 'THURSDAY - SUNDAY',
+          price: 3,
         },
         {
           name: 'Champions Club 3-Days - 3',
           period: 'FRIDAY - SUNDAY',
+          price: 13,
         },
       ],
     },
@@ -65,10 +71,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_4',
           period: 'THURSDAY - SUNDAY',
+          price: 4,
         },
         {
           name: 'Champions Club 3-Days - 4',
           period: 'FRIDAY - SUNDAY',
+          price: 14,
         },
       ],
     },
@@ -83,10 +91,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_5',
           period: 'THURSDAY - SUNDAY',
+          price: 5,
         },
         {
           name: 'Champions Club 3-Days - 5',
           period: 'FRIDAY - SUNDAY',
+          price: 15,
         },
       ],
     },
@@ -101,10 +111,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_6',
           period: 'THURSDAY - SUNDAY',
+          price: 6,
         },
         {
           name: 'Champions Club 3-Days - 6',
           period: 'FRIDAY - SUNDAY',
+          price: 16,
         },
       ],
     },
@@ -119,10 +131,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_7',
           period: 'THURSDAY - SUNDAY',
+          price: 7,
         },
         {
           name: 'Champions Club 3-Days - 7',
           period: 'FRIDAY - SUNDAY',
+          price: 17,
         },
       ],
     },
@@ -137,10 +151,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_8',
           period: 'THURSDAY - SUNDAY',
+          price: 8,
         },
         {
           name: 'Champions Club 3-Days - 8',
           period: 'FRIDAY - SUNDAY',
+          price: 18,
         },
       ],
     },
@@ -155,10 +171,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_9',
           period: 'THURSDAY - SUNDAY',
+          price: 9,
         },
         {
           name: 'Champions Club 3-Days - 9',
           period: 'FRIDAY - SUNDAY',
+          price: 19,
         },
       ],
     },
@@ -173,10 +191,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_10',
           period: 'THURSDAY - SUNDAY',
+          price: 10,
         },
         {
           name: 'Champions Club 3-Days - 10',
           period: 'FRIDAY - SUNDAY',
+          price: 20,
         },
       ],
     },
@@ -191,10 +211,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_11',
           period: 'THURSDAY - SUNDAY',
+          price: 11,
         },
         {
           name: 'Champions Club 3-Days - 11',
           period: 'FRIDAY - SUNDAY',
+          price: 21,
         },
       ],
     },
@@ -209,10 +231,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_12',
           period: 'THURSDAY - SUNDAY',
+          price: 12,
         },
         {
           name: 'Champions Club 3-Days - 12',
           period: 'FRIDAY - SUNDAY',
+          price: 22,
         },
       ],
     },
@@ -227,10 +251,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_13',
           period: 'THURSDAY - SUNDAY',
+          price: 13,
         },
         {
           name: 'Champions Club 3-Days - 13',
           period: 'FRIDAY - SUNDAY',
+          price: 23,
         },
       ],
     },
@@ -245,10 +271,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_14',
           period: 'THURSDAY - SUNDAY',
+          price: 14,
         },
         {
           name: 'Champions Club 3-Days - 14',
           period: 'FRIDAY - SUNDAY',
+          price: 24,
         },
       ],
     },
@@ -263,10 +291,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_15',
           period: 'THURSDAY - SUNDAY',
+          price: 15,
         },
         {
           name: 'Champions Club 3-Days - 15',
           period: 'FRIDAY - SUNDAY',
+          price: 25,
         },
       ],
     },
@@ -281,10 +311,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_16',
           period: 'THURSDAY - SUNDAY',
+          price: 16,
         },
         {
           name: 'Champions Club 3-Days - 16',
           period: 'FRIDAY - SUNDAY',
+          price: 26,
         },
       ],
     },
@@ -299,10 +331,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_17',
           period: 'THURSDAY - SUNDAY',
+          price: 17,
         },
         {
           name: 'Champions Club 3-Days - 17',
           period: 'FRIDAY - SUNDAY',
+          price: 27,
         },
       ],
     },
@@ -317,10 +351,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_18',
           period: 'THURSDAY - SUNDAY',
+          price: 18,
         },
         {
           name: 'Champions Club 3-Days - 18',
           period: 'FRIDAY - SUNDAY',
+          price: 28,
         },
       ],
     },
@@ -335,10 +371,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_19',
           period: 'THURSDAY - SUNDAY',
+          price: 19,
         },
         {
           name: 'Champions Club 3-Days - 19',
           period: 'FRIDAY - SUNDAY',
+          price: 29,
         },
       ],
     },
@@ -353,10 +391,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_20',
           period: 'THURSDAY - SUNDAY',
+          price: 20,
         },
         {
           name: 'Champions Club 3-Days - 20',
           period: 'FRIDAY - SUNDAY',
+          price: 30,
         },
       ],
     },
@@ -371,10 +411,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_21',
           period: 'THURSDAY - SUNDAY',
+          price: 21,
         },
         {
           name: 'Champions Club 3-Days - 21',
           period: 'FRIDAY - SUNDAY',
+          price: 31,
         },
       ],
     },
@@ -389,10 +431,12 @@ const CIRCUIT_DATA = {
         {
           name: 'HERO_22',
           period: 'THURSDAY - SUNDAY',
+          price: 22,
         },
         {
           name: 'Champions Club 3-Days - 22',
           period: 'FRIDAY - SUNDAY',
+          price: 32,
         },
       ],
     },

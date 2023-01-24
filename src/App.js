@@ -21,17 +21,22 @@ import {
   selectCollectionsForPreview,
 } from './redux/shop/shop.selectors';
 
+import CIRCUIT_DATA from './redux/shop/shop.data.circuits';
+
 class App extends React.Component {
   componentDidMount() {
     const { checkUserSession, collectionsArray } = this.props;
     checkUserSession();
+
+    // console.log('DATA');
+    // console.log(CIRCUIT_DATA.circuits);
 
     // console.log('Collections:' + collectionsArray[0]);
 
     // collectionsArray[0].forEach(element => {
     //   console.log(element.packages[1]);
     // });
-    // addCollectionAndDocuments('Circuits', collectionsArray[0]);
+    // addCollectionAndDocuments('Circuits', CIRCUIT_DATA.circuits);
   }
 
   render() {

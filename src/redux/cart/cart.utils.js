@@ -17,12 +17,6 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
 };
 
 export const removeItemFromCart = (cartItems, cartItemToRemove) => {
-  updateUserCart({
-    type: cartItemToRemove.type,
-    interval: cartItemToRemove.interval,
-    url: cartItemToRemove.url,
-    quantity: -1,
-  });
   const existingCartItem = cartItems.find(
     cartItem => cartItem.type === cartItemToRemove.type
   );

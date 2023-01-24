@@ -27,6 +27,7 @@ const CartReducer = (state = INITIAL_STATE, action) => {
         type: action.payload.type,
         interval: action.payload.interval,
         url: action.payload.url,
+        price: action.payload.price,
         quantity: 1,
       }).then(() => {
         getUserCart().then(cart => {
@@ -58,6 +59,13 @@ const CartReducer = (state = INITIAL_STATE, action) => {
         cartItems: [],
       };
     case CartActionTypes.REMOVE_ITEM:
+      updateUserCart({
+        type: action.payload.type,
+        interval: action.payload.interval,
+        url: action.payload.url,
+        price: action.payload.price,
+        quantity: -1,
+      });
       return {
         ...state,
         cartItems: removeItemFromCart(state.cartItems, action.payload),

@@ -9,43 +9,53 @@ import { selectCartItems } from '../../redux/cart/cart.selectors';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
 import './cart-dropdown.styles.scss';
-import { v4 as uuidv4 } from 'uuid';
 
-const CartDropdown = ({ v4 = uuidv4(), cartItems, history, dispatch }) => (
-  <div className="cart-dropdown">
-    <div className="cart-items">
-      {cartItems.length ? (
-        cartItems.map(cartItem => (
-          <CartItem key={cartItem.id} item={cartItem} />
-        ))
-      ) : (
-        <div className="loader" />
-        // <span className="empty-message">
-        //   {/* {setInterval(() => {
-        //     v4 = uuidv4();
-        //     console.log('RELOADED');
-        //   }, 5000)} */}
-        //   {cartItems.length === 0 ? (
-        //     <div className="loader" />
-        //   ) : (
-        //     'Your cart is empty or failed to load!'
-        //   )}
-        // </span>
-      )}
-    </div>
-    <CustomButton
-      onClick={() => {
-        history.push('/checkout');
-        dispatch(toggleCartHidden());
-      }}
-    >
-      GO TO CHECKOUT
-    </CustomButton>
-  </div>
-);
+class CartDropdown extends React.Component {
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
 
-const mapStateToPtops = createStructuredSelector({
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+  handleClickOutside = event => {
+    if (!event.target.closest('.cart-dropdown')) {
+      this.handleClickOutsideCartDropdown();
+    }
+  };
+
+  handleClickOutsideCartDropdown() {
+    // this.props.dispatch(toggleCartHidden());
+  }
+
+  render() {
+    const { cartItems, history, dispatch } = this.props;
+    return (
+      <div className="cart-dropdown">
+        <div className="cart-items">
+          {cartItems.length ? (
+            cartItems.map(cartItem => (
+              <CartItem key={cartItem.id} item={cartItem} />
+            ))
+          ) : (
+            <div className="loader" />
+          )}
+        </div>
+        <CustomButton
+          onClick={() => {
+            history.push('/checkout');
+            dispatch(toggleCartHidden());
+          }}
+        >
+          GO TO CHECKOUT
+        </CustomButton>
+      </div>
+    );
+  }
+}
+const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
 });
 
-export default withRouter(connect(mapStateToPtops)(CartDropdown));
+export default withRouter(connect(mapStateToProps)(CartDropdown));

@@ -11,7 +11,7 @@ import './checkout-item.styles.scss';
 import removeIcon from '../../assets/remove.png';
 
 const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
-  const { type, url, interval, quantity } = cartItem;
+  const { type, url, interval, quantity, price } = cartItem;
   return (
     <div className="checkout-item">
       <div className="image-container">
@@ -32,6 +32,8 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
           &#10095;
         </div>
       </span>
+      <span className="price">${price}</span>
+      <span className="price">${quantity * price}</span>
       <span className="interval">{interval}</span>
       <div className="remove-button" onClick={() => clearItem(cartItem)}>
         <img src={removeIcon} alt="Remove item" />

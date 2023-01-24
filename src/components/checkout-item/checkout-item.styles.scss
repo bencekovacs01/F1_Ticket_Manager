@@ -8,8 +8,8 @@
   align-items: center;
 
   .image-container {
-    width: 23%;
-    padding-right: 15px;
+    width: 15%;
+    padding-right: 35px;
 
     img {
       width: 100%;
@@ -17,10 +17,27 @@
     }
   }
 
+  .name {
+    padding-right: 10px;
+  }
+
+  .quantity {
+    padding-left: 40px;
+  }
+
+  .price {
+    padding-left: 25px;
+  }
+
+  .interval {
+    padding-right: 200px;
+  }
+
   .quantity,
   .name,
-  .interval {
-    width: 23%;
+  .interval,
+  .price {
+    width: 20%;
   }
 
   .quantity {
@@ -39,7 +56,6 @@
   .remove-button img {
     width: 100%;
     height: 30px;
-    padding-left: 12px;
     cursor: pointer;
   }
 }
