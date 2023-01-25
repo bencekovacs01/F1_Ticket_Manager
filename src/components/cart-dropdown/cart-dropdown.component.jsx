@@ -20,13 +20,16 @@ class CartDropdown extends React.Component {
   }
 
   handleClickOutside = event => {
-    if (!event.target.closest('.cart-dropdown')) {
+    if (
+      !event.target.closest('.cart-dropdown') &&
+      !event.target.closest('.header')
+    ) {
       this.handleClickOutsideCartDropdown();
     }
   };
 
   handleClickOutsideCartDropdown() {
-    // this.props.dispatch(toggleCartHidden());
+    this.props.dispatch(toggleCartHidden());
   }
 
   render() {

@@ -1,7 +1,10 @@
 import React from 'react';
 import styles from './Modal.module.scss';
 
+import Cookies from 'universal-cookie';
+
 const Modal = ({ setIsOpen }) => {
+  const cookies = new Cookies();
   return (
     <>
       <div className={styles.darkBG} /* onClick={() => setIsOpen(false)} */ />
@@ -28,7 +31,10 @@ const Modal = ({ setIsOpen }) => {
             <div className={styles.actionsContainer}>
               <button
                 className={styles.deleteBtn}
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  setIsOpen(false);
+                  cookies.set('modalAccepted', 'true', { path: '/' });
+                }}
               >
                 Understood
               </button>

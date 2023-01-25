@@ -21,7 +21,7 @@ import {
   selectCollectionsForPreview,
 } from './redux/shop/shop.selectors';
 
-import CIRCUIT_DATA from './redux/shop/shop.data.circuits';
+// import CIRCUIT_DATA from './redux/shop/shop.data.circuits';
 
 class App extends React.Component {
   componentDidMount() {

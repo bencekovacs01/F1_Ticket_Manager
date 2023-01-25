@@ -25,8 +25,9 @@ import {
 } from './header.styles';
 
 import { Link, useHistory } from 'react-router-dom';
+import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
-const Header = ({ currentUser, hidden, signOutStart }) => {
+const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
   let timeout;
   let scroll = 0;
   useEffect(() => {
@@ -57,11 +58,19 @@ const Header = ({ currentUser, hidden, signOutStart }) => {
       {/* <OptionsContainer> */}
       <div className="options">
         {/* <OptionLink to="/schedule">SCHEDULE</OptionLink> */}
-        <Link className="option" to="/schedule">
+        <Link
+          className="option"
+          to="/schedule"
+          onClick={hidden ? null : hideDropdown}
+        >
           SCHEDULE
         </Link>
         {/* <OptionLink to="/shop">CONTACT</OptionLink> */}
-        <Link className="option" to="/contact">
+        <Link
+          className="option"
+          to="/contact"
+          onClick={hidden ? null : hideDropdown}
+        >
           CONTACT
         </Link>
         {currentUser ? (
@@ -72,7 +81,10 @@ const Header = ({ currentUser, hidden, signOutStart }) => {
             className="option"
             to="/"
             as="div"
-            onClick={signOutStart /*() => auth.signOut()*/}
+            onClick={event => {
+              signOutStart();
+              hidden ? void 0 : hideDropdown();
+            }}
           >
             SIGN OUT
           </Link>
@@ -99,6 +111,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
   signOutStart: () => dispatch(signOutStart()),
+  hideDropdown: () => dispatch(toggleCartHidden()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
