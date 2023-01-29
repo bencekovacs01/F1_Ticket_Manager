@@ -38,8 +38,8 @@ class CartDropdown extends React.Component {
       <div className="cart-dropdown">
         <div className="cart-items">
           {cartItems.length ? (
-            cartItems.map(cartItem => (
-              <CartItem key={cartItem.id} item={cartItem} />
+            cartItems.map((cartItem, index) => (
+              <CartItem key={index} item={cartItem} />
             ))
           ) : (
             <div className="loader" />
@@ -57,6 +57,7 @@ class CartDropdown extends React.Component {
     );
   }
 }
+
 const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
 });

@@ -2,16 +2,6 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 
-// const config = {
-//   apiKey: 'AIzaSyDDS18q6YRFwu5_wB62PWYll6noreHq5vU',
-//   authDomain: 'crwn-db-f05eb.firebaseapp.com',
-//   projectId: 'crwn-db-f05eb',
-//   storageBucket: 'crwn-db-f05eb.appspot.com',
-//   messagingSenderId: '323031600393',
-//   appId: '1:323031600393:web:2e33212315d64f275697d8',
-//   measurementId: 'G-K3TTD10B6M',
-// };
-
 const firebaseConfig = {
   apiKey: 'AIzaSyCkV4qHipu33BRkxdWDtfNukBULHvdTsB8',
   authDomain: 'ticket-manager-46c6d.firebaseapp.com',
@@ -66,22 +56,15 @@ export const getUserCart = async () => {
 };
 
 export const updateUserCart = async updates => {
-  if (updates.type == null) {
+  if (!updates.type) {
     return;
   }
-  console.log('TYPE');
-  console.log(updates.type);
   const docRef = firestore.collection('users').doc(auth.currentUser.uid);
 
   try {
     const doc = await docRef.get();
     let cart = doc.data().cart || [];
-    // console.log('CART:');
-    // console.log(cart);
     let found = false;
-
-    console.log('!!UPDATES:');
-    console.log(updates);
 
     for (let i = 0; i < cart.length; i++) {
       if (cart[i].type === updates.type) {
@@ -102,7 +85,6 @@ export const updateUserCart = async updates => {
     // Removing 0 quantity items
     cart = cart.filter(item => item.quantity !== 0);
     await docRef.update({ cart });
-    console.log(cart);
     console.log('CART UPDATED');
   } catch (error) {
     console.error('Error updating document: ', error);
@@ -141,7 +123,6 @@ export const getCurrentUser = () => {
   });
 };
 
-// firebase.initializeApp(config);
 firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();

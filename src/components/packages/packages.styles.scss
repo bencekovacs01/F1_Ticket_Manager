@@ -1,12 +1,17 @@
 .packages {
-  width: 500px;
+  width: 100%;
   display: grid;
+  grid-template-columns: repeat(2, 1fr);
   align-items: center;
-  flex-direction: column;
-  //   border: 5px dotted black;
+  margin-left: 8%;
 }
 
 .package {
-  width: 50%;
-  height: 150px;
+  width: 100%;
+  height: max-content;
+  font-size: 23px;
+}
+
+.feedback {
+  margin-top: 50px;
 }

@@ -1,5 +1,12 @@
 import styled, { css } from 'styled-components';
 
+const disabledButtonStyles = css`
+  background-color: gray;
+  color: black;
+  border: none;
+  cursor: default;
+`;
+
 const buttonStyles = css`
   background-color: black;
   color: white;
@@ -36,6 +43,9 @@ const googleSignInStyles = css`
 const getButtonStyles = props => {
   if (props.isGoogleSignIn) {
     return googleSignInStyles;
+  }
+  if (props.isDisabled) {
+    return disabledButtonStyles;
   }
   return props.inverted ? invertedButtonStyles : buttonStyles;
 };

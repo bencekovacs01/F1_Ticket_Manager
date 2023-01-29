@@ -20,8 +20,18 @@ import { CustomButtonContainer } from './custom-button.styles';
 //   </button>
 // );
 
-const CustomButton = ({ children, ...props }) => (
-  <CustomButtonContainer {...props}>{children}</CustomButtonContainer>
-);
+const CustomButton = ({ children, enabled, ...props }) => {
+  return (
+    <CustomButtonContainer
+      styles={{
+        backgroundColor: enabled ? 'gray' : 'black',
+      }}
+      title={enabled ? null : 'Please sign in first or register!'}
+      {...props}
+    >
+      {children}
+    </CustomButtonContainer>
+  );
+};
 
 export default CustomButton;

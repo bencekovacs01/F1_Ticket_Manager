@@ -13,13 +13,9 @@ import {
 } from './shop.actions';
 
 export function* fetchCollectionsAsync() {
-  yield console.log('Fetching Circuits from database...');
-
   try {
     const collectionRef = firestore.collection('Circuits');
-    // console.log(collectionRef);
     const snapshot = yield collectionRef.get();
-    // console.log(snapshot);
 
     const collectionsMap = yield call(
       convertCollectionsSnapshotToMap,

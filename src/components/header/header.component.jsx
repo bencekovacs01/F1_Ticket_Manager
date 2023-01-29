@@ -2,10 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
 
-// import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
-// import { auth } from '../../firebase/firebase.utils';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
@@ -17,14 +15,14 @@ import { ReactComponent as Logo } from '../../assets/F1_black.svg';
 import './header.styles.scss';
 import '../../index.css';
 
-import {
-  HeaderContainer,
-  LogoContainer,
-  OptionsContainer,
-  OptionLink,
-} from './header.styles';
+// import {
+//   HeaderContainer,
+//   LogoContainer,
+//   OptionsContainer,
+//   OptionLink,
+// } from './header.styles';
 
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
 const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
@@ -32,12 +30,9 @@ const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
   let scroll = 0;
   useEffect(() => {
     window.onscroll = () => {
-      // if (timeout) {
-      //   clearTimeout(timeout);
-      // }
       timeout = setTimeout(() => {
         if (scroll >= window.scrollY && window.scrollY > 0) {
-          document.getElementsByClassName('header')[0].classList.add('sticky'); //.classList.add('sticky');
+          document.getElementsByClassName('header')[0].classList.add('sticky');
         } else {
           document
             .getElementsByClassName('header')[0]
@@ -79,9 +74,9 @@ const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
           // </OptionLink>
           <Link
             className="option"
-            to="/"
+            to="#"
             as="div"
-            onClick={event => {
+            onClick={() => {
               signOutStart();
               hidden ? void 0 : hideDropdown();
             }}
@@ -103,7 +98,6 @@ const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
   );
 };
 
-// auto passing state!
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
   hidden: selectCartHidden,

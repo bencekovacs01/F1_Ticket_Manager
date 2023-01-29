@@ -67,7 +67,7 @@ class SignUp extends React.Component {
   render() {
     const { displayName, email, password, confirmPassword } = this.state;
     return (
-      <div className="sign-up" autoComplete={false}>
+      <div className="sign-up">
         <h2 className="title">I do not have an account</h2>
         <span>Sign up with your email and password</span>
         <form className="sign-up-form" onSubmit={this.handleSubmit}>
@@ -93,6 +93,7 @@ class SignUp extends React.Component {
             value={password}
             onChange={this.handleChange}
             label="Password"
+            autoComplete="new-password"
             required
           ></FormInput>
           <FormInput
@@ -101,6 +102,7 @@ class SignUp extends React.Component {
             value={confirmPassword}
             onChange={this.handleChange}
             label="Confirm Password"
+            autoComplete="new-password"
             required
           ></FormInput>
           <CustomButton type="submit">SIGN UP</CustomButton>

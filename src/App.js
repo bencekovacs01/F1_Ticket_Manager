@@ -14,12 +14,9 @@ import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 
-import { addCollectionAndDocuments } from './firebase/firebase.utils';
-import {
-  selectCollection,
-  selectCollections,
-  selectCollectionsForPreview,
-} from './redux/shop/shop.selectors';
+// import { addCollectionAndDocuments } from './firebase/firebase.utils';
+import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
+import QrScannerPage from './pages/qr-scanner/qr-scanner-page.component';
 
 // import CIRCUIT_DATA from './redux/shop/shop.data.circuits';
 
@@ -31,8 +28,6 @@ class App extends React.Component {
     // console.log('DATA');
     // console.log(CIRCUIT_DATA.circuits);
 
-    // console.log('Collections:' + collectionsArray[0]);
-
     // collectionsArray[0].forEach(element => {
     //   console.log(element.packages[1]);
     // });
@@ -42,20 +37,32 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {/* <div className="attentionBox">
-          <ModalWindow />
-        </div> */}
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/schedule" component={ShopPage} />
-          <Route exact path="/checkout" component={CheckoutPage} />
+          <Route
+            exact
+            path="/checkout"
+            render={() =>
+              this.props.currentUser ? (
+                <CheckoutPage />
+              ) : (
+                <Redirect
+                  to={window.history.length > 1 ? window.history.back() : '/'}
+                />
+              )
+            }
+          />
+          <Route path="/contact" component={QrScannerPage} />
           <Route
             exact
             path="/signin"
             render={() =>
               this.props.currentUser ? (
-                <Redirect to="/" />
+                <Redirect
+                  to={window.history.length > 1 ? window.history.back() : '/'}
+                />
               ) : (
                 <SignInAndSignUpPage />
               )

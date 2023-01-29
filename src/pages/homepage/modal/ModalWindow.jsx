@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './App.module.scss';
+// import styles from './App.module.scss';
 
 import Modal from './Modal';
 import Cookies from 'universal-cookie';
@@ -17,14 +17,7 @@ const ModalWindow = () => {
   } else {
     isOpen = false;
   }
-  return (
-    <main>
-      {/* <button className={styles.primaryBtn} onClick={() => setIsOpen(true)}>
-        Open Modal
-      </button> */}
-      {isOpen && <Modal setIsOpen={setIsOpen} />}
-    </main>
-  );
+  return <main>{isOpen && <Modal setIsOpen={setIsOpen} />}</main>;
 };
 
 export default ModalWindow;

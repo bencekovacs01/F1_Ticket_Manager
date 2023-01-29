@@ -93,7 +93,6 @@ class SignIn extends React.Component {
               label="Reset email"
               required
             ></FormInput>
-            {/* // Input field for email */}
             <CustomButton type="submit">Forgot Password?</CustomButton>
           </div>
         </form>
