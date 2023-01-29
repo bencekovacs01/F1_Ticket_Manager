@@ -26,7 +26,6 @@ const CustomButton = ({ children, enabled, ...props }) => {
       styles={{
         backgroundColor: enabled ? 'gray' : 'black',
       }}
-      title={enabled ? null : 'Please sign in first or register!'}
       {...props}
     >
       {children}

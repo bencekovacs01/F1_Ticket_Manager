@@ -22,7 +22,7 @@ import QrScannerPage from './pages/qr-scanner/qr-scanner-page.component';
 
 class App extends React.Component {
   componentDidMount() {
-    const { checkUserSession, collectionsArray } = this.props;
+    const { checkUserSession /*, collectionsArray*/ } = this.props;
     checkUserSession();
 
     // console.log('DATA');

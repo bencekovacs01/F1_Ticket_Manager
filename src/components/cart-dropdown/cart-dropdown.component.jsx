@@ -9,6 +9,7 @@ import { selectCartItems } from '../../redux/cart/cart.selectors';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
 import './cart-dropdown.styles.scss';
+import Loader from '../loader/loader.component';
 
 class CartDropdown extends React.Component {
   componentDidMount() {
@@ -42,7 +43,7 @@ class CartDropdown extends React.Component {
               <CartItem key={index} item={cartItem} />
             ))
           ) : (
-            <div className="loader" />
+            <Loader />
           )}
         </div>
         <CustomButton

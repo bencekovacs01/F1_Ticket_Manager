@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import FormInput from '../form-input/form-input.component';
@@ -12,94 +12,124 @@ import {
 import { auth } from '../../firebase/firebase.utils';
 
 import './sign-in.styles.scss';
+import Loader from '../loader/loader.component';
 
-class SignIn extends React.Component {
-  constructor(props) {
-    super(props);
+const SignIn = ({ googleSignInStart, emailSignInStart }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [reset_email, setResetEmail] = useState('');
+  const [signInClicked, setSignInClicked] = useState(false);
+  const [googleSignInClicked, setGoogleSignInClicked] = useState(false);
 
-    this.state = {
-      email: '',
-      password: '',
-      reset_email: '',
-    };
-  }
-
-  handleSubmit = async event => {
-    event.preventDefault();
-    const { emailSignInStart } = this.props;
-    const { email, password } = this.state;
+  const handleSubmit = async event => {
     emailSignInStart(email, password);
+    setSignInClicked(false);
   };
 
-  handleChange = event => {
+  const handleChange = event => {
     const { value, name } = event.target;
-    this.setState({ [name]: value });
+    switch (name) {
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      case 'reset_email':
+        setResetEmail(value);
+        break;
+    }
   };
 
-  handleResetSubmit = async event => {
-    event.preventDefault();
-    await auth.sendPasswordResetEmail(this.state.reset_email);
+  const handleResetSubmit = async event => {
+    await auth.sendPasswordResetEmail(reset_email);
     alert(
       "Password reset email has been sent to '" +
-        this.state.reset_email +
+        reset_email +
         "'\n\n" +
         'If the email does not appear in a minute, please check your SPAM'
     );
+    setSignInClicked(false);
   };
 
-  render() {
-    const { googleSignInStart } = this.props;
-    return (
-      <div className="sign-in">
-        <h2>I already have an account</h2>
-        <span>Sign in with your email and password</span>
-
-        <form onSubmit={this.handleSubmit}>
-          <FormInput
-            name="email"
-            type="email"
-            handleChange={this.handleChange}
-            value={this.state.email}
-            label="Email"
-            required
-          ></FormInput>
-          <FormInput
-            name="password"
-            type="password"
-            value={this.state.password}
-            handleChange={this.handleChange}
-            label="Password"
-            required
-          ></FormInput>
-          <div className="buttons">
-            <CustomButton type="submit">Sign In</CustomButton>
+  return (
+    <div className="sign-in">
+      <h2>I already have an account</h2>
+      <span>Sign in with your email and password</span>
+      <form onSubmit={handleSubmit}>
+        <FormInput
+          name="email"
+          type="email"
+          handleChange={handleChange}
+          value={email}
+          label="Email"
+          required
+        ></FormInput>
+        <FormInput
+          name="password"
+          type="password"
+          value={password}
+          handleChange={handleChange}
+          label="Password"
+          required
+        ></FormInput>
+        <div className="buttons">
+          {signInClicked ? (
+            <button className="buttonload" enabled="false">
+              <i className="spinner">
+                <Loader />
+              </i>
+              Singing in...
+            </button>
+          ) : (
+            <CustomButton
+              type="submit"
+              onClick={() => {
+                handleSubmit();
+                setSignInClicked(true);
+              }}
+            >
+              Sign In
+            </CustomButton>
+          )}
+          {/* Sign in with Google */}
+          {googleSignInClicked ? (
+            <button className="buttonload" enabled="false">
+              <i className="spinner">
+                <Loader />
+              </i>
+              Singing in...
+            </button>
+          ) : (
             <CustomButton
               type="button"
-              onClick={googleSignInStart}
+              onClick={() => {
+                googleSignInStart();
+                setGoogleSignInClicked(true);
+              }}
               isGoogleSignIn
             >
               Sign in with Google
             </CustomButton>
-          </div>
-        </form>
-
-        <form onSubmit={this.handleResetSubmit} autoComplete="off">
-          <div className="resetPassword-main">
-            <FormInput
-              name="reset_email"
-              type="email"
-              value={this.state.reset_email}
-              handleChange={this.handleChange}
-              label="Reset email"
-              required
-            ></FormInput>
-            <CustomButton type="submit">Forgot Password?</CustomButton>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
+          )}
+        </div>
+      </form>
+      <form onSubmit={handleResetSubmit} autoComplete="off">
+        <div className="resetPassword-main">
+          <FormInput
+            name="reset_email"
+            type="email"
+            value={reset_email}
+            handleChange={handleChange}
+            label="Reset email"
+            required
+          ></FormInput>
+          <CustomButton type="submit">Forgot Password?</CustomButton>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 const mapDispatchToProps = dispatch => ({
   googleSignInStart: () => dispatch(googleSignInStart()),

@@ -25,12 +25,14 @@ import '../../index.css';
 import { Link } from 'react-router-dom';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
+import placeholderImage from '../../assets/placeholder_picture.png';
+
 const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
-  let timeout;
-  let scroll = 0;
+  // console.log(currentUser);
   useEffect(() => {
     window.onscroll = () => {
-      timeout = setTimeout(() => {
+      setTimeout(() => {
+        let scroll = 0;
         if (scroll >= window.scrollY && window.scrollY > 0) {
           document.getElementsByClassName('header')[0].classList.add('sticky');
         } else {
@@ -72,17 +74,30 @@ const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
           // <OptionLink as="div" onClick={signOutStart /*() => auth.signOut()*/}>
           //   SIGN OUT
           // </OptionLink>
-          <Link
-            className="option"
-            to="#"
-            as="div"
-            onClick={() => {
-              signOutStart();
-              hidden ? void 0 : hideDropdown();
-            }}
-          >
-            SIGN OUT
-          </Link>
+          <div className="signout">
+            <div className="profile">
+              {currentUser.displayName}
+              <img
+                alt="Profile"
+                className="picture"
+                src={
+                  currentUser.photoURL ? currentUser.photoURL : placeholderImage
+                }
+                referrerPolicy="no-referrer"
+              />
+            </div>
+            <Link
+              className="option"
+              to="#"
+              as="div"
+              onClick={() => {
+                signOutStart();
+                hidden ? void 0 : hideDropdown();
+              }}
+            >
+              SIGN OUT
+            </Link>
+          </div>
         ) : (
           // <OptionLink to="/signin">SIGN IN</OptionLink>
           <Link className="option" to="/signin">

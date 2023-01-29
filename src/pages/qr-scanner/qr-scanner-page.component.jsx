@@ -7,6 +7,7 @@ import './qr-scanner-page.styles.scss';
 
 const QrScannerPage = () => (
   <div className="generator">
+    {'Coming soon... 🏎️'}
     {/* <QrCode />
     <Crypto />
     <QRCodeScanner /> */}

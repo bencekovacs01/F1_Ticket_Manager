@@ -16,6 +16,21 @@
     top: 0;
   }
 
+  .signout {
+    text-align: center;
+    font-family: f1_2;
+    color: green;
+    font-size: 16px;
+    display: block;
+    flex-direction: row;
+    text-align: center;
+  }
+
+  .picture {
+    height: 33px;
+    margin-left: 5px;
+  }
+
   .logo-container {
     height: 100%;
     width: 70px;

@@ -1,4 +1,5 @@
 import React from 'react';
+import Loader from '../loader/loader.component';
 
 import { SpinnerContainer, SpinnerOverlay } from './with-spinner.styles';
 
@@ -9,7 +10,7 @@ const WithSpinner = WrappedComeponent => {
     return isLoading ? (
       <SpinnerOverlay>
         {/* <SpinnerContainer /> */}
-        <div className="loader" />
+        <Loader />
       </SpinnerOverlay>
     ) : (
       <WrappedComeponent {...otherProps} />
