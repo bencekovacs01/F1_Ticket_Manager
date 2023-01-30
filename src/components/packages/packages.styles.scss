@@ -1,17 +1,24 @@
 .packages {
-  width: 100%;
-  display: grid;
+  margin-top: 10px;
+  width: 90%;
+  font-family: f1_2;
+  display: flex;
   grid-template-columns: repeat(2, 1fr);
-  align-items: center;
-  margin-left: 8%;
 }
 
 .package {
-  width: 100%;
-  height: max-content;
-  font-size: 23px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 15%;
+  font-size: 20px;
+}
+
+.list-items {
+  list-style: none;
 }
 
 .feedback {
-  margin-top: 50px;
+  margin-top: 30px;
+  text-align: center;
 }

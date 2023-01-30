@@ -22,10 +22,11 @@ import '../../index.css';
 //   OptionLink,
 // } from './header.styles';
 
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
 import placeholderImage from '../../assets/placeholder_picture.png';
+import signOutImage from '../../assets/sign_out.svg';
 
 const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
   // console.log(currentUser);
@@ -74,9 +75,8 @@ const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
           // <OptionLink as="div" onClick={signOutStart /*() => auth.signOut()*/}>
           //   SIGN OUT
           // </OptionLink>
-          <div className="signout">
+          <>
             <div className="profile">
-              {currentUser.displayName}
               <img
                 alt="Profile"
                 className="picture"
@@ -85,26 +85,35 @@ const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
                 }
                 referrerPolicy="no-referrer"
               />
+              {currentUser.displayName}
+              <div className="popup">
+                <Link to="/profile" className="profile-link">
+                  Check Profile
+                </Link>
+                <Link
+                  className="option"
+                  to="#"
+                  as="div"
+                  onClick={() => {
+                    signOutStart();
+                    hidden ? void 0 : hideDropdown();
+                  }}
+                >
+                  <div className="signOutWrapper">
+                    SIGN OUT
+                    <img className="signOutImage" src={signOutImage} />
+                  </div>
+                </Link>
+              </div>
             </div>
-            <Link
-              className="option"
-              to="#"
-              as="div"
-              onClick={() => {
-                signOutStart();
-                hidden ? void 0 : hideDropdown();
-              }}
-            >
-              SIGN OUT
-            </Link>
-          </div>
+          </>
         ) : (
           // <OptionLink to="/signin">SIGN IN</OptionLink>
           <Link className="option" to="/signin">
             SIGN IN
           </Link>
         )}
-        {currentUser ? <CartIcon /> : null}
+        <div className="cartIcon">{currentUser ? <CartIcon /> : null}</div>
         {/* </OptionsContainer> */}
       </div>
       {hidden ? null : <CartDropdown />}

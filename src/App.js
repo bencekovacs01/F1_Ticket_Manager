@@ -68,6 +68,7 @@ class App extends React.Component {
               )
             }
           />
+          <Route path="/profile" component={QrScannerPage} />
         </Switch>
       </div>
     );
