@@ -15,17 +15,31 @@ const Modal = ({ setIsOpen }) => {
           </div>
           <div className={styles.modalContent}>
             <p>
-              The only purpose of this website is to imitate the process of
-              buying and validating tickets for Formula 1® Grand Prix weekends!
+              This website is made as thesis for
+              <a href="https://sapientia.ro/en">
+                &nbsp; Sapientia Hungarian University of Transylvania, Romania.
+              </a>
             </p>
             <p>
-              For buying the official tickets please visit
-              https://f1experiences.com/ or any related official sources!
+              The only purpose of this website is to imitate the process of
+              buying and validating tickets for Formula 1® Grand Prix weekends!
+              I do not claim that the tickets bought on this website are
+              official, thus they cannot be used!
+            </p>
+            <p>
+              For buying official tickets please visit&nbsp;
+              <a href="https://f1experiences.com">https://f1experiences.com/</a>
+              &nbsp;or any related official sources!
             </p>
             <p>
               All rights reserved by QuintEvents International and Formula One
               Digital Media Limited.
             </p>
+            <p>
+              By clicking 'Understood' you claim that you read and understood
+              all the information above and this window will not appear again!
+            </p>
+            <p>Enjoy surfing the website! 😃</p>
           </div>
           <div className={styles.modalActions}>
             <div className={styles.actionsContainer}>

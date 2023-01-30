@@ -17,8 +17,8 @@
 }
 
 .modal {
-  width: 500px;
-  height: 300px;
+  width: 600px;
+  height: 440px;
   background: white;
   color: white;
   z-index: 10;
@@ -35,11 +35,11 @@
 }
 
 .heading {
-  margin: 0;
+  margin: 10px;
   padding: 10px;
   color: #2c3e50;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 20px;
   text-align: center;
 }
 
@@ -69,7 +69,7 @@
   font-weight: 500;
   padding: 11px 28px;
   border-radius: 12px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   border: none;
   color: #fff;
   background: #ff3e4e;
@@ -80,4 +80,8 @@
   color: red;
   // box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
   background: black;
+}
+
+a {
+  color: red;
 }
