@@ -1,0 +1,90 @@
+.profile-page {
+  width: 100%;
+  justify-content: center;
+}
+
+.content {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.left-menu {
+  margin-left: 15%;
+  margin-top: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid rgb(212, 0, 0);
+  border-radius: 10px;
+  padding: 20px;
+  width: 270px;
+  font-weight: bold;
+  font-family: f1_2;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.right-menu {
+  margin-top: 40px;
+  width: 95%;
+  border: 1px solid black;
+  //   padding: 10px;
+}
+
+.right-menu span {
+  font-family: f1_2;
+  font-size: 25px;
+}
+
+.welcome {
+  text-align: center;
+  width: 100%;
+  font-family: f1_2;
+}
+
+.info {
+  font-size: 13px;
+  font-family: f1_3;
+  text-transform: uppercase;
+}
+
+.img-container {
+  position: relative;
+  cursor: pointer;
+  height: 150px;
+  margin-bottom: 30px;
+}
+
+.pic {
+  width: 150px;
+  height: 150px;
+}
+
+.blur {
+  filter: blur(3px);
+}
+
+.upload-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1em;
+  font-family: 'Courier New', Courier, monospace;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.editable-field {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  width: max-content;
+  height: max-content;
+  overflow: auto;
+  background-color: rgb(201, 200, 200);
+  border: 2px solid #ccc;
+  padding: 10px;
+}

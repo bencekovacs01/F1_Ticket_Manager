@@ -17,6 +17,7 @@ import { checkUserSession } from './redux/user/user.actions';
 // import { addCollectionAndDocuments } from './firebase/firebase.utils';
 import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
 import QrScannerPage from './pages/qr-scanner/qr-scanner-page.component';
+import ProfilePage from './pages/profile/profile.component';
 
 // import CIRCUIT_DATA from './redux/shop/shop.data.circuits';
 
@@ -68,7 +69,18 @@ class App extends React.Component {
               )
             }
           />
-          <Route path="/profile" component={QrScannerPage} />
+          <Route
+            path="/profile"
+            render={() =>
+              this.props.currentUser ? (
+                <ProfilePage />
+              ) : (
+                <Redirect
+                  to={window.history.length > 1 ? window.history.back() : '/'}
+                />
+              )
+            }
+          />
         </Switch>
       </div>
     );

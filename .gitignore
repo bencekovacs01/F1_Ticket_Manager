@@ -4,7 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-/src/assets/background_video.webm
 /src/assets/Ticket_Manager1.docx
 /src/assets/Ticket_Manager1.pdf
 

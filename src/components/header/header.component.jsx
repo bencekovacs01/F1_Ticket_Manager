@@ -22,24 +22,24 @@ import '../../index.css';
 //   OptionLink,
 // } from './header.styles';
 
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
 import placeholderImage from '../../assets/placeholder_picture.png';
 import signOutImage from '../../assets/sign_out.svg';
 
 const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
-  // console.log(currentUser);
   useEffect(() => {
+    let scroll = 0;
     window.onscroll = () => {
       setTimeout(() => {
-        let scroll = 0;
+        const headerEl = document.getElementsByClassName('header')[0];
         if (scroll >= window.scrollY && window.scrollY > 0) {
-          document.getElementsByClassName('header')[0].classList.add('sticky');
+          headerEl.classList.add('sticky');
+          headerEl.style.transition = 'all 0.5s ease-in-out';
         } else {
-          document
-            .getElementsByClassName('header')[0]
-            .classList.remove('sticky');
+          headerEl.classList.remove('sticky');
+          headerEl.style.transition = '';
         }
         scroll = window.scrollY;
       });
