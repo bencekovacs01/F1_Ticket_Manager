@@ -61,7 +61,7 @@ const CheckoutPage = ({ cartItems, total, clearCart }) => {
       >
         Place test order
       </button>
-      <StripeCheckoutButton price={total} cartItems={cartItems} />
+      <StripeCheckoutButton total={total} cartItems={cartItems} />
     </div>
   );
 };

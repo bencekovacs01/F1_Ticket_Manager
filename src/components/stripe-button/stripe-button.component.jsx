@@ -6,15 +6,15 @@ import Logo from '../../assets/F1.svg';
 import { addOrder } from '../../firebase/firebase.utils';
 import { clearCart } from '../../redux/cart/cart.actions';
 
-const StripeCheckoutButton = ({ price, cartItems, clearCart }) => {
-  const priceForStripe = price * 100;
+const StripeCheckoutButton = ({ total, cartItems, clearCart }) => {
+  const priceForStripe = total * 100;
   const publishableKey =
     'pk_test_51LBeUlGMNWn8GNGUXZVhagu5gVKdongiHuXJ01vk6b25QhzSk0yc4DpmQQcDvLGKcpyXk79tMYtRWwDGO7hJV26S00nrdpMDiU';
 
   const onToken = token => {
     // console.log(token);
     alert('Payment Successful');
-    addOrder(cartItems);
+    addOrder({ cartItems, total });
     clearCart();
   };
 
@@ -25,7 +25,7 @@ const StripeCheckoutButton = ({ price, cartItems, clearCart }) => {
       billingAddress
       shippingAddress
       image={Logo}
-      description={`Your total is $${price}`}
+      description={`Your total is $${total}`}
       amount={priceForStripe}
       panelLabel="Pay Now"
       token={onToken}
