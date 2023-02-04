@@ -43,7 +43,7 @@ class CartDropdown extends React.Component {
               <CartItem key={index} item={cartItem} />
             ))
           ) : (
-            <Loader />
+            <div className="empty-message">Your cart is empty!</div>
           )}
         </div>
         <CustomButton
