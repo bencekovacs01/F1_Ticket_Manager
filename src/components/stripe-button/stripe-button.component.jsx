@@ -1,15 +1,21 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
 
 import Logo from '../../assets/F1.svg';
+import { addOrder } from '../../firebase/firebase.utils';
+import { clearCart } from '../../redux/cart/cart.actions';
 
-const StripeCheckoutButton = ({ price }) => {
+const StripeCheckoutButton = ({ price, cartItems, clearCart }) => {
   const priceForStripe = price * 100;
   const publishableKey =
     'pk_test_51LBeUlGMNWn8GNGUXZVhagu5gVKdongiHuXJ01vk6b25QhzSk0yc4DpmQQcDvLGKcpyXk79tMYtRWwDGO7hJV26S00nrdpMDiU';
+
   const onToken = token => {
-    console.log(token);
+    // console.log(token);
     alert('Payment Successful');
+    addOrder(cartItems);
+    clearCart();
   };
 
   return (
@@ -28,4 +34,8 @@ const StripeCheckoutButton = ({ price }) => {
   );
 };
 
-export default StripeCheckoutButton;
+const mapDispatchToProps = dispatch => ({
+  clearCart: () => dispatch(clearCart()),
+});
+
+export default connect(null, mapDispatchToProps)(StripeCheckoutButton);

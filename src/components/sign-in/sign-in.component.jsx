@@ -85,8 +85,10 @@ const SignIn = ({ googleSignInStart, emailSignInStart }) => {
             <CustomButton
               type="submit"
               onClick={() => {
-                handleSubmit();
-                setSignInClicked(true);
+                if (email && password) {
+                  handleSubmit();
+                  setSignInClicked(true);
+                }
               }}
             >
               Sign In
