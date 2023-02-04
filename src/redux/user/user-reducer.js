@@ -15,7 +15,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         if (cart) {
           store.dispatch(establishCart(cart));
         } else {
-          console.log('Could not load cart OR is empty!');
+          // console.log('Could not load cart OR is empty!');
         }
       });
       return {

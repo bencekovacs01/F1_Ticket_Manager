@@ -1,6 +1,7 @@
 .profile-page {
   width: 100%;
   justify-content: center;
+  margin-bottom: 80px;
 }
 
 .content {
@@ -10,6 +11,9 @@
 }
 
 .left-menu {
+  // display: none;
+  display: flex;
+
   margin-left: 15%;
   margin-top: 40px;
   align-items: center;
@@ -18,23 +22,24 @@
   border-radius: 10px;
   padding: 20px;
   width: 270px;
+  height: max-content;
   font-weight: bold;
   font-family: f1_2;
   font-size: 15px;
-  display: flex;
   flex-direction: column;
 }
 
 .right-menu {
   margin-top: 40px;
   width: 95%;
-  border: 1px solid black;
+  height: max-content;
+  // border: 1px solid black;
   //   padding: 10px;
 }
 
 .right-menu span {
-  font-family: f1_2;
-  font-size: 25px;
+  font-family: f1_3;
+  font-size: 18px;
 }
 
 .welcome {

@@ -4,6 +4,8 @@ import { createStructuredSelector } from 'reselect';
 
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
+import { addOrder } from '../../firebase/firebase.utils';
+import { clearCart } from '../../redux/cart/cart.actions';
 
 import {
   selectCartItems,
@@ -12,7 +14,7 @@ import {
 
 import './checkout.styles.scss';
 
-const CheckoutPage = ({ cartItems, total }) => {
+const CheckoutPage = ({ cartItems, total, clearCart }) => {
   return (
     <div className="checkout-page">
       <div className="checkout-header">
@@ -49,7 +51,17 @@ const CheckoutPage = ({ cartItems, total }) => {
         <br />
         4242 4242 4242 4242 - Exp: 12/34 - CVV: 123
       </div>
-      <StripeCheckoutButton price={total} />
+      <button
+        onClick={() => {
+          if (cartItems && cartItems.length !== 0) {
+            addOrder({ cartItems, total });
+            clearCart();
+          }
+        }}
+      >
+        Place test order
+      </button>
+      <StripeCheckoutButton price={total} cartItems={cartItems} />
     </div>
   );
 };
@@ -59,4 +71,8 @@ const mapStateToPtops = createStructuredSelector({
   total: selectCartTotal,
 });
 
-export default connect(mapStateToPtops)(CheckoutPage);
+const mapDispatchToProps = dispatch => ({
+  clearCart: () => dispatch(clearCart()),
+});
+
+export default connect(mapStateToPtops, mapDispatchToProps)(CheckoutPage);

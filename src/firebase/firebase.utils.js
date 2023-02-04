@@ -50,14 +50,47 @@ export const addCollectionAndDocuments = async (
   return await batch.commit();
 };
 
-export const getUserCart = async () => {
-  const docRef = firestore.collection('users').doc(auth.currentUser.uid);
+export const getUserOrders = async userId => {
+  const docRef = firestore.collection('users').doc(auth?.currentUser?.uid);
   try {
     const doc = await docRef.get();
-    return await doc.data().cart.filter(item => item.quantity !== 0);
+    if (!(await doc?.data()?.orders)) {
+      return false;
+    }
+    return await doc?.data()?.orders;
+  } catch (error) {
+    console.error('Error getting orders: ', error);
+    return null;
+  }
+};
+
+export const getUserCart = async () => {
+  const docRef = firestore.collection('users').doc(auth?.currentUser?.uid);
+  try {
+    const doc = await docRef.get();
+    return await doc.data()?.cart?.filter(item => item.quantity !== 0);
   } catch (error) {
     console.error('Error getting cart: ', error);
     return null;
+  }
+};
+
+export const addOrder = async ({ cartItems, total }) => {
+  if (!cartItems || cartItems.length === 0) {
+    return;
+  }
+  const docRef = firestore.collection('users').doc(auth?.currentUser?.uid);
+  try {
+    const doc = await docRef.get();
+    let orders = (await doc.data()?.orders) || [];
+    orders.push({
+      cartItems: [...cartItems],
+      orderDate: new Date(),
+      total: total,
+    });
+    await docRef.update({ orders: orders, cart: null });
+  } catch (error) {
+    console.error('Error updating orders: ', error);
   }
 };
 
@@ -65,11 +98,11 @@ export const updateUserCart = async updates => {
   if (!updates.type) {
     return;
   }
-  const docRef = firestore.collection('users').doc(auth.currentUser.uid);
+  const docRef = firestore.collection('users').doc(auth?.currentUser?.uid);
 
   try {
     const doc = await docRef.get();
-    let cart = doc.data().cart || [];
+    let cart = doc.data()?.cart || [];
     let found = false;
 
     for (let i = 0; i < cart.length; i++) {
@@ -91,7 +124,7 @@ export const updateUserCart = async updates => {
     // Removing 0 quantity items
     cart = cart.filter(item => item.quantity !== 0);
     await docRef.update({ cart });
-    console.log('CART UPDATED');
+    // console.log('CART UPDATED');
   } catch (error) {
     console.error('Error updating document: ', error);
   }
