@@ -1,15 +1,42 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
+import axios from 'axios';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCkV4qHipu33BRkxdWDtfNukBULHvdTsB8',
+  apiKey:
+    process.env
+      .REACT_APP_FIREBASE_API_KEY /*'AIzaSyCkV4qHipu33BRkxdWDtfNukBULHvdTsB8'*/,
   authDomain: 'ticket-manager-46c6d.firebaseapp.com',
   projectId: 'ticket-manager-46c6d',
   storageBucket: 'ticket-manager-46c6d.appspot.com',
   messagingSenderId: '564345720934',
   appId: '1:564345720934:web:10a6d0b290bbcde8265da7',
   measurementId: 'G-SCJ42E57EL',
+};
+
+const sendEmail = async () => {
+  try {
+    const response = await axios.post(
+      'https://api.sendinblue.com/v3/smtp/email',
+      {
+        to: [{ email: 'recipient@example.com' }],
+        from: [{ email: 'sender@example.com' }],
+        subject: 'Example Email',
+        htmlContent:
+          '<p>This is an example email sent from a React app using the Sendinblue API.</p>',
+      },
+      {
+        headers: {
+          'api-key': 'YOUR_SENDINBLUE_API_KEY',
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
