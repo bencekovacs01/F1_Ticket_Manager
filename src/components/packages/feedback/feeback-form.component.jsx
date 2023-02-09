@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import CustomButton from '../../custom-button/custom-button.component';
 
 import './feedback.styles.scss';
 
@@ -45,12 +46,7 @@ const FeedbackForm = () => {
               onMouseLeave={handleMouseLeave}
               onClick={() => handleClick(i)}
               style={{
-                color:
-                  i < rating
-                    ? 'red'
-                    : i < hoverIndex
-                    ? 'orange'
-                    : 'black',
+                color: i < rating ? 'red' : i < hoverIndex ? 'orange' : 'black',
               }}
             >
               &#9733;
@@ -67,7 +63,9 @@ const FeedbackForm = () => {
           onChange={handleFeedbackChange}
         ></textarea>
       </div>
-      <input className="submit" type="submit" value="Submit Feedback" />
+      <CustomButton className="submit" type="submit">
+        Submit
+      </CustomButton>
     </form>
   );
 };
