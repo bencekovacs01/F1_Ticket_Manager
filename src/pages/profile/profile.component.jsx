@@ -6,9 +6,8 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 import './profile.styles.scss';
 
 import placeholderImage from '../../assets/placeholder_picture.png';
-// import PreviousOrders from './previous-orders/previous-orders.component';
 import Orders from './orders/orders.component';
-import { getUserOrders } from '../../firebase/firebase.utils';
+import { auth, getUserOrders } from '../../firebase/firebase.utils';
 import Loader from '../../components/loader/loader.component';
 
 const ProfilePage = ({ currentUser }) => {
@@ -16,24 +15,27 @@ const ProfilePage = ({ currentUser }) => {
   const [isHovering, setIsHovering] = useState(false);
   const [orders, setOrders] = useState(null);
 
-  getUserOrders(currentUser.id).then(orders => {
-    setOrders(orders);
-  });
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const userOrders = await getUserOrders();
+      setOrders(userOrders);
+    };
+
+    if (auth?.currentUser) {
+      fetchOrders();
+    }
+  }, [auth?.currentUser]);
 
   const handleImageChange = event => {
     const uploadedImage = event.target.files[0];
     setImage(URL.createObjectURL(uploadedImage));
   };
 
-  // console.log('PROFILE:');
-  // console.log(currentUser?.orders);
-
   return (
     <div className="profile-page">
       <h1 className="welcome">Welcome to your profile!</h1>
       <div className="content">
         <div className="left-menu">
-          {/* <span className="info">Profile info</span> */}
           <span>Picture:</span>
           <>
             <label
@@ -46,7 +48,6 @@ const ProfilePage = ({ currentUser }) => {
                 alt="Profile"
                 className={`pic ${isHovering ? 'blur' : ''}`}
                 src={image}
-                // src={currentUser.photoURL ? currentUser.photoURL : placeholderImage}
                 referrerPolicy="no-referrer"
               />
               {isHovering && <span className="upload-text">Upload image</span>}

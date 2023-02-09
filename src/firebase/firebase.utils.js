@@ -4,9 +4,7 @@ import 'firebase/compat/auth';
 import axios from 'axios';
 
 const firebaseConfig = {
-  apiKey:
-    process.env
-      .REACT_APP_FIREBASE_API_KEY /*'AIzaSyCkV4qHipu33BRkxdWDtfNukBULHvdTsB8'*/,
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: 'ticket-manager-46c6d.firebaseapp.com',
   projectId: 'ticket-manager-46c6d',
   storageBucket: 'ticket-manager-46c6d.appspot.com',
@@ -16,27 +14,35 @@ const firebaseConfig = {
 };
 
 const sendEmail = async () => {
-  try {
-    const response = await axios.post(
-      'https://api.sendinblue.com/v3/smtp/email',
-      {
-        to: [{ email: 'recipient@example.com' }],
-        from: [{ email: 'sender@example.com' }],
-        subject: 'Example Email',
-        htmlContent:
-          '<p>This is an example email sent from a React app using the Sendinblue API.</p>',
-      },
-      {
-        headers: {
-          'api-key': 'YOUR_SENDINBLUE_API_KEY',
-          'Content-Type': 'application/json',
+  const options = {
+    method: 'POST',
+    url: 'https://api.sendinblue.com/v3/smtp/email',
+    headers: {
+      accept: 'application/json',
+      'content-type': 'application/json',
+      'api-key': process.env.REACT_APP_SENDINBLUE_API_KEY,
+    },
+    data: {
+      sender: { name: 'F1 Ticket Manager', email: 'kbence55@gmail.com' },
+      to: [
+        {
+          email: auth?.currentUser?.email,
+          name: auth?.currentUser?.displayName,
         },
-      }
-    );
-    console.log(response.data);
-  } catch (error) {
-    console.error(error);
-  }
+      ],
+      textContent: 'This is a test content',
+      subject: auth?.currentUser?.providerId,
+    },
+  };
+
+  axios
+    .request(options)
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -77,7 +83,7 @@ export const addCollectionAndDocuments = async (
   return await batch.commit();
 };
 
-export const getUserOrders = async userId => {
+export const getUserOrders = async () => {
   const docRef = firestore.collection('users').doc(auth?.currentUser?.uid);
   try {
     const doc = await docRef.get();
@@ -116,6 +122,7 @@ export const addOrder = async ({ cartItems, total }) => {
       total: total,
     });
     await docRef.update({ orders: orders, cart: null });
+    // sendEmail();
   } catch (error) {
     console.error('Error updating orders: ', error);
   }
@@ -126,7 +133,6 @@ export const updateUserCart = async updates => {
     return;
   }
   const docRef = firestore.collection('users').doc(auth?.currentUser?.uid);
-
   try {
     const doc = await docRef.get();
     let cart = doc.data()?.cart || [];
