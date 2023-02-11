@@ -11,7 +11,6 @@
 }
 
 .left-menu {
-  // display: none;
   display: flex;
 
   margin-left: 15%;
@@ -27,6 +26,24 @@
   font-family: f1_2;
   font-size: 15px;
   flex-direction: column;
+
+  .spinner {
+    margin-left: 10px;
+  }
+
+  .loader {
+    color: black;
+    text-indent: -9999em;
+    margin: 0px auto;
+    position: relative;
+    font-size: 5px;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+    margin-right: 15px;
+  }
 }
 
 .right-menu {
@@ -58,7 +75,8 @@
   position: relative;
   cursor: pointer;
   height: 150px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .pic {
@@ -68,6 +86,10 @@
 
 .blur {
   filter: blur(3px);
+}
+
+.first {
+  margin-top: 10px;
 }
 
 .upload-text {
@@ -81,6 +103,33 @@
   background-color: rgba(0, 0, 0, 0.5);
   padding: 10px;
   border-radius: 10px;
+}
+
+.percentage {
+  font-family: f1_2;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+.upload {
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.uploading-text {
+  background-color: #04aa6d;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: bolder;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: auto;
+  margin-bottom: 15px;
 }
 
 .editable-field {

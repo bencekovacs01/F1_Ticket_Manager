@@ -1,6 +1,8 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
+import { getStorage } from 'firebase/storage';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import axios from 'axios';
 
 const firebaseConfig = {
@@ -128,6 +130,18 @@ export const addOrder = async ({ cartItems, total }) => {
   }
 };
 
+export const updateProfilePicture = async url => {
+  if (!url || url.length === 0) {
+    return;
+  }
+  const docRef = firestore.collection('users').doc(auth?.currentUser?.uid);
+  try {
+    await docRef.update({ photoURL: url });
+  } catch (error) {
+    console.error('Error updating picture: ', error);
+  }
+};
+
 export const updateUserCart = async updates => {
   if (!updates.type) {
     return;
@@ -195,7 +209,7 @@ export const getCurrentUser = () => {
   });
 };
 
-firebase.initializeApp(firebaseConfig);
+export const storage = getStorage(firebase.initializeApp(firebaseConfig));
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();

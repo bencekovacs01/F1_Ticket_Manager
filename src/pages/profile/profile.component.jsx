@@ -7,13 +7,27 @@ import './profile.styles.scss';
 
 import placeholderImage from '../../assets/placeholder_picture.png';
 import Orders from './orders/orders.component';
-import { auth, getUserOrders } from '../../firebase/firebase.utils';
+import {
+  auth,
+  getUserOrders,
+  updateProfilePicture,
+} from '../../firebase/firebase.utils';
 import Loader from '../../components/loader/loader.component';
+
+import { storage } from '../../firebase/firebase.utils';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import CustomButton from '../../components/custom-button/custom-button.component';
 
 const ProfilePage = ({ currentUser }) => {
   const [image, setImage] = useState(currentUser.photoURL || placeholderImage);
   const [isHovering, setIsHovering] = useState(false);
   const [orders, setOrders] = useState(null);
+
+  const [file, setFile] = useState(null);
+  const [percent, setPercent] = useState(0);
+
+  const [imageSelected, setImageSelected] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -29,6 +43,39 @@ const ProfilePage = ({ currentUser }) => {
   const handleImageChange = event => {
     const uploadedImage = event.target.files[0];
     setImage(URL.createObjectURL(uploadedImage));
+    setFile(event.target.files[0]);
+    setImageSelected(true);
+  };
+
+  const handlePictureUpload = async () => {
+    if (!file) {
+      return;
+    }
+    setUploading(true);
+    const storageRef = ref(
+      storage,
+      `/profile-pictures/${auth?.currentUser?.uid}`
+    );
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    uploadTask.on(
+      'state_changed',
+      snapshot => {
+        const percent = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setPercent(percent);
+        if (percent === 100) {
+          setUploading(false);
+          setImageSelected(false);
+        }
+      },
+      err => console.log(err),
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then(url => {
+          updateProfilePicture(url);
+        });
+      }
+    );
   };
 
   return (
@@ -50,8 +97,21 @@ const ProfilePage = ({ currentUser }) => {
                 src={image}
                 referrerPolicy="no-referrer"
               />
-              {isHovering && <span className="upload-text">Upload image</span>}
+              {isHovering && <p className="upload-text">Upload image</p>}
             </label>
+            {imageSelected && !uploading ? (
+              <CustomButton className="upload" onClick={handlePictureUpload}>
+                Upload
+              </CustomButton>
+            ) : null}
+            {uploading ? (
+              <div className="uploading-text">
+                {uploading ? <Loader /> : null}
+                {uploading ? (
+                  <p className="percentage">{percent}% done</p>
+                ) : null}
+              </div>
+            ) : null}
             <input
               id="image-input"
               type="file"
@@ -59,7 +119,7 @@ const ProfilePage = ({ currentUser }) => {
               style={{ display: 'none' }}
             />
           </>
-          <span>Display name:</span>
+          <span className="first">Display name:</span>
           <div className="editable-field">{currentUser?.displayName}</div>
           <span>Email address:</span>
           <div className="editable-field">{currentUser?.email}</div>

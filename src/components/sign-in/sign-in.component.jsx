@@ -14,6 +14,8 @@ import { auth } from '../../firebase/firebase.utils';
 import './sign-in.styles.scss';
 import Loader from '../loader/loader.component';
 
+import googleLogo from '../../assets/google_logo.png';
+
 const SignIn = ({ googleSignInStart, emailSignInStart }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -96,14 +98,16 @@ const SignIn = ({ googleSignInStart, emailSignInStart }) => {
           )}
           {/* Sign in with Google */}
           {googleSignInClicked ? (
-            <button className="buttonload" enabled="false">
-              <i className="spinner">
-                <Loader />
-              </i>
-              Singing in...
-            </button>
+            <div className="google-load-container">
+              <button className="buttonload" enabled="false">
+                <i className="spinner">
+                  <Loader />
+                </i>
+              </button>
+            </div>
           ) : (
             <CustomButton
+              className="google-button"
               type="button"
               onClick={() => {
                 googleSignInStart();
@@ -111,7 +115,7 @@ const SignIn = ({ googleSignInStart, emailSignInStart }) => {
               }}
               isGoogleSignIn
             >
-              Sign in with Google
+              <img className="google-logo" src={googleLogo}></img>
             </CustomButton>
           )}
         </div>

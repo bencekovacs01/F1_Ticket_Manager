@@ -10,8 +10,18 @@
 
   .buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
+  }
+
+  .google-logo {
+    width: 35px;
+    padding: 6px 0px;
+  }
+
+  .google-button {
+    width: 10px;
+    margin-left: 30px;
   }
 
   .buttonload {
@@ -28,6 +38,10 @@
     justify-content: center;
     height: 50px;
     width: auto;
+  }
+
+  .google-load-container {
+    margin-left: 30px;
   }
 
   .spinner {
