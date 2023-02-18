@@ -55,7 +55,7 @@ class App extends React.Component {
               )
             }
           />
-          <Route path="/contact" component={QrScannerPage} />
+          <Route path="/scan" component={QrScannerPage} />
           <Route
             exact
             path="/signin"

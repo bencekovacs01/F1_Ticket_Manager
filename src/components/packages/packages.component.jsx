@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
+import { useHistory } from 'react-router-dom';
+import SignInAndSignUpPage from '../../pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 
 import { addItem } from '../../redux/cart/cart.actions';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
@@ -8,14 +11,36 @@ import CustomButton from '../custom-button/custom-button.component';
 import FeedbackForm from './feedback/feeback-form.component';
 
 import './packages.styles.scss';
+import Popup from './popup/popup.component';
 
 const Package = ({ url, packages, addItem, currentUser }) => {
+  const history = useHistory();
   const items = [];
   for (let i = 0; i < packages.length; i++) {
     items.push([packages[i].name, packages[i].period, url, packages[i].price]);
   }
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  useEffect(() => {
+    if (isPopupOpen) {
+      setTimeout(() => {
+        setIsPopupOpen(false);
+      }, 1300);
+    }
+  }, [isPopupOpen]);
+
+  const handleOpenPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
+
   return (
     <div className="packages">
+      {isPopupOpen && <Popup onClose={handleClosePopup} />}
       {items.map((item, index) => (
         <div key={index} className="package">
           <ul className="list-items">
@@ -34,7 +59,7 @@ const Package = ({ url, packages, addItem, currentUser }) => {
             key={item.className}
             className="custom-button"
             enabled={currentUser ? true : false}
-            onClick={() =>
+            onClick={() => {
               currentUser
                 ? addItem({
                     type: item[0],
@@ -42,8 +67,9 @@ const Package = ({ url, packages, addItem, currentUser }) => {
                     url: item[2],
                     price: item[3],
                   })
-                : alert('Please sign in first or register!')
-            }
+                : alert('Please sign in first or register!');
+              currentUser ? handleOpenPopup() : history.push('/signin');
+            }}
             isDisabled={!currentUser}
           >
             Add to cart

@@ -6,6 +6,8 @@
   margin-bottom: 25px;
   z-index: 5;
   background-color: whitesmoke;
+  border: 3px solid red;
+  border-radius: 10px;
 
   top: -50px;
   transition: top 0.2s ease-in-out;
@@ -32,6 +34,7 @@
   }
 
   .cartIcon {
+    position: relative;
     margin-right: 15px;
   }
 
@@ -98,7 +101,7 @@
   .logo-container {
     height: 100%;
     width: 70px;
-    padding: 25px;
+    padding: 20px;
   }
 
   .options {

@@ -15,13 +15,6 @@ import { ReactComponent as Logo } from '../../assets/F1_black.svg';
 import './header.styles.scss';
 import '../../index.css';
 
-// import {
-//   HeaderContainer,
-//   LogoContainer,
-//   OptionsContainer,
-//   OptionLink,
-// } from './header.styles';
-
 import { Link } from 'react-router-dom';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
@@ -45,17 +38,13 @@ const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
       });
     };
   }, []);
+
   return (
     <div className="header">
-      {/* <HeaderContainer> */}
       <Link className="logo-container" to="/">
-        {/* <LogoContainer to="/"> */}
         <Logo className="logo"></Logo>
-        {/* </LogoContainer> */}
       </Link>
-      {/* <OptionsContainer> */}
       <div className="options">
-        {/* <OptionLink to="/schedule">SCHEDULE</OptionLink> */}
         <Link
           className="option"
           to="/schedule"
@@ -63,18 +52,14 @@ const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
         >
           SCHEDULE
         </Link>
-        {/* <OptionLink to="/shop">CONTACT</OptionLink> */}
-        <Link
+        {/* <Link
           className="option"
           to="/contact"
           onClick={hidden ? null : hideDropdown}
         >
           CONTACT
-        </Link>
+        </Link> */}
         {currentUser ? (
-          // <OptionLink as="div" onClick={signOutStart /*() => auth.signOut()*/}>
-          //   SIGN OUT
-          // </OptionLink>
           <>
             <div className="profile">
               <img
@@ -108,16 +93,18 @@ const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
             </div>
           </>
         ) : (
-          // <OptionLink to="/signin">SIGN IN</OptionLink>
           <Link className="option" to="/signin">
             SIGN IN
           </Link>
         )}
         <div className="cartIcon">{currentUser ? <CartIcon /> : null}</div>
-        {/* </OptionsContainer> */}
+        {/* 
+        <div className="cartIcon" onClick={handleAddToCart}>
+          {showDot && <div className="dot show"></div>}
+          {currentUser ? <CartIcon /> : null}
+        </div> */}
       </div>
       {hidden ? null : <CartDropdown />}
-      {/* </HeaderContainer> */}
     </div>
   );
 };
