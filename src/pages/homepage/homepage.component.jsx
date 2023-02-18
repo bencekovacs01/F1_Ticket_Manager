@@ -1,15 +1,11 @@
 import React from 'react';
 
-import Directory from '../../components/directory/directory.component';
-
 import './homepage.styles.scss';
 
-import { HomePageContainer } from './homepage.styles';
-
 import ModalWindow from './modal/ModalWindow';
+import ContactInfo from './contact-info/contact-info.component';
 
 const HomePage = () => (
-  //  <HomePageContainer>
   <div className="homepage">
     <div className="attentionBox">
       <ModalWindow />
@@ -17,10 +13,10 @@ const HomePage = () => (
     <div className="welcomeMessage">
       <h1>Welcome to F1 Ticket Manager!</h1>
     </div>
-    {/* <Directory /> */}
+    <div className="contact">
+      <ContactInfo />
+    </div>
   </div>
-
-  // </HomePageContainer>
 );
 
 export default HomePage;

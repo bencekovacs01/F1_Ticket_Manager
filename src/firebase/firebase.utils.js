@@ -15,7 +15,7 @@ const firebaseConfig = {
   measurementId: 'G-SCJ42E57EL',
 };
 
-const sendEmail = async () => {
+export const sendEmail = async (isAutoEmail, email, content, displayName) => {
   const options = {
     method: 'POST',
     url: 'https://api.sendinblue.com/v3/smtp/email',
@@ -25,15 +25,24 @@ const sendEmail = async () => {
       'api-key': process.env.REACT_APP_SENDINBLUE_API_KEY,
     },
     data: {
-      sender: { name: 'F1 Ticket Manager', email: 'kbence55@gmail.com' },
-      to: [
-        {
-          email: auth?.currentUser?.email,
-          name: auth?.currentUser?.displayName,
-        },
-      ],
-      textContent: 'This is a test content',
-      subject: auth?.currentUser?.providerId,
+      sender: isAutoEmail
+        ? { name: 'F1 Ticket Manager', email: 'kbence55@gmail.com' }
+        : {
+            name: displayName,
+            email: email,
+          },
+      to: isAutoEmail
+        ? [
+            {
+              email: auth?.currentUser?.email,
+              displayName,
+            },
+          ]
+        : [{ name: 'F1 Ticket Manager', email: 'kbence55@gmail.com' }],
+      textContent: isAutoEmail ? 'This is a test content' : content,
+      subject: isAutoEmail
+        ? auth?.currentUser?.providerId
+        : `Contact message from ${displayName}`,
     },
   };
 
