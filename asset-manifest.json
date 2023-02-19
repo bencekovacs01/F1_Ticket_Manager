@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/F1_Ticket_Manager/static/css/main.52735e9d.css",
-    "main.js": "/F1_Ticket_Manager/static/js/main.fbc06a73.js",
+    "main.css": "/F1_Ticket_Manager/static/css/main.848e138a.css",
+    "main.js": "/F1_Ticket_Manager/static/js/main.a1c6ea5c.js",
     "static/media/bg_22.jpg": "/F1_Ticket_Manager/static/media/bg_22.de65b7702a05aca3067e.jpg",
     "static/media/f1_3.ttf": "/F1_Ticket_Manager/static/media/f1_3.eb4817363f5ec9d88064.ttf",
     "static/media/f1_2.ttf": "/F1_Ticket_Manager/static/media/f1_2.a10812e5dfa71f8496d3.ttf",
@@ -14,12 +14,10 @@
     "static/media/shopping-bag.svg": "/F1_Ticket_Manager/static/media/shopping-bag.a688874f6f1507316bdfa420328a4a53.svg",
     "static/media/F1.svg": "/F1_Ticket_Manager/static/media/F1.071f00fcc01d19842d2863342f93dd65.svg",
     "static/media/sign_out.svg": "/F1_Ticket_Manager/static/media/sign_out.ec36decb8e3e21a1a51d4254fa949cc8.svg",
-    "index.html": "/F1_Ticket_Manager/index.html",
-    "main.52735e9d.css.map": "/F1_Ticket_Manager/static/css/main.52735e9d.css.map",
-    "main.fbc06a73.js.map": "/F1_Ticket_Manager/static/js/main.fbc06a73.js.map"
+    "index.html": "/F1_Ticket_Manager/index.html"
   },
   "entrypoints": [
-    "static/css/main.52735e9d.css",
-    "static/js/main.fbc06a73.js"
+    "static/css/main.848e138a.css",
+    "static/js/main.a1c6ea5c.js"
   ]
 }
