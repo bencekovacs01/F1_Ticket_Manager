@@ -19,6 +19,10 @@ const CIRCUIT_DATA = {
           price: 11,
         },
       ],
+      Date: {
+        start: '2022-04-08',
+        end: '2022-04-10',
+      },
     },
     {
       circuitId: 'americas',
@@ -39,6 +43,10 @@ const CIRCUIT_DATA = {
           price: 12,
         },
       ],
+      Date: {
+        start: '2022-10-21',
+        end: '2022-10-23',
+      },
     },
     {
       circuitId: 'bahrain',
@@ -59,6 +67,10 @@ const CIRCUIT_DATA = {
           price: 13,
         },
       ],
+      Date: {
+        start: '2022-03-18',
+        end: '2022-03-20',
+      },
     },
     {
       circuitId: 'baku',
@@ -79,6 +91,10 @@ const CIRCUIT_DATA = {
           price: 14,
         },
       ],
+      Date: {
+        start: '2022-06-10',
+        end: '2022-06-12',
+      },
     },
     {
       circuitId: 'catalunya',
@@ -99,6 +115,10 @@ const CIRCUIT_DATA = {
           price: 15,
         },
       ],
+      Date: {
+        start: '2022-05-20',
+        end: '2022-05-22',
+      },
     },
     {
       circuitId: 'hungaroring',
@@ -119,6 +139,10 @@ const CIRCUIT_DATA = {
           price: 16,
         },
       ],
+      Date: {
+        start: '2022-07-29',
+        end: '2022-07-31',
+      },
     },
     {
       circuitId: 'imola',
@@ -139,6 +163,10 @@ const CIRCUIT_DATA = {
           price: 17,
         },
       ],
+      Date: {
+        start: '2022-04-22',
+        end: '2022-04-24',
+      },
     },
     {
       circuitId: 'interlagos',
@@ -159,6 +187,10 @@ const CIRCUIT_DATA = {
           price: 18,
         },
       ],
+      Date: {
+        start: '2022-11-11',
+        end: '2022-11-13',
+      },
     },
     {
       circuitId: 'jeddah',
@@ -179,6 +211,10 @@ const CIRCUIT_DATA = {
           price: 19,
         },
       ],
+      Date: {
+        start: '2022-03-25',
+        end: '2022-03-27',
+      },
     },
     {
       circuitId: 'marina_bay',
@@ -199,6 +235,10 @@ const CIRCUIT_DATA = {
           price: 20,
         },
       ],
+      Date: {
+        start: '2022-09-30',
+        end: '2022-10-02',
+      },
     },
     {
       circuitId: 'miami',
@@ -219,6 +259,10 @@ const CIRCUIT_DATA = {
           price: 21,
         },
       ],
+      Date: {
+        start: '2022-05-06',
+        end: '2022-05-08',
+      },
     },
     {
       circuitId: 'monaco',
@@ -239,6 +283,10 @@ const CIRCUIT_DATA = {
           price: 22,
         },
       ],
+      Date: {
+        start: '2022-05-27',
+        end: '2022-05-29',
+      },
     },
     {
       circuitId: 'monza',
@@ -259,6 +307,10 @@ const CIRCUIT_DATA = {
           price: 23,
         },
       ],
+      Date: {
+        start: '2022-09-09',
+        end: '2022-09-11',
+      },
     },
     {
       circuitId: 'red_bull_ring',
@@ -279,6 +331,10 @@ const CIRCUIT_DATA = {
           price: 24,
         },
       ],
+      Date: {
+        start: '2022-07-08',
+        end: '2022-07-10',
+      },
     },
     {
       circuitId: 'ricard',
@@ -299,6 +355,10 @@ const CIRCUIT_DATA = {
           price: 25,
         },
       ],
+      Date: {
+        start: '2022-07-22',
+        end: '2022-07-24',
+      },
     },
     {
       circuitId: 'rodriguez',
@@ -319,6 +379,10 @@ const CIRCUIT_DATA = {
           price: 26,
         },
       ],
+      Date: {
+        start: '2022-10-28',
+        end: '2022-10-30',
+      },
     },
     {
       circuitId: 'silverstone',
@@ -339,6 +403,10 @@ const CIRCUIT_DATA = {
           price: 27,
         },
       ],
+      Date: {
+        start: '2022-07-01',
+        end: '2022-07-03',
+      },
     },
     {
       circuitId: 'spa',
@@ -359,6 +427,10 @@ const CIRCUIT_DATA = {
           price: 28,
         },
       ],
+      Date: {
+        start: '2022-08-26',
+        end: '2022-08-28',
+      },
     },
     {
       circuitId: 'suzuka',
@@ -379,6 +451,10 @@ const CIRCUIT_DATA = {
           price: 29,
         },
       ],
+      Date: {
+        start: '2022-10-07',
+        end: '2022-10-09',
+      },
     },
     {
       circuitId: 'villeneuve',
@@ -399,6 +475,10 @@ const CIRCUIT_DATA = {
           price: 30,
         },
       ],
+      Date: {
+        start: '2022-06-17',
+        end: '2022-06-19',
+      },
     },
     {
       circuitId: 'yas_marina',
@@ -419,6 +499,10 @@ const CIRCUIT_DATA = {
           price: 31,
         },
       ],
+      Date: {
+        start: '2022-11-18',
+        end: '2022-11-20',
+      },
     },
     {
       circuitId: 'zandvoort',
@@ -439,6 +523,10 @@ const CIRCUIT_DATA = {
           price: 32,
         },
       ],
+      Date: {
+        start: '2022-09-02',
+        end: '2022-09-04',
+      },
     },
   ],
 };

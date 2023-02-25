@@ -188,8 +188,16 @@ export const updateUserCart = async updates => {
 
 export const convertCollectionsSnapshotToMap = collections => {
   const tranformedCollection = collections.docs.map(doc => {
-    const { CircuitName, Country, Locality, url, circuitId, round, packages } =
-      doc.data();
+    const {
+      CircuitName,
+      Country,
+      Locality,
+      url,
+      circuitId,
+      round,
+      packages,
+      Date,
+    } = doc.data();
 
     return {
       id: doc.id,
@@ -200,6 +208,7 @@ export const convertCollectionsSnapshotToMap = collections => {
       url,
       round,
       packages,
+      Date,
     };
   });
 

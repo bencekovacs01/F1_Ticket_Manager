@@ -4,11 +4,100 @@
     flex-wrap: wrap;
     flex-direction: row;
   }
+
+  .date-selector {
+    text-align: center;
+    align-items: center;
+    width: max-content;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    z-index: 2;
+  }
+
+  .date-selector.loaded {
+    opacity: 1;
+    transition: opacity 1s ease-in-out, background-color 0.2s ease-in-out;
+  }
+
+  .date-selector span {
+    font-size: 18px;
+    font-family: f1_1;
+  }
+
+  .highlighted {
+    display: flex;
+    justify-content: center;
+  }
+
+  .track {
+    justify-content: center;
+    align-content: center;
+    width: 50%;
+    height: 100%;
+    color: black;
+    transition: color 0.2s ease-in-out;
+  }
+
+  .upcoming {
+    color: white;
+    padding: 1%;
+    height: 150px;
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    font-family: f1_3;
+    margin-bottom: 3%;
+    border-radius: 30px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .upcoming.loaded {
+    opacity: 1;
+    background-color: white;
+    border: 2px solid black;
+    transition: opacity 1s ease-in-out, background-color 0.2s ease-in-out;
+  }
+
+  .upcoming:hover {
+    background-color: black;
+    transition: background-color 0.2s ease-in-out;
+
+    .track {
+      color: white;
+      transition: color 0.2s ease-in-out;
+    }
+
+    .upcoming-track {
+      color: black;
+      background-color: white;
+      transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    }
+  }
+
+  .upcoming-track {
+    align-self: center;
+    font-family: f1_3;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 15px;
+    letter-spacing: 2px;
+
+    transition: color 0.2s ease-in-out, background-color 0.2 ease-in-out;
+  }
 }
 
 @media (max-width: 768px) {
   .collections-overview {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     flex-direction: row;
   }

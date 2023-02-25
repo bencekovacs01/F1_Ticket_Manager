@@ -1,10 +1,14 @@
 import React from 'react';
 
-import CollectionItem from '../collection-item/collection-item.component';
+import './highlighted.styles.scss';
 
-import './collection-preview.styles.scss';
-
-const CollectionPreview = circuit => {
+const HighlightedTrack = ({
+  CircuitName,
+  Country,
+  StartDate,
+  EndDate,
+  ImageUrl,
+}) => {
   const getExactMonth = monthNumber => {
     switch (monthNumber) {
       case 1:
@@ -36,23 +40,27 @@ const CollectionPreview = circuit => {
     }
   };
 
-  const start = new Date(circuit.Date.start);
-  const end = new Date(circuit.Date.end);
+  const start = new Date(StartDate);
+  const end = new Date(EndDate);
 
   const displayDate = `${start.getDate()} - ${end.getDate()} ${getExactMonth(
     start.getMonth() + 1
   )}`;
 
   return (
-    <div className="collection-preview">
-      <h1 className="title">{circuit.CircuitName}</h1>
-      <h1 className="title2">{circuit.Country}</h1>
-      <span>{displayDate}</span>
-      <div className="preview">
-        <CollectionItem key={circuit.CircuitName} item={circuit} />
+    <div className="highlighted">
+      <div className="info">
+        <div className="circuit">
+          <div className="name">{CircuitName}</div>
+          <div className="name">{Country}</div>
+          <div className="name interval">
+            Interval {'->'} {displayDate}
+          </div>
+        </div>
       </div>
+      <div className="image" style={{ backgroundImage: `url(${ImageUrl})` }} />
     </div>
   );
 };
 
-export default CollectionPreview;
+export default HighlightedTrack;
