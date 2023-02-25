@@ -98,11 +98,6 @@ const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
           </Link>
         )}
         <div className="cartIcon">{currentUser ? <CartIcon /> : null}</div>
-        {/* 
-        <div className="cartIcon" onClick={handleAddToCart}>
-          {showDot && <div className="dot show"></div>}
-          {currentUser ? <CartIcon /> : null}
-        </div> */}
       </div>
       {hidden ? null : <CartDropdown />}
     </div>

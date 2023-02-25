@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import styles from './App.module.scss';
 
 import Modal from './Modal';
 import Cookies from 'universal-cookie';
