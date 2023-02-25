@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/F1_Ticket_Manager/static/css/main.848e138a.css",
-    "main.js": "/F1_Ticket_Manager/static/js/main.a1c6ea5c.js",
+    "main.css": "/F1_Ticket_Manager/static/css/main.0637ca48.css",
+    "main.js": "/F1_Ticket_Manager/static/js/main.82d6c5bc.js",
     "static/media/bg_22.jpg": "/F1_Ticket_Manager/static/media/bg_22.de65b7702a05aca3067e.jpg",
     "static/media/f1_3.ttf": "/F1_Ticket_Manager/static/media/f1_3.eb4817363f5ec9d88064.ttf",
     "static/media/f1_2.ttf": "/F1_Ticket_Manager/static/media/f1_2.a10812e5dfa71f8496d3.ttf",
@@ -17,7 +17,7 @@
     "index.html": "/F1_Ticket_Manager/index.html"
   },
   "entrypoints": [
-    "static/css/main.848e138a.css",
-    "static/js/main.a1c6ea5c.js"
+    "static/css/main.0637ca48.css",
+    "static/js/main.82d6c5bc.js"
   ]
 }
