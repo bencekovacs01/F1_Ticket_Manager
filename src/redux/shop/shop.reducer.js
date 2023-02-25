@@ -1,8 +1,7 @@
 import ShopActionTypes from './shop.types';
-import CIRCUIT_DATA from './shop.data.circuits';
+// import CIRCUIT_DATA from './shop.data.circuits';
 const INITIAL_STATE = {
-  collections: CIRCUIT_DATA,
-  // collections: null,
+  collections: null,
   isFetching: false,
   errorMessage: undefined,
 };
