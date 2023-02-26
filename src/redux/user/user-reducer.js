@@ -36,7 +36,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         action.payload.code.includes('user-not-found') ||
         action.payload.code.includes('wrong-password')
       ) {
-        alert('Wrong Email or Password! Please try again or register!');
+        alert('Wrong credentials or unverified account!');
       }
       return {
         ...state,

@@ -37,10 +37,16 @@ export function* signInWithGoogle() {
   }
 }
 
-export function* signInWithEmail({ payload: { email, password } }) {
+export function* signInWithEmail({ email, password }) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
-    yield getSnapshotFromUserAuth(user);
+
+    if (user?.emailVerified) {
+      yield getSnapshotFromUserAuth(user);
+    } else {
+      alert('Wrong credentials or unverified account!');
+      return -1;
+    }
   } catch (error) {
     yield put(signInFailure(error));
   }
@@ -49,7 +55,7 @@ export function* signInWithEmail({ payload: { email, password } }) {
 export function* isUserAuthenticated() {
   try {
     const userAuth = yield getCurrentUser();
-    if (!userAuth) return;
+    if (!userAuth || !userAuth.emailVerified) return;
     yield getSnapshotFromUserAuth(userAuth);
   } catch (error) {
     yield put(signInFailure(error));
@@ -68,10 +74,12 @@ export function* signOut() {
 export function* signUp({ payload: { displayName, email, password } }) {
   try {
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+
+    yield user.sendEmailVerification();
+    alert('Verification email has been sent!');
     yield call(createUserProfileDocument, user, {
       displayName,
     });
-    yield put(emailSignInStart({ email, password }));
   } catch (error) {
     yield put(signUpFailure(error));
   }
