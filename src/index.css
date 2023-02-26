@@ -12,3 +12,7 @@
   font-family: 'f1_3';
   src: local('f1_3'), url(./assets/f1_3.ttf) format('truetype');
 }
+
+body {
+  background-color: beige;
+}

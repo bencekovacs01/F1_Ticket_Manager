@@ -31,7 +31,7 @@ class SignUp extends React.Component {
     const { signUpStart } = this.props;
 
     if (password !== confirmPassword) {
-      alert('passwords do not match!');
+      alert('Passwords do not match!');
       return;
     }
 

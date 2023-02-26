@@ -1,4 +1,4 @@
-$sub-color: grey;
+$sub-color: gray;
 $main-color: black;
 
 @mixin shrinkLabel {
@@ -45,7 +45,7 @@ $main-color: black;
     pointer-events: none;
     left: 5px;
     top: 10px;
-    transition: 300ms ease all;
+    transition: 100ms ease all;
 
     &.shrink {
       @include shrinkLabel();
