@@ -40,20 +40,81 @@ const Crypto = () => {
   // };
 
   // AES
-  const encryptData = () => {
-    const data = CryptoJS.AES.encrypt(
-      JSON.stringify(text),
-      secretPass
-    ).toString();
+  // const encryptData = () => {
+  //   const data = CryptoJS.AES.encrypt(
+  //     JSON.stringify(text),
+  //     secretPass
+  //   ).toString();
 
-    setEncrptedData(data);
+  //   setEncrptedData(data);
+  // };
+
+  // const decryptData = () => {
+  //   const bytes = CryptoJS.AES.decrypt(text, secretPass);
+  //   const data = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+  //   setDecrptedData(data);
+  // };
+
+  ///
+
+  const encryptData = () => {
+    const salt = CryptoJS.lib.WordArray.random(128 / 8);
+    const key = CryptoJS.PBKDF2(secretPass, salt, {
+      keySize: 256 / 32,
+      iterations: 1000,
+    });
+    const iv = CryptoJS.lib.WordArray.random(128 / 8);
+
+    const encrypted = CryptoJS.AES.encrypt(JSON.stringify(text), key, {
+      iv: iv,
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Pkcs7,
+      tag: true,
+    });
+
+    const data = {
+      ciphertext: encrypted.ciphertext.toString(CryptoJS.enc.Base64),
+      iv: iv.toString(CryptoJS.enc.Base64),
+      salt: salt.toString(CryptoJS.enc.Base64),
+      tag: true,
+    };
+
+    setEncrptedData(JSON.stringify(data));
+    console.log('Encrypted:' + JSON.stringify(data));
   };
 
   const decryptData = () => {
-    const bytes = CryptoJS.AES.decrypt(text, secretPass);
-    const data = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    const json = JSON.parse(text);
+    const salt = CryptoJS.enc.Base64.parse(json.salt);
+    const iv = CryptoJS.enc.Base64.parse(json.iv);
+    const tag = /*CryptoJS.enc.Base64.parse*/ json.tag;
+    const ciphertext = CryptoJS.enc.Base64.parse(json.ciphertext);
+
+    const key = CryptoJS.PBKDF2(secretPass, salt, {
+      keySize: 256 / 32,
+      iterations: 1000,
+    });
+
+    const decrypted = CryptoJS.AES.decrypt(
+      { ciphertext: ciphertext, salt: salt, iv: iv, tag: tag },
+      key,
+      {
+        iv: iv,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7,
+        tag: true,
+      }
+    );
+
+    const data = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
+
     setDecrptedData(data);
+    console.log(
+      'Decrypted:' + JSON.parse(decrypted.toString(CryptoJS.enc.Utf8))
+    );
   };
+
+  ///
 
   const switchScreen = type => {
     setText('');

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
+import CustomButton from '../../components/custom-button/custom-button.component';
 import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
 import { addOrder } from '../../firebase/firebase.utils';
 import { clearCart } from '../../redux/cart/cart.actions';
@@ -51,7 +52,7 @@ const CheckoutPage = ({ cartItems, total, clearCart }) => {
         <br />
         4242 4242 4242 4242 - Exp: 12/34 - CVV: 123
       </div>
-      <button
+      <CustomButton
         onClick={() => {
           if (cartItems && cartItems.length !== 0) {
             addOrder({ cartItems, total });
@@ -59,8 +60,8 @@ const CheckoutPage = ({ cartItems, total, clearCart }) => {
           }
         }}
       >
-        Place test order
-      </button>
+        Test order
+      </CustomButton>
       <StripeCheckoutButton total={total} cartItems={cartItems} />
     </div>
   );
