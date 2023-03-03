@@ -1,11 +1,36 @@
 .sign-up {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
+  width: 40%;
+  max-width: 500px;
+  padding: 20px;
+
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
   font-family: f1_1;
-  margin-right: 5%;
+  text-align: center;
+
+  border: 5px solid white;
+  transition: border 0.2s ease-in-out;
+
+  &:hover {
+    border: 5px solid green;
+    transition: border 0.2s ease-in-out;
+  }
+
+  &:focus-within {
+    border: 5px solid green;
+    transition: border 0.2s ease-in-out;
+  }
 
   .title {
-    margin: 10px 0;
+    margin: 20px 0;
+  }
+
+  form {
+    margin-top: 5%;
+  }
+
+  .signup-button {
+    width: 100%;
   }
 }

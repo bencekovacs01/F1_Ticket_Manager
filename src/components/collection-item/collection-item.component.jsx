@@ -6,7 +6,7 @@ import './collection-item.styles.scss';
 import { withRouter } from 'react-router-dom';
 
 const CollectionItem = ({ item, history, match }) => {
-  const { circuitId, url, round } = item;
+  const { url, round } = item;
   return (
     <div className="collection-item">
       <div className="image" style={{ backgroundImage: `url(${url})` }} />

@@ -133,7 +133,9 @@ const SignIn = ({ googleSignInStart /*, emailSignInStart*/ }) => {
             label="Email"
             required
           />
-          <CustomButton type="submit">Forgot Password?</CustomButton>
+          <CustomButton className="forgot-button" type="submit">
+            Forgot Password?
+          </CustomButton>
         </div>
       </form>
     </div>

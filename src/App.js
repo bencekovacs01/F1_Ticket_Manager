@@ -18,6 +18,7 @@ import { checkUserSession } from './redux/user/user.actions';
 import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
 import QrScannerPage from './pages/qr-scanner/qr-scanner-page.component';
 import ProfilePage from './pages/profile/profile.component';
+import ModalWindow from './pages/homepage/modal/ModalWindow';
 
 // import CIRCUIT_DATA from './redux/shop/shop.data.circuits';
 
@@ -38,6 +39,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <div className="attentionBox">
+          <ModalWindow />
+        </div>
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />

@@ -8,14 +8,14 @@ import {
   signOutSuccess,
   signOutFailure,
   signUpFailure,
-  emailSignInStart,
+  // emailSignInStart,
 } from './user.actions';
 
 import {
   auth,
-  googleProvider,
   createUserProfileDocument,
   getCurrentUser,
+  googleSignIn,
 } from '../../firebase/firebase.utils';
 
 export function* getSnapshotFromUserAuth(userAuth) {
@@ -30,7 +30,7 @@ export function* getSnapshotFromUserAuth(userAuth) {
 
 export function* signInWithGoogle() {
   try {
-    const { user } = yield auth.signInWithPopup(googleProvider);
+    const { user } = yield googleSignIn();
     yield getSnapshotFromUserAuth(user);
   } catch (error) {
     yield put(signInFailure(error));
@@ -49,6 +49,7 @@ export function* signInWithEmail({ email, password }) {
     }
   } catch (error) {
     yield put(signInFailure(error));
+    return -1;
   }
 }
 

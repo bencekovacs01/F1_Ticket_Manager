@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -37,6 +37,12 @@ const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
         scroll = window.scrollY;
       });
     };
+  }, []);
+
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(true);
   }, []);
 
   return (

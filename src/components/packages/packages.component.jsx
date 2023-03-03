@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { useHistory } from 'react-router-dom';
-import SignInAndSignUpPage from '../../pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 
 import { addItem } from '../../redux/cart/cart.actions';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
@@ -26,7 +24,7 @@ const Package = ({ url, packages, addItem, currentUser }) => {
     if (isPopupOpen) {
       setTimeout(() => {
         setIsPopupOpen(false);
-      }, 1300);
+      }, 800);
     }
   }, [isPopupOpen]);
 
