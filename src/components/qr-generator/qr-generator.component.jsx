@@ -1,12 +1,26 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
+import { addOrder } from '../../firebase/firebase.utils';
 
 const QrCode = () => {
   const [url, setUrl] = useState('');
 
-  const downloadQRCode = e => {
+  const downloadQRCode = async e => {
     e.preventDefault();
-    setUrl('');
+    const canvas = document.getElementById('123456');
+    const pngUrl = canvas
+      .toDataURL('image/png')
+      .replace('image/png', 'image/octet-stream');
+
+    // console.log(pngUrl.substring(31));
+    // addOrder({ image: pngUrl.substring(31) });
+
+    // let downloadLink = document.createElement('a');
+    // downloadLink.href = pngUrl;
+    // downloadLink.download = '123456.png';
+    // document.body.appendChild(downloadLink);
+    // downloadLink.click();
+    // document.body.removeChild(downloadLink);
   };
 
   const qrCodeEncoder = e => {
@@ -15,13 +29,14 @@ const QrCode = () => {
 
   const qrcode = (
     <QRCodeCanvas
-      id="qrCode"
+      id="123456"
       value={url}
       size={300}
       bgColor={'transparent'}
       level={'H'}
     />
   );
+
   return (
     <div className="qrcode__container">
       <div>{qrcode}</div>

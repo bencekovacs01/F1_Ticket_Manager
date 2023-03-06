@@ -44,7 +44,7 @@ const CollectionPreview = circuit => {
   )}`;
 
   return (
-    <div className="collection-preview">
+    <div className={`collection-preview`}>
       <h1 className="title">{circuit.CircuitName}</h1>
       <h1 className="title2">{circuit.Country}</h1>
       <span>{displayDate}</span>

@@ -9,6 +9,8 @@
   border-radius: 30px;
   height: max-content;
   z-index: 1;
+  // opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 
   .title {
     font-size: 28px;
@@ -39,3 +41,7 @@
     justify-content: space-between;
   }
 }
+
+// .collection-preview.show {
+//   opacity: 1;
+// }

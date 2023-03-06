@@ -14,7 +14,37 @@ const firebaseConfig = {
   measurementId: 'G-SCJ42E57EL',
 };
 
-export const sendEmail = async (isAutoEmail, email, content, displayName) => {
+const table = `
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John Smith</td>
+        <td>john@example.com</td>
+        <td>(555) 555-1234</td>
+      </tr>
+      <tr>
+        <td>Jane Doe</td>
+        <td>jane@example.com</td>
+        <td>(555) 555-5678</td>
+      </tr>
+    </tbody>
+  </table>
+`;
+
+export const sendEmail = async (
+  isAutoEmail,
+  email,
+  content,
+  displayName,
+  image
+) => {
   const options = {
     method: 'POST',
     url: 'https://api.sendinblue.com/v3/smtp/email',
@@ -38,10 +68,17 @@ export const sendEmail = async (isAutoEmail, email, content, displayName) => {
             },
           ]
         : [{ name: 'F1 Ticket Manager', email: 'kbence55@gmail.com' }],
-      textContent: isAutoEmail ? 'This is a test content' : content,
+      // textContent: content,
+      textContent: `Here's the table:<br>${table}`,
       subject: isAutoEmail
         ? auth?.currentUser?.providerId
         : `Contact message from ${displayName}`,
+      attachment: [
+        {
+          name: 'myAttachment.png',
+          content: image,
+        },
+      ],
     },
   };
 
@@ -118,7 +155,7 @@ export const getUserCart = async () => {
   }
 };
 
-export const addOrder = async ({ cartItems, total }) => {
+export const addOrder = async ({ cartItems, total, image }) => {
   if (!cartItems || cartItems.length === 0) {
     return;
   }
@@ -132,7 +169,13 @@ export const addOrder = async ({ cartItems, total }) => {
       total: total,
     });
     await docRef.update({ orders: orders, cart: null });
-    // sendEmail();
+    sendEmail(
+      true,
+      auth.currentUser.email,
+      'QR CODE',
+      auth.currentUser.displayName,
+      image
+    );
   } catch (error) {
     console.error('Error updating orders: ', error);
   }
@@ -233,6 +276,6 @@ export const firestore = firebase.firestore();
 
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: 'select_account' });
-export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
+export const googleSignIn = () => auth.signInWithPopup(googleProvider);
 
 export default firebase;
