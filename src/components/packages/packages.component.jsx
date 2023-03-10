@@ -56,7 +56,6 @@ const Package = ({ url, packages, addItem, currentUser }) => {
           <CustomButton
             key={item.className}
             className="custom-button"
-            enabled={currentUser ? true : false}
             onClick={() => {
               currentUser
                 ? addItem({

@@ -135,10 +135,22 @@
 .editable-field {
   margin-top: 5px;
   margin-bottom: 20px;
-  width: max-content;
-  height: max-content;
-  overflow: auto;
+  width: 110%;
+  word-wrap: break-word;
   background-color: rgb(201, 200, 200);
   border: 2px solid #ccc;
-  padding: 10px;
+  padding: 5px;
+  text-align: center;
+  font-family: f1_1;
+  font-size: 100%;
+}
+
+.edit {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.first-edit {
+  margin-bottom: 10px;
 }

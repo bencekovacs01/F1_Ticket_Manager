@@ -10,6 +10,7 @@ import Orders from './orders/orders.component';
 import {
   auth,
   getUserOrders,
+  updateProfile,
   updateProfilePicture,
 } from '../../firebase/firebase.utils';
 import Loader from '../../components/loader/loader.component';
@@ -22,12 +23,17 @@ const ProfilePage = ({ currentUser }) => {
   const [image, setImage] = useState(currentUser.photoURL || placeholderImage);
   const [isHovering, setIsHovering] = useState(false);
   const [orders, setOrders] = useState(null);
+  const [displayName, setDisplayName] = useState(currentUser?.displayName);
+  const [email, setEmail] = useState(currentUser?.email);
+  const [edit, setEdit] = useState(false);
 
   const [file, setFile] = useState(null);
   const [percent, setPercent] = useState(0);
 
   const [imageSelected, setImageSelected] = useState(false);
   const [uploading, setUploading] = useState(false);
+
+  const dName = currentUser?.displayName;
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -39,6 +45,26 @@ const ProfilePage = ({ currentUser }) => {
       fetchOrders();
     }
   }, [auth?.currentUser]);
+
+  const handleDisplayNameChange = event => {
+    setDisplayName(event.target.value);
+  };
+
+  const handleEmailChange = event => {
+    setEmail(event.target.value);
+  };
+
+  const handleEditClicked = () => {
+    if (edit) {
+      setDisplayName(dName);
+    }
+    setEdit(!edit);
+  };
+
+  const handleSaveClicked = async () => {
+    setEdit(!edit);
+    updateProfile(displayName);
+  };
 
   const handleImageChange = event => {
     const uploadedImage = event.target.files[0];
@@ -120,9 +146,31 @@ const ProfilePage = ({ currentUser }) => {
             />
           </>
           <span className="first">Display name:</span>
-          <div className="editable-field">{currentUser?.displayName}</div>
+          <input
+            disabled={!edit}
+            type="text"
+            className="editable-field"
+            value={displayName}
+            onChange={handleDisplayNameChange}
+          />
           <span>Email address:</span>
-          <div className="editable-field">{currentUser?.email}</div>
+          <input
+            disabled={true}
+            type="email"
+            className="editable-field"
+            value={email}
+            onChange={handleEmailChange}
+          />
+          <div className="edit">
+            <CustomButton className="first-edit" onClick={handleEditClicked}>
+              {edit ? 'Cancel editing' : 'Edit profile'}
+            </CustomButton>
+            {edit ? (
+              <CustomButton onClick={handleSaveClicked} save>
+                Save
+              </CustomButton>
+            ) : null}
+          </div>
         </div>
         <div className="right-menu">
           <span>Previous orders</span>

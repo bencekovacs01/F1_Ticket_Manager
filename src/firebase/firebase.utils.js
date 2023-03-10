@@ -150,6 +150,18 @@ export const updateProfilePicture = async url => {
   }
 };
 
+export const updateProfile = async displayName => {
+  if (!displayName || displayName.length === 0) {
+    return;
+  }
+  const docRef = firestore.collection('users').doc(auth?.currentUser?.uid);
+  try {
+    await docRef.update({ displayName: displayName });
+  } catch (error) {
+    console.error('Error updating picture: ', error);
+  }
+};
+
 export const updateUserCart = async updates => {
   if (!updates.type) {
     return;
@@ -233,6 +245,6 @@ export const firestore = firebase.firestore();
 
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: 'select_account' });
-export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
+export const googleSignIn = () => auth.signInWithPopup(googleProvider);
 
 export default firebase;
