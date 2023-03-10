@@ -30,7 +30,7 @@ const SignIn = ({ googleSignInStart /*, emailSignInStart*/ }) => {
       email,
       password,
     }).toPromise();
-    if (response == -1) setSignInClicked(false);
+    if (response === -1) setSignInClicked(false);
   };
 
   const handleChange = event => {
