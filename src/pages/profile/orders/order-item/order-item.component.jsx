@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './order-item.styles.scss';
 
 import detailsIcon from '../../../../assets/details_icon.png';
 
-const OrderItem = ({ idx, order }) => {
+const OrderItem = ({ idx, order, onItemSelected }) => {
   const { orderDate, total } = order;
+
+  const handleClick = event => {
+    onItemSelected(idx);
+  };
+
   return (
     <div className="order-item">
       <div className="no">{idx + 1}</div>
@@ -13,7 +18,7 @@ const OrderItem = ({ idx, order }) => {
         {new Date(orderDate?.seconds * 1000).toLocaleDateString()}
       </div>
       <div className="total">${total}</div>
-      <div className="details">
+      <div className="details" onClick={handleClick}>
         <img src={detailsIcon} alt="Details" />
       </div>
     </div>

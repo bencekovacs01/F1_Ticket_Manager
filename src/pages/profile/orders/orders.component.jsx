@@ -1,9 +1,12 @@
-import React from 'react';
-import OrderItem from './order-item/order-item.component';
+import React, { useState } from 'react';
+import OrderDetail from './order-detail/order-detail.component';
+import OrderList from './order-list/order-list.component';
 
 import './orders.styles.scss';
 
 const Orders = ({ orders }) => {
+  const [itemIndex, setItemIndex] = useState(0);
+  const [detail, setDetail] = useState(false);
   if (!orders)
     return (
       <div
@@ -13,26 +16,27 @@ const Orders = ({ orders }) => {
         There are no orders yet!
       </div>
     );
+
+  const handleItemSelected = index => {
+    setItemIndex(index);
+    setDetail(true);
+  };
+
+  const handleBackClicked = () => {
+    setDetail(false);
+  };
+
   return (
-    <div className="orders-container">
-      <div className="orders">
-        <div className="block">
-          <span>No.</span>
-        </div>
-        <div className="block">
-          <span>Date</span>
-        </div>
-        <div className="block">
-          <span>Total</span>
-        </div>
-        <div className="block">
-          <span>Details</span>
-        </div>
-      </div>
-      {orders.map((order, index) => (
-        <OrderItem key={index} idx={index} order={order} />
-      ))}
-    </div>
+    <>
+      {detail ? (
+        <OrderDetail
+          order={orders[itemIndex]}
+          onBackClicked={handleBackClicked}
+        />
+      ) : (
+        <OrderList orders={orders} onItemSelected={handleItemSelected} />
+      )}
+    </>
   );
 };
 

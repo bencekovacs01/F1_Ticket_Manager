@@ -1,0 +1,11 @@
+.order-detail {
+  display: flex;
+  flex-direction: column;
+
+  .back-icon {
+    height: 100%;
+    width: 40px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+}

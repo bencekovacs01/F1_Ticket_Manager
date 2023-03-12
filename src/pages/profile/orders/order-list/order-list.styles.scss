@@ -1,0 +1,30 @@
+.orders-container {
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: f1_2;
+
+  .orders {
+    margin-top: 20px;
+    width: 100%;
+    padding: 3px 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid red;
+
+    .block span {
+      font-family: f1_1;
+      text-transform: capitalize;
+      font-size: 15px;
+
+      &:first-child {
+        margin-left: 10px;
+      }
+
+      &:last-child {
+        margin-right: 10px;
+      }
+    }
+  }
+}
