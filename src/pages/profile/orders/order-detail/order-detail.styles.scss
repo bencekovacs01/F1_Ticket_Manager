@@ -1,11 +1,38 @@
 .order-detail {
+  width: 100%;
+  height: max-content;
   display: flex;
   flex-direction: column;
+  align-items: center;
+
+  .order-detail-header {
+    width: 100%;
+    padding: 5px 0;
+    display: flex;
+    border-bottom: 2px solid red;
+
+    .order-detail-header-block {
+      width: 100%;
+
+      &:last-child {
+        width: 50%;
+      }
+    }
+  }
 
   .back-icon {
     height: 100%;
     width: 40px;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    align-self: flex-start;
+  }
+
+  .detail-total {
+    margin-top: 30px;
+    margin-left: auto;
+    font-size: 15px;
+    font-family: f1_2;
   }
 }
