@@ -19,12 +19,7 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
       </div>
       <span className="name">{type}</span>
       <span className="quantity">
-        <div
-          className="arrow"
-          onClick={() =>
-            /*console.log(cartItem.interval)*/ removeItem(cartItem)
-          }
-        >
+        <div className="arrow" onClick={() => removeItem(cartItem)}>
           &#10094;
         </div>
         <span className="value">{quantity}</span>
