@@ -14,14 +14,20 @@ import {
 import {
   auth,
   createUserProfileDocument,
+  facebookSignIn,
   getCurrentUser,
   googleSignIn,
 } from '../../firebase/firebase.utils';
 
-export function* getSnapshotFromUserAuth(userAuth) {
+export function* getSnapshotFromUserAuth(userAuth, additionalData) {
   try {
-    const userRef = yield call(createUserProfileDocument, userAuth);
+    const userRef = yield call(
+      createUserProfileDocument,
+      userAuth,
+      additionalData
+    );
     const userSnapshot = yield userRef.get();
+    console.log(userSnapshot);
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
     yield put(signInFailure(error));
@@ -32,6 +38,42 @@ export function* signInWithGoogle() {
   try {
     const { user } = yield googleSignIn();
     yield getSnapshotFromUserAuth(user);
+  } catch (error) {
+    yield put(signInFailure(error));
+  }
+}
+
+export function* signInWithFacebook() {
+  try {
+    const { user, additionalUserInfo } = yield facebookSignIn();
+    const photoURL = additionalUserInfo?.profile?.picture?.data?.url;
+    console.log(user);
+    if (!user?.email) {
+      return -1;
+      // yield user.sendEmailVerification();
+      // alert('Verification email has been sent!');
+    }
+    // console.log('Current user:');
+    // console.log(auth?.currentUser);
+
+    // auth?.currentUser
+    //   .updateProfile({
+    //     emailVerified: true,
+    //   })
+    //   .then(() => {
+    //     console.log('SUCCESS');
+    //     console.log('Updated user:');
+    //     console.log(auth?.currentUser);
+    //     // Email verification status updated successfully
+    //   })
+    //   .catch(error => {
+    //     console.log('FAIL');
+    //     console.log('Updated user:');
+    //     console.log(auth?.currentUser);
+    //     // An error occurred while updating the email verification status
+    //   });
+
+    // yield getSnapshotFromUserAuth(user, photoURL);
   } catch (error) {
     yield put(signInFailure(error));
   }
@@ -90,6 +132,10 @@ export function* onGoogleSignInStart() {
   yield takeLatest(UserActionTypes.GOOGLE_SIGN_IN_START, signInWithGoogle);
 }
 
+export function* onFacebookSignInStart() {
+  yield takeLatest(UserActionTypes.FACEBOOK_SIGN_IN_START, signInWithFacebook);
+}
+
 export function* onEmailSignInStart() {
   yield takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, signInWithEmail);
 }
@@ -109,6 +155,7 @@ export function* onSignUpStart() {
 export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
+    call(onFacebookSignInStart),
     call(onEmailSignInStart),
     call(isUserAuthenticated),
     call(onSignOutStart),

@@ -44,7 +44,9 @@ const ProfilePage = ({ currentUser }) => {
     if (auth?.currentUser) {
       fetchOrders();
     }
-  }, [auth?.currentUser]);
+  }, [auth.currentUser]);
+
+  // console.log(auth?.currentUser);
 
   const handleDisplayNameChange = event => {
     setDisplayName(event.target.value);
@@ -158,7 +160,7 @@ const ProfilePage = ({ currentUser }) => {
             disabled={true}
             type="email"
             className="editable-field"
-            value={email}
+            value={email ? email : ''}
             onChange={handleEmailChange}
           />
           <div className="edit">
@@ -174,7 +176,8 @@ const ProfilePage = ({ currentUser }) => {
         </div>
         <div className="right-menu">
           <span>Previous orders</span>
-          {orders !== null ? <Orders orders={orders} /> : <Loader />}
+          {/* {console.log(currentUser)} */}
+          {orders ? <Orders orders={orders} /> : <Loader />}
         </div>
       </div>
     </div>

@@ -98,7 +98,8 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get();
   if (!snapShot.exists) {
-    const { displayName, email, photoURL } = userAuth;
+    const { displayName, email } = userAuth;
+    const photoURL = additionalData ? additionalData : userAuth.photoURL;
     const createdAt = new Date();
 
     try {
@@ -107,7 +108,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         email,
         photoURL,
         createdAt,
-        ...additionalData,
       });
     } catch (error) {
       console.log('error creating user', error.message);
@@ -287,7 +287,9 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
-googleProvider.setCustomParameters({ prompt: 'select_account' });
 export const googleSignIn = () => auth.signInWithPopup(googleProvider);
+
+export const facebookProvider = new firebase.auth.FacebookAuthProvider();
+export const facebookSignIn = () => auth.signInWithPopup(facebookProvider);
 
 export default firebase;

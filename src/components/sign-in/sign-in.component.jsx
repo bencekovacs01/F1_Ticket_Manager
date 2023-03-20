@@ -5,25 +5,44 @@ import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
 import {
+  facebookSignInStart,
   googleSignInStart,
   /*emailSignInStart,*/
 } from '../../redux/user/user.actions';
 
-import { auth } from '../../firebase/firebase.utils';
+import { auth, facebookSignIn } from '../../firebase/firebase.utils';
 
 import './sign-in.styles.scss';
 import Loader from '../loader/loader.component';
 
-import googleLogo from '../../assets/google_logo.png';
 import { runSaga } from 'redux-saga';
 import { store } from '../../redux/store';
-import { signInWithEmail } from '../../redux/user/user.sagas';
+import {
+  signInWithEmail,
+  signInWithFacebook,
+} from '../../redux/user/user.sagas';
 
-const SignIn = ({ googleSignInStart /*, emailSignInStart*/ }) => {
+import GoogleLogo from '../../assets/google_logo.png';
+import FacebookLogo from '../../assets/facebook_logo.png';
+import EmailPopup from './email-popup/email-popup.component';
+
+const SignIn = ({
+  googleSignInStart,
+  facebookSignInStart /*, emailSignInStart*/,
+}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [reset_email, setResetEmail] = useState('');
   const [signInClicked, setSignInClicked] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleOpenPopup = () => {
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
 
   const handleSubmit = async () => {
     const response = await runSaga(store, signInWithEmail, {
@@ -31,6 +50,11 @@ const SignIn = ({ googleSignInStart /*, emailSignInStart*/ }) => {
       password,
     }).toPromise();
     if (response === -1) setSignInClicked(false);
+  };
+
+  const handleFacebookSignIn = async () => {
+    const response = await runSaga(store, signInWithFacebook).toPromise();
+    if (response === -1) setShowPopup(true);
   };
 
   const handleChange = event => {
@@ -66,6 +90,7 @@ const SignIn = ({ googleSignInStart /*, emailSignInStart*/ }) => {
 
   return (
     <div className="sign-in">
+      {showPopup && <EmailPopup onClose={handleClosePopup} />}
       <h2>I already have an account</h2>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
@@ -117,8 +142,25 @@ const SignIn = ({ googleSignInStart /*, emailSignInStart*/ }) => {
           >
             <img
               className="google-logo"
-              src={googleLogo}
+              src={GoogleLogo}
               alt="Sign in with your Google account"
+            />
+          </CustomButton>
+          <CustomButton
+            className="google-button"
+            type="button"
+            onClick={
+              handleFacebookSignIn /*() => {
+              facebookSignInStart();
+              // setShowPopup(true);
+            }*/
+            }
+            isGoogleSignIn
+          >
+            <img
+              className="google-logo"
+              src={FacebookLogo}
+              alt="Sign in with your Facebook account"
             />
           </CustomButton>
         </div>
@@ -144,6 +186,7 @@ const SignIn = ({ googleSignInStart /*, emailSignInStart*/ }) => {
 
 const mapDispatchToProps = dispatch => ({
   googleSignInStart: () => dispatch(googleSignInStart()),
+  facebookSignInStart: () => dispatch(facebookSignInStart()),
   // emailSignInStart: (email, password) =>
   // dispatch(emailSignInStart({ email, password })),
 });
