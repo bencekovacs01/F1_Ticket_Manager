@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 
 import './email-popup.styles.scss';
 
-function EmailPopup(props) {
+import CustomButton from '../../custom-button/custom-button.component';
+import FormInput from '../../form-input/form-input.component';
+import { auth } from '../../../firebase/firebase.utils';
+
+const EmailPopup = props => {
   const [email, setEmail] = useState('');
   const [loaded, setLoaded] = useState(false);
-
   const body = document.querySelector('body');
 
   useEffect(() => {
@@ -13,12 +16,12 @@ function EmailPopup(props) {
     setLoaded(true);
   }, []);
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    // Do something with the email address, e.g. send it to a server
+  const handleSubmit = async () => {
     console.log(email);
-    // Close the popup window
-    props.onClose();
+    await auth?.currentUser?.updateEmail(email);
+    // auth?.currentUser
+    // console.log(auth?.currentUser?.email);
+    // props.onClose();
   };
 
   const handleCancel = () => {
@@ -28,27 +31,36 @@ function EmailPopup(props) {
     props.onClose();
   };
 
+  const handleEmailChange = event => {
+    const { value } = event.target;
+    setEmail(value);
+  };
+
   return (
     <div className="blurBG">
       <div className={`email-popup ${loaded ? 'loaded' : ''}`}>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Please enter your email address
-            <input
-              type="email"
-              value={email}
-              onChange={event => setEmail(event.target.value)}
-              required
-            />
-          </label>
-          <button type="submit">Submit</button>
-          <button type="button" onClick={handleCancel}>
-            Cancel
-          </button>
-        </form>
+        {/* <form onSubmit={handleSubmit}> */}
+        <label>
+          Please enter your email address
+          <FormInput
+            name="email"
+            type="email"
+            value={email}
+            label="Email"
+            onChange={handleEmailChange}
+            required
+          />
+        </label>
+        <div className="popup-buttons">
+          <CustomButton className="submit" save onClick={handleSubmit}>
+            Submit
+          </CustomButton>
+          <CustomButton onClick={handleCancel}>Cancel</CustomButton>
+        </div>
+        {/* </form> */}
       </div>
     </div>
   );
-}
+};
 
 export default EmailPopup;

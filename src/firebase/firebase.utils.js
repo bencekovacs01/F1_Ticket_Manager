@@ -98,7 +98,11 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get();
   if (!snapShot.exists) {
-    const { displayName, email } = userAuth;
+    const { displayName } = userAuth;
+    const email =
+      userAuth?.providerData[0]?.providerId === 'facebook.com'
+        ? userAuth?.providerData[0].email
+        : userAuth?.email;
     const photoURL = additionalData ? additionalData : userAuth.photoURL;
     const createdAt = new Date();
 
@@ -108,6 +112,8 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         email,
         photoURL,
         createdAt,
+        cart: null,
+        orders: [],
       });
     } catch (error) {
       console.log('error creating user', error.message);
@@ -134,10 +140,11 @@ export const getUserOrders = async () => {
   const docRef = firestore.collection('users').doc(auth?.currentUser?.uid);
   try {
     const doc = await docRef.get();
-    if (!(await doc?.data()?.orders)) {
+    const orders = await doc?.data()?.orders;
+    if (!orders || orders === []) {
       return false;
     }
-    return await doc?.data()?.orders;
+    return orders;
   } catch (error) {
     console.error('Error getting orders: ', error);
     return null;
@@ -231,10 +238,8 @@ export const updateUserCart = async updates => {
       cart.push(updates);
     }
 
-    // Removing 0 quantity items
     cart = cart.filter(item => item.quantity !== 0);
     await docRef.update({ cart });
-    // console.log('CART UPDATED');
   } catch (error) {
     console.error('Error updating document: ', error);
   }

@@ -4,7 +4,8 @@
   background: black;
   animation: load1 1s infinite ease-in-out;
   width: 1em;
-  height: 5em;
+  height: 6em;
+  margin: 0px;
 }
 .loader {
   color: black;
@@ -12,7 +13,6 @@
   margin: 88px auto;
   position: relative;
   font-size: 11px;
-  -ms-transform: translateZ(0);
   transform: translateZ(0);
   animation-delay: -0.16s;
 }
@@ -29,27 +29,15 @@
 .loader:after {
   left: 1.5em;
 }
-@-webkit-keyframes load1 {
-  0%,
-  80%,
-  100% {
-    box-shadow: 0 0;
-    height: 4em;
-  }
-  40% {
-    box-shadow: 0 -2em;
-    height: 5em;
-  }
-}
 @keyframes load1 {
   0%,
   80%,
   100% {
     box-shadow: 0 0;
-    height: 4em;
+    height: 5em;
   }
   40% {
     box-shadow: 0 -2em;
-    height: 5em;
+    height: 6em;
   }
 }
