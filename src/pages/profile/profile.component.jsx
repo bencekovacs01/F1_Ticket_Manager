@@ -44,9 +44,7 @@ const ProfilePage = ({ currentUser }) => {
     if (auth?.currentUser) {
       fetchOrders();
     }
-  }, [auth.currentUser]);
-
-  // console.log(auth?.currentUser);
+  }, [auth?.currentUser]);
 
   const handleDisplayNameChange = event => {
     setDisplayName(event.target.value);
@@ -167,16 +165,15 @@ const ProfilePage = ({ currentUser }) => {
             <CustomButton className="first-edit" onClick={handleEditClicked}>
               {edit ? 'Cancel editing' : 'Edit profile'}
             </CustomButton>
-            {edit ? (
+            {edit && (
               <CustomButton onClick={handleSaveClicked} save>
                 Save
               </CustomButton>
-            ) : null}
+            )}
           </div>
         </div>
         <div className="right-menu">
           <span>Previous orders</span>
-          {/* {console.log(currentUser)} */}
           {orders ? <Orders orders={orders} /> : <Loader />}
         </div>
       </div>

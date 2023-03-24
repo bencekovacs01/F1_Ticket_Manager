@@ -7,7 +7,8 @@ import './orders.styles.scss';
 const Orders = ({ orders }) => {
   const [itemIndex, setItemIndex] = useState(0);
   const [detail, setDetail] = useState(false);
-  if (!orders)
+
+  if (orders.length === 0)
     return (
       <div
         style={{ marginTop: '30px', fontSize: '25px' }}

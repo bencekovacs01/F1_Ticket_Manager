@@ -19,6 +19,7 @@ import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
 import QrScannerPage from './pages/qr-scanner/qr-scanner-page.component';
 import ProfilePage from './pages/profile/profile.component';
 import ModalWindow from './pages/homepage/modal/ModalWindow';
+import NotFoundPage from './pages/404-not-found/404-not-found.component';
 
 // import CIRCUIT_DATA from './redux/shop/shop.data.circuits';
 
@@ -54,7 +55,12 @@ class App extends React.Component {
                 <CheckoutPage />
               ) : (
                 <Redirect
-                  to={window.history.length > 1 ? window.history.back() : '/'}
+                  to={
+                    window.location.pathname.split('/').pop() != 'checkout' &&
+                    window.history.length > 1
+                      ? window.history.back()
+                      : '/'
+                  }
                 />
               )
             }
@@ -66,7 +72,12 @@ class App extends React.Component {
             render={() =>
               this.props.currentUser ? (
                 <Redirect
-                  to={window.history.length > 1 ? window.history.back() : '/'}
+                  to={
+                    window.location.pathname.split('/').pop() != 'signin' &&
+                    window.history.length > 1
+                      ? window.history.back()
+                      : '/'
+                  }
                 />
               ) : (
                 <SignInAndSignUpPage />
@@ -85,6 +96,7 @@ class App extends React.Component {
               )
             }
           />
+          <Route component={NotFoundPage} />
         </Switch>
       </div>
     );

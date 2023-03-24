@@ -49,6 +49,13 @@ const saveButtonStyles = css`
   }
 `;
 
+const signInLoadingButtonStyles = css`
+  background-color: green;
+  color: white;
+  cursor: default;
+  transition: 0s;
+`;
+
 const getButtonStyles = props => {
   if (props.isGoogleSignIn) {
     return googleSignInStyles;
@@ -58,6 +65,9 @@ const getButtonStyles = props => {
   }
   if (props.save) {
     return saveButtonStyles;
+  }
+  if (props.signin) {
+    return signInLoadingButtonStyles;
   }
   return props.inverted ? invertedButtonStyles : buttonStyles;
 };

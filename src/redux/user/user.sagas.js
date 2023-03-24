@@ -8,7 +8,6 @@ import {
   signOutSuccess,
   signOutFailure,
   signUpFailure,
-  // emailSignInStart,
 } from './user.actions';
 
 import {
@@ -27,7 +26,6 @@ export function* getSnapshotFromUserAuth(userAuth, additionalData) {
       additionalData
     );
     const userSnapshot = yield userRef.get();
-    console.log(userSnapshot);
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
     yield put(signInFailure(error));
@@ -47,33 +45,7 @@ export function* signInWithFacebook() {
   try {
     const { user, additionalUserInfo } = yield facebookSignIn();
     const photoURL = additionalUserInfo?.profile?.picture?.data?.url;
-    console.log(user);
-    if (!user?.email) {
-      return -1;
-      // yield user.sendEmailVerification();
-      // alert('Verification email has been sent!');
-    }
-    // console.log('Current user:');
-    // console.log(auth?.currentUser);
-
-    // auth?.currentUser
-    //   .updateProfile({
-    //     emailVerified: true,
-    //   })
-    //   .then(() => {
-    //     console.log('SUCCESS');
-    //     console.log('Updated user:');
-    //     console.log(auth?.currentUser);
-    //     // Email verification status updated successfully
-    //   })
-    //   .catch(error => {
-    //     console.log('FAIL');
-    //     console.log('Updated user:');
-    //     console.log(auth?.currentUser);
-    //     // An error occurred while updating the email verification status
-    //   });
-
-    // yield getSnapshotFromUserAuth(user, photoURL);
+    yield getSnapshotFromUserAuth(user, photoURL);
   } catch (error) {
     yield put(signInFailure(error));
   }
@@ -98,7 +70,7 @@ export function* signInWithEmail({ email, password }) {
 export function* isUserAuthenticated() {
   try {
     const userAuth = yield getCurrentUser();
-    if (!userAuth || !userAuth.emailVerified) return;
+    if (!userAuth || (userAuth?.email && !userAuth.emailVerified)) return;
     yield getSnapshotFromUserAuth(userAuth);
   } catch (error) {
     yield put(signInFailure(error));

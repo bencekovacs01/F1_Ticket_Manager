@@ -49,8 +49,8 @@
     background-color: #04aa6d;
     border: none;
     color: white;
-    padding: 12px 24px;
-    font-size: 15px;
+    padding: 12px;
+    font-size: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -74,15 +74,13 @@
 
   .spinner {
     margin-left: 10px;
+    height: 80%;
   }
 
   .loader {
-    color: black;
-    margin: 0px auto;
+    margin: 0px;
     position: relative;
     font-size: 5px;
-    transform: translateZ(0);
-    animation-delay: -0.16s;
     margin-right: 15px;
   }
 }

@@ -65,6 +65,14 @@ const CartReducer = (state = INITIAL_STATE, action) => {
         url: action.payload.url,
         price: action.payload.price,
         quantity: -1,
+      }).then(() => {
+        getUserCart().then(cart => {
+          if (cart) {
+            store.dispatch(establishCart(cart));
+          } else {
+            console.log('Could not load cart OR is empty!');
+          }
+        });
       });
       return {
         ...state,

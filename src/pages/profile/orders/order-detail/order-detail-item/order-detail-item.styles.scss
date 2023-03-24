@@ -8,7 +8,7 @@
   justify-content: flex-start;
 
   .detail-image-container {
-    width: 15%;
+    width: 13%;
 
     img {
       width: 100%;
@@ -17,7 +17,7 @@
   }
 
   .name {
-    margin-left: 30px;
+    margin-left: 8%;
     margin-right: 70px;
   }
 
@@ -43,13 +43,15 @@
   .interval,
   .price,
   .price-total {
-    width: 10%;
-    font-size: 16px;
+    font-family: f1_1;
+    width: 15%;
+    font-size: 18px;
   }
 
   .quantity {
     .value {
-      font-size: 16px;
+      font-family: f1_1;
+      font-size: 18px;
     }
   }
 }

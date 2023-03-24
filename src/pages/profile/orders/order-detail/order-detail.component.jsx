@@ -39,7 +39,7 @@ const OrderDetail = ({ order, onBackClicked }) => {
         <OrderDetailItem key={index} cartItem={cartItem} />
       ))}
       <div className="detail-total">
-        <span>Total: ${total}</span>
+        <span>Total ${total}</span>
       </div>
     </div>
   );

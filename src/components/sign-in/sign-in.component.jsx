@@ -26,19 +26,12 @@ import GoogleLogo from '../../assets/google_logo.png';
 import FacebookLogo from '../../assets/facebook_logo.png';
 import EmailPopup from './email-popup/email-popup.component';
 
-const SignIn = ({
-  googleSignInStart,
-  facebookSignInStart /*, emailSignInStart*/,
-}) => {
+const SignIn = ({ googleSignInStart }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [reset_email, setResetEmail] = useState('');
   const [signInClicked, setSignInClicked] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-
-  const handleOpenPopup = () => {
-    setShowPopup(true);
-  };
 
   const handleClosePopup = () => {
     setShowPopup(false);
@@ -112,26 +105,24 @@ const SignIn = ({
         />
         <div className="buttons">
           {signInClicked ? (
-            <button className="buttonload" enabled="false">
+            <CustomButton type="button" className="buttonload" signin>
               <i className="spinner">
                 <Loader />
               </i>
-              Singing in...
-            </button>
+            </CustomButton>
           ) : (
             <CustomButton
               type="submit"
               onClick={() => {
                 if (email && password) {
-                  handleSubmit();
                   setSignInClicked(true);
+                  handleSubmit();
                 }
               }}
             >
               Sign In
             </CustomButton>
           )}
-          {/* Sign in with Google */}
           <CustomButton
             className="google-button"
             type="button"
@@ -149,12 +140,7 @@ const SignIn = ({
           <CustomButton
             className="google-button"
             type="button"
-            onClick={
-              handleFacebookSignIn /*() => {
-              facebookSignInStart();
-              // setShowPopup(true);
-            }*/
-            }
+            onClick={handleFacebookSignIn}
             isGoogleSignIn
           >
             <img
@@ -187,8 +173,6 @@ const SignIn = ({
 const mapDispatchToProps = dispatch => ({
   googleSignInStart: () => dispatch(googleSignInStart()),
   facebookSignInStart: () => dispatch(facebookSignInStart()),
-  // emailSignInStart: (email, password) =>
-  // dispatch(emailSignInStart({ email, password })),
 });
 
 export default connect(null, mapDispatchToProps)(SignIn);
