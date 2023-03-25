@@ -125,19 +125,17 @@ const ProfilePage = ({ currentUser }) => {
               />
               {isHovering && <p className="upload-text">Upload image</p>}
             </label>
-            {imageSelected && !uploading ? (
+            {imageSelected && !uploading && (
               <CustomButton className="upload" onClick={handlePictureUpload}>
                 Upload
               </CustomButton>
-            ) : null}
-            {uploading ? (
+            )}
+            {uploading && (
               <div className="uploading-text">
-                {uploading ? <Loader /> : null}
-                {uploading ? (
-                  <p className="percentage">{percent}% done</p>
-                ) : null}
+                {uploading && <Loader />}
+                {uploading && <p className="percentage">{percent}% done</p>}
               </div>
-            ) : null}
+            )}
             <input
               id="image-input"
               type="file"

@@ -26,7 +26,6 @@ const invertedButtonStyles = css`
   &:hover {
     background-color: black;
     color: white;
-    border: none;
   }
 `;
 
@@ -49,6 +48,16 @@ const saveButtonStyles = css`
   }
 `;
 
+const backToMainButtonStyles = css`
+  background-color: black;
+  color: white;
+  border: none;
+
+  &:hover {
+    background-color: red;
+  }
+`;
+
 const signInLoadingButtonStyles = css`
   background-color: green;
   color: white;
@@ -68,6 +77,9 @@ const getButtonStyles = props => {
   }
   if (props.signin) {
     return signInLoadingButtonStyles;
+  }
+  if (props.btm) {
+    return backToMainButtonStyles;
   }
   return props.inverted ? invertedButtonStyles : buttonStyles;
 };

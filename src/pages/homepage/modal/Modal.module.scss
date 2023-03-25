@@ -24,6 +24,10 @@
   color: white;
   border-radius: 16px;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+
+  a {
+    color: red;
+  }
 }
 
 .modalHeader {
@@ -80,8 +84,4 @@
   color: red;
   // box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
   background: black;
-}
-
-a {
-  color: red;
 }

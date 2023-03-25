@@ -50,7 +50,7 @@ const CollectionsOverview = ({ collections, history, match }) => {
           />
         </div>
       </div>
-      {upcomingCollection ? (
+      {upcomingCollection && (
         <>
           <div className="highlighted">
             <div
@@ -62,7 +62,7 @@ const CollectionsOverview = ({ collections, history, match }) => {
               <div className="upcoming-track">Upcoming Race {'>>>>'}</div>
               {collections.find(collection =>
                 getUpcomingTrack(collection?.Date?.start)
-              ) ? (
+              ) && (
                 <div className="track">
                   <HighlightedTrack
                     CircuitName={upcomingCollection.CircuitName}
@@ -72,11 +72,11 @@ const CollectionsOverview = ({ collections, history, match }) => {
                     ImageUrl={upcomingCollection.url}
                   />
                 </div>
-              ) : null}
+              )}
             </div>
           </div>
         </>
-      ) : null}
+      )}
       <div className="collections-overview">
         {collections.map(({ id, ...otherCollectionProps }, index) => (
           <CollectionPreview key={index} {...otherCollectionProps} />

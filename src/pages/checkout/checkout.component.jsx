@@ -8,6 +8,8 @@ import StripeCheckoutButton from '../../components/stripe-button/stripe-button.c
 import { addOrder } from '../../firebase/firebase.utils';
 import { clearCart } from '../../redux/cart/cart.actions';
 
+import CryptUtils, { decryptData, encryptData } from './crypt/crypt.utils';
+
 import {
   selectCartItems,
   selectCartTotal,
@@ -61,9 +63,13 @@ const CheckoutPage = ({ cartItems, total, clearCart }) => {
         className="test-order"
         onClick={() => {
           if (cartItems && cartItems.length !== 0) {
-            // addOrder({ cartItems, total, image: qr });
-            // clearCart();
-            console.log(uuidv4());
+            addOrder({
+              cartItems,
+              total,
+              image: qr,
+              cryptedUID: encryptData(uuidv4()),
+            });
+            clearCart();
           }
         }}
       >

@@ -103,7 +103,7 @@ const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
             SIGN IN
           </Link>
         )}
-        <div className="cartIcon">{currentUser ? <CartIcon /> : null}</div>
+        <div className="cartIcon">{currentUser && <CartIcon />}</div>
       </div>
       {hidden ? null : <CartDropdown />}
     </div>

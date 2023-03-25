@@ -71,11 +71,11 @@ const Package = ({ url, packages, addItem, currentUser }) => {
           >
             Add to cart
           </CustomButton>
-          {currentUser ? (
+          {currentUser && (
             <div className="feedback">
               <FeedbackForm />
             </div>
-          ) : null}
+          )}
         </div>
       ))}
     </div>

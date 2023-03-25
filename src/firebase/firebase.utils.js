@@ -162,7 +162,7 @@ export const getUserCart = async () => {
   }
 };
 
-export const addOrder = async ({ cartItems, total, image }) => {
+export const addOrder = async ({ cartItems, total, image, cryptedUID }) => {
   if (!cartItems || cartItems.length === 0) {
     return;
   }
@@ -174,6 +174,7 @@ export const addOrder = async ({ cartItems, total, image }) => {
       cartItems: [...cartItems],
       orderDate: new Date(),
       total: total,
+      uid: cryptedUID,
     });
     await docRef.update({ orders: orders, cart: null });
     sendEmail(

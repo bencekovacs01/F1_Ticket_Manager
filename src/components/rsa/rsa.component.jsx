@@ -176,12 +176,12 @@ const Crypto = () => {
         </button>
       </div>
 
-      {encrptedData || decrptedData ? (
+      {(encrptedData || decrptedData) && (
         <div className="content">
           <label>{screen === 'encrypt' ? 'Encrypted' : 'Decrypted'} Data</label>
           <p>{screen === 'encrypt' ? encrptedData : decrptedData}</p>
         </div>
-      ) : null}
+      )}
     </div>
   );
 };
