@@ -1,4 +1,5 @@
 import { getUserCart, updateUserCart } from '../../firebase/firebase.utils';
+import { generateUID } from '../../pages/checkout/crypt/crypt.utils';
 import { store } from '../store';
 import { establishCart } from './cart.actions';
 import { CartActionTypes } from './cart.types';
@@ -28,6 +29,8 @@ const CartReducer = (state = INITIAL_STATE, action) => {
         interval: action.payload.interval,
         url: action.payload.url,
         price: action.payload.price,
+        circuitId: action.payload.circuitId,
+        uid: generateUID(),
         quantity: 1,
       }).then(() => {
         getUserCart().then(cart => {
@@ -64,6 +67,8 @@ const CartReducer = (state = INITIAL_STATE, action) => {
         interval: action.payload.interval,
         url: action.payload.url,
         price: action.payload.price,
+        circuitId: action.payload.circuitId,
+        uid: generateUID(),
         quantity: -1,
       }).then(() => {
         getUserCart().then(cart => {

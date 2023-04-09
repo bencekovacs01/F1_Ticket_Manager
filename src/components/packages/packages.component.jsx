@@ -11,11 +11,17 @@ import FeedbackForm from './feedback/feeback-form.component';
 import './packages.styles.scss';
 import Popup from './popup/popup.component';
 
-const Package = ({ url, packages, addItem, currentUser }) => {
+const Package = ({ url, packages, addItem, currentUser, circuitId }) => {
   const history = useHistory();
   const items = [];
   for (let i = 0; i < packages.length; i++) {
-    items.push([packages[i].name, packages[i].period, url, packages[i].price]);
+    items.push([
+      packages[i].name,
+      packages[i].period,
+      url,
+      packages[i].price,
+      circuitId,
+    ]);
   }
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -63,6 +69,7 @@ const Package = ({ url, packages, addItem, currentUser }) => {
                     interval: item[1],
                     url: item[2],
                     price: item[3],
+                    circuitId: item[4],
                   })
                 : alert('Please sign in first or register!');
               currentUser ? handleOpenPopup() : history.push('/signin');

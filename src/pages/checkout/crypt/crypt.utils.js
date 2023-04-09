@@ -1,6 +1,19 @@
 import CryptoJS from 'crypto-js';
+import { v4 as uuidv4 } from 'uuid';
 
 const secretPass = process.env.REACT_APP_SECRET_PASS;
+
+export const generateCode = () => {
+  let code = '';
+  for (let i = 0; i < 6; i++) {
+    code += Math.floor(Math.random() * 10);
+  }
+  return code;
+};
+
+export const generateUID = () => {
+  return uuidv4();
+};
 
 export const encryptData = text => {
   const salt = CryptoJS.lib.WordArray.random(128 / 8);

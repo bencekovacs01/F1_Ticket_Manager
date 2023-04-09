@@ -65,7 +65,23 @@ class App extends React.Component {
               )
             }
           />
-          <Route path="/scan" component={QrScannerPage} />
+          <Route
+            path="/scan"
+            render={() =>
+              this.props.currentUser?.id !== 'pHkSuunfIaXudY27iKvtzorCWkf1' ? (
+                <Redirect
+                  to={
+                    window.location.pathname.split('/').pop() != 'signin' &&
+                    window.history.length > 1
+                      ? window.history.back()
+                      : '/'
+                  }
+                />
+              ) : (
+                <QrScannerPage />
+              )
+            }
+          />
           <Route
             exact
             path="/signin"

@@ -10,7 +10,7 @@ import {
   /*emailSignInStart,*/
 } from '../../redux/user/user.actions';
 
-import { auth, facebookSignIn } from '../../firebase/firebase.utils';
+import { auth } from '../../firebase/firebase.utils';
 
 import './sign-in.styles.scss';
 import Loader from '../loader/loader.component';
@@ -24,18 +24,12 @@ import {
 
 import GoogleLogo from '../../assets/google_logo.png';
 import FacebookLogo from '../../assets/facebook_logo.png';
-import EmailPopup from './email-popup/email-popup.component';
 
 const SignIn = ({ googleSignInStart }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [reset_email, setResetEmail] = useState('');
   const [signInClicked, setSignInClicked] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
-
-  const handleClosePopup = () => {
-    setShowPopup(false);
-  };
 
   const handleSubmit = async () => {
     const response = await runSaga(store, signInWithEmail, {
@@ -47,7 +41,7 @@ const SignIn = ({ googleSignInStart }) => {
 
   const handleFacebookSignIn = async () => {
     const response = await runSaga(store, signInWithFacebook).toPromise();
-    if (response === -1) setShowPopup(true);
+    // if (response === -1) setShowPopup(true);
   };
 
   const handleChange = event => {
@@ -83,7 +77,6 @@ const SignIn = ({ googleSignInStart }) => {
 
   return (
     <div className="sign-in">
-      {showPopup && <EmailPopup onClose={handleClosePopup} />}
       <h2>I already have an account</h2>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>

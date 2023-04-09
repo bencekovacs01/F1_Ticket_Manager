@@ -3,6 +3,13 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 import { getStorage } from 'firebase/storage';
 import axios from 'axios';
+import {
+  decryptData,
+  encryptData,
+  generateUID,
+} from '../pages/checkout/crypt/crypt.utils';
+import { clearCart } from '../redux/cart/cart.actions';
+import { connect } from 'react-redux';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -92,18 +99,26 @@ export const sendEmail = async (
     });
 };
 
-export const createUserProfileDocument = async (userAuth, additionalData) => {
+export const createUserProfileDocument = async (
+  userAuth,
+  additionalData,
+  signUp = false
+) => {
   if (!userAuth) return;
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get();
   if (!snapShot.exists) {
-    const { displayName } = userAuth;
+    const displayName = signUp
+      ? additionalData?.displayName
+      : userAuth?.displayName;
     const email =
       userAuth?.providerData[0]?.providerId === 'facebook.com'
         ? userAuth?.providerData[0].email
         : userAuth?.email;
-    const photoURL = additionalData ? additionalData : userAuth.photoURL;
+    const photoURL = additionalData?.photoURL
+      ? additionalData?.photoURL
+      : userAuth.photoURL;
     const createdAt = new Date();
 
     try {
@@ -162,10 +177,61 @@ export const getUserCart = async () => {
   }
 };
 
-export const addOrder = async ({ cartItems, total, image, cryptedUID }) => {
+export const checkOrders = async ({ circuitId, pin }) => {
+  const ordersRef = firestore
+    .collection('orders')
+    .doc(circuitId)
+    .collection('orders');
+
+  try {
+    const snapshot = await ordersRef.get();
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      if (data.uid === '7d04417c-d0f0-442f-bd27-27e1c9958b85') {
+        const decryptedUID = decryptData(data.cryptedUID);
+        const decyptedPin = decryptedUID.substring(decryptedUID.length - 6);
+        if (decyptedPin == pin) {
+          console.log('Success!');
+        } else {
+          console.log('Incorrect PIN!');
+        }
+      }
+    });
+  } catch (error) {
+    console.error('Error getting orders: ', error);
+  }
+};
+
+export const addOrder = async ({ cartItems, total, image, pin }) => {
   if (!cartItems || cartItems.length === 0) {
     return;
   }
+
+  cartItems.forEach(async item => {
+    const { circuitId, type, quantity, uid } = item;
+    const date = new Date();
+    const cryptedUID = encryptData(uid + pin);
+
+    console.log(cryptedUID);
+
+    const ordersRef = firestore
+      .collection('orders')
+      .doc(circuitId)
+      .collection('orders');
+
+    try {
+      await ordersRef.add({
+        uid,
+        type,
+        quantity,
+        date,
+        cryptedUID,
+      });
+    } catch (error) {
+      console.error('Error adding order: ', error);
+    }
+  });
+
   const docRef = firestore.collection('users').doc(auth?.currentUser?.uid);
   try {
     const doc = await docRef.get();
@@ -174,18 +240,19 @@ export const addOrder = async ({ cartItems, total, image, cryptedUID }) => {
       cartItems: [...cartItems],
       orderDate: new Date(),
       total: total,
-      uid: cryptedUID,
     });
     await docRef.update({ orders: orders, cart: null });
-    sendEmail(
-      true,
-      auth.currentUser.email,
-      'QR CODE',
-      auth.currentUser.displayName,
-      image
-    );
+    // sendEmail(
+    //   true,
+    //   auth.currentUser.email,
+    //   'QR CODE',
+    //   auth.currentUser.displayName,
+    //   image
+    // );
+    return 1;
   } catch (error) {
     console.error('Error updating orders: ', error);
+    return -1;
   }
 };
 
@@ -217,6 +284,7 @@ export const updateUserCart = async updates => {
   if (!updates.type) {
     return;
   }
+
   const docRef = firestore.collection('users').doc(auth?.currentUser?.uid);
   try {
     const doc = await docRef.get();

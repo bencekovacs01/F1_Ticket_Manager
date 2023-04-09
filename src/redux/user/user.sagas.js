@@ -45,7 +45,7 @@ export function* signInWithFacebook() {
   try {
     const { user, additionalUserInfo } = yield facebookSignIn();
     const photoURL = additionalUserInfo?.profile?.picture?.data?.url;
-    yield getSnapshotFromUserAuth(user, photoURL);
+    yield getSnapshotFromUserAuth(user, { photoURL });
   } catch (error) {
     yield put(signInFailure(error));
   }
@@ -92,9 +92,14 @@ export function* signUp({ payload: { displayName, email, password } }) {
 
     yield user.sendEmailVerification();
     alert('Verification email has been sent!');
-    yield call(createUserProfileDocument, user, {
-      displayName,
-    });
+    yield call(
+      createUserProfileDocument,
+      user,
+      {
+        displayName,
+      },
+      (signUp = true)
+    );
   } catch (error) {
     yield put(signUpFailure(error));
   }

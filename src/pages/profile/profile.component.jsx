@@ -80,7 +80,7 @@ const ProfilePage = ({ currentUser }) => {
     setUploading(true);
     const storageRef = ref(
       storage,
-      `/profile-pictures/${auth?.currentUser?.uid}`
+      `/profile-pictures/${auth?.currentUser?.uid}/${auth?.currentUser?.uid}`
     );
     const uploadTask = uploadBytesResumable(storageRef, file);
     uploadTask.on(

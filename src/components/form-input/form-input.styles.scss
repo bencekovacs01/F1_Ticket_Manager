@@ -51,4 +51,21 @@ $main-color: black;
       @include shrinkLabel();
     }
   }
+
+  .toggle-password-btn {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: $main-color;
+    font-size: 16px;
+  }
+
+  .toggle-btn {
+    height: 100%;
+    width: 1.8rem;
+  }
 }
