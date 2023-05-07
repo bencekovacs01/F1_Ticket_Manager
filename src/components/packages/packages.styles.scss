@@ -1,24 +1,44 @@
 .packages {
   margin-top: 10px;
   width: 90%;
-  font-family: f1_2;
+  font-family: f1_1;
   display: flex;
-  grid-template-columns: repeat(2, 1fr);
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .package {
+  width: 40%;
+  font-size: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 15%;
-  font-size: 20px;
+  margin: 10px;
+  padding: 20px;
+  background-color: beige;
+  border-radius: 50px;
+  border: 5px solid rgb(255, 109, 109);
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.package:hover {
+  transform: scale(1.05);
+  box-shadow: 20px 20px 15px rgb(255, 109, 109);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .list-items {
   list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .feedback {
   margin-top: 30px;
   text-align: center;
+  font-size: 13px;
+  font-weight: bold;
 }

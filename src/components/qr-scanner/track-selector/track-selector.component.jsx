@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 
 import './track-selector.styles.scss';
 
-const TrackSelector = ({ items }) => {
+const TrackSelector = ({ items, onSelect }) => {
   const [selectedItem, setSelectedItem] = useState(items[0]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleItemClick = item => {
     setSelectedItem(item);
     setIsDropdownOpen(false);
+    onSelect(item.circuitId);
   };
 
   return (
@@ -20,6 +21,7 @@ const TrackSelector = ({ items }) => {
         {selectedItem ? (
           <>
             <img
+              key={selectedItem.circuitId}
               className="dropdown-selector__image"
               src={selectedItem.image}
               alt={selectedItem.circuitId}
@@ -29,7 +31,9 @@ const TrackSelector = ({ items }) => {
             </span>
           </>
         ) : (
-          <span className="dropdown-selector__text">Select Item</span>
+          <span key="select-item" className="dropdown-selector__text">
+            Select Item
+          </span>
         )}
       </button>
       {isDropdownOpen && (

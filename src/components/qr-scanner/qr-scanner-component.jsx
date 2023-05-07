@@ -17,6 +17,9 @@ const QRCodeScanner = ({ collections }) => {
 
   const [uid, setUid] = useState('');
   const [pin, setPin] = useState('');
+  const [selectedCurcuitId, setSelectedCurcuitId] = useState(
+    collections[0].circuitId
+  );
 
   const handleScanUidChange = event => {
     const { value } = event.target;
@@ -35,7 +38,10 @@ const QRCodeScanner = ({ collections }) => {
 
   return (
     <>
-      <TrackSelector items={items} />
+      <TrackSelector
+        items={items}
+        onSelect={circuitId => setSelectedCurcuitId(circuitId)}
+      />
       <FormInput
         id="scan_uid"
         name="scan_uid"
@@ -60,8 +66,9 @@ const QRCodeScanner = ({ collections }) => {
         className="submit"
         onClick={async () => {
           if (pin.length === 6 && uid.length > 0) {
+            if (!selectedCurcuitId) return;
             const res = await checkOrders({
-              circuitId: 'catalunya',
+              circuitId: selectedCurcuitId,
               uid: uid,
               pin: pin,
             });

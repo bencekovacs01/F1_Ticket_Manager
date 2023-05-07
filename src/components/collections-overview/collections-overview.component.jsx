@@ -77,6 +77,7 @@ const CollectionsOverview = ({ collections, history, match }) => {
           </div>
         </>
       )}
+      <h1>OK</h1>
       <div className="collections-overview">
         {collections.map(({ id, ...otherCollectionProps }, index) => (
           <CollectionPreview key={index} {...otherCollectionProps} />

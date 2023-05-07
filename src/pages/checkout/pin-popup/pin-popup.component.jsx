@@ -9,11 +9,12 @@ import GenerateIcon from '../../../assets/magic-wand.png';
 import { generateCode } from '../crypt/crypt.utils';
 import Popup from '../../../components/packages/popup/popup.component';
 
-const PinPopup = ({ onClose, fromcheckout, uid }) => {
+const PinPopup = ({ onClose, fromcheckout, curcuitId, uid }) => {
   const [pin, setPin] = useState('');
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(null);
   const [copyClicked, setCopyClicked] = useState(false);
+  const [newPinForm, setNewPinForm] = useState(false);
 
   const body = document.querySelector('body');
 
@@ -54,13 +55,17 @@ const PinPopup = ({ onClose, fromcheckout, uid }) => {
     if (value.length < 7) setPin(value);
   };
 
+  const handleNewPin = () => {
+    setNewPinForm(true);
+  };
+
   return (
     <div className="blurBG">
       <div
         className={`pin-popup ${loaded ? 'loaded' : ''}`}
         style={!fromcheckout ? { height: 'max-content' } : null}
       >
-        {fromcheckout ? (
+        {newPinForm || fromcheckout ? (
           <>
             <label className="pin-title">Please set a PIN code</label>
             <div className="disclaimer">
@@ -125,8 +130,8 @@ const PinPopup = ({ onClose, fromcheckout, uid }) => {
               {uid}
             </button>
             <div className="popup-buttons">
-              <CustomButton className="submit" inverted onClick={handleSubmit}>
-                NEW PIN
+              <CustomButton className="submit" inverted onClick={handleNewPin}>
+                New Pin
               </CustomButton>
               <CustomButton className="cancel-button" onClick={handleCancel}>
                 Cancel

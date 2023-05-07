@@ -8,8 +8,6 @@ import OrderDetailItem from './order-detail-item/order-detail-item.component';
 const OrderDetail = ({ order, onBackClicked }) => {
   const { cartItems, total } = order;
 
-  // console.log(order);
-
   const handleBackClicked = () => {
     onBackClicked();
   };
@@ -37,9 +35,11 @@ const OrderDetail = ({ order, onBackClicked }) => {
           <span className="rm-span">Interval</span>
         </div>
       </div>
-      {cartItems.map((cartItem, index) => (
-        <OrderDetailItem key={index} cartItem={cartItem} />
-      ))}
+      <div style={{ height: '35vh', width: '100%', overflowY: 'auto' }}>
+        {cartItems.map((cartItem, index) => (
+          <OrderDetailItem key={index} cartItem={cartItem} />
+        ))}
+      </div>
       <div className="detail-total">
         <span className="rm-span">Total ${total}</span>
       </div>

@@ -206,6 +206,29 @@ export const checkOrders = async ({ circuitId, pin, uid }) => {
   }
 };
 
+export const updatePin = async ({ circuitId, newPin, uid }) => {
+  if (!newPin || !uid || newPin === '') {
+    return;
+  }
+  const cryptedUID = encryptData(uid + newPin);
+
+  const ordersRef = firestore
+    .collection('orders')
+    .doc(circuitId)
+    .collection('orders');
+
+  const querySnapshot = await ordersRef.where('uid', '==', uid).get();
+  querySnapshot.forEach(async doc => {
+    try {
+      await doc.ref.update({
+        cryptedUID: cryptedUID,
+      });
+    } catch (error) {
+      console.error('Error updating pin: ', error);
+    }
+  });
+};
+
 export const addOrder = async ({ cartItems, total, image, pin }) => {
   if (!cartItems || cartItems.length === 0) {
     return;
@@ -220,7 +243,6 @@ export const addOrder = async ({ cartItems, total, image, pin }) => {
       .collection('orders')
       .doc(circuitId)
       .collection('orders');
-    // .doc(auth?.currentUser?.uid);
 
     try {
       await ordersRef.add({

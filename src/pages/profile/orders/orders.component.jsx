@@ -8,6 +8,16 @@ const Orders = ({ orders }) => {
   const [itemIndex, setItemIndex] = useState(0);
   const [detail, setDetail] = useState(false);
 
+  orders = [...orders].sort((a, b) => {
+    const aDate = new Date(
+      a.orderDate.seconds * 1000 + a.orderDate.nanoseconds / 1000000
+    );
+    const bDate = new Date(
+      b.orderDate.seconds * 1000 + b.orderDate.nanoseconds / 1000000
+    );
+    return bDate - aDate;
+  });
+
   if (orders.length === 0)
     return (
       <div

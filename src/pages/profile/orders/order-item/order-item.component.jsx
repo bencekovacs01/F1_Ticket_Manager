@@ -7,7 +7,7 @@ import detailsIcon from '../../../../assets/details_icon.png';
 const OrderItem = ({ idx, order, onItemSelected }) => {
   const { orderDate, total } = order;
 
-  const handleClick = event => {
+  const handleClick = () => {
     onItemSelected(idx);
   };
 

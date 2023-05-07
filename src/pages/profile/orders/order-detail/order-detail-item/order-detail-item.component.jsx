@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import './order-detail-item.styles.scss';
 import Popup from '../../../../../components/packages/popup/popup.component';
 import PinPopup from '../../../../checkout/pin-popup/pin-popup.component';
+import { updatePin } from '../../../../../firebase/firebase.utils';
 
 const OrderDetailItem = ({ cartItem }) => {
   const [isHovering, setIsHovering] = useState(false);
   const [copyClicked, setCopyClicked] = useState(false);
   const [popupClosed, setPopupClosed] = useState(false);
 
-  const { type, url, interval, quantity, price, uid } = cartItem;
+  const { type, url, interval, quantity, price, uid, circuitId } = cartItem;
 
   useEffect(() => {
     if (popupClosed) {
@@ -30,7 +31,9 @@ const OrderDetailItem = ({ cartItem }) => {
         <PinPopup
           onClose={pin => {
             setPopupClosed(true);
+            updatePin({ circuitId: circuitId, newPin: pin, uid: uid });
           }}
+          curcuitId={circuitId}
           uid={uid}
         />
       )}
