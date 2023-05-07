@@ -2,3 +2,46 @@
   margin: auto;
   width: 400px;
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  min-width: 160px;
+  padding: 12px 16px;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  overflow-y: auto;
+  max-height: 200px;
+}
+
+.dropdown-content a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  padding: 8px 0;
+}
+
+.dropdown-content img {
+  height: 40px;
+  margin-right: 12px;
+}
+
+.dropdown-content span {
+  font-size: 14px;
+}

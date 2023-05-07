@@ -171,7 +171,7 @@ const ProfilePage = ({ currentUser }) => {
           </div>
         </div>
         <div className="right-menu">
-          <span>Previous orders</span>
+          <span className="rm-span">Previous orders</span>
           {orders ? <Orders orders={orders} /> : <Loader />}
         </div>
       </div>

@@ -44,7 +44,9 @@ const Package = ({ url, packages, addItem, currentUser, circuitId }) => {
 
   return (
     <div className="packages">
-      {isPopupOpen && <Popup onClose={handleClosePopup} />}
+      {isPopupOpen && (
+        <Popup onClose={handleClosePopup} message="Added to cart!" />
+      )}
       {items.map((item, index) => (
         <div key={index} className="package">
           <ul className="list-items">

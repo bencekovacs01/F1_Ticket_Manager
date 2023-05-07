@@ -1,0 +1,37 @@
+.popup-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  //   margin-top: 3%;
+}
+
+.popup-icon {
+  margin-bottom: 20px;
+}
+
+.popup-message {
+  margin-top: 3%;
+  font-size: 2rem;
+}
+
+.valid-icon {
+  width: 200px;
+  height: 100%;
+  margin-top: 8%;
+}
+
+.popup-close {
+  background-color: #008000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid #008000;
+}
+
+.popup-close:hover {
+  background-color: #fff;
+  color: #008000;
+  border: 1px solid #008000;
+}

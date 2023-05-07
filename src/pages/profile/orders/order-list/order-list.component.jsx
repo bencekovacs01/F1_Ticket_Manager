@@ -8,6 +8,18 @@ const OrderList = ({ orders, onItemSelected }) => {
     onItemSelected(index);
   };
 
+  const sortedOrders = [...orders].sort((a, b) => {
+    const aDate = new Date(
+      a.orderDate.seconds * 1000 + a.orderDate.nanoseconds / 1000000
+    );
+    const bDate = new Date(
+      b.orderDate.seconds * 1000 + b.orderDate.nanoseconds / 1000000
+    );
+    return aDate - bDate;
+  });
+
+  console.log(sortedOrders);
+
   return (
     <div className="orders-container">
       <div className="orders">
@@ -24,7 +36,7 @@ const OrderList = ({ orders, onItemSelected }) => {
           <span>Details</span>
         </div>
       </div>
-      {orders.map((order, index) => (
+      {sortedOrders.map((order, index) => (
         <OrderItem
           key={index}
           idx={index}

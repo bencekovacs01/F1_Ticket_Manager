@@ -177,28 +177,32 @@ export const getUserCart = async () => {
   }
 };
 
-export const checkOrders = async ({ circuitId, pin }) => {
+export const checkOrders = async ({ circuitId, pin, uid }) => {
   const ordersRef = firestore
     .collection('orders')
     .doc(circuitId)
     .collection('orders');
 
+  let result = -3;
   try {
     const snapshot = await ordersRef.get();
     snapshot.forEach(doc => {
       const data = doc.data();
-      if (data.uid === '7d04417c-d0f0-442f-bd27-27e1c9958b85') {
+      console.log(data);
+      if (data.uid === uid) {
         const decryptedUID = decryptData(data.cryptedUID);
         const decyptedPin = decryptedUID.substring(decryptedUID.length - 6);
         if (decyptedPin == pin) {
-          console.log('Success!');
+          result = 1;
         } else {
-          console.log('Incorrect PIN!');
+          result = -1;
         }
       }
     });
+    return result;
   } catch (error) {
-    console.error('Error getting orders: ', error);
+    console.error('Error checking order: ', error);
+    return -2;
   }
 };
 
@@ -212,12 +216,11 @@ export const addOrder = async ({ cartItems, total, image, pin }) => {
     const date = new Date();
     const cryptedUID = encryptData(uid + pin);
 
-    console.log(cryptedUID);
-
     const ordersRef = firestore
       .collection('orders')
       .doc(circuitId)
       .collection('orders');
+    // .doc(auth?.currentUser?.uid);
 
     try {
       await ordersRef.add({

@@ -2,11 +2,11 @@ import React from 'react';
 
 import './popup.styles.scss';
 
-const Popup = ({ onClose }) => {
+const Popup = ({ message }) => {
   return (
     <div className="popup-box">
       <div className="popup-content">
-        <h2>Added to cart! ✅</h2>
+        <h2>{message} ✅</h2>
       </div>
     </div>
   );

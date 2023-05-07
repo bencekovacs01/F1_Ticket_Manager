@@ -28,6 +28,8 @@ const CheckoutPage = ({ cartItems, total, clearCart }) => {
   const [pin, setPin] = useState(null);
   // const [cryptedUID, setCryptedUID] = useState(null);
 
+  const [popupClosed, setPopupClosed] = useState(false);
+
   useEffect(() => {
     const order = async () => {
       // console.log(pin);
@@ -45,14 +47,24 @@ const CheckoutPage = ({ cartItems, total, clearCart }) => {
     }
   }, [pin]);
 
+  useEffect(() => {
+    if (popupClosed) {
+      setTimeout(() => {
+        setShowPopup(false);
+        setPopupClosed(false);
+      }, 700);
+    }
+  }, [popupClosed]);
+
   return (
     <div className="checkout-page">
       {showPopup && (
         <PinPopup
           onClose={pin => {
-            setShowPopup(false);
+            setPopupClosed(true);
             setPin(pin);
           }}
+          fromcheckout={true}
         />
       )}
       <div className="checkout-header">

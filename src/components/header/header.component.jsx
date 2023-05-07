@@ -51,6 +51,15 @@ const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
         <Logo className="logo"></Logo>
       </Link>
       <div className="options">
+        {currentUser?.id === 'pHkSuunfIaXudY27iKvtzorCWkf1' && (
+          <Link
+            className="option"
+            to="/scan"
+            onClick={hidden ? null : hideDropdown}
+          >
+            SCAN
+          </Link>
+        )}
         <Link
           className="option"
           to="/schedule"
