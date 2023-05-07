@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/F1_Ticket_Manager/static/css/main.479d4949.css",
-    "main.js": "/F1_Ticket_Manager/static/js/main.15752b8d.js",
+    "main.css": "/F1_Ticket_Manager/static/css/main.e3120aad.css",
+    "main.js": "/F1_Ticket_Manager/static/js/main.79a96f01.js",
     "static/media/bg_22.jpg": "/F1_Ticket_Manager/static/media/bg_22.de65b7702a05aca3067e.jpg",
     "static/media/f1_3.ttf": "/F1_Ticket_Manager/static/media/f1_3.eb4817363f5ec9d88064.ttf",
     "static/media/facebook_logo.png": "/F1_Ticket_Manager/static/media/facebook_logo.15e9e015043c0c28a351.png",
@@ -10,11 +10,13 @@
     "static/media/placeholder_picture.png": "/F1_Ticket_Manager/static/media/placeholder_picture.16b7424786c37d0428e7.png",
     "static/media/bg2.avif": "/F1_Ticket_Manager/static/media/bg2.eb7df329dcbb6a0ea3a2.avif",
     "static/media/error_flag.png": "/F1_Ticket_Manager/static/media/error_flag.9f1da96396afdd59a49d.png",
+    "static/media/valid.png": "/F1_Ticket_Manager/static/media/valid.0e163e83492acb677d72.png",
     "static/media/google_logo.png": "/F1_Ticket_Manager/static/media/google_logo.9db27c1011edb821b59c.png",
     "static/media/remove.png": "/F1_Ticket_Manager/static/media/remove.c9905959564083764497.png",
     "static/media/hide.png": "/F1_Ticket_Manager/static/media/hide.54b3107d160578572bcc.png",
     "static/media/show.png": "/F1_Ticket_Manager/static/media/show.180932f866861728bd41.png",
     "static/media/magic-wand.png": "/F1_Ticket_Manager/static/media/magic-wand.0b29b73aae77e6ec030a.png",
+    "static/media/invalid.png": "/F1_Ticket_Manager/static/media/invalid.ffdafe3f0eceab67b7c2.png",
     "static/media/F1_black.svg": "/F1_Ticket_Manager/static/media/F1_black.3a2a79156e6fc95e40068a692bf69d27.svg",
     "static/media/shopping-bag.svg": "/F1_Ticket_Manager/static/media/shopping-bag.a688874f6f1507316bdfa420328a4a53.svg",
     "static/media/F1.svg": "/F1_Ticket_Manager/static/media/F1.071f00fcc01d19842d2863342f93dd65.svg",
@@ -22,7 +24,7 @@
     "index.html": "/F1_Ticket_Manager/index.html"
   },
   "entrypoints": [
-    "static/css/main.479d4949.css",
-    "static/js/main.15752b8d.js"
+    "static/css/main.e3120aad.css",
+    "static/js/main.79a96f01.js"
   ]
 }
