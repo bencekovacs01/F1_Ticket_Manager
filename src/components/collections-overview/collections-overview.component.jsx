@@ -77,7 +77,9 @@ const CollectionsOverview = ({ collections, history, match }) => {
           </div>
         </>
       )}
-      <h1>OK</h1>
+      <h1 className="all-tracks-title">
+        {'>>>>'} Browse Tracks {'<<<<'}
+      </h1>
       <div className="collections-overview">
         {collections.map(({ id, ...otherCollectionProps }, index) => (
           <CollectionPreview key={index} {...otherCollectionProps} />

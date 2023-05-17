@@ -50,8 +50,13 @@ export const sendEmail = async (
   email,
   content,
   displayName,
-  image
+  images
 ) => {
+  const attachmentData = images.map((image, index) => ({
+    name: `order${index + 1}.png`,
+    content: image,
+  }));
+
   const options = {
     method: 'POST',
     url: 'https://api.sendinblue.com/v3/smtp/email',
@@ -80,12 +85,7 @@ export const sendEmail = async (
       subject: isAutoEmail
         ? auth?.currentUser?.providerId
         : `Contact message from ${displayName}`,
-      attachment: [
-        {
-          name: 'myAttachment.png',
-          content: image,
-        },
-      ],
+      attachment: attachmentData,
     },
   };
 
@@ -229,11 +229,7 @@ export const updatePin = async ({ circuitId, newPin, uid }) => {
   });
 };
 
-export const addOrder = async ({ cartItems, total, image, pin }) => {
-  if (!cartItems || cartItems.length === 0) {
-    return;
-  }
-
+export const addOrder = async ({ cartItems, total, images, pin }) => {
   cartItems.forEach(async item => {
     const { circuitId, type, quantity, uid } = item;
     const date = new Date();
@@ -267,13 +263,16 @@ export const addOrder = async ({ cartItems, total, image, pin }) => {
       total: total,
     });
     await docRef.update({ orders: orders, cart: null });
-    // sendEmail(
-    //   true,
-    //   auth.currentUser.email,
-    //   'QR CODE',
-    //   auth.currentUser.displayName,
-    //   image
-    // );
+    sendEmail(
+      true,
+      auth.currentUser.email,
+      'QR CODE',
+      auth.currentUser.displayName,
+      images
+    );
+    if (!cartItems || cartItems.length === 0) {
+      return;
+    }
     return 1;
   } catch (error) {
     console.error('Error updating orders: ', error);

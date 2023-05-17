@@ -8,14 +8,19 @@ import './collection.styles.scss';
 import BackgroundImage from '../../assets/bg2.avif';
 
 import Package from '../../components/packages/packages.component';
+import NotFoundPage from '../404-not-found/404-not-found.component';
 
 const CollectionPage = ({ circuit }) => {
-  const { CircuitName, Country } = circuit;
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     setLoaded(true);
   }, []);
+
+  if (!circuit) {
+    return <NotFoundPage />;
+  }
+  const { CircuitName, Country } = circuit;
 
   return (
     <div className={`collection-page ${loaded ? 'loaded' : ''}`}>

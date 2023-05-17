@@ -10,10 +10,8 @@ const QrCode = () => {
     const canvas = document.getElementById('123456');
     const pngUrl = canvas
       .toDataURL('image/png')
-      .replace('image/png', 'image/octet-stream');
-
-    // console.log(pngUrl.substring(31));
-    // addOrder({ image: pngUrl.substring(31) });
+      .replace('image/png', 'image/octet-stream')
+      .substring(31);
 
     // let downloadLink = document.createElement('a');
     // downloadLink.href = pngUrl;
@@ -29,6 +27,7 @@ const QrCode = () => {
 
   const qrcode = (
     <QRCodeCanvas
+      hidden={true}
       id="123456"
       value={url}
       size={300}

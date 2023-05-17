@@ -106,7 +106,9 @@ const ProfilePage = ({ currentUser }) => {
 
   return (
     <div className="profile-page">
-      <h1 className="welcome">Welcome to your profile!</h1>
+      <h1 className="all-tracks-title">
+        {'>>>>'} Your profile {'<<<<'}
+      </h1>
       <div className="content">
         <div className="left-menu">
           <span>Picture:</span>
