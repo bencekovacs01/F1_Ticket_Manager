@@ -321,7 +321,7 @@ export const updateUserCart = async updates => {
         cart[i].url = updates.url;
         if (updates.quantity === 0) {
           cart[i].quantity = 0;
-        } else {
+        } else if (cart[i].quantity > 0) {
           cart[i].quantity += updates.quantity;
         }
         break;
@@ -331,7 +331,7 @@ export const updateUserCart = async updates => {
       cart.push(updates);
     }
 
-    cart = cart.filter(item => item.quantity !== 0);
+    cart = cart.filter(item => item.quantity > 0);
     await docRef.update({ cart });
   } catch (error) {
     console.error('Error updating document: ', error);
