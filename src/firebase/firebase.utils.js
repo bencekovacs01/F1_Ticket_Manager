@@ -188,7 +188,6 @@ export const checkOrders = async ({ circuitId, pin, uid }) => {
     const snapshot = await ordersRef.get();
     snapshot.forEach(doc => {
       const data = doc.data();
-      console.log(data);
       if (data.uid === uid) {
         const decryptedUID = decryptData(data.cryptedUID);
         const decyptedPin = decryptedUID.substring(decryptedUID.length - 6);
