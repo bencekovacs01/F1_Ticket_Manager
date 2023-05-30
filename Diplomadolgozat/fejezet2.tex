@@ -1,0 +1,151 @@
+%----------------------------------------------------------------------------
+\chapter{Matematikai modellek, ahol fontos az időtényező}
+%----------------------------------------------------------------------------
+
+Ebben a fejezetben szeretnék bemutatni egy olyan matematikai modellt, ahol nagyon fontos az időtényező. Ezzel is szeretném kihangsúlyozni azt, hogy nem mindegy, hogy egy adott differenciálegyenletet vagy rendszert milyen gyorsan tudunk megoldani és megválaszolni a problémával kapcsolatban felmerülő kérdéseket. Ezek a modellek nem csak arra szolgálhatnak, hogy a valóságot reprezentálják vagy leírják. Nagyon sok esetben a legfontosabb szerepük az, hogy különböző előrejelzéseket és szimulációkat tudjunk végezni velük.
+
+\section{Leukémia modellje}
+
+Az általam választott modell egy napjainkban ismert és eléggé súlyos betegség, az úgynezett \textbf{leukémia} modellje \cite{LeukemiaModell2}, \cite{LeukemiaModell}. Mit is jelent pontosan a leukémia? A leukémia (fehérvérűség vagy vérrák) a vérképző rendszer rosszindulatú daganatos megbetegedése, melyre a vérképzésben résztvevő csontvelői sejtek kontrollálatlan szaporodása jellemző. A keletkező tumorsejtek kiszorítják a normális vérképző sejteket, és megjelennek a vérben, kóros fehérvérsejtszám emelkedést okozva \cite{LeukemiaMeghatarozas}.
+\newline
+
+A \cite{LeukemiaModell2}, \cite{LeukemiaModell} cikkekben leírtak alapján felírhatjuk a normál leukémia dinamikus rendszerének modelljét, amely egy differenciálegyenlet rendszer lesz. Tudjuk, hogy minden $ t $ időpillanatban az őssejtek populációját két csoportra oszthatjuk fel (tehát a rendszerünkben is két egyenlet lesz): a normál, vagyis egészséges őssejtek populációjára, melyet $ x(t) $-vel fogunk jelölni és a leukémiás őssejtek populációjára, melyet $ y(t) $-vel jelölünk. Ezek alapján a rendszerünk a következőképpen alakul:
+\begin{align} \label{eq:leukemiaEgyenlet}
+	\begin{cases}
+		\dfrac{dx}{dt} = x'(t) = \dfrac{a}{1+b_{1}x+b_{2}y}x-cx \\ \\
+		\dfrac{dy}{dt} = y'(t) = \dfrac{A}{1+B(x+y)}y-Cy \\
+	\end{cases}
+\end{align}
+
+A fenti modellünk egyenleteiben láthatunk pár ismeretlen paramétert, melyeket a következőkben ismertetek:
+\begin{itemize}
+	\item $ a $ - nem korlátozott növekedési ráta normál őssejtek esetén
+	\item $ A $ - nem korlátozott növekedési ráta leukémiás őssejtek esetén
+	\item $ b_{1} $, $ b_{2} $, $ B $ - a csontvelő mikrokörnyezeti érzékenységének együtthatói
+	\item $ c $ - normál őssejtek halálozási rátája
+	\item $ C $ - leukémiás őssejtek elhalási rátája
+\end{itemize}
+
+Beláthatjuk, hogy mindkét őssejt populúcióban a növekedési ráta nagyobb, mint az elhalási ráta, téhát
+\begin{align*}
+	a > c \quad \textrm{és} \quad A > C.
+\end{align*}
+
+A normál és leukémiás őssejtek különböző módon járulnak hozza a normál őssejtek növekedési rátájának csökkenéséhez. Ezt az első egyenletben úgy tudjuk biztosítani, hogy különböző értékeket használunk a $ b_{1} $ és $ b_{2} $ paraméterek esetében. Annak érdekében, hogy utánozni tudjuk a leukémiás sejtek előnyét kisebb értéket veszünk fel a környezeti érzékenységi együtthatójának ($ B $). Az elmondottak alapján tehát feltételezzük, hogy
+\begin{align*}
+	b_{1}\geq b_{2}\geq B.
+\end{align*}
+
+Továbbá rendszerünknek két nem zéró egyensúlyi állapota van abban az esetben, ha $ b_{1} = b_{2} $ ezek $ (d, 0) $ és $ (0, D) $, ahol
+\begin{align*}
+	d = \dfrac{1}{b_{1}}\left(\dfrac{a}{c}-1\right) \quad \textrm{és} \quad D = \dfrac{1}{B}\left(\dfrac{A}{C}-1\right)
+\end{align*}
+$ d $ és $ D $ a normális és leukémiás őssejtek homeosztatikus mennyiségét jelenti. Ezekre a paraméterekre igazak a következő egyenlőtlenségek:
+\begin{itemize}
+	\item Ha $ D < d $, akkor normál, egészséges állapot áll fenn.
+	\item Ha $ D > d $, akkor akut leukémiás állapot áll fenn.
+\end{itemize}
+\pagebreak
+
+A továbbiakban nézzünk meg egy konkrét példát a \cite{LeukemiaModell2} cikkben leírtak alapján. Az említett cikkből tudjuk, hogy egy egészséges felnőttnek van megközelítőleg $ d = 2*10^{4} $ db őssejtje. Emellett tudjuk azt is, hogy az őssejtek $ 200 $ naponta osztódnak és $ 500 $ naponta halnak meg. Ezek alapján már fel tudjuk írni a normál őssejtek növekedési és elhalási rátáját: $ a = 1/200 $ és $ c = 1/500 $. A csontvelő mikrokörnyezeti érzékenységének együtthatóit a következőképpen kaphatjuk meg: $  b_{1} = (a/c-1)/d = 0.75*10^{-4}$ és  $  b_{2} = 0.38*10^{-4}$. A további három paraméter $ A $, $ B $ és $ C $ minden páciensnél más és más értékű, azonban $ B $ -ről tudjuk, hogy körülbelül egyenlő a $ b_{2} $ értékének felével, tehát $ B = b_{2}/2 = 0.19*10^{-4} $. \\ \\
+Első tesztesetünkben a további paraméterek értékei:
+\begin{itemize}
+	\item $ A = 0.01 $ és $ C = 0.009 $
+	\item $ x(0) = 1.5 * 10^{4} $ és $ y(0) = 5 * 10^{3} $ kezdeti értékek
+\end{itemize}
+A fenti paraméterekkel megoldjuk a \eqref{leukemiaEgyenlet}. egyenletrendszert így a normál, egészséges állapot grafikonját kapjuk:
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.95\textwidth] {figures/leukemia_normal_allapot}
+	\caption{Normál, egészséges állapot.}
+\end{figure}
+
+Második tesztesetünkben az úgynevezett krónikus mieloid leukémia (CML) állapotot szeretnénk szemléltetni, melynek bemenő paraméterei:
+\begin{itemize}
+	\item $ A = 0.01 $ és $ C = 0.007 $
+	\item $ x(0) = 2 * 10^{4} $ és $ y(0) = 10^{3} $ kezdeti értékek
+\end{itemize}
+A fenti paraméterekkel újra megoldjuk a \eqref{leukemiaEgyenlet}. egyenletrendszert és a következő grafikont kapjuk:
+\pagebreak
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.95\textwidth] {figures/leukemia_CML_allapot}
+	\caption{Krónikus mieloid leukémia (CML) állapot.}
+\end{figure}
+
+Utolsó tesztesetünkben pedig az úgynevezett akut mieloid leukémia (AML) állapotot szeretnénk szemléltetni, melynek bemenő paraméterei a következőek:
+\begin{itemize}
+	\item $ A = 0.01 $ és $ C = 0.004 $
+	\item $ x(0) = 2 * 10^{4} $ és $ y(0) = 1 $ kezdeti értékek
+\end{itemize}
+Az új paraméterekkel harmadszor is megoldjuk a \eqref{leukemiaEgyenlet}. egyenletrendszert:
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.95\textwidth] {figures/leukemia_AML_allapot}
+	\caption{Akut mieloid leukémia (AML) állapot.}
+\end{figure}
+
+\section{Hullámmozgás modellje}
+
+Az előző modellünk egyenletei közönséges differenciálegyenletek (ODE) voltak. Ezzel szemben a hullámmozgás modelljének leírásánál a parciális differenciálegyenleteket (PDE) és azok gyakorlati fontosságát szeretném ismertetni. Modellünk elméleti alapjai megtalálhatóak a következő könyvben és jegyzetben \cite{HullamegyenletKonyv}, \cite{HullammozgasLink}.
+
+Modellünk megértése érdekében képzeljünk el egy végtelen hosszú és rugalmas húrt, amely hullámmozgást végez, ez lehet egy kötél hullámzása, megpengetett gitárhúr vagy akár egy dob membránja. A továbbiakban kiváncsiak vagyunk arra, hogy a húr mozgatás közben milyen alakot vesz fel. Ennek leírásához szükségünk van néhány feltételezésre:
+\begin{itemize}
+	\item Feltételezzük, hogy a húr csak kis kitéréseket végez a függőleges síkban.
+	\item A húr hosszának változása elhanyagolható, ezáltal a húrban állandó $ T $
+	nagyságú érintőirányú feszítő erő ébred.
+	\item Jellemezzük a húr pontjait az $ x \in \mathbb R$ koordinátával, és jelölje $\mu$ a húr (konstans) lineáris sűrűségét (ez azt jelenti, hogy teszőleges $l$ hosszú húrdarab tömege $\mu l$).
+	\item Legyen $ u(x,t) $ függvény, amely a húr $ x $ koordinátájú pontjának kitérését ($ y $ tengely irányú) írja le $ t $ időpillanatban.
+	\item Végül feltételezzük, hogy a húrra $ F(x,t) $ sűrűségű $ y $ tengely irányú külső erő hat, ami azt jelenti, hogy tetszőleges végtelen kicsi $ [x, \delta x] $ húrdarabra $ F \delta x$ erő hat.
+\end{itemize}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.5\textwidth] {figures/hurdarabra_hato_erok}
+	\caption{Húrdarabra ható erők.}
+	\caption*{\textbf{Forrás}: \cite{PDEKonyv}}
+\end{figure}
+
+Ezután vizsgáljuk meg a húr $ x $ és $ x + \delta x$ közötti $ x $ hosszúságú végtelen kicsi darabját. Tegyük fel, hogy az $ x $ végpontban az érintő $\theta$ szöget zár be az $ x $ tengellyel, míg az $ x + \delta x$ pontban az érintő szöge $ \theta + \delta \theta $ lesz. Mindezek ismeretében a húrdarabra ható erők függőleges komponenseire felírva Newton második törvényét a következőt kapjuk:
+\begin{align} \label{eq:Newton}
+	T sin(\theta + \delta \theta) - T sin(\theta) + F(x,t) \delta x = (\mu \delta x)a_{y},
+\end{align}
+ahol $ a_{y} $ a húrdarab $ y $ tengely irányú gyorsulása, amely a húrdarab infinitezimális hossza miatt megközelítőleg $ \partial^{2}_{t} u(x,t) $.
+
+Másrészt, tudjuk, hogy a húr csak kis kitéréseket végez, ezért kicsi a szög, így alkalmazhatóak a $ sin(\delta \theta) \approx \delta \theta$, $ cos(\delta \theta) \approx 1$ és \newline $ sin(\theta + \delta \theta) = sin(\theta) cos(\delta \theta) + cos(\theta) sin(\delta \theta) \approx sin \theta + \delta \theta$ közelítések, amelyekkel a \eqref{Newton} egyenlet a következőképpen alakul:
+\begin{align} \label{eq:Newton}
+	T \delta \theta + F(x,t) \delta x = (\mu \delta x) \partial^{2}_{t} u(x,t).
+\end{align}
+
+Vegyük észre, hogy $ \theta $ az érintő szöge, ezért $ tg \theta = \partial_{x} u$, amit $ x $ szerint deriváva az összetett függvény deriválása alapján $ (1/cos^{2} \theta) \partial_{x} \theta = \partial^{2}_{x} u $.
+Ebből újra a $ cos(\delta \theta) \approx 1$ közelítést használva, illetve a $ \partial_{x} \theta $ deriváltat a $ \delta \theta / \delta x $ különbségi hányadossal helyettesítve azt kapjuk, hogy $ \delta \theta \approx  (\partial^{2}_{x} u) \delta x$. \newline Vegül ezeket visszahelyettesítve a legutóbbi egyenletbe a következőket kapjuk:
+\begin{align} \label{eq:Newton}
+	(T \delta x) \partial^{2}_{x} u + F \delta x = (\mu \delta x) \partial^{2}_{t} u \\
+	\partial^{2}_{t} u - \dfrac{T}{\mu} \partial^{2}_{x} u = \dfrac{F}{\mu}
+\end{align}
+Ezt az egyenletet nevezik \textbf{egydimenziós hullámegyenletnek}.
+\newline
+
+Ha tudjuk, hogy a húr hullámmozgást végez, akkor $ u(x,t) $ olyan kétszer folytonosan differenciálható függvény kell legyen, amely kielégíti az alábbi parciális differenciálegyenletet:
+\begin{align}
+	u''_{tt} - c^{2}u''_{xx} = 0,
+\end{align}
+ahol $ c $ egy ismert konstans érték. Az egyenlet megoldásához ebben az esetben is szükségünk van a kezdeti feltételekre, amelyek a húr helyzete a kezdeti időpillanatban ($ t = 0 $ - ban) és az adott pontokhoz tartozó pillanatnyi sebességek lesznek:
+\begin{align*}
+	u(x,0) = f(x), \\
+	u'(x,0) = g(x),
+\end{align*}
+ahol $ f(x) $ és $ g(x) $ ismert, folytonosan differenciálható függvények lesznek.
+\\
+
+A következőkben legyen $ u(x,t) = F(x+ct)$, ahol az $ F $ tetszőlegesen választott kétszer differenciálható függvény. Ebben az esetben
+\begin{align*}
+	u''_{xx} = F'' \quad \textrm{és} \quad u''_{tt} = c^{2}F'',
+\end{align*}
+tehát $ u $ függvény megoldása a hullámegyenletnek. Az előző esethez hasonlóan, legyen $ u(x,t) = G(x-ct)$, ahol $ G $ szintén egy tetszőlegesen választott kétszer differenciálható függvény. Ugyanúgy, mint az előző esetben itt is az $ u $ függvény megoldása lesz a hullámegyenletnek.
+
+A látottak alapján elmondható (számításokkal be is bizonyítható), hogy a hullámmozgás parciális differenciálegyenlet általános megoldása
+\begin{align}
+	u(x,t) = F(x+ct)+G(x-ct),
+\end{align}
+ahol $ F $ és $ G $ folytonosan differenciálható függvények.

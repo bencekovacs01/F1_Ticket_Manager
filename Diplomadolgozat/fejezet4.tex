@@ -1,0 +1,95 @@
+%----------------------------------------------------------------------------
+\chapter{Eredmények, következtetések}
+%----------------------------------------------------------------------------
+
+\section {Beépített szoftverek esetén}
+
+A \ref{fejezet3}. fejezetben bemutattam két beépített, előre megvalósított szoftvert, melyek a Matlab ode45 programja és a Boost - Odeint könyvtár. Az elért eredmények és tesztek azt mutatják, hogy a Matlab ode45 differenciálegyenlet megoldója sokkal gyorsabb és hatékonyabb, mint az Odeint. Ha a tesztesetekben mért átlagidőket összehasonlítjuk láthatjuk (\ref{fejezet3_3}. alfejezet), hogy az ode45 $ 20-30 $ -szor gyorsabb a Odeintnél. Ez talán annak is köszönhető, hogy a Matlab egy nagyon komoly szoftver, amelynek programcsomagjain mérnökök és programozók százai  (vagy akár ezrei) dolgoznak, így természetes, hogy az algoritmusok jobban optimizáltak és hatékonyabbak az ingyenes szoftvereknél. A továbbiakban összegezzük, hogy a két technológiának milyen előnyei és hátrányai vannak vagy éppen miért érdemes/nem érdemes használni őket, l\'asd \cite{Lovasz}
+\\ \\
+\textbf{Matlab ode45 előnyei:}
+\begin{itemize}
+	\item nagyon egyszerű a használata, nem igényel komoly programozási ismereteket
+	\item könnyű beépíteni és összekötni más Matlab programokkal
+	\item a kapott eredményeket mátrix vagy vektor típusokban téríti vissza, ami könnyűvé teszi az eredmények további kezelését
+	\item az eredményeket grafikus felületen azonnal meg tudjuk jeleníteni
+	\item jobb eredményeket produkált, mint az Odeint
+	\item jól dokumentált, sok példa van a használatára
+\end{itemize}
+\pagebreak
+\textbf{Matlab ode45 hátrányai:}
+\begin{itemize}
+	\item komoly hátránya az Odeinttel szemben, hogy \textbf{fizetni kell a használatáért}
+	\item nagyon sok memóriát használ, komolyan igénybeveszi a számítógép erőforrásait
+\end{itemize}
+\textbf{Odeint előnyei:}
+\begin{itemize}
+	\item ingyenes és nyílt forráskódú, használható személyi és kereskedelmi célokra egyaránt
+	\item nagyon rugalmas, absztrak, így könnyedén változtatható a bemeneti adatok típusa vagy struktúrája 
+	\item C++ nyelven írodott, támogatva a modern programozási technológiákat (Generikus programozás, Template Metaprogramming)
+\end{itemize}
+\textbf{Odeint hátrányai:}
+\begin{itemize}
+	\item használata nehezebb, mint a Matlab ode45 programé, szükséges a C++ programozási nyelv ismerete
+	\item a kapott eredményekkel nem olyan könnyű bánni, mint a Matlab esetében
+	\item absztraktsága miatt nehéz a felmerülő problémákat megoldani
+	\item dokumentáltsága jóval szegényesebb, mint a Matlabé
+\end{itemize}
+
+
+
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\node[main node] (1) {$1$};
+		\node[main node] (2) [below left = 2.3cm and 1.5cm of 1]  {$2$};
+		\node[main node] (3) [below right = 2.3cm and 1.5cm of 1] {$3$};
+		
+		\path[draw,thick]
+		(1) edge node {} (2)
+		(2) edge node {} (3)
+		(3) edge node {} (1);
+		%%
+		\begin{scope}[xshift=4cm]
+			\node[main node] (1) {$1$};
+			\node[main node] (2) [right = 2cm  of 1]  {$2$};
+			\node[main node] (3) [below = 2cm  of 1] {$3$};
+			\node[main node] (4) [right = 2cm  of 3] {$4$};
+			
+			\path[draw,thick]
+			(1) edge node {} (2)
+			(1) edge node {} (4)
+			(3) edge node {} (2)
+			(3) edge node {} (4)
+			;
+		\end{scope}
+	\end{tikzpicture}
+\caption{Egyszer\H u gr\'af TIKZ seg\'its\'eg\'evel}
+\end{figure}
+
+
+
+\newpage
+\section {Saját szoftverek esetén}
+
+Saját szoftverek esetében sikerült négy különböző technológia segítségével megvalósítani a Dorman-Prince differenciálegyenlet megoldó algoritmust (lásd \ref{fejezet3_2}. alfejezet). A felhasznált technológiák: Matlab, Java, C++ és Android voltak.
+
+Ezen technológiák közül az Androidos szoftverrel kapcsolatban már előzetes félelmeink voltak, mivel azt feltételeztük, hogy bármennyire is fejlettek napjainkban a mobileszközök, mégis hardveresen nem lesznek elegek ahhoz, hogy versenybe tudjanak szállni a számítógépekkel. Néhány teszt után feltételezéseink beigazolódtak, láthatjuk a \ref{fejezet3_3}. alfejezet teszteseteiben is, hogy az Android szoftver mennyire gyengén teljesített (mind a Motorola Moto E2, mind a Samsung Galaxy Core Prime esetében). Összehasonlítva a többi algoritmussal az átlagidőket nézve $ 150-160 $ - szor lassabb a Javanál és $ 300 - 350 $ - szer a C++ - nál! Tehát azt a következtetést vonhatjuk le, hogy nem érdemes mobileszközökön differenciálegyenleteket oldani, mivel túlságosan nagy a hardver igénye és egyelőre ezen a téren nem képesek tartani a lépést a számítógépekkel.
+
+A további három technológia közül (Matlab, Java, C++) meglepő módon itt is a Matlab teljesített a legjobban, igaz, hogy ebben az esetben már nem használtuk az ode45 programot, hanem megírtam én a saját függvényemet. Ez a teljesítményen is meglátszott, mert az általam írt függvény nem tudott jobban teljesíteni a tesztek alatt, mint az ode45. Mindezek ellenére $ 35-40 $ - szer gyorsabb volt a Javanál és megközelítőleg $ 15-20 $ - szor gyorsabb a C++ - nál.
+
+A Java és C++ szoftvereket összehasonlítva elmondhatom, hogy az esetek többségében a C++ körülbelül $ 2 $ - szer volt gyorsabb a Javanál, ami megfelel az előzetes elvárásoknak.
+
+Amit nagyon fontosnak tartok kihangsúlyozni, hogy az általam megvalósított C++ szoftver a tesztek során nagyon jól teljesített, felvette a versenyt az Odeint könyvtárral és az elért átlagok is csak nagyon kicsivel maradnak el az Odeint által produkált eredményektől (\ref{fejezet3_3}. alfejezet).
+
+Továbbá megvalósítottam az Euler és Runge-Kutta módszerek párhuzamosított változatait is CUDA technológia segítségével. Ebben az esetben a tesztek azt mutatták, hogy az Euler módszer esetében többe kerül a sok CPU és GPU memória közötti másolás művelete, mint amennyit nyerünk a számítások elvégzése során. Tehát ebben az esetben ez a fajta párhuzamosítási megközelítés nem éri meg. Ezzel ellentétben a Runge-Kutta módszer esetében a megközelítés eredményesnek bizonyult abban az esetben, ha az egyenletek száma nagy és a lépésköz kicsi. A \ref{fejezet3_4} alfejezetben láthattuk, hogy abban az esetben ha az egyenletek száma $ n = 10 $ és a lépésköz $ h = 0.001 $, a GPU-n megközelítőleg 5 és fél perccel hamarabb lefutott az algoritmus, mint a CPU-n. Ezzel a párhuzamosítási módszerrel nem tudtuk kihasználni a videókártya által nyújtott maximális számítási kapacitást, de így is jelentős különbséget sikerült elérni a futási időket nézve, l\'asd \cite{Katai}.
+
+
+
+\section {Összességében}
+
+A fentieket összegezve elmondhatom, hogy megéri előre megírt szoftvereket vagy könyvtárakat használni differenciálegyenletek megoldására. Nagyon megkönnyíthetik az eltünket egyszerűségükkel és nagy teljesítményükkel. Viszont fontos elmondani, hogy használatuk problémákkal is járhat, például fizetni kell értük vagy nem lehet belenyúlni az algoritmusokba kedvünk szerint, esetleges fellépő hibák esetén nagyon nehéz lenyomozni a hiba forrását (vagy szinten lehetetlen).
+
+Saját algoritmusok terén bátran elmondhatom, hogy megéri a C++ technológiát választani és ezen a vonalon továbbhaladni egy esetleges saját könyvtár megírása, megvalósítása felé. Láthattuk, hogy az általam megírt C++ szoftver is felvette a versenyt az Odeint könyvtárral, ami szintén C++ technológiát alkalmaz, l\'asd \cite{Antal}.
+
+Egy másik vonal, amit érdemes sokkal jobban felderíteni az a CUDA technológiával és grafikus kártyával történő differenciálegyenlet megoldása. Láthattuk, hogy egy kis párhuzamosítás is jelentős időbeli különbséget jelenthet bizonyos algoritmusok esetében. Annak tudatában is, hogy a differenciálegyenletek megoldása nem a legjobban adatpárhuzamosítható feladatok közé sorolható azt mondom, hogy megéri ezzel a technológiával foglalkozni. Ennek kapcsán a legnagyobb motiváció számomra a jövőre nézve a parciális differenciálegyenletek párhuzamosításának megvalósítása és tanulmányozása, mivel ezeknél az egyenleteknél jobban ki lehet használni a videókártya rácsos szerkezetét.
