@@ -3,13 +3,7 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 import { getStorage } from 'firebase/storage';
 import axios from 'axios';
-import {
-  decryptData,
-  encryptData,
-  generateUID,
-} from '../pages/checkout/crypt/crypt.utils';
-import { clearCart } from '../redux/cart/cart.actions';
-import { connect } from 'react-redux';
+import { decryptData, encryptData } from '../pages/checkout/crypt/crypt.utils';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
