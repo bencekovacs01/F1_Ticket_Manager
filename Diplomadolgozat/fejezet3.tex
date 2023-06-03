@@ -1,11 +1,27 @@
 %----------------------------------------------------------------------------
-\chapter{Rendszerspecifikáció és architektúra} \label{fejezet3}
+\chapter{Rendszerspecifikáció} \label{fejezet3}
 %----------------------------------------------------------------------------
 
-\section {Beépített szoftverek, könyvtárak}
+\section {Rendszer áttekintése}
 
-Dolgozatom ezen részében előszőr vizsgáljunk meg olyan beépített differenciálegyenlet megoldó szoftvereket, melyeket már megemlítettem. Ezek közül én a Matlab és a Boost - Odeint beépített programját használtam és vizsgáltam meg. Mindkét esetben közönséges differenciálegyenletek (ODE) megoldására, az előre megírt algoritmus segítségével, melynek hátterében természetesen a Dormand-Prince módszer áll.
+A rendszer specifikációit négy nagy részre oszthatjuk fel, amelyek közé tartoznak a felhasználói felület-, a jegyvásárlás-, a felhasználók- és a biztonság specifikációja. Elsőként a felhasználói felület biztosítja a felhasználó és a rendszer közötti kommunikációt. A jegyvásárlás a rendszer központi funkcionalitása, ezáltal a legkomplexebb is. Az alkalmazás lehetővé teszi a több típusú felhasználók hozzáférését a különbőző funkcionalitásokhoz. Végül de nem utolsó sorban a rendszer a bizalmas adatok biztonságát is hivatott kiszolgálni. A specifikációk prezentálására a Visual Paradigm Online felület segítségével hoztam létre a szükséges diagramokat .
 
+\subsection {Felhasználói felület}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.7]{images/useCaseNA}
+	\caption{Use case diagram - Nem bejelentkezett felhasználó}
+	\label{abra:useCaseNA}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.7]{images/useCaseA}
+	\caption{Use case diagram - Bejelentkezett felhasználó}
+	\label{abra:useCaseA}
+\end{figure}
+\pagebreak
 
 	\begin{align}
 	x&=1+1+1+1\\
