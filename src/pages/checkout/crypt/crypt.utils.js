@@ -1,5 +1,6 @@
 import CryptoJS from 'crypto-js';
 import { v4 as uuidv4 } from 'uuid';
+import { Crypt, RSA } from 'hybrid-crypto-js';
 
 const secretPass = process.env.REACT_APP_SECRET_PASS;
 
@@ -126,6 +127,76 @@ const decryptedData = encryptData2(testData, secretPass);
 const decryptionEnd = performance.now();
 const decryptionTime = decryptionEnd - decryptionStart;
 
-console.log(decryptedData);
-console.log('Encryption time:', encryptionTime, 'ms');
-console.log('Decryption time:', decryptionTime, 'ms');
+// console.log(decryptedData);
+// console.log('Encryption time:', encryptionTime, 'ms');
+// console.log('Decryption time:', decryptionTime, 'ms');
+
+/////////////////////////////
+
+var crypt = new Crypt();
+var rsa = new RSA();
+
+var publicKey;
+var privateKey;
+var encrypted;
+var decrypted;
+
+generateKeys();
+
+function generateKeys() {
+  var rsa = new RSA();
+  rsa.generateKeyPair(function (keyPair) {
+    publicKey = keyPair.publicKey;
+    privateKey = keyPair.privateKey;
+  });
+  setTimeout(function () {
+    console.log('publicKey', publicKey);
+    console.log('privateKey', privateKey);
+    Encryption();
+  }, 3000);
+}
+
+function Encryption() {
+  var entropy = 'Testing of RSA algorithm in javascript.';
+  crypt = new Crypt({
+    rsaStandard: 'RSA-OAEP',
+    aesStandard: 'AES-CBC',
+    md: 'sha512',
+    entropy: entropy,
+  });
+  var message = 'Hello world!';
+
+  // Create a signature with ISSUER's private RSA key
+  var signature = crypt.signature(privateKey, message);
+
+  // Encrypt message with RECEIVERS public RSA key and attach the signature
+  encrypted = crypt.encrypt(publicKey, message, signature);
+  console.log('encrypted', encrypted);
+
+  // Call the Decryption function after encryption
+  setTimeout(function () {
+    Decryption();
+  }, 3000);
+}
+
+function Decryption() {
+  var entropy = 'Testing of RSA algorithm in javascript.';
+  crypt = new Crypt({
+    rsaStandard: 'RSA-OAEP',
+    aesStandard: 'AES-CBC',
+    md: 'sha512',
+    entropy: entropy,
+  });
+
+  // Decrypt message with own (RECEIVER) private key
+  decrypted = crypt.decrypt(privateKey, encrypted);
+  console.log('decrypted', decrypted);
+
+  // Verify message with ISSUER's public key
+  var verified = crypt.verify(
+    publicKey,
+    decrypted.signature,
+    decrypted.message
+  );
+  console.log('verified', verified);
+}
