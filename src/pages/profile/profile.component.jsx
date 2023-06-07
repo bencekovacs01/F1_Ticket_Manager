@@ -142,6 +142,7 @@ const ProfilePage = ({ currentUser }) => {
               id="image-input"
               type="file"
               onChange={handleImageChange}
+              accept="image/*"
               style={{ display: 'none' }}
             />
           </>
