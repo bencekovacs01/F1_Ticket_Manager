@@ -2,24 +2,23 @@
 \chapter{Rendszerspecifikáció} \label{fejezet3}
 %----------------------------------------------------------------------------
 
-\section {Rendszer áttekintése}
+\section {Rendszer követelmények - Funkcionális}
 
 A rendszer specifikációit négy nagy részre oszthatjuk fel, amelyek közé tartoznak a felhasználói felület-, a jegyvásárlás-, a felhasználók- és a biztonság specifikációja. Elsőként a felhasználói felület biztosítja a felhasználó és a rendszer közötti kommunikációt. A jegyvásárlás a rendszer központi funkcionalitása, ezáltal a legkomplexebb is. Az alkalmazás lehetővé teszi a több típusú felhasználók hozzáférését a különbőző funkcionalitásokhoz. Végül de nem utolsó sorban a rendszer a bizalmas adatok biztonságát is hivatott kiszolgálni. A specifikációk prezentálására a Visual Paradigm Online felület segítségével hoztam létre a szükséges diagramokat.
 
-\section {Felhasználói felület}
+\subsection {Felhasználói felület}
 
 A rendszer felhasználói felülete egy webes alkalmazás felülete, amelyet a frontend technológiák segítségével valósítottam meg. A felületnek az a célja, hogy egyszerű és intuitív legyen, így a felhasználók könnyen tudnak navigálni rajta és megtalálják a kívánt jegyeket.
 
-\subsection {Felhasználói követelmények}
+\subsection {Jegyvásárlás}
 
-A weboldal használatára háromféle felhasználótípust hoztam létre, amelyek különböző jogosultságokkal rendelkeznek:
-\begin{itemize}
-	\item Első kategória (\ref{abra:useCaseNA})
-	\item Második kategória (\ref{abra:useCaseA})
-	\item Harmadik kategória ()
-\end{itemize}
+A jegyvásárlás során a felhasználóknak lehetőséget kell adni arra, hogy a kiválasztott jegyeket kosárba helyezzék, módosítsák azok mennyiséget, illetve töröljék a jegyeket szükség esetén. A böngészés során fontos, hogy meg tudják tekinteni a jegyek részleteit, mint a helyszín, időpont vagy az ár.
+Biztosítani kell, hogy a felhasználók biztonságosan és kényelmesen tudjanak fizetni a jegyekért. Az adatátvitelnek titkosított csatornán kell történnie a megfelelő biztonság érdekében.
 
+\pagebreak
+\subsection {Felhasználói szerepkörök}
 
+Az oldal böngészésének tekintetében érdemes különboző jogosultságokkal rendelkező szerepköröket kialakítani. Erre azért van szükség, mivel a rendszer több típusú felhasználó által látogatható. Ezek közül a legelső és egyben a legkevesebb funkcionalitással rendelkező az \textbf{Anonymous}, aki egy \textit{be nem jelentkezett} felhasználó (unauthorized user). Ennek a szerepkörnek lehetősége van a jegyek között böngészni, megnézni azok részleteit, email-t küldeni a \textit{Support} számára akár hibák jelzésére vagy segítségkérési szándékkal (\ref{abra:useCaseNA}). Továbbá lehetősége van bejelentkezni vagy regisztrálni az oldalra. A bejelentkezés megtörténhet az oldalon regisztrált fiókkal vagy egyéb közösségi fiókok által.
 
 \begin{figure}[!h]
 	\centering
@@ -27,6 +26,9 @@ A weboldal használatára háromféle felhasználótípust hoztam létre, amelye
 	\caption{Use case diagram - Nem bejelentkezett felhasználó}
 	\label{abra:useCaseNA}
 \end{figure}
+\pagebreak
+
+A második kategóriát a \textbf{Regular} felhasználók alkotják, másnéven az átlagos vásárlók. Ennek a kategóriának feltétele, hogy az adott felhasználó \textit{be legyen jelentkezve} a rendszerbe (\ref{abra:useCaseA}). Ezen felhasználók tudnak jegyeket helyezni a kosárba, visszajelzéseket írni az egyes jegyekhez, valamint értékelni azokat. Megtekinthetik a profiljukat, ahol felhasználó nevet, profil képet tudnak változtatni, valamint megtekinteni a vásárlási előzményeiket. Az előzmények részelteinél lehetőségük van az adott jegy PIN kódját megváltoztatni, amennyiben ez szükséges. A vásárlási procedúra egyik lépéseként el tudnak jutni a rendelési oldalra (\textit{Checkout}), ahol lehetőség van módosítani az listaelemek mennyiségét vagy törölni őket. Ugyan itt történik meg a fizetés és a rendelés leadása.
 
 \begin{figure}[!h]
 	\centering
@@ -35,6 +37,21 @@ A weboldal használatára háromféle felhasználótípust hoztam létre, amelye
 	\label{abra:useCaseA}
 \end{figure}
 \pagebreak
+
+A harmadik kategória a \textbf{Admin} felhasználó, amelyből jelenleg csak egy van a rendszerben. Ennek a felhasználónak joga van minden eddig említett funkcionalitáshoz, valamint a jegyek hitelesítéséhez a QR kód beolvasásával és a PIN kód megadásával. Az adminisztrátori szerepkör csak manuálisan vehető fel a rendszerbe és módosítható. Habár egy rendszergazdának lehetősége van jegyet vásárolni, ezt teljes mértékben a rendszer tesztelésére és karbantartására hivatott használni (\ref{abra:useCaseAdmin}).
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.7]{images/useCaseAdmin}
+	\caption{Use case diagram - Adminisztrátor}
+	\label{abra:useCaseAdmin}
+\end{figure}
+\pagebreak
+
+\section {Felhasználói követelmények}
+
+////////////
+
 
 	\begin{align}
 	x&=1+1+1+1\\
