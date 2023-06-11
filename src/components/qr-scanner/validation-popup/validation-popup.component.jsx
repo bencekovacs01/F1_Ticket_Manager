@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './validation-popup.styles.scss';
 
 import ValidIcon from '../../../assets/valid.png';

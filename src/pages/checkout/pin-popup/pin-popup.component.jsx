@@ -29,7 +29,7 @@ const PinPopup = ({ onClose, fromcheckout, curcuitId, uid }) => {
   useEffect(() => {
     body.classList.add('no-scroll');
     setLoaded(true);
-  }, []);
+  }, [body?.classList]);
 
   const handleSubmit = () => {
     if (pin.length !== 6) {
@@ -97,6 +97,7 @@ const PinPopup = ({ onClose, fromcheckout, curcuitId, uid }) => {
               >
                 <img
                   src={GenerateIcon}
+                  alt="Auto generate"
                   title="Auto generate PIN"
                   className="auto-generate-icon"
                 />

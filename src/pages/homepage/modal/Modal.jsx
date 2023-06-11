@@ -7,7 +7,7 @@ const Modal = ({ setIsOpen }) => {
   const cookies = new Cookies();
   return (
     <>
-      <div className={styles.darkBG} /* onClick={() => setIsOpen(false)} */ />
+      <div className={styles.darkBG} />
       <div className={styles.centered}>
         <div className={styles.modal}>
           <div className={styles.modalHeader}>

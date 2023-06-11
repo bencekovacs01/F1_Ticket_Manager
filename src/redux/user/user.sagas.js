@@ -98,7 +98,7 @@ export function* signUp({ payload: { displayName, email, password } }) {
       {
         displayName,
       },
-      (signUp = true)
+      true
     );
   } catch (error) {
     yield put(signUpFailure(error));

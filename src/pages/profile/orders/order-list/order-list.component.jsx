@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import OrderItem from '../order-item/order-item.component';
 
 import './order-list.styles.scss';

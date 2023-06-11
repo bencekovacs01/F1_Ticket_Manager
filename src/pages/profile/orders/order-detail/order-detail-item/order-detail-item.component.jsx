@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 import './order-detail-item.styles.scss';
-import Popup from '../../../../../components/packages/popup/popup.component';
 import PinPopup from '../../../../checkout/pin-popup/pin-popup.component';
 import { updatePin } from '../../../../../firebase/firebase.utils';
 
@@ -20,10 +19,6 @@ const OrderDetailItem = ({ cartItem }) => {
       }, 700);
     }
   }, [popupClosed]);
-
-  const handleClosePopup = () => {
-    setCopyClicked(false);
-  };
 
   return (
     <>

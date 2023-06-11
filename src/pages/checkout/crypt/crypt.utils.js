@@ -1,6 +1,8 @@
-import CryptoJS from 'crypto-js';
+import CryptoJS, { enc } from 'crypto-js';
 import { v4 as uuidv4 } from 'uuid';
 import { Crypt, RSA } from 'hybrid-crypto-js';
+
+import JSChaCha20 from 'js-chacha20';
 
 const secretPass = process.env.REACT_APP_SECRET_PASS;
 
@@ -133,70 +135,142 @@ const decryptionTime = decryptionEnd - decryptionStart;
 
 /////////////////////////////
 
-var crypt = new Crypt();
-var rsa = new RSA();
+// var crypt = new Crypt();
+// var rsa = new RSA();
 
-var publicKey;
-var privateKey;
-var encrypted;
-var decrypted;
+// var publicKey;
+// var privateKey;
+// var encrypted;
+// var decrypted;
 
-generateKeys();
+// generateKeys();
 
-function generateKeys() {
-  var rsa = new RSA();
-  rsa.generateKeyPair(function (keyPair) {
-    publicKey = keyPair.publicKey;
-    privateKey = keyPair.privateKey;
-  });
-  setTimeout(function () {
-    console.log('publicKey', publicKey);
-    console.log('privateKey', privateKey);
-    Encryption();
-  }, 3000);
-}
+// function generateKeys() {
+//   rsa.generateKeyPair(function (keyPair) {
+//     publicKey = keyPair.publicKey;
+//     privateKey = keyPair.privateKey;
+//   });
+//   setTimeout(function () {
+//     console.log('publicKey', publicKey);
+//     console.log('privateKey', privateKey);
+//     Encryption();
+//   }, 3000);
+// }
 
-function Encryption() {
-  var entropy = 'Testing of RSA algorithm in javascript.';
-  crypt = new Crypt({
-    rsaStandard: 'RSA-OAEP',
-    aesStandard: 'AES-CBC',
-    md: 'sha512',
-    entropy: entropy,
-  });
-  var message = 'Hello world!';
+// function Encryption() {
+//   var entropy = 'Testing of RSA algorithm in javascript.';
+//   crypt = new Crypt({
+//     rsaStandard: 'RSA-OAEP',
+//     aesStandard: 'AES-CBC',
+//     md: 'sha512',
+//     entropy: entropy,
+//   });
+//   var message = 'Hello world!';
 
-  // Create a signature with ISSUER's private RSA key
-  var signature = crypt.signature(privateKey, message);
+//   // Create a signature with ISSUER's private RSA key
+//   var signature = crypt.signature(privateKey, message);
 
-  // Encrypt message with RECEIVERS public RSA key and attach the signature
-  encrypted = crypt.encrypt(publicKey, message, signature);
-  console.log('encrypted', encrypted);
+//   // Encrypt message with RECEIVERS public RSA key and attach the signature
+//   encrypted = crypt.encrypt(publicKey, message, signature);
+//   console.log('encrypted', encrypted);
 
-  // Call the Decryption function after encryption
-  setTimeout(function () {
-    Decryption();
-  }, 3000);
-}
+//   // Call the Decryption function after encryption
+//   setTimeout(function () {
+//     Decryption();
+//   }, 3000);
+// }
 
-function Decryption() {
-  var entropy = 'Testing of RSA algorithm in javascript.';
-  crypt = new Crypt({
-    rsaStandard: 'RSA-OAEP',
-    aesStandard: 'AES-CBC',
-    md: 'sha512',
-    entropy: entropy,
-  });
+// function Decryption() {
+//   var entropy = 'Testing of RSA algorithm in javascript.';
+//   crypt = new Crypt({
+//     rsaStandard: 'RSA-OAEP',
+//     aesStandard: 'AES-CBC',
+//     md: 'sha512',
+//     entropy: entropy,
+//   });
 
-  // Decrypt message with own (RECEIVER) private key
-  decrypted = crypt.decrypt(privateKey, encrypted);
-  console.log('decrypted', decrypted);
+//   // Decrypt message with own (RECEIVER) private key
+//   decrypted = crypt.decrypt(privateKey, encrypted);
+//   console.log('decrypted', decrypted);
 
-  // Verify message with ISSUER's public key
-  var verified = crypt.verify(
-    publicKey,
-    decrypted.signature,
-    decrypted.message
-  );
-  console.log('verified', verified);
-}
+//   // Verify message with ISSUER's public key
+//   var verified = crypt.verify(
+//     publicKey,
+//     decrypted.signature,
+//     decrypted.message
+//   );
+//   console.log('verified', verified);
+// }
+
+////// CHACHA20
+
+const convertTextToUint8Array = text => {
+  const encoder = new TextEncoder();
+  const encodedText = encoder.encode(text);
+
+  // If the encoded text is longer than 64 bytes, truncate it
+  if (encodedText.length > 64) {
+    console.log('TOO LONG!');
+    return encodedText.subarray(0, 64);
+  }
+
+  // If the encoded text is shorter than 64 bytes, pad it with zeros
+  if (encodedText.length < 64) {
+    const paddedText = new Uint8Array(64);
+    paddedText.set(encodedText);
+    return paddedText;
+  }
+
+  return encodedText;
+};
+
+const convertUint8ArrayToText = uint8Array => {
+  const decoder = new TextDecoder();
+  const text = decoder.decode(uint8Array);
+  return text;
+};
+
+//////
+
+const generateRandomTEXT = () => {
+  const key = new Uint8Array(64);
+  crypto.getRandomValues(key);
+  return key;
+};
+
+// Generate a random key with 32 bytes
+const generateRandomKey = () => {
+  const key = new Uint8Array(32);
+  crypto.getRandomValues(key);
+  return key;
+};
+
+// Generate a random nonce with 12 bytes
+const generateRandomNonce = () => {
+  const nonce = new Uint8Array(12);
+  crypto.getRandomValues(nonce);
+  return nonce;
+};
+
+// Usage example:
+const key12 = generateRandomKey();
+console.log('key12', key12);
+const nonce12 = generateRandomNonce();
+console.log('nonce12', nonce12);
+
+const chacha20ENCYPT = (key, nonce) => {
+  const message = convertTextToUint8Array('HELLO');
+  console.log('message', message);
+  return new JSChaCha20(key, nonce).encrypt(message);
+};
+
+const chacha20DECYPT = (key, nonce, encrypt) => {
+  return new JSChaCha20(key, nonce).decrypt(encrypt);
+};
+
+const ecrypted12 = chacha20ENCYPT(key12, nonce12);
+console.log('ecrypted12', ecrypted12);
+const decrypted12 = chacha20DECYPT(key12, nonce12, ecrypted12);
+console.log('decrypted12', decrypted12);
+
+console.log(convertUint8ArrayToText(decrypted12));

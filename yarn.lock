@@ -7866,6 +7866,11 @@ js-base64@^2.4.9:
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.6.4.tgz#f4e686c5de1ea1f867dbcad3d46d969428df98c4"
   integrity sha512-pZe//GGmwJndub7ZghVHz7vjb2LgC1m8B07Au3eYqeqv9emhESByMXxaEgkUkEqJe87oBbSniGYoQNIBklc7IQ==
 
+js-chacha20@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/js-chacha20/-/js-chacha20-1.1.0.tgz#6a92b5393ca65d99eb877204c374cf5ab9c44a21"
+  integrity sha512-ML5/rujYI/iYydrkIdf+JtUyjmiTWd4UgxNkEmIQ/rltgHzgtzlYJnnMETxPTFGnivEWynZca4YXUoZlxVtjqA==
+
 js-sdsl@^4.1.4:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/js-sdsl/-/js-sdsl-4.3.0.tgz#aeefe32a451f7af88425b11fdb5f58c90ae1d711"

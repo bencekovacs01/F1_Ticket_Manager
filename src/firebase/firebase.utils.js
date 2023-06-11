@@ -4,6 +4,11 @@ import 'firebase/compat/auth';
 import { getStorage } from 'firebase/storage';
 import axios from 'axios';
 import { decryptData, encryptData } from '../pages/checkout/crypt/crypt.utils';
+import {
+  _NODE_Decrypt,
+  _NODE_Encrypt,
+  _NODE_GenerateKeyPair,
+} from '../nodejsServer/api';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -96,14 +101,14 @@ export const sendEmail = async (
 export const createUserProfileDocument = async (
   userAuth,
   additionalData,
-  signUp = false
+  isSignUp = false
 ) => {
   if (!userAuth) return;
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get();
   if (!snapShot.exists) {
-    const displayName = signUp
+    const displayName = isSignUp
       ? additionalData?.displayName
       : userAuth?.displayName;
     const email =
@@ -172,31 +177,42 @@ export const getUserCart = async () => {
 };
 
 export const checkOrders = async ({ circuitId, pin, uid }) => {
-  const ordersRef = firestore
-    .collection('orders')
-    .doc(circuitId)
-    .collection('orders');
+  if (!circuitId || !pin || !uid) return;
 
-  let result = -3;
-  try {
-    const snapshot = await ordersRef.get();
-    snapshot.forEach(doc => {
-      const data = doc.data();
-      if (data.uid === uid) {
-        const decryptedUID = decryptData(data.cryptedUID);
-        const decyptedPin = decryptedUID.substring(decryptedUID.length - 6);
-        if (decyptedPin == pin) {
-          result = 1;
-        } else {
-          result = -1;
-        }
-      }
-    });
-    return result;
-  } catch (error) {
-    console.error('Error checking order: ', error);
-    return -2;
-  }
+  const response = await _NODE_Decrypt({
+    userId: auth?.currentUser?.uid,
+    circuitId,
+    uid,
+    pin,
+  });
+
+  return response != null && response?.status === 200;
+
+  // const ordersRef = firestore
+  //   .collection('orders')
+  //   .doc(circuitId)
+  //   .collection('orders');
+
+  // let result = -3;
+  // try {
+  //   const snapshot = await ordersRef.get();
+  //   snapshot.forEach(doc => {
+  //     const data = doc.data();
+  //     if (data.uid === uid) {
+  //       const decryptedUID = decryptData(data.cryptedUID);
+  //       const decyptedPin = decryptedUID.substring(decryptedUID.length - 6);
+  //       if (decyptedPin == pin) {
+  //         result = 1;
+  //       } else {
+  //         result = -1;
+  //       }
+  //     }
+  //   });
+  //   return result;
+  // } catch (error) {
+  //   console.error('Error checking order: ', error);
+  //   return -2;
+  // }
 };
 
 export const updatePin = async ({ circuitId, newPin, uid }) => {
@@ -223,9 +239,28 @@ export const updatePin = async ({ circuitId, newPin, uid }) => {
 };
 
 export const addOrder = async ({ cartItems, total, images, pin }) => {
+  const generate = await _NODE_GenerateKeyPair({
+    userId: auth?.currentUser?.uid,
+  });
+
+  if (generate === -1) {
+    return;
+  }
+
   cartItems.forEach(async item => {
     const { circuitId, type, quantity, uid } = item;
     const date = new Date();
+
+    const encrypt = await _NODE_Encrypt({
+      userId: auth?.currentUser?.uid,
+      data: uid + pin,
+    });
+
+    if (encrypt === -1) {
+      return;
+    }
+    const { encryptedKey, encryptedData } = encrypt?.data;
+
     const cryptedUID = encryptData(uid + pin);
 
     const ordersRef = firestore
@@ -240,6 +275,8 @@ export const addOrder = async ({ cartItems, total, images, pin }) => {
         quantity,
         date,
         cryptedUID,
+        encryptedKey,
+        encryptedData,
       });
     } catch (error) {
       console.error('Error adding order: ', error);

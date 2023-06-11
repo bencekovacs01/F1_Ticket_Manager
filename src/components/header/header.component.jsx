@@ -39,12 +39,6 @@ const Header = ({ currentUser, hidden, signOutStart, hideDropdown }) => {
     };
   }, []);
 
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    setLoaded(true);
-  }, []);
-
   return (
     <div className="header">
       <Link className="logo-container" to="/">

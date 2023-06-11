@@ -4,7 +4,7 @@ import Modal from './Modal';
 import Cookies from 'universal-cookie';
 
 const ModalWindow = () => {
-  const [_, setIsOpen] = useState(true);
+  const [unused, setIsOpen] = useState(true);
   const body = document.querySelector('body');
 
   let isOpen = true;

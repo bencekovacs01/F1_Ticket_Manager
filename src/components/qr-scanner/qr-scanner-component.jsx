@@ -3,16 +3,16 @@ import React, { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import ValidationPopup from './validation-popup/validation-popup.component';
-import { checkOrder, checkOrders } from '../../firebase/firebase.utils';
+import { checkOrders } from '../../firebase/firebase.utils';
 
 import './qr-scanner-styles.scss';
 import TrackSelector from './track-selector/track-selector.component';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCollectionsForPreview } from '../../redux/shop/shop.selectors';
+import { _NODE_Decrypt } from '../../nodejsServer/api';
 
 const QRCodeScanner = ({ collections }) => {
-  // const [scanning, setScanning] = useState(true);
   const [result, setResult] = useState(0);
 
   const [uid, setUid] = useState('');
@@ -65,38 +65,22 @@ const QRCodeScanner = ({ collections }) => {
       <CustomButton
         className="submit"
         onClick={async () => {
+          setResult(0);
           if (pin.length === 6 && uid.length > 0) {
-            if (!selectedCurcuitId) return;
             const res = await checkOrders({
               circuitId: selectedCurcuitId,
               uid: uid,
               pin: pin,
             });
             setResult(res);
-            switch (res) {
-              case -3:
-                console.log('Unknown error!');
-                break;
-              case -2:
-                console.log('Error checking order!');
-                break;
-              case -1:
-                console.log('Incorrect PIN!');
-                break;
-              case 1:
-                console.log('Success!');
-                break;
-              default:
-                console.log('Unknown error!');
-                break;
-            }
+            console.log('res', res);
           }
         }}
       >
         VALIDATE
       </CustomButton>
 
-      <ValidationPopup isSuccessful={result > 0} scanned={result !== 0} />
+      <ValidationPopup isSuccessful={result} scanned={result !== 0} />
 
       {/* {result !== 0 ? ( 
         <Popup isSuccessful={result > 0} scanned={true} />

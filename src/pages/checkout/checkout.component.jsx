@@ -6,7 +6,7 @@ import { QRCodeCanvas } from 'qrcode.react';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 import CustomButton from '../../components/custom-button/custom-button.component';
 import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
-import { addOrder } from '../../firebase/firebase.utils';
+import { addOrder, auth } from '../../firebase/firebase.utils';
 import { clearCart } from '../../redux/cart/cart.actions';
 
 import {
@@ -17,6 +17,12 @@ import {
 import './checkout.styles.scss';
 
 import PinPopup from './pin-popup/pin-popup.component';
+import {
+  _NODE_Encrypt,
+  _NODE_GenerateKeyPair,
+  _NODE_Init,
+  _NODE_Decrypt,
+} from '../../nodejsServer/api';
 
 const CheckoutPage = ({ cartItems, total, clearCart }) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -124,11 +130,38 @@ const CheckoutPage = ({ cartItems, total, clearCart }) => {
       <CustomButton
         className="test-order"
         onClick={() => {
+          if (!cartItems || cartItems.length === 0) {
+            console.log('EMPTY CART!');
+            return;
+          }
           setShowPopup(true);
         }}
       >
         Test order
       </CustomButton>
+      {/* <CustomButton
+        className="test-order"
+        onClick={async () => {
+          const response = await _NODE_GenerateKeyPair({
+            userId: auth?.currentUser?.uid,
+          });
+          console.log('response', response);
+          const encrypt = await _NODE_Encrypt({
+            userId: auth?.currentUser?.uid,
+          });
+          console.log('encrypt', encrypt);
+          const { encryptedKey, encryptedData } = encrypt?.data;
+
+          const decrypt = await _NODE_Decrypt({
+            userId: auth?.currentUser?.uid,
+            encryptedKey: encryptedKey,
+            encryptedData: encryptedData,
+          });
+          console.log('decrypt:', decrypt);
+        }}
+      >
+        NODEJS
+      </CustomButton> */}
       <StripeCheckoutButton total={total} cartItems={cartItems} />
       <div>{qrCodes}</div>
     </div>

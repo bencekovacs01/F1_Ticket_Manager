@@ -14,7 +14,12 @@ const OrderDetail = ({ order, onBackClicked }) => {
 
   return (
     <div className="order-detail">
-      <img className="back-icon" src={BackIcon} onClick={handleBackClicked} />
+      <img
+        className="back-icon"
+        alt="Go back"
+        src={BackIcon}
+        onClick={handleBackClicked}
+      />
       <div className="order-detail-header">
         <div className="order-detail-header-block">
           <span className="rm-span">Circuit</span>
