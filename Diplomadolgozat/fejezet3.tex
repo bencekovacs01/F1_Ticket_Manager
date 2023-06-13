@@ -2,23 +2,21 @@
 \chapter{Rendszerspecifikáció} \label{fejezet3}
 %----------------------------------------------------------------------------
 
-\section {Rendszer követelmények - Funkcionális}
+\section {Rendszer követelmények}
 
-A rendszer specifikációit négy nagy részre oszthatjuk fel, amelyek közé tartoznak a felhasználói felület-, a jegyvásárlás-, a felhasználók- és a biztonság specifikációja. Elsőként a felhasználói felület biztosítja a felhasználó és a rendszer közötti kommunikációt. A jegyvásárlás a rendszer központi funkcionalitása, ezáltal a legkomplexebb is. Az alkalmazás lehetővé teszi a több típusú felhasználók hozzáférését a különbőző funkcionalitásokhoz. Végül de nem utolsó sorban a rendszer a bizalmas adatok biztonságát is hivatott kiszolgálni. A specifikációk prezentálására a Visual Paradigm Online felület segítségével hoztam létre a szükséges diagramokat.
+A rendszer specifikációit négy nagy részre oszthatjuk fel, amelyek közé tartoznak a felhasználói felület-, a jegyvásárlás-, a felhasználók- és a biztonság specifikációja. Elsőként a felhasználói felület biztosítja a felhasználó és a rendszer közötti kommunikációt. A jegyvásárlás a rendszer központi funkcionalitása, ezáltal a legkomplexebb is. Az alkalmazás lehetővé teszi a több típusú felhasználók hozzáférését a különbőző funkcionalitásokhoz. Végül de nem utolsó sorban a rendszer a bizalmas adatok biztonságát is hivatott kiszolgálni. A specifikációk prezentálására a Visual Paradigm Online felület segítségével hoztam létre a szükséges diagramokat. A rendszer működését vizsgálni tudjuk a funkcionális- és nem funkcionális követelmény alapján.
+\subsection {Funkcionális}
 
-\subsection {Felhasználói felület}
+A funkcionális követelmények a rendszer által elvárt funkcionalitásokat foglalják magukban.
 
-A rendszer felhasználói felülete egy webes alkalmazás felülete, amelyet a frontend technológiák segítségével valósítottam meg. A felületnek az a célja, hogy egyszerű és intuitív legyen, így a felhasználók könnyen tudnak navigálni rajta és megtalálják a kívánt jegyeket.
+\begin{itemize}
+  \item[\textbf{a,}] \textbf{Felhasználói szerepkörök:}
 
-\subsection {Jegyvásárlás}
+Az \textbf{Anonymous}, amelyek \textit{be nem jelentkezett} felhasználók, esetében ilyen funkcionális követelmények például a jegyek közötti böngészés lehetősége, a jegyek részleteinek megtekintése, valamint az email-küldés a \textit{Support} számára. Emellett fontos, hogy az Anonymous felhasználók be tudjanak jelentkezni az oldalra vagy új felhasználói fiókot tudjanak regisztrálni, és ez a bejelentkezési folyamat lehetőséget biztosít az oldalon regisztrált fiókok vagy akár más közösségi fiókok használatára is (\ref{abra:useCaseNA}).
 
-A jegyvásárlás során a felhasználóknak lehetőséget kell adni arra, hogy a kiválasztott jegyeket kosárba helyezzék, módosítsák azok mennyiséget, illetve töröljék a jegyeket szükség esetén. A böngészés során fontos, hogy meg tudják tekinteni a jegyek részleteit, mint a helyszín, időpont vagy az ár.
-Biztosítani kell, hogy a felhasználók biztonságosan és kényelmesen tudjanak fizetni a jegyekért. Az adatátvitelnek titkosított csatornán kell történnie a megfelelő biztonság érdekében.
-
-\pagebreak
-\subsection {Felhasználói szerepkörök}
-
+---OFF
 Az oldal böngészésének tekintetében érdemes különboző jogosultságokkal rendelkező szerepköröket kialakítani. Erre azért van szükség, mivel a rendszer több típusú felhasználó által látogatható. Ezek közül a legelső és egyben a legkevesebb funkcionalitással rendelkező az \textbf{Anonymous}, aki egy \textit{be nem jelentkezett} felhasználó (unauthorized user). Ennek a szerepkörnek lehetősége van a jegyek között böngészni, megnézni azok részleteit, email-t küldeni a \textit{Support} számára akár hibák jelzésére vagy segítségkérési szándékkal (\ref{abra:useCaseNA}). Továbbá lehetősége van bejelentkezni vagy regisztrálni az oldalra. A bejelentkezés megtörténhet az oldalon regisztrált fiókkal vagy egyéb közösségi fiókok által.
+---OFF
 
 \begin{figure}[!h]
 	\centering
@@ -28,7 +26,11 @@ Az oldal böngészésének tekintetében érdemes különboző jogosultságokkal
 \end{figure}
 \pagebreak
 
+A \textbf{Regular} felhasználók esetében elvárt, hogy \textit{be legyenek jelentkezve} a rendszerbe. Lehetőségük van a jegyek kosárba helyezése, visszajelzések írása és jegyek értékelése. Emellett a felhasználók képesek megtekinteni a profiljukat, ahol lehetőségük van felhasználói név és profil kép változtatására, valamint a vásárlási előzményeik megtekintésére. Az előzmények részleteinél a felhasználóknak lehetőségük van az adott jegy PIN kódjának megváltoztatására, amennyiben szükséges. A vásárlási folyamat során a felhasználók a rendelési oldalra (\textit{Checkout}) jutnak el, ahol lehetőségük van a listaelemek mennyiségének módosítására vagy azok törlésére. Itt történik meg a fizetés és a rendelés leadása (\ref{abra:useCaseA}).
+
+---OFF
 A második kategóriát a \textbf{Regular} felhasználók alkotják, másnéven az átlagos vásárlók. Ennek a kategóriának feltétele, hogy az adott felhasználó \textit{be legyen jelentkezve} a rendszerbe (\ref{abra:useCaseA}). Ezen felhasználók tudnak jegyeket helyezni a kosárba, visszajelzéseket írni az egyes jegyekhez, valamint értékelni azokat. Megtekinthetik a profiljukat, ahol felhasználó nevet, profil képet tudnak változtatni, valamint megtekinteni a vásárlási előzményeiket. Az előzmények részelteinél lehetőségük van az adott jegy PIN kódját megváltoztatni, amennyiben ez szükséges. A vásárlási procedúra egyik lépéseként el tudnak jutni a rendelési oldalra (\textit{Checkout}), ahol lehetőség van módosítani az listaelemek mennyiségét vagy törölni őket. Ugyan itt történik meg a fizetés és a rendelés leadása.
+---OFF
 
 \begin{figure}[!h]
 	\centering
@@ -38,7 +40,15 @@ A második kategóriát a \textbf{Regular} felhasználók alkotják, másnéven 
 \end{figure}
 \pagebreak
 
+Az adminisztrátorok a harmadik kategóriát alkotják a rendszerben, és különleges jogosultságokkal rendelkeznek. Az \textbf{Admin} felhasználóknak joguk van az összes korábban említett funkcionalitáshoz, mint például a jegyek kosárba helyezése, visszajelzések írása és értékelése, valamint a profiljuk kezelése és vásárlási előzményeik megtekintése. Azonban az Admin felhasználóknak további feladatuk is van, nevezetesen a jegyek hitelesítése.
+
+Az Admin felhasználóknak lehetőségük van a jegyek hitelesítésére, amelyhez a QR kódot be kell olvasniuk és meg kell adniuk a PIN kódot. Ez a folyamat biztosítja, hogy csak érvényes jegyek kerüljenek elfogadásra és használatra a rendszerben. Ez a szerepkör manuálisan adható hozzá a rendszerhez, és szükség esetén módosítható.
+
+Fontos megjegyezni, hogy bár az adminisztrátoroknak lehetőségük van jegyek vásárlására, ezt kizárólag a rendszer tesztelésére és karbantartására szolgáló célokra használható. Az adminisztrátorok elsődleges felelőssége a rendszer megfelelő működésének biztosítása és a jegyek hitelesítése (\ref{abra:useCaseAdmin}).
+
+---OFF
 A harmadik kategória a \textbf{Admin} felhasználó, amelyből jelenleg csak egy van a rendszerben. Ennek a felhasználónak joga van minden eddig említett funkcionalitáshoz, valamint a jegyek hitelesítéséhez a QR kód beolvasásával és a PIN kód megadásával. Az adminisztrátori szerepkör csak manuálisan vehető fel a rendszerbe és módosítható. Habár egy rendszergazdának lehetősége van jegyet vásárolni, ezt teljes mértékben a rendszer tesztelésére és karbantartására hivatott használni (\ref{abra:useCaseAdmin}).
+---OFF
 
 \begin{figure}[!h]
 	\centering
@@ -47,6 +57,46 @@ A harmadik kategória a \textbf{Admin} felhasználó, amelyből jelenleg csak eg
 	\label{abra:useCaseAdmin}
 \end{figure}
 \pagebreak
+
+  \item[\textbf{b,}] \textbf{Jegyvásárlás:}
+
+A jegyvásárlás során a felhasználóknak számos funkcionalitást kell biztosítani. Először is, lehetőséget kell adni nekik, hogy kiválaszthassák a jegyeket és azokat kosárba helyezhessék. Emellett fontos, hogy a felhasználók módosíthassák a jegyek mennyiségét vagy akár törölhessék azokat, ha szükséges. A böngészés során pedig lehetővé kell tenni számukra, hogy részletes információkat kapjanak a jegyekről, mint például a helyszín, az időpont vagy az ár. Ez segíti őket a megfelelő döntéshozatalban és a kívánt jegyek megtalálásában.
+
+
+  \item[\textbf{c,}] \textbf{Bejelentkezés és regisztráció:}
+
+A \textbf{bejelentkezés} és \textbf{regisztráció} lehetővé teszik a felhasználók számára, hogy saját profiljuk legyen a rendszerben, amellyel vásárlásokat tudnak végrehajtani és nyomon tudják követni azokat.
+
+A \textbf{bejelentkezés} folyamata magában foglalja a felhasználónév és jelszó megadását vagy egy harmadik féltől származó fiók segítségével. A felhasználóknak lehetőségük van megadni a regisztrált felhasználónevüket és a hozzájuk tartozó jelszavukat a bejelentkezéshez. A felhasználói felületnek tartalmaznia kell egy bejelentkezés gombot, amelyre kattintva a felhasználó bejelentkezik a rendszerbe. Ezután a rendszer ellenőrzi az adatok helyességét és hitelesíti a felhasználót, hogy hozzáférjen a felhasználói funkciókhoz.
+
+A \textbf{regisztráció} lehetőséget ad a felhasználóknak arra, hogy új fiókot hozzanak létre a rendszerben. Ehhez a felhasználóknak kitöltetniük kell egy regisztrációs űrlapot, amely tartalmazza az szükséges adatokat, például felhasználónevüket, jelszavukat, e-mail címüket. A felületnek tartalmaznia kell egy regisztrációs gombot, amelyre kattintva a rendszer regisztrálja a felhasználót és létrehozza az új fiókját.
+\end{itemize}
+
+
+\pagebreak
+
+
+
+\section {Rendszer követelmények - Nem funkcionális}
+\subsection {Teljesítmény}
+
+\subsection {Skálázhatóság}
+
+\subsection {Biztonság}
+
+\subsection {Jegyvásárlás}
+
+A jegyvásárlás során a felhasználóknak lehetőséget kell adni arra, hogy a kiválasztott jegyeket kosárba helyezzék, módosítsák azok mennyiséget, illetve töröljék a jegyeket szükség esetén. A böngészés során fontos, hogy meg tudják tekinteni a jegyek részleteit, mint a helyszín, időpont vagy az ár. Továbbá a felhasználóknak biztonságos és kényelmes fizetési lehetőséget kell biztosítani a jegyekért.
+Biztosítani kell, hogy a felhasználók biztonságosan és kényelmesen tudjanak fizetni a jegyekért. Az adatátvitelnek titkosított csatornán kell történnie a megfelelő biztonság érdekében.
+
+\subsection {Rendelkezésre állás}
+
+\subsection {Használhatóság}
+
+\subsection {Felhasználói felület}
+
+A rendszer felhasználói felülete egy webes alkalmazás felülete, amelyet a frontend technológiák segítségével valósítottam meg. A felületnek az a célja, hogy egyszerű és intuitív legyen, így a felhasználók könnyen tudnak navigálni rajta és megtalálják a kívánt jegyeket.
+
 
 \section {Felhasználói követelmények}
 
