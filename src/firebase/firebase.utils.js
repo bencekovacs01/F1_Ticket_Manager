@@ -1,14 +1,14 @@
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
-import 'firebase/compat/auth';
-import { getStorage } from 'firebase/storage';
 import axios from 'axios';
-import { decryptData, encryptData } from '../pages/checkout/crypt/crypt.utils';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import { getStorage } from 'firebase/storage';
 import {
   _NODE_Decrypt,
   _NODE_Encrypt,
   _NODE_GenerateKeyPair,
-} from '../nodejsServer/api';
+} from '../nodejs/api';
+import { encryptData } from '../pages/checkout/crypt/crypt.utils';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,

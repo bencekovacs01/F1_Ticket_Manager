@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 // import { QrScanner } from '@yudiel/react-qr-scanner';
-import FormInput from '../form-input/form-input.component';
-import CustomButton from '../custom-button/custom-button.component';
-import ValidationPopup from './validation-popup/validation-popup.component';
 import { checkOrders } from '../../firebase/firebase.utils';
+import CustomButton from '../custom-button/custom-button.component';
+import FormInput from '../form-input/form-input.component';
+import ValidationPopup from './validation-popup/validation-popup.component';
 
-import './qr-scanner-styles.scss';
-import TrackSelector from './track-selector/track-selector.component';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCollectionsForPreview } from '../../redux/shop/shop.selectors';
-import { _NODE_Decrypt } from '../../nodejsServer/api';
+import './qr-scanner-styles.scss';
+import TrackSelector from './track-selector/track-selector.component';
 
 const QRCodeScanner = ({ collections }) => {
   const [result, setResult] = useState(0);
