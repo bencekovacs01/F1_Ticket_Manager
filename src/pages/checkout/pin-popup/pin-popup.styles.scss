@@ -11,7 +11,7 @@
 
 .pin-popup {
   position: fixed;
-  height: 50vh;
+  height: max-content;
   width: 28%;
   top: 50%;
   left: 50%;
@@ -25,10 +25,8 @@
 
   .submit {
     margin-right: 10%;
-  }
-
-  .cancel-button {
-    margin-top: 5%;
+    width: 100%;
+    margin-bottom: 10px;
   }
 
   .pin-title {
@@ -40,9 +38,9 @@
 
   .popup-buttons {
     display: flex;
-    align-items: center;
+    width: 100%;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
     height: max-content;
   }
 }

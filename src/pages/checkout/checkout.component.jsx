@@ -74,10 +74,7 @@ const CheckoutPage = ({ cartItems, total, clearCart }) => {
   ));
 
   return (
-    <div className="checkout-page">
-      <h1 className="all-tracks-title">
-        {'>>>>'} Checkout {'<<<<'}
-      </h1>
+    <>
       {showPopup && (
         <PinPopup
           onClose={pin => {
@@ -87,53 +84,57 @@ const CheckoutPage = ({ cartItems, total, clearCart }) => {
           fromcheckout={true}
         />
       )}
-      <div className="checkout-header">
-        <div className="header-block">
-          <span>Circuit</span>
+      <div className="checkout-page">
+        <h1 className="all-tracks-title">
+          {'>>>>'} Checkout {'<<<<'}
+        </h1>
+        <div className="checkout-header">
+          <div className="header-block">
+            <span>Circuit</span>
+          </div>
+          <div className="header-block">
+            <span>Ticket</span>
+          </div>
+          <div className="header-block">
+            <span>Quantity</span>
+          </div>
+          <div className="header-block">
+            <span>Price</span>
+          </div>
+          <div className="header-block">
+            <span>Price Total</span>
+          </div>
+          <div className="header-block">
+            <span>Interval</span>
+          </div>
+          <div className="header-block">
+            <span>Remove</span>
+          </div>
         </div>
-        <div className="header-block">
-          <span>Ticket</span>
+        {cartItems.map((cartItem, index) => (
+          <CheckoutItem key={index} cartItem={cartItem} />
+        ))}
+        <div className="total">
+          <span>Total: ${total}</span>
         </div>
-        <div className="header-block">
-          <span>Quantity</span>
+        <div className="test-warning">
+          *Please use the following credit card for payments*
+          <br />
+          4242 4242 4242 4242 - Exp: 12/34 - CVV: 123
         </div>
-        <div className="header-block">
-          <span>Price</span>
-        </div>
-        <div className="header-block">
-          <span>Price Total</span>
-        </div>
-        <div className="header-block">
-          <span>Interval</span>
-        </div>
-        <div className="header-block">
-          <span>Remove</span>
-        </div>
-      </div>
-      {cartItems.map((cartItem, index) => (
-        <CheckoutItem key={index} cartItem={cartItem} />
-      ))}
-      <div className="total">
-        <span>Total: ${total}</span>
-      </div>
-      <div className="test-warning">
-        *Please use the following credit card for payments*
-        <br />
-        4242 4242 4242 4242 - Exp: 12/34 - CVV: 123
-      </div>
-      <CustomButton
-        className="test-order"
-        onClick={() => {
-          if (!cartItems || cartItems.length === 0) {
-            console.log('EMPTY CART!');
-            return;
-          }
-          setShowPopup(true);
-        }}
-      >
-        Test order
-      </CustomButton>
-      {/* <CustomButton
+        <CustomButton
+          className="test-order"
+          onClick={() => {
+            if (!cartItems || cartItems.length === 0) {
+              console.log('EMPTY CART!');
+              return;
+            }
+            setShowPopup(true);
+          }}
+        >
+          Test order
+        </CustomButton>
+        {/* <CustomButton
         className="test-order"
         onClick={async () => {
           const response = await _NODE_GenerateKeyPair({
@@ -156,9 +157,10 @@ const CheckoutPage = ({ cartItems, total, clearCart }) => {
       >
         NODEJS
       </CustomButton> */}
-      <StripeCheckoutButton total={total} cartItems={cartItems} />
-      <div>{qrCodes}</div>
-    </div>
+        <StripeCheckoutButton total={total} cartItems={cartItems} />
+        <div>{qrCodes}</div>
+      </div>
+    </>
   );
 };
 
