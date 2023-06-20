@@ -96,7 +96,7 @@ status collapsed
 \end_layout
 
 \begin_layout Chapter
-SzÃ¡mÃ­tÃ³gÃ©pes elemzÃ©s
+EredmÃ©nyek, kÃ¶vetkeztetÃ©sek
 \end_layout
 
 \begin_layout Standard
@@ -108,19 +108,159 @@ status collapsed
 %----------------------------------------------------------------------------
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
+
 
 \end_layout
 
+\begin_layout Section
+BeÃ©pÃ­tett szoftverek esetÃ©n
+\end_layout
+
+\begin_layout Standard
+A 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fejezet3"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
-Ebben a fejezetben bemutatom az elÅzÅ fejezetben elviekben ismertetett modelleket pÃ©ldÃ¡kon Ã©s valÃ³s adatokon keresztÃ¼l. A szoftver segÃ­tsÃ©gÃ¼nkre lesz abban, hogy megoldjuk a felmerÃ¼lÅ differenciÃ¡legyenleteket Ã©s egyenletrendszereket, vÃ©gÃ¼l az eredmÃ©nyeket grafikus felÃ¼leten is megtekinthetjÃ¼k.
+. fejezetben bemutattam kÃ©t beÃ©pÃ­tett, elÅre megvalÃ³sÃ­tott szoftvert, melyek a Matlab ode45 programja Ã©s a Boost - Odeint kÃ¶nyvtÃ¡r. Az elÃ©rt eredmÃ©nyek Ã©s tesztek azt mutatjÃ¡k, hogy a Matlab ode45 differenciÃ¡legyenlet megoldÃ³ja sokkal gyorsabb Ã©s hatÃ©konyabb, mint az Odeint. Ha a tesztesetekben mÃ©rt Ã¡tlagidÅket Ã¶sszehasonlÃ­tjuk lÃ¡thatjuk (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fejezet3_3"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+. alfejezet), hogy az ode45 
+\begin_inset Formula $ 20-30 $
+\end_inset
+
+ -szor gyorsabb a OdeintnÃ©l. Ez talÃ¡n annak is kÃ¶szÃ¶nhetÅ, hogy a Matlab egy nagyon komoly szoftver, amelynek programcsomagjain mÃ©rnÃ¶kÃ¶k Ã©s programozÃ³k szÃ¡zai (vagy akÃ¡r ezrei) dolgoznak, Ã­gy termÃ©szetes, hogy az algoritmusok jobban optimizÃ¡ltak Ã©s hatÃ©konyabbak az ingyenes szoftvereknÃ©l. A tovÃ¡bbiakban Ã¶sszegezzÃ¼k, hogy a kÃ©t technolÃ³giÃ¡nak milyen elÅnyei Ã©s hÃ¡trÃ¡nyai vannak vagy Ã©ppen miÃ©rt Ã©rdemes/nem Ã©rdemes hasznÃ¡lni Åket, lásd 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Lovasz"
+literal "false"
+
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+ 
+\series bold
+Matlab ode45 elÅnyei:
+\series default
+ 
+\end_layout
+
+\begin_layout Itemize
+nagyon egyszerÅ± a hasznÃ¡lata, nem igÃ©nyel komoly programozÃ¡si ismereteket 
+\end_layout
+
+\begin_layout Itemize
+kÃ¶nnyÅ± beÃ©pÃ­teni Ã©s Ã¶sszekÃ¶tni mÃ¡s Matlab programokkal 
+\end_layout
+
+\begin_layout Itemize
+a kapott eredmÃ©nyeket mÃ¡trix vagy vektor tÃ­pusokban tÃ©rÃ­ti vissza, ami kÃ¶nnyÅ±vÃ© teszi az eredmÃ©nyek tovÃ¡bbi kezelÃ©sÃ©t 
+\end_layout
+
+\begin_layout Itemize
+az eredmÃ©nyeket grafikus felÃ¼leten azonnal meg tudjuk jelenÃ­teni 
+\end_layout
+
+\begin_layout Itemize
+jobb eredmÃ©nyeket produkÃ¡lt, mint az Odeint 
+\end_layout
+
+\begin_layout Itemize
+jÃ³l dokumentÃ¡lt, sok pÃ©lda van a hasznÃ¡latÃ¡ra 
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\series bold
+Matlab ode45 hÃ¡trÃ¡nyai:
+\series default
+ 
+\end_layout
+
+\begin_layout Itemize
+komoly hÃ¡trÃ¡nya az Odeinttel szemben, hogy 
+\series bold
+fizetni kell a hasznÃ¡latÃ¡Ã©rt
+\series default
+ 
+\end_layout
+
+\begin_layout Itemize
+nagyon sok memÃ³riÃ¡t hasznÃ¡l, komolyan igÃ©nybeveszi a szÃ¡mÃ­tÃ³gÃ©p erÅforrÃ¡sait 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Odeint elÅnyei:
+\series default
+ 
+\end_layout
+
+\begin_layout Itemize
+ingyenes Ã©s nyÃ­lt forrÃ¡skÃ³dÃº, hasznÃ¡lhatÃ³ szemÃ©lyi Ã©s kereskedelmi cÃ©lokra egyarÃ¡nt 
+\end_layout
+
+\begin_layout Itemize
+nagyon rugalmas, absztrak, Ã­gy kÃ¶nnyedÃ©n vÃ¡ltoztathatÃ³ a bemeneti adatok tÃ­pusa vagy struktÃºrÃ¡ja 
+\end_layout
+
+\begin_layout Itemize
+C++ nyelven Ã­rodott, tÃ¡mogatva a modern programozÃ¡si technolÃ³giÃ¡kat (Generikus programozÃ¡s, Template Metaprogramming) 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Odeint hÃ¡trÃ¡nyai:
+\series default
+ 
+\end_layout
+
+\begin_layout Itemize
+hasznÃ¡lata nehezebb, mint a Matlab ode45 programÃ©, szÃ¼ksÃ©ges a C++ programozÃ¡si nyelv ismerete 
+\end_layout
+
+\begin_layout Itemize
+a kapott eredmÃ©nyekkel nem olyan kÃ¶nnyÅ± bÃ¡nni, mint a Matlab esetÃ©ben 
+\end_layout
+
+\begin_layout Itemize
+absztraktsÃ¡ga miatt nehÃ©z a felmerÃ¼lÅ problÃ©mÃ¡kat megoldani 
+\end_layout
+
+\begin_layout Itemize
+dokumentÃ¡ltsÃ¡ga jÃ³val szegÃ©nyesebb, mint a MatlabÃ© 
 \end_layout
 
 \begin_layout Standard
 
 \begin_inset Float figure
-placement !h
 wide false
 sideways false
 status open
@@ -140,39 +280,141 @@ centering
 \end_inset
 
  
-\begin_inset Graphics 
-	filename images/graf1.png
-	scale 20
-
-\end_inset
-
- 
-\begin_inset Caption Standard
+\begin_inset ERT
+status collapsed
 
 \begin_layout Plain Layout
-Gráf
+
+\backslash
+begin{tikzpicture}
 \end_layout
 
 \end_inset
 
 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+		
+\backslash
+node[main node] (1) {$1$};
+\end_layout
+
+\begin_layout Plain Layout
+		
+\backslash
+node[main node] (2) [below left = 2.3cm and 1.5cm of 1]  {$2$};
+\end_layout
+
+\begin_layout Plain Layout
+		
+\backslash
+node[main node] (3) [below right = 2.3cm and 1.5cm of 1] {$3$};
+\end_layout
+
+\begin_layout Plain Layout
+		
+\end_layout
+
+\begin_layout Plain Layout
+		
+\backslash
+path[draw,thick]
+\end_layout
+
+\begin_layout Plain Layout
+		(1) edge node {} (2)
+\end_layout
+
+\begin_layout Plain Layout
+		(2) edge node {} (3)
+\end_layout
+
+\begin_layout Plain Layout
+		(3) edge node {} (1);
+\end_layout
+
+\begin_layout Plain Layout
+		%%
+\end_layout
+
+\begin_layout Plain Layout
+		
+\backslash
+begin{scope}[xshift=4cm]
+\end_layout
+
+\begin_layout Plain Layout
+			
+\backslash
+node[main node] (1) {$1$};
+\end_layout
+
+\begin_layout Plain Layout
+			
+\backslash
+node[main node] (2) [right = 2cm  of 1]  {$2$};
+\end_layout
+
+\begin_layout Plain Layout
+			
+\backslash
+node[main node] (3) [below = 2cm  of 1] {$3$};
+\end_layout
+
+\begin_layout Plain Layout
+			
+\backslash
+node[main node] (4) [right = 2cm  of 3] {$4$};
+\end_layout
+
+\begin_layout Plain Layout
+			
+\end_layout
+
+\begin_layout Plain Layout
+			
+\backslash
+path[draw,thick]
+\end_layout
+
+\begin_layout Plain Layout
+			(1) edge node {} (2)
+\end_layout
+
+\begin_layout Plain Layout
+			(1) edge node {} (4)
+\end_layout
+
+\begin_layout Plain Layout
+			(3) edge node {} (2)
+\end_layout
+
+\begin_layout Plain Layout
+			(3) edge node {} (4)
+\end_layout
+
+\begin_layout Plain Layout
+			;
+\end_layout
+
+\begin_layout Plain Layout
+		
+\backslash
+end{scope}
+\end_layout
+
+\begin_layout Plain Layout
+	
 \end_layout
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-
-\begin_inset Float figure
-placement !h
-wide false
-sideways false
-status open
-
-
-\begin_layout Standard
 
 \begin_inset ERT
 status collapsed
@@ -180,15 +422,8 @@ status collapsed
 \begin_layout Plain Layout
 
 \backslash
-centering
+end{tikzpicture}
 \end_layout
-
-\end_inset
-
- 
-\begin_inset Graphics 
-	filename images/graf2
-	scale 20
 
 \end_inset
 
@@ -196,7 +431,7 @@ centering
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Gráf 2
+Egyszerű gráf TIKZ segítségével
 \end_layout
 
 \end_inset
@@ -211,94 +446,140 @@ Gráf 2
 
 \begin_layout Standard
 
-\begin_inset Float figure
-placement !h
-wide false
-sideways false
-status open
-
-
-\begin_layout Standard
-
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-\backslash
-centering
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Graphics 
-	filename images/kep2.png
-	scale 30
-
-\end_inset
-
- 
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Bifurkációs diagram
-\end_layout
-
+\begin_inset Newpage newpage
 \end_inset
 
 
 \end_layout
 
-\end_inset
-
-
+\begin_layout Section
+SajÃ¡t szoftverek esetÃ©n
 \end_layout
 
 \begin_layout Standard
+SajÃ¡t szoftverek esetÃ©ben sikerÃ¼lt nÃ©gy kÃ¼lÃ¶nbÃ¶zÅ technolÃ³gia segÃ­tsÃ©gÃ©vel megvalÃ³sÃ­tani a Dorman-Prince differenciÃ¡legyenlet megoldÃ³ algoritmust (lÃ¡sd 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fejezet3_2"
+plural "false"
+caps "false"
+noprefix "false"
 
-\begin_inset Float figure
-placement !h
-wide false
-sideways false
-status open
+\end_inset
 
+. alfejezet). A felhasznÃ¡lt technolÃ³giÃ¡k: Matlab, Java, C++ Ã©s Android voltak.
+\end_layout
 
 \begin_layout Standard
+Ezen technolÃ³giÃ¡k kÃ¶zÃ¼l az Androidos szoftverrel kapcsolatban mÃ¡r elÅzetes fÃ©lelmeink voltak, mivel azt feltÃ©teleztÃ¼k, hogy bÃ¡rmennyire is fejlettek napjainkban a mobileszkÃ¶zÃ¶k, mÃ©gis hardveresen nem lesznek elegek ahhoz, hogy versenybe tudjanak szÃ¡llni a szÃ¡mÃ­tÃ³gÃ©pekkel. NÃ©hÃ¡ny teszt utÃ¡n feltÃ©telezÃ©seink beigazolÃ³dtak, lÃ¡thatjuk a 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fejezet3_3"
+plural "false"
+caps "false"
+noprefix "false"
 
-\begin_inset ERT
-status collapsed
+\end_inset
 
-\begin_layout Plain Layout
+. alfejezet teszteseteiben is, hogy az Android szoftver mennyire gyengÃ©n teljesÃ­tett (mind a Motorola Moto E2, mind a Samsung Galaxy Core Prime esetÃ©ben). ÃsszehasonlÃ­tva a tÃ¶bbi algoritmussal az Ã¡tlagidÅket nÃ©zve 
+\begin_inset Formula $ 150-160 $
+\end_inset
 
-\backslash
-centering
+ - szor lassabb a JavanÃ¡l Ã©s 
+\begin_inset Formula $ 300 - 350 $
+\end_inset
+
+ - szer a C++ - nÃ¡l! TehÃ¡t azt a kÃ¶vetkeztetÃ©st vonhatjuk le, hogy nem Ã©rdemes mobileszkÃ¶zÃ¶kÃ¶n differenciÃ¡legyenleteket oldani, mivel tÃºlsÃ¡gosan nagy a hardver igÃ©nye Ã©s egyelÅre ezen a tÃ©ren nem kÃ©pesek tartani a lÃ©pÃ©st a szÃ¡mÃ­tÃ³gÃ©pekkel.
 \end_layout
 
+\begin_layout Standard
+A tovÃ¡bbi hÃ¡rom technolÃ³gia kÃ¶zÃ¼l (Matlab, Java, C++) meglepÅ mÃ³don itt is a Matlab teljesÃ­tett a legjobban, igaz, hogy ebben az esetben mÃ¡r nem hasznÃ¡ltuk az ode45 programot, hanem megÃ­rtam Ã©n a sajÃ¡t fÃ¼ggvÃ©nyemet. Ez a teljesÃ­tmÃ©nyen is meglÃ¡tszott, mert az Ã¡ltalam Ã­rt fÃ¼ggvÃ©ny nem tudott jobban teljesÃ­teni a tesztek alatt, mint az ode45. Mindezek ellenÃ©re 
+\begin_inset Formula $ 35-40 $
 \end_inset
 
- 
-\begin_inset Graphics 
-	filename images/kep33.png
-	scale 40
-
+ - szer gyorsabb volt a JavanÃ¡l Ã©s megkÃ¶zelÃ­tÅleg 
+\begin_inset Formula $ 15-20 $
 \end_inset
 
- 
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Lorentz attraktor
+ - szor gyorsabb a C++ - nÃ¡l.
 \end_layout
 
+\begin_layout Standard
+A Java Ã©s C++ szoftvereket Ã¶sszehasonlÃ­tva elmondhatom, hogy az esetek tÃ¶bbsÃ©gÃ©ben a C++ kÃ¶rÃ¼lbelÃ¼l 
+\begin_inset Formula $ 2 $
 \end_inset
 
-
+ - szer volt gyorsabb a JavanÃ¡l, ami megfelel az elÅzetes elvÃ¡rÃ¡soknak.
 \end_layout
 
+\begin_layout Standard
+Amit nagyon fontosnak tartok kihangsÃºlyozni, hogy az Ã¡ltalam megvalÃ³sÃ­tott C++ szoftver a tesztek sorÃ¡n nagyon jÃ³l teljesÃ­tett, felvette a versenyt az Odeint kÃ¶nyvtÃ¡rral Ã©s az elÃ©rt Ã¡tlagok is csak nagyon kicsivel maradnak el az Odeint Ã¡ltal produkÃ¡lt eredmÃ©nyektÅl (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fejezet3_3"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
+. alfejezet).
+\end_layout
 
+\begin_layout Standard
+TovÃ¡bbÃ¡ megvalÃ³sÃ­tottam az Euler Ã©s Runge-Kutta mÃ³dszerek pÃ¡rhuzamosÃ­tott vÃ¡ltozatait is CUDA technolÃ³gia segÃ­tsÃ©gÃ©vel. Ebben az esetben a tesztek azt mutattÃ¡k, hogy az Euler mÃ³dszer esetÃ©ben tÃ¶bbe kerÃ¼l a sok CPU Ã©s GPU memÃ³ria kÃ¶zÃ¶tti mÃ¡solÃ¡s mÅ±velete, mint amennyit nyerÃ¼nk a szÃ¡mÃ­tÃ¡sok elvÃ©gzÃ©se sorÃ¡n. TehÃ¡t ebben az esetben ez a fajta pÃ¡rhuzamosÃ­tÃ¡si megkÃ¶zelÃ­tÃ©s nem Ã©ri meg. Ezzel ellentÃ©tben a Runge-Kutta mÃ³dszer esetÃ©ben a megkÃ¶zelÃ­tÃ©s eredmÃ©nyesnek bizonyult abban az esetben, ha az egyenletek szÃ¡ma nagy Ã©s a lÃ©pÃ©skÃ¶z kicsi. A 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fejezet3_4"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ alfejezetben lÃ¡thattuk, hogy abban az esetben ha az egyenletek szÃ¡ma 
+\begin_inset Formula $ n = 10 $
+\end_inset
+
+ Ã©s a lÃ©pÃ©skÃ¶z 
+\begin_inset Formula $ h = 0.001 $
+\end_inset
+
+, a GPU-n megkÃ¶zelÃ­tÅleg 5 Ã©s fÃ©l perccel hamarabb lefutott az algoritmus, mint a CPU-n. Ezzel a pÃ¡rhuzamosÃ­tÃ¡si mÃ³dszerrel nem tudtuk kihasznÃ¡lni a videÃ³kÃ¡rtya Ã¡ltal nyÃºjtott maximÃ¡lis szÃ¡mÃ­tÃ¡si kapacitÃ¡st, de Ã­gy is jelentÅs kÃ¼lÃ¶nbsÃ©get sikerÃ¼lt elÃ©rni a futÃ¡si idÅket nÃ©zve, lásd 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Katai"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+ÃsszessÃ©gÃ©ben
+\end_layout
+
+\begin_layout Standard
+A fentieket Ã¶sszegezve elmondhatom, hogy megÃ©ri elÅre megÃ­rt szoftvereket vagy kÃ¶nyvtÃ¡rakat hasznÃ¡lni differenciÃ¡legyenletek megoldÃ¡sÃ¡ra. Nagyon megkÃ¶nnyÃ­thetik az eltÃ¼nket egyszerÅ±sÃ©gÃ¼kkel Ã©s nagy teljesÃ­tmÃ©nyÃ¼kkel. Viszont fontos elmondani, hogy hasznÃ¡latuk problÃ©mÃ¡kkal is jÃ¡rhat, pÃ©ldÃ¡ul fizetni kell Ã©rtÃ¼k vagy nem lehet belenyÃºlni az algoritmusokba kedvÃ¼nk szerint, esetleges fellÃ©pÅ hibÃ¡k esetÃ©n nagyon nehÃ©z lenyomozni a hiba forrÃ¡sÃ¡t (vagy szinten lehetetlen).
+\end_layout
+
+\begin_layout Standard
+SajÃ¡t algoritmusok terÃ©n bÃ¡tran elmondhatom, hogy megÃ©ri a C++ technolÃ³giÃ¡t vÃ¡lasztani Ã©s ezen a vonalon tovÃ¡bbhaladni egy esetleges sajÃ¡t kÃ¶nyvtÃ¡r megÃ­rÃ¡sa, megvalÃ³sÃ­tÃ¡sa felÃ©. LÃ¡thattuk, hogy az Ã¡ltalam megÃ­rt C++ szoftver is felvette a versenyt az Odeint kÃ¶nyvtÃ¡rral, ami szintÃ©n C++ technolÃ³giÃ¡t alkalmaz, lásd 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Antal"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Egy mÃ¡sik vonal, amit Ã©rdemes sokkal jobban felderÃ­teni az a CUDA technolÃ³giÃ¡val Ã©s grafikus kÃ¡rtyÃ¡val tÃ¶rtÃ©nÅ differenciÃ¡legyenlet megoldÃ¡sa. LÃ¡thattuk, hogy egy kis pÃ¡rhuzamosÃ­tÃ¡s is jelentÅs idÅbeli kÃ¼lÃ¶nbsÃ©get jelenthet bizonyos algoritmusok esetÃ©ben. Annak tudatÃ¡ban is, hogy a differenciÃ¡legyenletek megoldÃ¡sa nem a legjobban adatpÃ¡rhuzamosÃ­thatÃ³ feladatok kÃ¶zÃ© sorolhatÃ³ azt mondom, hogy megÃ©ri ezzel a technolÃ³giÃ¡val foglalkozni. Ennek kapcsÃ¡n a legnagyobb motivÃ¡ciÃ³ szÃ¡momra a jÃ¶vÅre nÃ©zve a parciÃ¡lis differenciÃ¡legyenletek pÃ¡rhuzamosÃ­tÃ¡sÃ¡nak megvalÃ³sÃ­tÃ¡sa Ã©s tanulmÃ¡nyozÃ¡sa, mivel ezeknÃ©l az egyenleteknÃ©l jobban ki lehet hasznÃ¡lni a videÃ³kÃ¡rtya rÃ¡csos szerkezetÃ©t.
 \end_layout
 
 \end_body

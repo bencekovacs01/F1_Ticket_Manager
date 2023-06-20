@@ -1,151 +1,226 @@
 %----------------------------------------------------------------------------
-\chapter{Matematikai modellek, ahol fontos az időtényező}
+\chapter{Elméleti megalapozás és szakirodalmi áttekintő}
 %----------------------------------------------------------------------------
 
-Ebben a fejezetben szeretnék bemutatni egy olyan matematikai modellt, ahol nagyon fontos az időtényező. Ezzel is szeretném kihangsúlyozni azt, hogy nem mindegy, hogy egy adott differenciálegyenletet vagy rendszert milyen gyorsan tudunk megoldani és megválaszolni a problémával kapcsolatban felmerülő kérdéseket. Ezek a modellek nem csak arra szolgálhatnak, hogy a valóságot reprezentálják vagy leírják. Nagyon sok esetben a legfontosabb szerepük az, hogy különböző előrejelzéseket és szimulációkat tudjunk végezni velük.
+\section {Webes alkalamazás felépítése}
 
-\section{Leukémia modellje}
+Az F1TM a React JavaScript programozási nyelv keretrendszerével valósult meg a Microsoft Visual Studio Code IDE-ben. Az alkalmazás használ harmadik féltől származó könyvtárakat is, amelyek felgyorsítják a fejlesztési folyamatot, mivel előre le van implementálva számos funkcionalitás. Ezek általában több fejlesztő által használtak és vannak tesztelve, ezért többségében gyorsabbak és biztonságosabbak.
 
-Az általam választott modell egy napjainkban ismert és eléggé súlyos betegség, az úgynezett \textbf{leukémia} modellje \cite{LeukemiaModell2}, \cite{LeukemiaModell}. Mit is jelent pontosan a leukémia? A leukémia (fehérvérűség vagy vérrák) a vérképző rendszer rosszindulatú daganatos megbetegedése, melyre a vérképzésben résztvevő csontvelői sejtek kontrollálatlan szaporodása jellemző. A keletkező tumorsejtek kiszorítják a normális vérképző sejteket, és megjelennek a vérben, kóros fehérvérsejtszám emelkedést okozva \cite{LeukemiaMeghatarozas}.
-\newline
+Lévén, hogy az alkalmazás egy webes platform, a struktúrája két fő részből áll: frontend és backend. Ezen projekt keretében első sorban a frontend implementációján volt a hangsúly.
 
-A \cite{LeukemiaModell2}, \cite{LeukemiaModell} cikkekben leírtak alapján felírhatjuk a normál leukémia dinamikus rendszerének modelljét, amely egy differenciálegyenlet rendszer lesz. Tudjuk, hogy minden $ t $ időpillanatban az őssejtek populációját két csoportra oszthatjuk fel (tehát a rendszerünkben is két egyenlet lesz): a normál, vagyis egészséges őssejtek populációjára, melyet $ x(t) $-vel fogunk jelölni és a leukémiás őssejtek populációjára, melyet $ y(t) $-vel jelölünk. Ezek alapján a rendszerünk a következőképpen alakul:
-\begin{align} \label{eq:leukemiaEgyenlet}
-	\begin{cases}
-		\dfrac{dx}{dt} = x'(t) = \dfrac{a}{1+b_{1}x+b_{2}y}x-cx \\ \\
-		\dfrac{dy}{dt} = y'(t) = \dfrac{A}{1+B(x+y)}y-Cy \\
-	\end{cases}
-\end{align}
+A frontend az a része a webes alkalmazásnak, amellyel a felhasználók közvetlenül interakcióba lépnek. Ez a rész felelős a UI megjelenítéséért és a felhasználói interakciók kezeléséért. A frontend általában a böngészőben fut, és a felhasználó által látott elemeket jeleníti meg, például az oldalak, űrlapok, gombok, navigációs elemek stb. A frontend tervezésekor figyelembe kell venni a UX aspektusait is. Ezek azért felelnek, hogy a felhasználói élmény a lehető legjobb legyen a weboldal böngészése során. Itt első sorban a letisztultság, átláthatóság és az összezavaró elemek elkerülése a legfőbb cél.
 
-A fenti modellünk egyenleteiben láthatunk pár ismeretlen paramétert, melyeket a következőkben ismertetek:
+A frontend technológiák közé tartozhatnak:
 \begin{itemize}
-	\item $ a $ - nem korlátozott növekedési ráta normál őssejtek esetén
-	\item $ A $ - nem korlátozott növekedési ráta leukémiás őssejtek esetén
-	\item $ b_{1} $, $ b_{2} $, $ B $ - a csontvelő mikrokörnyezeti érzékenységének együtthatói
-	\item $ c $ - normál őssejtek halálozási rátája
-	\item $ C $ - leukémiás őssejtek elhalási rátája
+	\item HTML: Az alapvető struktúrát és tartalmat határozza meg a weboldalakhoz.
+	\item CSS: A megjelenítést és a stílust adja a weboldalaknak, mint például a színek, betűtípusok, elrendezés stb.
+	\item JavaScript: A dinamikus és interaktív funkciókért felelős, például animációk, eseménykezelés, adatmanipuláció. Gyakran használnak frontend keretrendszereket, például a React JS-t, Next.js-t vagy Angular-t, amelyek segítenek az alkalmazás fejlesztésében és szervezésében. 
 \end{itemize}
 
-Beláthatjuk, hogy mindkét őssejt populúcióban a növekedési ráta nagyobb, mint az elhalási ráta, téhát
-\begin{align*}
-	a > c \quad \textrm{és} \quad A > C.
-\end{align*}
+A backend a szerveroldali logikát és adatkezelést végzi. Ez a rész felelős az adatbáziskezelésért, a logika végrehajtásáért, a felhasználói kérések feldolgozásáért és a válaszok generálásáért. A backend nem közvetlenül látható vagy interaktív a felhasználók számára, viszont folyamatosan kommunikál a frontend-el az API-kon keresztül.
 
-A normál és leukémiás őssejtek különböző módon járulnak hozza a normál őssejtek növekedési rátájának csökkenéséhez. Ezt az első egyenletben úgy tudjuk biztosítani, hogy különböző értékeket használunk a $ b_{1} $ és $ b_{2} $ paraméterek esetében. Annak érdekében, hogy utánozni tudjuk a leukémiás sejtek előnyét kisebb értéket veszünk fel a környezeti érzékenységi együtthatójának ($ B $). Az elmondottak alapján tehát feltételezzük, hogy
-\begin{align*}
-	b_{1}\geq b_{2}\geq B.
-\end{align*}
-
-Továbbá rendszerünknek két nem zéró egyensúlyi állapota van abban az esetben, ha $ b_{1} = b_{2} $ ezek $ (d, 0) $ és $ (0, D) $, ahol
-\begin{align*}
-	d = \dfrac{1}{b_{1}}\left(\dfrac{a}{c}-1\right) \quad \textrm{és} \quad D = \dfrac{1}{B}\left(\dfrac{A}{C}-1\right)
-\end{align*}
-$ d $ és $ D $ a normális és leukémiás őssejtek homeosztatikus mennyiségét jelenti. Ezekre a paraméterekre igazak a következő egyenlőtlenségek:
+A backend technológiák közé tartozhatnak:
 \begin{itemize}
-	\item Ha $ D < d $, akkor normál, egészséges állapot áll fenn.
-	\item Ha $ D > d $, akkor akut leukémiás állapot áll fenn.
+	\item Szerveroldali programozási nyelvek: Python, Ruby, Java, PHP stb.
+	\item Keretrendszerek: Node.js, Django, Ruby on Rails, Laravel stb., amelyek segítenek az alkalmazás fejlesztésében és a szerveroldali logika megvalósításában.
+	\item Adatbázis-kezelő rendszerek: MySQL, PostgreSQL, MongoDB stb., amelyek tárolják az alkalmazás adatai és lehetővé teszik ezek lekérdezését és manipulálását.
 \end{itemize}
+
+A frontend és backend között kommunikáció történik HTTP kérések és válaszok segítségével. A frontend kéréseket küld a backendnek, például adatlekérdezések vagy műveletek végrehajtása érdekében. Ezek a backend(ek) API végpontjain keresztül történnek A backend feldolgozza ezeket a kéréseket, és visszaküldi a válaszokat a frontendnek (\ref{abra:Architektura}). Nagyon alkalmazások esetében megtörténhet, hogy a frontend több backend szerverről kéri le az információkat. Ez az felhasználó számára nem feltűnő, mivel egy megfelelő UX-szel rendelkező frontend minden esetben egy státuszjelző elemet helyez a betöltés idejére (animáció), függetlenül attól, hogy éppen melyik szerverrel történik a kommunikáció.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.2]{images/architektura}
+	\caption{Webes alkalmazás architekúrája}
+	\label{abra:Architektura}
+\end{figure}
+
+\section {A React JavaScript keretrendszer}
+
+Az elmúlt években a React JS jelentős népszerűségre tett szert a webfejlesztés területén. A React egy nyílt forráskódú JavaScript keretrendszer, amelyet a Facebook (Meta) fejlesztett ki, és célja a felhasználói felületek könnyű és hatékony megvalósítása. A React alapvetően egy komponens alapú megközelítést kínál, amely lehetővé teszi a fejlesztők számára, hogy újra felhasználható, önálló építőelemeket hozzanak létre, amelyeket könnyedén kombinálhatnak egymással a komplexebb felhasználói felületek elkészítése érdekében.
+
+A React (\ref{abra:reactLogo}) rendkívül népszerűvé vált a fejlesztők körében számos előnye miatt. Elsőként említhetjük a hatékony Virtual DOM implementációját, amely lehetővé teszi az alkalmazások gyors és hatékony frissítését. A Virtual DOM a weboldal megjelenítéséhez használt valós DOM virtuális reprezentációja. Amikor változás történik az adatokban, a React a Virtual DOM-on keresztül kiszámítja az optimális frissítéseket, majd ezeket a változtatásokat csak a valós DOM-ra alkalmazza. Ez a megközelítés jelentős sebességjavulást eredményez a webalkalmazásokban.
+
+\pagebreak
+A második fontos előny a komponens alapú megközelítés, amely lehetővé teszi a fejlesztők számára a komponensek újra felhasználását és a kód modularizációját. A React komponensek önmagukban zárt egységek, amelyek különböző feladatokat elláthatnak a felhasználói felületeken, például gombok, űrlapok, listák stb. Az egyedi komponensek könnyedén kombinálhatók egymással, így a fejlesztőknek nem kell újra megírniuk a kódot, hanem egyszerűen felhasználhatják a meglévő komponenseket.
+
+Emellett más technológiai óriások is felfedezték a React előnyeit. Például a Netflix, a PayPal, az Airbnb és a Dropbox is a React-et használja az alkalmazásaik fejlesztéséhez. Ezek a vállalatok magas forgalommal és komplex felhasználói felületekkel rendelkeznek, és a React segítségével könnyedén kezelhetik ezeket a kihívásokat.
+
+Az open-source software (OSS) közösség is hozzájárult a React népszerűségének növekedéséhez. Számos harmadik által (Third party) fél készített könyvtár és eszköz érhető el a React-hez, amelyek további lehetőségeket kínálnak a fejlesztőknek. Ilyen példa a Redux, amely egy állapotkezelő könyvtár, vagy a React Router, amely segít az alkalmazások útvonalainak kezelésében.
+
+A JavaScript önmagában egy típusfüggetlen programozási nyelv, de egyes keretrendszerek, mint a Next.js, a Microsoft által kifejlesztett TypeScript nyelvet használják, amely már megengedi a beépített és személyre szabott típusok használatát.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.02]{images/reactLogo}
+	\caption{React logó}
+	\label{abra:reactLogo}
+\end{figure}
+
+\section {A Google Firebase platform}
+
+Mivel a React a webes alkalmazások frontend-jének fejlesztésére szolgál, szükségem volt egy backend szerverre és egy adatbázis-kezelő rendszerre, amely kiszolgálja a frontend-et, a Google által fejlesztett Firebase platformot és API-kat építettem be az alkalmazásba.
+A Google Firebase (\ref{abra:firebaseLogo}) egy teljes körű fejlesztői platform, amely különféle eszközöket és szolgáltatásokat kínál a fejlesztőknek, hogy könnyedén hozzanak létre, teszteljenek és üzemeltessenek webes és mobilalkalmazásokat.
+
+A Firebase Realtime Database egy NoSQL alapú adatbázis, amely valós idejű adatszinkronizációt tesz lehetővé az alkalmazások között. Ez azt jelenti, hogy az adatok automatikusan frissülnek minden csatlakozott eszközön, így a felhasználók valós idejű élményt élvezhetnek. Ez különösen hasznos például csevegőalkalmazások vagy valós idejű játékok fejlesztésekor. 
+
+A Firebase Authentication lehetővé teszi a felhasználók egyszerű és biztonságos hitelesítését. Támogatja az e-mail és jelszó, a szociális média hitelesítés (pl. Google, Facebook, Twitter) és más autentikációs módokat is. A Firebase emellett lehetőséget biztosít a felhasználói fiókok-, profilok kezelésére és jogosultságkezelésre is. 
+
+\pagebreak
+A Firebase Cloud Storage segítségével könnyedén tárolhatóak és kezelhetőek az alkalmazásban használt fájlok, például képek, hangfájlok vagy videók. Az egyszerű API-k lehetővé teszik a fájlok feltöltését, letöltését és megosztását. Emellett a Firebase Hosting segítségével egyszerűen és gyorsan kiszolgálhatod az alkalmazásod statikus fájljait a világ minden tájáról.
+
+A Storage Bucket-ek egy nagy tárolóhelyet jelentenek a fájlok (például képek, hangfájlok, videók stb.) biztonságos tárolására a felhőben. A Firebase Storage lehetővé teszi a fájlok feltöltését, letöltését, törlését és megosztását egyszerű API-k segítségével. Emellett automatikusan kezeli a fájlok hozzáférési jogosultságait és a CDN révén biztosítja a gyors és megbízható fájlletöltést a felhasználóknak.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.1]{images/firebaseLogo}
+	\caption{Firebase logó}
+	\label{abra:firebaseLogo}
+\end{figure}
+
+\section {Az AES titkosítás}
+\subsection {Bevezető}
+
+Az AES egy blokk titkosítási algoritmus, amelyet két belga kriptográfus tervezett 1997-ben. Az algoritmus az 1990-ben meghirdetett nyilvános pályázat nyertese lett, és 2001-ben a NIST (National Institute of Standards and Technology) elfogadta az Egyesült Államok kormányzati szervezetei számára ajánlott titkosítási szabványnak. Mivel az említett pályázat elbírálása publikusan történt, ezért valószínűleg nem történt befolyás a díj megítélését illetően. Az algoritmus egy változata a Rinjdael algoritmusnak, amely eredetileg több blokkmérettel is dolgozott és ebből választották ki az AES-t, amelynek blokkmérete 128 bit.
+
+Az AES blokk mérete 128 bit, és a kulcs mérete lehet 128, 192 vagy 256 bit. Az AES hatékonysága körülbelül 109 Mb/s, amely természetesen függ az adott hardver tulajdonságaitól, és szakértők szerint a 256 bites kulcsméret biztonsága "örök" időkre szól.
+
+Az AES nem használja a Feistel-sémát, mint a DES (Data Encryption Standard), hanem iteratív szerkezetű. Az algoritmus a kulcsméret alapján különböző számú körökben végzi a titkosítást, amelyekhez korkulcsokat generál. A 128 bites kulcs esetén a körök száma 10, a 192 bites kulcs esetén a körök száma 12, míg a 256 bites kulcs esetén a körök száma 14.
+
+Az AES helyettesítést és permutációt alkalmaz a blokkon belül, és véges testek felett végez aritmetikai és műveletet. Az algoritmus térnyerésére az szolgált, hogy a művelet végzés egész számokkal történik, ezért a szerzők egy olyan algoritmust fejlesztettek, ahol az összeadás, kivonás, szorzás, osztás után is halmaz béli elemet kapunk. Az AES véges testként használja a bináris együtthatós polinomokat a GF(2\textasciicircum n) felett, ahol n = 8 fokszámnál kisebb.
+
+Az AES minden műveletet 8 biten végez, és az összes 30 irreducibilis polinom közül a következőt használja: $x\textasciicircum 8 + x\textasciicircum 4 + x\textasciicircum 3 + x + 1$. Az AES minden bájtot a $GF(2\textasciicircum 8) = GF(2)[x]/(x\textasciicircum 8 + x\textasciicircum 4 + x\textasciicircum 3 + x + 1)$ testelemeként kezel.
+
+Az AES-t általában három algoritmus alkotja: a kulcsgenerálás, a titkosítás és a visszafejtés. Az AES a bemeneti 128 bites állapotot (state) egy 4x4-es mátrix formájában kezeli, és az algoritmus minden iterációja során helyettesítő és permutációs műveleteket végez el a blokkon belül.
+
+\subsection {Az algoritmus elmélete}
+
+Az AES a bemeneti adatokat 128 bites blokkokra bontja. A bemeneti adatokat több körön keresztül módosítja míg el nem jutunk a titkosított adatig. A módosításokat az algoritmus több lépésben hajtja végre. Ezeket a lépéseket altranszformációknak nevezzük.
+
+Az altranszformációk három típusúak lehetnek: AddRoundKey, SubBytes és ShiftRows. Az AddRoundKey lépés során az aktuális kör kulcsát XOR művelettel adja hozzá adatblokkhoz. A SubBytes lépés a bemeneti blokk minden elemén végigmegy egy előre meghatározott nemlineáris függvénnyel. A ShiftRows lépés során az adatblokk minden sorát egy bizonyos számmal rotáljuk.
+
+Összességében az AES titkosítási algoritmus magában foglalja a bemeneti adatok blokkokra bontását, majd a bemeneti blokkokon végrehajtja az altranszformációkat több körön keresztül, amíg meg nem kapja a titkosított adatot. Az algoritmus célja az adatok biztonságos és hatékony titkosítása a megfelelő védelem érdekében.
+
+\subsection {Az algoritmus gyakorlatban}
+
+Az alábbi kódrészlet az AES algoritmus egyik használati módja JavaScript programozási nyelven a CryptoJS könyvtárcsomag segítségével (\ref{code:encryption}).
+
+A kód első lépése a \textit{salt (só)} generálása, ami egy 128/8 bájt szekvencia, amely segítségével meghatározásra kerül majd a key (kulcs). A \textit{CryptoJS.lib.WordArray.random(128 / 8)} kódsor a \textbf{CryptoJS} könyvtárban található \textit{random()} függvény hívásával egy véletlenszerű 128-bites szekvenciát generál, majd beilleszti az adatokat a WordArray osztályba.
+
+A következő lépésben a kulcs előállítása történik meg a \textit{secretPass (jelszó)} és a só használatával a kulcsderiváló függvény segítségével. A kulcs előállítása a \textit{CryptoJS.PBKDF2()} függvénnyel történik, amely egy kulcstervező függvény. Az első paraméter a titkosításhoz használt jelszó, a második argumentum a só, a harmadik pedig a kulcs hosszát és az iterációk számát határozza meg. Ennél az algoritmusnál nagyon fontos odafigyelni, hogy a jelszó szigorúan titkos információ, vagyis ezt biztonságosan ajánlott eltárolni szerver oldalon. A többi paraméter publikus, mert önmagukban nem elegendőek a titkosított szöveg visszafejtéséhez.
+
+Az inicializáló \textit{vektor (iv)} generálása következik. Az IV egy véletlenszerű bájt szekvencia, amelynek hossza megegyezik a blokk méretével (128 bit), és a titkosítás során használják, hogy azonos adatok esetén is véletlenszerű kimenetet generáljon.
+
 \pagebreak
 
-A továbbiakban nézzünk meg egy konkrét példát a \cite{LeukemiaModell2} cikkben leírtak alapján. Az említett cikkből tudjuk, hogy egy egészséges felnőttnek van megközelítőleg $ d = 2*10^{4} $ db őssejtje. Emellett tudjuk azt is, hogy az őssejtek $ 200 $ naponta osztódnak és $ 500 $ naponta halnak meg. Ezek alapján már fel tudjuk írni a normál őssejtek növekedési és elhalási rátáját: $ a = 1/200 $ és $ c = 1/500 $. A csontvelő mikrokörnyezeti érzékenységének együtthatóit a következőképpen kaphatjuk meg: $  b_{1} = (a/c-1)/d = 0.75*10^{-4}$ és  $  b_{2} = 0.38*10^{-4}$. A további három paraméter $ A $, $ B $ és $ C $ minden páciensnél más és más értékű, azonban $ B $ -ről tudjuk, hogy körülbelül egyenlő a $ b_{2} $ értékének felével, tehát $ B = b_{2}/2 = 0.19*10^{-4} $. \\ \\
-Első tesztesetünkben a további paraméterek értékei:
-\begin{itemize}
-	\item $ A = 0.01 $ és $ C = 0.009 $
-	\item $ x(0) = 1.5 * 10^{4} $ és $ y(0) = 5 * 10^{3} $ kezdeti értékek
-\end{itemize}
-A fenti paraméterekkel megoldjuk a \eqref{leukemiaEgyenlet}. egyenletrendszert így a normál, egészséges állapot grafikonját kapjuk:
-\begin{figure}[!ht]
-	\centering
-	\includegraphics[width=0.95\textwidth] {figures/leukemia_normal_allapot}
-	\caption{Normál, egészséges állapot.}
-\end{figure}
+Az adat titkosítása a \textit{CryptoJS.AES.encrypt()} függvénnyel történik. Az adatot először JSON formátumba alakítjuk, majd az AES algoritmust a kulcs, az IV és további paraméterek (mód, padding és tag) megadásával alkalmazzuk. A \textit{mode} a blokktitkosítási mód (BCM) kiválasztására szolgál, ezek között található a ECB, CBC, OFB vagy CFB. A mi esetünkben a CBC (Cipher Block Chaining) mód van használva.
 
-Második tesztesetünkben az úgynevezett krónikus mieloid leukémia (CML) állapotot szeretnénk szemléltetni, melynek bemenő paraméterei:
-\begin{itemize}
-	\item $ A = 0.01 $ és $ C = 0.007 $
-	\item $ x(0) = 2 * 10^{4} $ és $ y(0) = 10^{3} $ kezdeti értékek
-\end{itemize}
-A fenti paraméterekkel újra megoldjuk a \eqref{leukemiaEgyenlet}. egyenletrendszert és a következő grafikont kapjuk:
+\begin{lstlisting}[caption={Titkosítás példakód.}, captionpos=b, language = JavaScript, label={code:encryption}]
+export const encryptData = text => {
+  const salt = CryptoJS.lib.WordArray.random(128 / 8);
+  const key = CryptoJS.PBKDF2(secretPass, salt, {
+    keySize: 256 / 32,
+    iterations: 1000,
+  });
+  const iv = CryptoJS.lib.WordArray.random(128 / 8);
+
+  const encrypted = CryptoJS.AES.encrypt(JSON.stringify(text), key, {
+    iv: iv,
+    mode: CryptoJS.mode.CBC,
+    padding: CryptoJS.pad.Pkcs7,
+    tag: true,
+  });
+
+  const data = {
+    ciphertext: encrypted.ciphertext.toString(CryptoJS.enc.Base64),
+    iv: iv.toString(CryptoJS.enc.Base64),
+    salt: salt.toString(CryptoJS.enc.Base64),
+    tag: true,
+  };
+  return JSON.stringify(data);
+};
+\end{lstlisting}
+
+A  \textit{padding} a blokkok kitöltési módját határozza meg, itt a \textbf{Pkcs7} (Public Key Cryptography Standards 7-es szabványa) van használva. A Pkcs7 padding szabvány szerint, ha az üzenet hossza nem egész blokk méretű, akkor azt szükséges kiegészíteni. Minden hiányzó bájt felveszi a hiányzó bájtok számának megfelelő értéket. Ha például az utolsó blokkban 3 hiányzó bájl van, akkor a blokk utolsó bájtjai a 0x03 értéket vesz fel.
+
+Az textit{iv} az inicializáló vektort tartalmazza, amit korábban generáltunk. A textit{tag} beállítása igazra van állítva, hogy az üzenet hitelesítése (integritásának ellenőrzése) is megtörténjen a titkosítás során. A tag az üzenet elejére kerül beillesztésre a titkosítás során, és végül az eredeti üzenet végén kerül ellenőrzésre a helyessége.
+
+Az utolsó lépés a textit{titkosított adat (ciphertext)}, az IV, a só és az üzenet hitelesítésének értéke (tag) összekapcsolása és JSON formátumba rendezése és visszatérítése.
+
 \pagebreak
-\begin{figure}[!ht]
-	\centering
-	\includegraphics[width=0.95\textwidth] {figures/leukemia_CML_allapot}
-	\caption{Krónikus mieloid leukémia (CML) állapot.}
-\end{figure}
+Az alábbi példakód a visszafejtést valósítja meg (\ref{code:decryption}):
 
-Utolsó tesztesetünkben pedig az úgynevezett akut mieloid leukémia (AML) állapotot szeretnénk szemléltetni, melynek bemenő paraméterei a következőek:
+\begin{lstlisting}[caption={Visszafejtés példakód.}, captionpos=b, language = JavaScript, label={code:decryption}]
+export const encryptData = text => {
+  const salt = CryptoJS.lib.WordArray.random(128 / 8);
+  const key = CryptoJS.PBKDF2(secretPass, salt, {
+    keySize: 256 / 32,
+    iterations: 1000,
+  });
+  const iv = CryptoJS.lib.WordArray.random(128 / 8);
+
+  const encrypted = CryptoJS.AES.encrypt(JSON.stringify(text), key, {
+    iv: iv,
+    mode: CryptoJS.mode.CBC,
+    padding: CryptoJS.pad.Pkcs7,
+    tag: true,
+  });
+
+  const data = {
+    ciphertext: encrypted.ciphertext.toString(CryptoJS.enc.Base64),
+    iv: iv.toString(CryptoJS.enc.Base64),
+    salt: salt.toString(CryptoJS.enc.Base64),
+    tag: true,
+  };
+  return JSON.stringify(data);
+};
+\end{lstlisting}
+
+A \textbf{decrypt} függvény az \textbf{encrypt} függvénnyel ellentétes sorrendben dolgozza fel az adatokat. A paraméterként kapott titkosított szövegből JSON objektumot állít elő. Ezután ebből az objektumból megkapja a só és az iv Base64 formátumból az értékeket. A kulcs előállítása a \textit{PBKDF2} függvénnyel történik a jelszó és a só segítségével. A titkosított adat, az iv, a só és a hitelesítési tag felhasználásával sikeresen vissza tudjuk fejteni az eredeti üzenetet.
+
+\pagebreak
+\subsection{Alkalmazások és érdekességek}
+
 \begin{itemize}
-	\item $ A = 0.01 $ és $ C = 0.004 $
-	\item $ x(0) = 2 * 10^{4} $ és $ y(0) = 1 $ kezdeti értékek
+	\item Az AES algoritmusnak 128, 192 és 256 bites változatai vannak, amelyek mindegyike különböző szintű biztonságot nyújt.
+	\item Az algoritmus rendkívül hatékony, amely lehetővé teszi a titkosított adatok nagy sebességű feldolgozását.
+	\item Nyilvánosan elérhető és ingyenesen használható, ami azt jelenti, hogy bárki használhatja és integrálhatja az alkalmazásába.
+	\item Ennek az algoritmusnak számos könyvtárcsomagban van megvalósítva. Léteznek egyaránt publikus és privát forráskódok, amelyek közül néhány optimalizálva van a hardveres és szoftveres rendszerekhez.
+	\item Az alkalmazása különböző területeken népszerű, például az online banki- és pénzügyi tranzakciókban, a VPN (Virtual Private Network) rendszerekben, a Wi-Fi hálózatokban, az adattároló eszközökön.
+	\item Az AES használata akkor biztosít teljes biztonságot, ha ezt együtt használják egyéb kriptográfiai primitívekkel. Ilyen az AES-en kívül az RSA vagy a Hashmap. A kulcsfontosságú védelmi rendszerekben, mint például a HTTPS, SSH vagy TLS, használnak több rétegű védelmi mechanizmusokat az AES kiegészítéseként.
+	\item A 256 bites titkosítási kulcsokat sokkal nehezebb brute-force módon támadni, mint egy 128 bites kulcsot. Azonban az utóbbi is olyan hosszú időbe telik kitalálni, még hatalmas számítási kapacitás mellett is, hogy az előrelátható jövőben nem lesz probléma, mert egy támadónak is hatalmas számítási kapacitásra lenne szüksége a szükséges brute-force (nyers-erő módszere) generáláshoz.
+	\item Azonban a 256 bites kulcsokhoz is több feldolgozási teljesítmény szükséges és hosszabb ideig tarthat a generálásuk. Amikor az energiafogyasztás problémát jelent, különösen kis eszközök esetében, vagy a késleltetés valószínű, a 128 bites kulcsok jobb választásnak számítanak.
 \end{itemize}
-Az új paraméterekkel harmadszor is megoldjuk a \eqref{leukemiaEgyenlet}. egyenletrendszert:
-\begin{figure}[!ht]
-	\centering
-	\includegraphics[width=0.95\textwidth] {figures/leukemia_AML_allapot}
-	\caption{Akut mieloid leukémia (AML) állapot.}
-\end{figure}
 
-\section{Hullámmozgás modellje}
+\section {RSA (TBD)}
 
-Az előző modellünk egyenletei közönséges differenciálegyenletek (ODE) voltak. Ezzel szemben a hullámmozgás modelljének leírásánál a parciális differenciálegyenleteket (PDE) és azok gyakorlati fontosságát szeretném ismertetni. Modellünk elméleti alapjai megtalálhatóak a következő könyvben és jegyzetben \cite{HullamegyenletKonyv}, \cite{HullammozgasLink}.
+\section {Kutatási kérdések} \label{research}
 
-Modellünk megértése érdekében képzeljünk el egy végtelen hosszú és rugalmas húrt, amely hullámmozgást végez, ez lehet egy kötél hullámzása, megpengetett gitárhúr vagy akár egy dob membránja. A továbbiakban kiváncsiak vagyunk arra, hogy a húr mozgatás közben milyen alakot vesz fel. Ennek leírásához szükségünk van néhány feltételezésre:
+Az alkalmazás fejlesztése során a következő kérdésekre próbáltam válaszokat keresni:
 \begin{itemize}
-	\item Feltételezzük, hogy a húr csak kis kitéréseket végez a függőleges síkban.
-	\item A húr hosszának változása elhanyagolható, ezáltal a húrban állandó $ T $
-	nagyságú érintőirányú feszítő erő ébred.
-	\item Jellemezzük a húr pontjait az $ x \in \mathbb R$ koordinátával, és jelölje $\mu$ a húr (konstans) lineáris sűrűségét (ez azt jelenti, hogy teszőleges $l$ hosszú húrdarab tömege $\mu l$).
-	\item Legyen $ u(x,t) $ függvény, amely a húr $ x $ koordinátájú pontjának kitérését ($ y $ tengely irányú) írja le $ t $ időpillanatban.
-	\item Végül feltételezzük, hogy a húrra $ F(x,t) $ sűrűségű $ y $ tengely irányú külső erő hat, ami azt jelenti, hogy tetszőleges végtelen kicsi $ [x, \delta x] $ húrdarabra $ F \delta x$ erő hat.
+	\item Hogyan lehet biztonságosabbá tenni az elektronikus jegyvásárlást és azok felhasználását?
+	\item Mely technológiák segítségével lehet gyors és hatékony online üzletet tervezni és megvalósítani?
+	\item Hogyan lehet a megvalósított rendszert hosszú távon karban tartani és felügyelni?
+	\item Hogyan lehetséges a rendszer automatizálása valós időben?
 \end{itemize}
 
-\begin{figure}[!ht]
-	\centering
-	\includegraphics[width=0.5\textwidth] {figures/hurdarabra_hato_erok}
-	\caption{Húrdarabra ható erők.}
-	\caption*{\textbf{Forrás}: \cite{PDEKonyv}}
-\end{figure}
+\section {Célkitűzések} \label{scopes}
 
-Ezután vizsgáljuk meg a húr $ x $ és $ x + \delta x$ közötti $ x $ hosszúságú végtelen kicsi darabját. Tegyük fel, hogy az $ x $ végpontban az érintő $\theta$ szöget zár be az $ x $ tengellyel, míg az $ x + \delta x$ pontban az érintő szöge $ \theta + \delta \theta $ lesz. Mindezek ismeretében a húrdarabra ható erők függőleges komponenseire felírva Newton második törvényét a következőt kapjuk:
-\begin{align} \label{eq:Newton}
-	T sin(\theta + \delta \theta) - T sin(\theta) + F(x,t) \delta x = (\mu \delta x)a_{y},
-\end{align}
-ahol $ a_{y} $ a húrdarab $ y $ tengely irányú gyorsulása, amely a húrdarab infinitezimális hossza miatt megközelítőleg $ \partial^{2}_{t} u(x,t) $.
+A kutatási kérdésekre keresett válaszok során felmerültek további kérdések, amelyek hozzájárulnak a céljaim pontosabb megfogalmazásában:
+\begin{itemize}
+	\item Hol és hogyan fogom tárolni a felhasználói- és alkalmazás adatokat?
+	\item Hogyan fogom kelelni a felhasználói jogosultságokat, hogy minden felhaszáló csak a saját adataihoz férjen hozzá?
+	\item Hogyan fogom megvalósítani a többlépcsős azonosítást a jegyek felhasználásásnál?
+	\item Hogyan fogom eljuttatni a felhasználóknak a megvásárolt termék(ek)ről és azok azonosításához szükséges információkat? 
+	\item Hogyan tudom a felületet felhasználó baráttá tenni?
+\end{itemize}
 
-Másrészt, tudjuk, hogy a húr csak kis kitéréseket végez, ezért kicsi a szög, így alkalmazhatóak a $ sin(\delta \theta) \approx \delta \theta$, $ cos(\delta \theta) \approx 1$ és \newline $ sin(\theta + \delta \theta) = sin(\theta) cos(\delta \theta) + cos(\theta) sin(\delta \theta) \approx sin \theta + \delta \theta$ közelítések, amelyekkel a \eqref{Newton} egyenlet a következőképpen alakul:
-\begin{align} \label{eq:Newton}
-	T \delta \theta + F(x,t) \delta x = (\mu \delta x) \partial^{2}_{t} u(x,t).
-\end{align}
+A megfogalmazott kérdések azt a legfontosabb célt hivatottak szolgálni, hogy egy kényelmes és megbízható alkalmazás jöjjön létre a felhasználók számára. Ennek megvalósításához szükséges szempont, hogy megbizonyosodjanak a felhasználók, hogy a felület használata nem félreérthető és nincsenek olyan működési aspektusok, amelyek zavarhatják a felhasználói élményt.
 
-Vegyük észre, hogy $ \theta $ az érintő szöge, ezért $ tg \theta = \partial_{x} u$, amit $ x $ szerint deriváva az összetett függvény deriválása alapján $ (1/cos^{2} \theta) \partial_{x} \theta = \partial^{2}_{x} u $.
-Ebből újra a $ cos(\delta \theta) \approx 1$ közelítést használva, illetve a $ \partial_{x} \theta $ deriváltat a $ \delta \theta / \delta x $ különbségi hányadossal helyettesítve azt kapjuk, hogy $ \delta \theta \approx  (\partial^{2}_{x} u) \delta x$. \newline Vegül ezeket visszahelyettesítve a legutóbbi egyenletbe a következőket kapjuk:
-\begin{align} \label{eq:Newton}
-	(T \delta x) \partial^{2}_{x} u + F \delta x = (\mu \delta x) \partial^{2}_{t} u \\
-	\partial^{2}_{t} u - \dfrac{T}{\mu} \partial^{2}_{x} u = \dfrac{F}{\mu}
-\end{align}
-Ezt az egyenletet nevezik \textbf{egydimenziós hullámegyenletnek}.
-\newline
+Az előbbiek elérésére a kisebb célok egy még pontosabb képet tudnak biztosítani számomra, hogy megfelelő ütemben haladjon a fejlesztés anélkül. hogy kimaradjanak fontos részletek.
 
-Ha tudjuk, hogy a húr hullámmozgást végez, akkor $ u(x,t) $ olyan kétszer folytonosan differenciálható függvény kell legyen, amely kielégíti az alábbi parciális differenciálegyenletet:
-\begin{align}
-	u''_{tt} - c^{2}u''_{xx} = 0,
-\end{align}
-ahol $ c $ egy ismert konstans érték. Az egyenlet megoldásához ebben az esetben is szükségünk van a kezdeti feltételekre, amelyek a húr helyzete a kezdeti időpillanatban ($ t = 0 $ - ban) és az adott pontokhoz tartozó pillanatnyi sebességek lesznek:
-\begin{align*}
-	u(x,0) = f(x), \\
-	u'(x,0) = g(x),
-\end{align*}
-ahol $ f(x) $ és $ g(x) $ ismert, folytonosan differenciálható függvények lesznek.
-\\
+A fent felsorolt kérdések felhívják a figyelmet arra a fontos tényezőre, hogy az egyre elterjedtebb körű internet használatának korszakában elengedhetetlen a felhasználók személyes adatainak a védelme. Ennek megvalósítására is érdemes számos megoldást kutatni és majd kiválasztani az alkalmazás szempontjából megfelelőt.
 
-A következőkben legyen $ u(x,t) = F(x+ct)$, ahol az $ F $ tetszőlegesen választott kétszer differenciálható függvény. Ebben az esetben
-\begin{align*}
-	u''_{xx} = F'' \quad \textrm{és} \quad u''_{tt} = c^{2}F'',
-\end{align*}
-tehát $ u $ függvény megoldása a hullámegyenletnek. Az előző esethez hasonlóan, legyen $ u(x,t) = G(x-ct)$, ahol $ G $ szintén egy tetszőlegesen választott kétszer differenciálható függvény. Ugyanúgy, mint az előző esetben itt is az $ u $ függvény megoldása lesz a hullámegyenletnek.
+Továbbá a előzőek mellett megoldást kell kapjak arra a problémára, hogy a jelenleg is működő oldalak nagy része nem foglalkozik azzal a tényezővel, hogy egy elektronikus jegy nagyon sok veszélynek van kitéve és ennek ellenére nem alkalmaznak többlépcsős azonosítást a jegyek hitelesítésekor. Ennek egyszerűen az az oka, hogy bizonyos százalékban lassítaná a hitelesítési folyamatot és az eladók nem vállalnak felelősséget a jegyek esetleges elveszítése vagy ellopása esetén.
 
-A látottak alapján elmondható (számításokkal be is bizonyítható), hogy a hullámmozgás parciális differenciálegyenlet általános megoldása
-\begin{align}
-	u(x,t) = F(x+ct)+G(x-ct),
-\end{align}
-ahol $ F $ és $ G $ folytonosan differenciálható függvények.
+Végül de nem utolsó sorban fontos, hogy lehetőséget biztosítsak az alkalmazás viselkedésének monitorizálására, valamint az alkalmazás továbbfejleszthetőségére. Az alkalmazás működésének megfigyelése során olyan hibákról és ötletekre kaphatok visszajelzést, amivel tudom biztosítani az alkalmazás hosszútávú karbantartása és továbbfejlesztése érdekében.

@@ -1,95 +1,140 @@
 %----------------------------------------------------------------------------
-\chapter{Eredmények, következtetések}
+\chapter{A rendszer architektúrája}
 %----------------------------------------------------------------------------
 
-\section {Beépített szoftverek esetén}
+Az alkalmazás architektúrája három nagyobb komponensből áll. Mindhárom egy különálló szerver, amelyek egy teljesen összefüggő gráfként képesek kommunikálni egymással (\ref{abra:architecture}).
 
-A \ref{fejezet3}. fejezetben bemutattam két beépített, előre megvalósított szoftvert, melyek a Matlab ode45 programja és a Boost - Odeint könyvtár. Az elért eredmények és tesztek azt mutatják, hogy a Matlab ode45 differenciálegyenlet megoldója sokkal gyorsabb és hatékonyabb, mint az Odeint. Ha a tesztesetekben mért átlagidőket összehasonlítjuk láthatjuk (\ref{fejezet3_3}. alfejezet), hogy az ode45 $ 20-30 $ -szor gyorsabb a Odeintnél. Ez talán annak is köszönhető, hogy a Matlab egy nagyon komoly szoftver, amelynek programcsomagjain mérnökök és programozók százai  (vagy akár ezrei) dolgoznak, így természetes, hogy az algoritmusok jobban optimizáltak és hatékonyabbak az ingyenes szoftvereknél. A továbbiakban összegezzük, hogy a két technológiának milyen előnyei és hátrányai vannak vagy éppen miért érdemes/nem érdemes használni őket, l\'asd \cite{Lovasz}
-\\ \\
-\textbf{Matlab ode45 előnyei:}
-\begin{itemize}
-	\item nagyon egyszerű a használata, nem igényel komoly programozási ismereteket
-	\item könnyű beépíteni és összekötni más Matlab programokkal
-	\item a kapott eredményeket mátrix vagy vektor típusokban téríti vissza, ami könnyűvé teszi az eredmények további kezelését
-	\item az eredményeket grafikus felületen azonnal meg tudjuk jeleníteni
-	\item jobb eredményeket produkált, mint az Odeint
-	\item jól dokumentált, sok példa van a használatára
-\end{itemize}
-\pagebreak
-\textbf{Matlab ode45 hátrányai:}
-\begin{itemize}
-	\item komoly hátránya az Odeinttel szemben, hogy \textbf{fizetni kell a használatáért}
-	\item nagyon sok memóriát használ, komolyan igénybeveszi a számítógép erőforrásait
-\end{itemize}
-\textbf{Odeint előnyei:}
-\begin{itemize}
-	\item ingyenes és nyílt forráskódú, használható személyi és kereskedelmi célokra egyaránt
-	\item nagyon rugalmas, absztrak, így könnyedén változtatható a bemeneti adatok típusa vagy struktúrája 
-	\item C++ nyelven írodott, támogatva a modern programozási technológiákat (Generikus programozás, Template Metaprogramming)
-\end{itemize}
-\textbf{Odeint hátrányai:}
-\begin{itemize}
-	\item használata nehezebb, mint a Matlab ode45 programé, szükséges a C++ programozási nyelv ismerete
-	\item a kapott eredményekkel nem olyan könnyű bánni, mint a Matlab esetében
-	\item absztraktsága miatt nehéz a felmerülő problémákat megoldani
-	\item dokumentáltsága jóval szegényesebb, mint a Matlabé
-\end{itemize}
-
-
-
-
-\begin{figure}
+\begin{figure}[!h]
 	\centering
-	\begin{tikzpicture}
-		\node[main node] (1) {$1$};
-		\node[main node] (2) [below left = 2.3cm and 1.5cm of 1]  {$2$};
-		\node[main node] (3) [below right = 2.3cm and 1.5cm of 1] {$3$};
-		
-		\path[draw,thick]
-		(1) edge node {} (2)
-		(2) edge node {} (3)
-		(3) edge node {} (1);
-		%%
-		\begin{scope}[xshift=4cm]
-			\node[main node] (1) {$1$};
-			\node[main node] (2) [right = 2cm  of 1]  {$2$};
-			\node[main node] (3) [below = 2cm  of 1] {$3$};
-			\node[main node] (4) [right = 2cm  of 3] {$4$};
-			
-			\path[draw,thick]
-			(1) edge node {} (2)
-			(1) edge node {} (4)
-			(3) edge node {} (2)
-			(3) edge node {} (4)
-			;
-		\end{scope}
-	\end{tikzpicture}
-\caption{Egyszer\H u gr\'af TIKZ seg\'its\'eg\'evel}
+	\includegraphics[scale=0.7]{images/architecture}
+	\caption{Rendszer architekúra}
+	\label{abra:architecture}
 \end{figure}
 
+Az rendszer fő komponense a weboldalt üzemeltető szerver, a \textbf{GitHub Pages}. Ez felel az oldal rendereléséért és valós időben elérhetőségéről. Erre azért van lehetőség, mivel a forráskód megtalálható a GitHub-on, amelyet összekötöttem a GitHub Pages-el. A deployment fázis során egy optimalizált deploy verziót készít a kódból és azt hosztolja. Ez a szerver 
 
+A második komponens a \textbf{Google Firebase} CDN alapú felhőalapú szolgáltató. Segítségével meg lehet valósítani felhasználók autentikációját, adatok tárolását egy NoSQL adatbázis-kezelő rendszerben és még sok mást. Azért ezeket emeltem ki, mivel ezek a funkcionalitások játszanak szerepet a rendszerben. A weboldal folyamatosan kommunikál a Google Firebase-el, hogy valós időben és hatékonyan tudja kiszolgálni a felhasználókat. Az \textbf{F1 Ticket Manager} egyik központi eleme a jegyek kezelése, amely során titkosítási algoritmusok futnak a felhasználók adatainak biztonsága érdekében. Mivel ezeket az algoritmusokat nem lehetséges, hogy a Google Firebase ingyenes verziójával igénybe vegyem, ezért szükségem volt egy másik backend szerverre is, ahol el tudom végezni ezeket a műveleteket.
 
-\newpage
-\section {Saját szoftverek esetén}
+A harmadik és egyben utolsó komponens a \textbf{Vercel} felhőalapú szolgáltató, amelyen fut egy NodeJs szerver, amelyet én fejlesztettem. Ennek a szervernek a API-jai felelnek a titkosítási folyamatokért. Mivel az adatok csak a {Google Firestore}-ban vannak tárolva, ezért elengedhetetlen, hogy kommunikáljon vele. 
 
-Saját szoftverek esetében sikerült négy különböző technológia segítségével megvalósítani a Dorman-Prince differenciálegyenlet megoldó algoritmust (lásd \ref{fejezet3_2}. alfejezet). A felhasznált technológiák: Matlab, Java, C++ és Android voltak.
+\section {GitHub frontend architektúra} \label{frontend}
 
-Ezen technológiák közül az Androidos szoftverrel kapcsolatban már előzetes félelmeink voltak, mivel azt feltételeztük, hogy bármennyire is fejlettek napjainkban a mobileszközök, mégis hardveresen nem lesznek elegek ahhoz, hogy versenybe tudjanak szállni a számítógépekkel. Néhány teszt után feltételezéseink beigazolódtak, láthatjuk a \ref{fejezet3_3}. alfejezet teszteseteiben is, hogy az Android szoftver mennyire gyengén teljesített (mind a Motorola Moto E2, mind a Samsung Galaxy Core Prime esetében). Összehasonlítva a többi algoritmussal az átlagidőket nézve $ 150-160 $ - szor lassabb a Javanál és $ 300 - 350 $ - szer a C++ - nál! Tehát azt a következtetést vonhatjuk le, hogy nem érdemes mobileszközökön differenciálegyenleteket oldani, mivel túlságosan nagy a hardver igénye és egyelőre ezen a téren nem képesek tartani a lépést a számítógépekkel.
+A rendszer frontendjét szolgáló komponens, amelyet a GitHub Pages hosztol, egy \textbf{create-react-app} alkalmazás. Ez egy olyan \textbf{npm} (\ref{abra:npmLogo}) JavaScript futási környezet csomagkezelője \cite{WikiNpm} által forgalmazott projekt sablon, amely tartalmazza az alapvető konfigurációkat és fájlokat, amelyek szülségesek egy \textbf{React} alkalmazás készítéséhez.
 
-A további három technológia közül (Matlab, Java, C++) meglepő módon itt is a Matlab teljesített a legjobban, igaz, hogy ebben az esetben már nem használtuk az ode45 programot, hanem megírtam én a saját függvényemet. Ez a teljesítményen is meglátszott, mert az általam írt függvény nem tudott jobban teljesíteni a tesztek alatt, mint az ode45. Mindezek ellenére $ 35-40 $ - szer gyorsabb volt a Javanál és megközelítőleg $ 15-20 $ - szor gyorsabb a C++ - nál.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.2]{images/npmLogo}
+	\caption{Az npm csomagkezelő}
+	\label{abra:npmLogo}
+\end{figure}
 
-A Java és C++ szoftvereket összehasonlítva elmondhatom, hogy az esetek többségében a C++ körülbelül $ 2 $ - szer volt gyorsabb a Javanál, ami megfelel az előzetes elvárásoknak.
+Az F1TM frontend kódbázisának gyökérkönyvtára az \textit{src} mappa (\ref{abra:srcFolderStructure}), amely tartalmazza az alkalmazás komponenseit, oldalait, a többi szerver végpontjaira kapcsolódó függvényeket és a React \textbf{Redux} kezelésére használt kódokat.
 
-Amit nagyon fontosnak tartok kihangsúlyozni, hogy az általam megvalósított C++ szoftver a tesztek során nagyon jól teljesített, felvette a versenyt az Odeint könyvtárral és az elért átlagok is csak nagyon kicsivel maradnak el az Odeint által produkált eredményektől (\ref{fejezet3_3}. alfejezet).
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.6]{images/srcFolderStructure}
+	\caption{Az src mappa struktúrája}
+	\label{abra:srcFolderStructure}
+\end{figure}
 
-Továbbá megvalósítottam az Euler és Runge-Kutta módszerek párhuzamosított változatait is CUDA technológia segítségével. Ebben az esetben a tesztek azt mutatták, hogy az Euler módszer esetében többe kerül a sok CPU és GPU memória közötti másolás művelete, mint amennyit nyerünk a számítások elvégzése során. Tehát ebben az esetben ez a fajta párhuzamosítási megközelítés nem éri meg. Ezzel ellentétben a Runge-Kutta módszer esetében a megközelítés eredményesnek bizonyult abban az esetben, ha az egyenletek száma nagy és a lépésköz kicsi. A \ref{fejezet3_4} alfejezetben láthattuk, hogy abban az esetben ha az egyenletek száma $ n = 10 $ és a lépésköz $ h = 0.001 $, a GPU-n megközelítőleg 5 és fél perccel hamarabb lefutott az algoritmus, mint a CPU-n. Ezzel a párhuzamosítási módszerrel nem tudtuk kihasználni a videókártya által nyújtott maximális számítási kapacitást, de így is jelentős különbséget sikerült elérni a futási időket nézve, l\'asd \cite{Katai}.
+A mappa struktúrába rendezett komponensek (\ref{abra:components}) áttekinthetőbbé teszik a rendszert. Az adott funkcióhoz tartozó összes fájl vagy modul egy helyen vannak, így könnyen megtalálhatóak és karbantarthatóak. Ez különösen hasznos, ha több fejlesztő dolgozik ugyanazon a rendszeren, vagy ha idővel vizsgálni vagy módosítani kell a komponenseket.
 
+Az alaposan megszervezett struktúra lehetővé teszi a komponensek könnyű újrafelhasználását. Ez jelentősen csökkentheti a fejlesztési időt és erőforrásokat, mivel nem kell mindent újra implementálni vagy átírni.
 
+Továbbá egy új funkció bevezetésénél nagyon megkönnyíti a mapparendszer, hogy könnyen megtaláljam a megfelelő helyét az új fájloknak. Az új funkciót egy új komponensként hozzáadhatjuk a megfelelő mappába anélkül, hogy át kellene írni vagy megváltoztatni a meglévő komponenseket. Ez tisztább és kevésbé összezavaró kódbázist eredményez, és minimalizálja a mellékhatásokat vagy a hibák kockázatát.
 
-\section {Összességében}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.6]{images/components}
+	\caption{Komponensek}
+	\label{abra:components}
+\end{figure}
 
-A fentieket összegezve elmondhatom, hogy megéri előre megírt szoftvereket vagy könyvtárakat használni differenciálegyenletek megoldására. Nagyon megkönnyíthetik az eltünket egyszerűségükkel és nagy teljesítményükkel. Viszont fontos elmondani, hogy használatuk problémákkal is járhat, például fizetni kell értük vagy nem lehet belenyúlni az algoritmusokba kedvünk szerint, esetleges fellépő hibák esetén nagyon nehéz lenyomozni a hiba forrását (vagy szinten lehetetlen).
+A \textbf{Vercel} szerverrel való kommunikációra az \textbf{axios} csomagot használtam. Ennel segítségével tudom kezelni a hálózaton történő HTTP kéréseket, amelyekhez hozzátartozik az url, body és egyéb paraméterek megadása.
 
-Saját algoritmusok terén bátran elmondhatom, hogy megéri a C++ technológiát választani és ezen a vonalon továbbhaladni egy esetleges saját könyvtár megírása, megvalósítása felé. Láthattuk, hogy az általam megírt C++ szoftver is felvette a versenyt az Odeint könyvtárral, ami szintén C++ technológiát alkalmaz, l\'asd \cite{Antal}.
+\section {Google Firebase backend architektúra} \label{firebase}
 
-Egy másik vonal, amit érdemes sokkal jobban felderíteni az a CUDA technológiával és grafikus kártyával történő differenciálegyenlet megoldása. Láthattuk, hogy egy kis párhuzamosítás is jelentős időbeli különbséget jelenthet bizonyos algoritmusok esetében. Annak tudatában is, hogy a differenciálegyenletek megoldása nem a legjobban adatpárhuzamosítható feladatok közé sorolható azt mondom, hogy megéri ezzel a technológiával foglalkozni. Ennek kapcsán a legnagyobb motiváció számomra a jövőre nézve a parciális differenciálegyenletek párhuzamosításának megvalósítása és tanulmányozása, mivel ezeknél az egyenleteknél jobban ki lehet használni a videókártya rácsos szerkezetét.
+A \textbf{Google Firebase} olyan platform, amely lehetővé teszi a fejlesztők számára, hogy könnyedén építsenek és üzemeltessenek felhőalapú alkalmazásokat. A Firebase architektúrája több szolgáltatásból áll, amelyek együttműködnek, hogy biztosítsák a fejlesztők számára a skálázhatóságot, megbízhatóságot és az alkalmazások széleskörű funkcióit (\ref{abra:firebaseConsole}).
+
+A Google Firebase funkcionalitásainak elérésére léteznek direkt JavaScript alapú keretrendszerekre könyvtárcsomagok. ReactJs-re a \textit{firebase} és annak almoduljai a \textit{/storage}, \textit{/compat/app}, \textit{/compat/auth} vagy a \textit{/compat/firestore}, míg NodeJS-ben a \textit{firebase-admin}. Ezekben a modulokban implementálva minden olyan kérés a Firebase felé és a visszakapott adatok deszerializálása, amelyek lehetségesek a Goolge szerverek fele kód alapon. Például a \textbf{storage} modullal lehetséges a Cloud Storage kezelése és az \textbf{auth}-al a felhasználók bejelentkeztetése és az adataik kezelése.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.6]{images/firebaseConsole}
+	\caption{Firebase Console}
+	\label{abra:firebaseConsole}
+\end{figure}
+\pagebreak
+
+\subsection {Firebase Authentication}
+
+A rendszeremben az egyik központi szerepet játszó szolgáltatás a \textbf{Firebase Authentication}. Ennek segítségével a felhasználók regisztrálhatnak, bejelentkezhetnek és hitelesíthetik magukat az alkalmazásban. Ez a szolgáltatás támogatja az email-alapú, és közösségi média alapú hitelesítési módokat is, és lehetővé teszi a felhasználói adatok kezelését. Az F1 Ticket Managerben lehetőség van regisztrálni email cím, Google- vagy Facebook fiók segítségével (\ref{abra:loginMethods}). Amennyiben saját email fiókkal történik a regisztráció, szükség van annak vissza igazolására, amely a megadott fiókra érkező levélben megadott linkkel lehetséges.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.4]{images/loginMethods}
+	\caption{Autentikációs módok}
+	\label{abra:loginMethods}
+\end{figure}
+
+A \ref{firebase} fejezetben is említett \textit{/compat/auth} modul által lehetőségem van a rendszer bármely pontján elérni az aktuálisan bejelentkezett felhasználó adatait a \textit{firebase.currentUser}-en keresztül.
+
+\subsection {Cloud Firestore}
+
+A második, általam leghasználtabb, funckionalitás a \textbf{Cloud Firestore}. A Firestore egy dokumentum-orientált adatbázis, amely skálázhatóbb és rugalmasabb lehetőségeket kínál adatok tárolására és lekérdezésére. Firestore használatakor a fejlesztők strukturált gyűjteményeket és dokumentumokat hozhatnak létre, és lehetőségük van komplex lekérdezések végrehajtására és az adatok szűrésére. Ilyen a dokumentumokban tárolom a felhasználói adatokat, amelyek nagyrésze meg is jelenik a felületen, a pályák és jegyek adatait, valamint a rendeléseket (\ref{abra:firestoreStructure}). A pályaadatokat egy JSON fájlban gyűjtöttem össze és abba lehetséges a módosításuk is, majd egy általam írt algoritmust segítségével ebből a JSON adatcsomagból létrehozok egy többrétegű dokumentumrendszert a Firestoreban.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.4]{images/firestoreStructure}
+	\caption{Cloud Firestore struktúrája}
+	\label{abra:firestoreStructure}
+\end{figure}
+
+A adatbázis megfelelő biztonságát a \textbf{szabályok} (Rules) beállításával lehet megadni. Ezen szabályok tudják biztonsítani, hogy az adott dokumentumokhoz milyen feltételek alapján lehet hozzáférni. Ilyen például, hogy egy felhasználó adataihoz mindig csak a \textit{Firebase Authentication} által bejelentkezett felhasználó férjen hozzá az egyedi azonosító alapján (auth.uid) (\ref{code:databaseRules}).
+
+\begin{lstlisting}[caption={Firestore szabályok.}, captionpos=b, label={code:databaseRules}]
+match /databases/{database}/documents {
+    match /users/{userId} {
+      // Allow users to only read or write their own documents
+    	allow read, write: if request.auth.uid == userId;
+    }
+}
+\end{lstlisting}
+
+\subsection {Firebase Storage}
+
+A \textbf{Firebase Storage} szolgáltatás lehetővé teszi a felhasználói fájlok, például képek, videók vagy hangfájlok tárolását és kezelését. A Firebase Storage nagyobb méretű fájlok tárolására és letöltésére specializálódott, amelyeket a Google Cloudban tárolja. Az én alkalmazásomban a feltöltött profilképek kerülnek a Storage-ban tárolásra (\ref{abra:storageStructure}).
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.4]{images/storageStructure}
+	\caption{Firebase Storage struktúrája}
+	\label{abra:storageStructure}
+\end{figure}
+\pagebreak
+
+\section {Vercel backend architektúra}
+
+A \textbf{Vercel} által kiszolgált egyik backend szerver, amely hasonlóan a frontendhez (\ref{frontend}) JavaScript nyelven van írva \textbf{NodeJS} keretrendszerben (\ref{abra:vercelStructure}). A szerver kiinduló pontja az \textit{app.js}, amely tartalmazza az alapértelmezett konfigurációkat a HTTP hívások kezelésére és a végpontokat tartalmazó fájlok helyét. A szerver textbf{Express} alapú.
+
+A Vercel-en több sablon alapján lehet szervert létrehozni. Én egy egy third-party repository segítségével hoztam létre, amely megtalálható a GitHubon a \textbf{geshan} nevű felhasználó jóvoltából \cite{GitNodeSql}.
+
+Az Express.js, vagy egyszerűen csak Express, egy backend webalkalmazás-keretrendszer RESTful API-k létrehozásához a Node.js segítségével, amelyet ingyenes és nyílt forráskódú szoftverként adnak ki az MIT-licenc alatt \cite{WikiExpress}.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.6]{images/vercelStructure}
+	\caption{Vercel mappa struktúrája}
+	\label{abra:vercelStructure}
+\end{figure}
+
+A \textbf{routes} mappa tartalmazza a alkalmazás működéséhez szükséges JSON, CSS és egyéb JS fájlok. Az én esetemben itt található az \textit{index.js} és a \textit{quotes.js} fájlok (\ref{abra:vercelRoutes}). Az index.js tartalmazza a szerver végpontjait és az üzleti logikát. A quotes.js pedig a Google Firebase szerverrel való kapcsolat kialakításához szükséges konfigurációkat, amelyek lefutnak a szerver indulásakor.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.8]{images/vercelRoutes}
+	\caption{Vercel \textit{Routes} mappa}
+	\label{abra:vercelRoutes}
+\end{figure}
+
+A titkosítási és kulcscsere algoritmusok használatára a rendre a \textbf{crypto-js} és \textbf{node-rsa} JavaScript könyvtárcsomagokat használom. A node-rsa egy optimális és kényelmes használatot nyújt az RSA publikus kulcscsere protokoll beépítéséhez a rendszerbe. Ez egy emelt szintű biztonságot biztosít a felhasználók számára. Azt is figyelembe vettem, hogy ez a kulcscsere csak akkor biztonságos, ha a kulcsokat is biztonságos módon tároljuk. Erre azt a megoldást alkalmaztam, hogy a publikus és privát kulcsokat is a Google Firestore-ban tárolom, amelyre olyan szabályok (rules) vannak beállítva, hogy mindig csak az adott autentikált felhasználó férjen hozzá, ahogyan arról már említést tettem a \ref{firebase} fejezetben a \ref{code:databaseRules} kódrészlet segítségével.
