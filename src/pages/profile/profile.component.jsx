@@ -6,18 +6,18 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 import './profile.styles.scss';
 
 import placeholderImage from '../../assets/placeholder_picture.png';
-import Orders from './orders/orders.component';
+import Loader from '../../components/loader/loader.component';
 import {
   auth,
   getUserOrders,
   updateProfile,
   updateProfilePicture,
 } from '../../firebase/firebase.utils';
-import Loader from '../../components/loader/loader.component';
+import Orders from './orders/orders.component';
 
-import { storage } from '../../firebase/firebase.utils';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import CustomButton from '../../components/custom-button/custom-button.component';
+import { storage } from '../../firebase/firebase.utils';
 
 const ProfilePage = ({ currentUser }) => {
   const [image, setImage] = useState(currentUser.photoURL || placeholderImage);
@@ -68,8 +68,16 @@ const ProfilePage = ({ currentUser }) => {
 
   const handleImageChange = event => {
     const uploadedImage = event.target.files[0];
+    const maxSizeInBytes = 5 * 1024 * 1024;
+
+    if (uploadedImage && uploadedImage.size > maxSizeInBytes) {
+      alert('The selected image exceeds the maximum allowed size of 5MB.');
+      event.target.value = null;
+      return;
+    }
+
     setImage(URL.createObjectURL(uploadedImage));
-    setFile(event.target.files[0]);
+    setFile(uploadedImage);
     setImageSelected(true);
   };
 
