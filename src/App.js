@@ -19,13 +19,16 @@ import NotFoundPage from './pages/404-not-found/404-not-found.component';
 import ModalWindow from './pages/homepage/modal/ModalWindow';
 import ProfilePage from './pages/profile/profile.component';
 import QrScannerPage from './pages/qr-scanner/qr-scanner-page.component';
+import { fetchCollectionsStart } from './redux/shop/shop.actions';
 
 // import CIRCUIT_DATA from './redux/shop/shop.data.circuits';
 
 class App extends React.Component {
   componentDidMount() {
-    const { checkUserSession /*, collectionsArray*/ } = this.props;
+    const { checkUserSession, fetchCollectionsStart /*, collectionsArray*/ } =
+      this.props;
     checkUserSession();
+    fetchCollectionsStart();
 
     // console.log('DATA');
     // console.log(CIRCUIT_DATA.circuits);
@@ -125,6 +128,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
   checkUserSession: () => dispatch(checkUserSession()),
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
