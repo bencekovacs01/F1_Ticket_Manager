@@ -4,8 +4,8 @@ import { Route } from 'react-router-dom';
 import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview.containter';
 import CollectionPageContainer from '../collection/collection.container';
 
-const ShopPage = () => {
-  const { match } = this.props;
+const ShopPage = props => {
+  const { match } = props;
 
   return (
     <div className="shop-page">
