@@ -239,17 +239,48 @@ export const updatePin = async ({ circuitId, newPin, uid }) => {
 };
 
 export const addOrder = async ({ cartItems, total, images, pin }) => {
-  const generate = await _NODE_GenerateKeyPair({
-    userId: auth?.currentUser?.uid,
-  });
+  const docRef = firestore.collection('users').doc(auth?.currentUser?.uid);
+  try {
+    const doc = await docRef.get();
+    let orders = (await doc.data()?.orders) || [];
+    orders.push({
+      cartItems: [...cartItems],
+      orderDate: new Date(),
+      total: total,
+    });
+    await docRef.update({ orders: orders, cart: null });
 
-  if (generate === -1) {
-    return;
+    const generate = await _NODE_GenerateKeyPair({
+      userId: auth?.currentUser?.uid,
+    });
+
+    if (generate === -1) {
+      return;
+    }
+
+    // sendEmail(
+    //   true,
+    //   auth.currentUser.email,
+    //   'QR CODE',
+    //   auth.currentUser.displayName,
+    //   images
+    // );
+    if (!cartItems || cartItems.length === 0) {
+      return;
+    }
+  } catch (error) {
+    console.error('Error updating orders: ', error);
+    return -1;
   }
 
   cartItems.forEach(async item => {
     const { circuitId, type, quantity, uid } = item;
     const date = new Date();
+
+    const ordersRef = firestore
+      .collection('orders')
+      .doc(circuitId)
+      .collection('orders');
 
     const encrypt = await _NODE_Encrypt({
       userId: auth?.currentUser?.uid,
@@ -262,11 +293,6 @@ export const addOrder = async ({ cartItems, total, images, pin }) => {
     const { encryptedKey, encryptedData } = encrypt?.data;
 
     const cryptedUID = encryptData(uid + pin);
-
-    const ordersRef = firestore
-      .collection('orders')
-      .doc(circuitId)
-      .collection('orders');
 
     try {
       await ordersRef.add({
@@ -282,32 +308,7 @@ export const addOrder = async ({ cartItems, total, images, pin }) => {
       console.error('Error adding order: ', error);
     }
   });
-
-  const docRef = firestore.collection('users').doc(auth?.currentUser?.uid);
-  try {
-    const doc = await docRef.get();
-    let orders = (await doc.data()?.orders) || [];
-    orders.push({
-      cartItems: [...cartItems],
-      orderDate: new Date(),
-      total: total,
-    });
-    await docRef.update({ orders: orders, cart: null });
-    sendEmail(
-      true,
-      auth.currentUser.email,
-      'QR CODE',
-      auth.currentUser.displayName,
-      images
-    );
-    if (!cartItems || cartItems.length === 0) {
-      return;
-    }
-    return 1;
-  } catch (error) {
-    console.error('Error updating orders: ', error);
-    return -1;
-  }
+  return 1;
 };
 
 export const updateProfilePicture = async url => {
