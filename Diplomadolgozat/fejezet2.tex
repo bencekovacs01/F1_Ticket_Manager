@@ -81,7 +81,7 @@ A Storage Bucket-ek egy nagy tárolóhelyet jelentenek a fájlok (például kép
 \section {Az AES titkosítás}
 \subsection {Bevezető}
 
-Az AES egy blokk titkosítási algoritmus, amelyet két belga kriptográfus tervezett 1997-ben. Az algoritmus az 1990-ben meghirdetett nyilvános pályázat nyertese lett, és 2001-ben a NIST (National Institute of Standards and Technology) elfogadta az Egyesült Államok kormányzati szervezetei számára ajánlott titkosítási szabványnak. Mivel az említett pályázat elbírálása publikusan történt, ezért valószínűleg nem történt befolyás a díj megítélését illetően. Az algoritmus egy változata a Rinjdael algoritmusnak, amely eredetileg több blokkmérettel is dolgozott és ebből választották ki az AES-t, amelynek blokkmérete 128 bit.
+Az AES egy blokk titkosítási algoritmus, amelyet két belga kriptográfus tervezett 1997-ben. Az algoritmus az 1990-ben meghirdetett nyilvános pályázat nyertese lett, és 2001-ben a NIST (National Institute of Standards and Technology) elfogadta az Egyesült Államok kormányzati szervezetei számára ajánlott titkosítási szabványnak. Mivel az említett pályázat elbírálása publikusan történt, ezért valószínűleg nem történt befolyás a díj megítélését illetően. Az algoritmus egy változata a Rinjdael algoritmusnak, amely eredetileg több blokkmérettel is dolgozott és ebből választották ki az AES-t, amelynek blokkmérete 128 bit \cite{AES}.
 
 Az AES blokk mérete 128 bit, és a kulcs mérete lehet 128, 192 vagy 256 bit. Az AES hatékonysága körülbelül 109 Mb/s, amely természetesen függ az adott hardver tulajdonságaitól, és szakértők szerint a 256 bites kulcsméret biztonsága "örök" időkre szól.
 
@@ -91,7 +91,7 @@ Az AES helyettesítést és permutációt alkalmaz a blokkon belül, és véges 
 
 Az AES minden műveletet 8 biten végez, és az összes 30 irreducibilis polinom közül a következőt használja: $x\textasciicircum 8 + x\textasciicircum 4 + x\textasciicircum 3 + x + 1$. Az AES minden bájtot a $GF(2\textasciicircum 8) = GF(2)[x]/(x\textasciicircum 8 + x\textasciicircum 4 + x\textasciicircum 3 + x + 1)$ testelemeként kezel.
 
-Az AES-t általában három algoritmus alkotja: a kulcsgenerálás, a titkosítás és a visszafejtés. Az AES a bemeneti 128 bites állapotot (state) egy 4x4-es mátrix formájában kezeli, és az algoritmus minden iterációja során helyettesítő és permutációs műveleteket végez el a blokkon belül.
+Az AES-t általában három algoritmus alkotja: a kulcsgenerálás, a titkosítás és a visszafejtés. Az AES a bemeneti 128 bites állapotot (state) egy 4x4-es mátrix formájában kezeli, és az algoritmus minden iterációja során helyettesítő és permutációs műveleteket végez el a blokkon belül \cite{Marton}.
 
 \subsection {Az algoritmus elmélete}
 
@@ -192,7 +192,28 @@ A \textbf{decrypt} függvény az \textbf{encrypt} függvénnyel ellentétes sorr
 	\item Azonban a 256 bites kulcsokhoz is több feldolgozási teljesítmény szükséges és hosszabb ideig tarthat a generálásuk. Amikor az energiafogyasztás problémát jelent, különösen kis eszközök esetében, vagy a késleltetés valószínű, a 128 bites kulcsok jobb választásnak számítanak.
 \end{itemize}
 
-\section {RSA (TBD)}
+\section {RSA kulcscsere protokoll}
+
+Az \textbf{RSA (Rivest-Shamir-Adleman)} egy kriptográfiai algoritmus, amely nyilvános kulcsokkal dolgozik. Ezt a matematikai alapokon fekvő eljárást számos területen használják, mint a titkosítás, elektronikus aláírások és kulcscsere. Az RSA kulcscsere rendszerben mindkét félnek van egy \textbf{publikus}- és egy \textbf{privát} kulcsa. A nyilvános kulcsot a feladó közzéteszi, míg a magánkulcs titkos marad, amely csak a címzett számára ismert. Az üzenetek titkosításához a feladó használja a címzett nyilvános kulcsát, majd a címzett a saját magánkulcsával tudja megfejteni az üzenetet. Ez biztosítja a biztonságos kommunikációt, mivel csak a címzett képes elolvasni az üzenetet (\ref{abra:rsa}).
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.4]{images/rsa}
+	\caption{RSA protokoll működése}
+	\label{abra:rsa}
+\end{figure}
+
+A RSA protokoll alapvetően a prímtényezőkre bontás nehézségén alapul. A kulcsok hossza, azaz a prímek mérete befolyásolja a rendszer biztonságát, azaz minél hosszabb a kulcs, annál nehezebb a faktorizáció, és így biztonságosabb a rendszer \cite{SZTE}.
+
+Fontos megjegyezni, hogy a hosszabb kulcsok használata növeli a számítási időt és az erőforrásigényt, ezért a RSA rendszer lassabb lehet a titkos kulcsú kriptográfiához képest. A rendszer biztonsága továbbá függ az alkalmazott titkos kulcsú algoritmustól, valamint a kulcsgenerálási módszertől.
+
+Az RSA-t a legtöbb esetben együtt használják olyan privát szimmetrikus kulcsú algoritmusokkal, mint az \textbf{AES} (Advanced Encryption Standard), \textbf{DES} (Data Encryption Standard), vagy a \textbf{Blowfish}. Az RSA titkosítja a szimmetrikus kulcsot, majd ezzel a titkosított kulccsal titkosítja az üzenetet. Ez azért hasznos, mert a szimmetrikus kulcsú algoritmusok hatékonyabbak a hosszú üzenetek titkosításában. Az F1 Ticket Managerben az RSA-t az AES-el együtt használóm a jegyek kódjainak titkosítására.
+
+Az alkalamzásomban minden vásárlás esetén generálok egy egyedi RSA kulcspárt, amelyet a Google Firestore-ban tárolok a felhasználók rendeléseinek dokumentumában. Ez nagyban lassítja az alkalmazás sebességét, mivel minden rendeléskor kell kulcsokat generálni, ami önmagában is egy időigényes folyamat. Továbbá a hitelesítés folyamatában meg kell keresni a felhasználó rendelései között az adott egyedi azonosítóval ellátott rendelést és ezáltal a hozzá tartozó kulcsokat, valamint az \textbf{orders} dokumentumon belül az adott pályához tartozó rendeléseket, ahol hasonlóan az egyedi azonosító alapján tudja lekérni a rendszer a titkosított kódot.
+
+Fontos megjegyezni, hogy a \textit{gyorsaság} és a \textit{biztonság} nagy mértékben befolyásolják egymást. Ennek értelmében ha egy rendszer biztonságos, akkor a veszíteni fog a teljesítményéből a bonyolult és adott esetekben sok matematikai számítás során. Ha viszont gyors, akkor az a rendszer kevésbé biztonságos.
+
+Az \textit{F1 Ticket Manager}ben előtérbe helyeztem a biztonság mértékét a gyorsasággal szemben, mivel érzékeny adatokról van szó. Az alkalmazás teljesítményét ettől függetlenül lehet fejleszteni annak skálázásával, vagyis a szerverek mennyiségének és teherbírásuknak növelésével.
 
 \section {Kutatási kérdések} \label{research}
 
