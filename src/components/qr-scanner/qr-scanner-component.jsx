@@ -1,5 +1,5 @@
+import { QrScanner } from '@yudiel/react-qr-scanner';
 import React, { useState } from 'react';
-// import { QrScanner } from '@yudiel/react-qr-scanner';
 import { checkOrders } from '../../firebase/firebase.utils';
 import CustomButton from '../custom-button/custom-button.component';
 import FormInput from '../form-input/form-input.component';
@@ -13,6 +13,7 @@ import TrackSelector from './track-selector/track-selector.component';
 
 const QRCodeScanner = ({ collections }) => {
   const [result, setResult] = useState(0);
+  const [scanning, setScanning] = useState(true);
 
   const [uid, setUid] = useState('');
   const [pin, setPin] = useState('');
@@ -41,6 +42,48 @@ const QRCodeScanner = ({ collections }) => {
         items={items}
         onSelect={circuitId => setSelectedCurcuitId(circuitId)}
       />
+      <div
+        className="scanner"
+        style={{
+          margin: 'auto',
+          width: 400,
+        }}
+      >
+        {scanning && (
+          <QrScanner
+            constraints={{
+              facingMode: 'environment',
+              height: {
+                ideal: 720,
+                max: 1080,
+                min: 640,
+              },
+              width: {
+                ideal: 720,
+                max: 1920,
+                min: 640,
+              },
+            }}
+            onResult={e => {
+              console.log(e.text);
+              setResult(e.text);
+              setUid(e.text);
+              if (scanning) {
+                setScanning(false);
+              }
+            }}
+            scanDelay={1000}
+          />
+        )}
+      </div>
+      {/* <div
+        style={{
+          fontSize: 30,
+          fontFamily: 'f1_1',
+        }}
+      >
+        {result}
+      </div> */}
       <FormInput
         id="scan_uid"
         name="scan_uid"
@@ -86,48 +129,6 @@ const QRCodeScanner = ({ collections }) => {
       ) : (
         <Popup isSuccessful={result > 0} scanned={false} />
       )} */}
-
-      {/* <div
-        className="scanner"
-        style={{
-          margin: 'auto',
-          width: 400,
-        }}
-      >
-        {scanning && (
-          <QrScanner
-            constraints={{
-              facingMode: 'environment',
-              height: {
-                ideal: 720,
-                max: 1080,
-                min: 640,
-              },
-              width: {
-                ideal: 720,
-                max: 1920,
-                min: 640,
-              },
-            }}
-            onResult={e => {
-              console.log(e.text);
-              setResult(e.text);
-              if (scanning) {
-                setScanning(false);
-              }
-            }}
-            scanDelay={1000}
-          />
-        )}
-      </div>
-      <div
-        style={{
-          fontSize: 30,
-          fontFamily: 'f1_1',
-        }}
-      >
-        {result}
-      </div> */}
     </>
   );
 };
