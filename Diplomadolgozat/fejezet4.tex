@@ -2,7 +2,7 @@
 \chapter{A rendszer architektúrája}
 %----------------------------------------------------------------------------
 
-Az alkalmazás architektúrája három nagyobb komponensből áll. Mindhárom egy különálló szerver, amelyek egy teljesen összefüggő gráfként képesek kommunikálni egymással (\ref{abra:architecture}).
+Az alkalmazás architektúrája három nagyobb komponensből áll. Mindhárom egy különálló szerver, amelyek egy összefüggő gráfként képesek kommunikálni egymással (\ref{abra:architecture}).
 
 \begin{figure}[!h]
 	\centering
@@ -11,7 +11,7 @@ Az alkalmazás architektúrája három nagyobb komponensből áll. Mindhárom eg
 	\label{abra:architecture}
 \end{figure}
 
-Az rendszer fő komponense a weboldalt üzemeltető szerver, a \textbf{GitHub Pages}. Ez felel az oldal rendereléséért és valós időben elérhetőségéről. Erre azért van lehetőség, mivel a forráskód megtalálható a GitHub-on, amelyet összekötöttem a GitHub Pages-el. A deployment fázis során egy optimalizált deploy verziót készít a kódból és azt hosztolja \cite{Deploy}.
+Az rendszer fő komponense a weboldalt üzemeltető szerver, a \textbf{GitHub Pages}. Ez felel az oldal rendereléséért és valós időben elérhetőségéről. Erre azért van lehetőség, mivel a forráskód megtalálható a GitHub-on, amelyet összekötöttem a GitHub Pages-el. A deployment fázis során a GitHub egy optimalizált kódor generál és azt hosztolja \cite{Deploy}.
 
 A második komponens a \textbf{Google Firebase} CDN alapú felhőalapú szolgáltató. Segítségével meg lehet valósítani felhasználók autentikációját, adatok tárolását egy NoSQL adatbázis-kezelő rendszerben és még sok mást. Azért ezeket emeltem ki, mivel ezek a funkcionalitások játszanak szerepet a rendszerben. A weboldal folyamatosan kommunikál a Google Firebase-el, hogy valós időben és hatékonyan tudja kiszolgálni a felhasználókat. Az \textbf{F1 Ticket Manager} egyik központi eleme a jegyek kezelése, amely során titkosítási algoritmusok futnak a felhasználók adatainak biztonsága érdekében. Mivel ezeket az algoritmusokat nem lehetséges, hogy a Google Firebase ingyenes verziójával igénybe vegyem, ezért szükségem volt egy másik backend szerverre is, ahol el tudom végezni ezeket a műveleteket.
 
@@ -50,13 +50,13 @@ Továbbá egy új funkció bevezetésénél nagyon megkönnyíti a mapparendszer
 	\label{abra:components}
 \end{figure}
 
-A \textbf{Vercel} szerverrel való kommunikációra az \textbf{axios} csomagot használtam. Ennel segítségével tudom kezelni a hálózaton történő HTTP kéréseket, amelyekhez hozzátartozik az url, body és egyéb paraméterek megadása.
+A \textbf{Vercel} szerverrel való kommunikációra az \textbf{axios} csomagot használtam. Ennek segítségével tudom kezelni a hálózaton történő HTTP kéréseket, amelyekhez hozzátartozik az url, body és egyéb paraméterek megadása.
 
 \section {Google Firebase backend architektúra} \label{firebase}
 
 A \textbf{Google Firebase} olyan platform, amely lehetővé teszi a fejlesztők számára, hogy könnyedén építsenek és üzemeltessenek felhőalapú alkalmazásokat. A Firebase architektúrája több szolgáltatásból áll, amelyek együttműködnek, hogy biztosítsák a fejlesztők számára a skálázhatóságot, megbízhatóságot és az alkalmazások széleskörű funkcióit (\ref{abra:firebaseConsole}).
 
-A Google Firebase funkcionalitásainak elérésére léteznek direkt JavaScript alapú keretrendszerekre könyvtárcsomagok. ReactJs-re a \textit{firebase} és annak almoduljai a \textit{/storage}, \textit{/compat/app}, \textit{/compat/auth} vagy a \textit{/compat/firestore}, míg NodeJS-ben a \textit{firebase-admin}. Ezekben a modulokban implementálva minden olyan kérés a Firebase felé és a visszakapott adatok deszerializálása, amelyek lehetségesek a Goolge szerverek fele kód alapon. Például a \textbf{storage} modullal lehetséges a Cloud Storage kezelése és az \textbf{auth}-al a felhasználók bejelentkeztetése és az adataik kezelése.
+A Google Firebase funkcionalitásainak elérésére léteznek direkt JavaScript alapú keretrendszerekre könyvtárcsomagok. ReactJs-re a \textit{firebase} és annak almoduljai a \textit{/storage}, \textit{/compat/app}, \textit{/compat/auth} vagy a \textit{/compat/firestore}, míg NodeJS-ben a \textit{firebase-admin}. Ezekben a modulokban implementálva minden kérés a Firebase felé és a visszakapott adatok deszerializálása. Például a \textbf{storage} modullal lehetséges a Cloud Storage kezelése és az \textbf{auth}-al a felhasználók bejelentkeztetése és az adataik kezelése.
 
 \begin{figure}[!h]
 	\centering
@@ -81,7 +81,7 @@ A \ref{firebase} fejezetben is említett \textit{/compat/auth} modul által lehe
 
 \subsection {Cloud Firestore}
 
-A második, általam leghasználtabb, funckionalitás a \textbf{Cloud Firestore}. A Firestore egy dokumentum-orientált adatbázis, amely skálázhatóbb és rugalmasabb lehetőségeket kínál adatok tárolására és lekérdezésére. Firestore használatakor a fejlesztők strukturált gyűjteményeket és dokumentumokat hozhatnak létre, és lehetőségük van komplex lekérdezések végrehajtására és az adatok szűrésére. Ilyen a dokumentumokban tárolom a felhasználói adatokat, amelyek nagyrésze meg is jelenik a felületen, a pályák és jegyek adatait, valamint a rendeléseket (\ref{abra:firestoreStructure}). A pályaadatokat egy JSON fájlban gyűjtöttem össze és abba lehetséges a módosításuk is, majd egy általam írt algoritmust segítségével ebből a JSON adatcsomagból létrehozok egy többrétegű dokumentumrendszert a Firestoreban.
+A második, általam leghasználtabb, funckionalitás a \textbf{Cloud Firestore}. A Firestore egy dokumentum-orientált adatbázis, amely skálázhatóbb és rugalmasabb lehetőségeket kínál adatok tárolására és lekérdezésére. Firestore használatakor a fejlesztők strukturált gyűjteményeket és dokumentumokat hozhatnak létre, és lehetőségük van komplex lekérdezések végrehajtására és az adatok szűrésére. Ilyen dokumentumokban tárolom a felhasználói adatokat, amelyek nagyrésze meg is jelenik a felületen, a pályák és jegyek adatait, valamint a rendeléseket (\ref{abra:firestoreStructure}). A pályaadatokat egy JSON fájlban gyűjtöttem össze és abba lehetséges a módosításuk is, majd egy általam írt kód segítségével ebből a JSON adatcsomagból létrehozok egy többrétegű dokumentumrendszert a Firestoreban.
 
 \begin{figure}[!h]
 	\centering
@@ -128,7 +128,7 @@ Az Express.js, vagy egyszerűen csak Express, egy backend webalkalmazás-keretre
 	\label{abra:vercelStructure}
 \end{figure}
 
-A \textbf{routes} mappa tartalmazza a alkalmazás működéséhez szükséges JSON, CSS és egyéb JS fájlok. Az én esetemben itt található az \textit{index.js} és a \textit{quotes.js} fájlok (\ref{abra:vercelRoutes}). Az index.js tartalmazza a szerver végpontjait és az üzleti logikát. A quotes.js pedig a Google Firebase szerverrel való kapcsolat kialakításához szükséges konfigurációkat, amelyek lefutnak a szerver indulásakor.
+A \textbf{routes} mappa tartalmazza a alkalmazás működéséhez szükséges JSON, CSS és egyéb JS fájlokat. Az én esetemben itt találhatóak az \textit{index.js} és a \textit{quotes.js} fájlok (\ref{abra:vercelRoutes}). Az index.js tartalmazza a szerver végpontjait és az üzleti logikát. A quotes.js pedig a Google Firebase szerverrel való kapcsolat kialakításához szükséges konfigurációkat, amelyek lefutnak a szerver indulásakor.
 
 \begin{figure}[!h]
 	\centering
@@ -137,4 +137,4 @@ A \textbf{routes} mappa tartalmazza a alkalmazás működéséhez szükséges JS
 	\label{abra:vercelRoutes}
 \end{figure}
 
-A titkosítási és kulcscsere algoritmusok használatára a rendre a \textbf{crypto-js} és \textbf{node-rsa} JavaScript könyvtárcsomagokat használom \cite{NRSA} \cite{CJS}. A node-rsa egy optimális és kényelmes használatot nyújt az RSA publikus kulcscsere protokoll beépítéséhez a rendszerbe. Ez egy emelt szintű biztonságot biztosít a felhasználók számára. Azt is figyelembe vettem, hogy ez a kulcscsere csak akkor biztonságos, ha a kulcsokat is biztonságos módon tároljuk. Erre azt a megoldást alkalmaztam, hogy a publikus és privát kulcsokat is a Google Firestore-ban tárolom, amelyre olyan szabályok (rules) vannak beállítva, hogy mindig csak az adott autentikált felhasználó férjen hozzá, ahogyan arról már említést tettem a \ref{firebase} fejezetben a \ref{code:databaseRules} kódrészlet segítségével.
+A titkosítási és kulcscsere algoritmusok használatára rendre a \textbf{crypto-js} és \textbf{node-rsa} JavaScript könyvtárcsomagokat használom \cite{NRSA} \cite{CJS}. A node-rsa egy optimális és kényelmes használatot nyújt az RSA publikus kulcscsere protokoll beépítéséhez a rendszerbe. Ez egy emelt szintű biztonságot biztosít a felhasználók számára. Azt is figyelembe vettem, hogy ez a kulcscsere csak akkor biztonságos, ha a kulcsokat is biztonságos módon tároljuk. Erre azt a megoldást alkalmaztam, hogy a publikus és privát kulcsokat is a Google Firestore-ban tárolom, amelyre olyan szabályok (rules) vannak beállítva, hogy mindig csak az adott autentikált felhasználó férjen hozzá, ahogyan arról már említést tettem a \ref{firebase} fejezetben a \ref{code:databaseRules} kódrészlet segítségével.

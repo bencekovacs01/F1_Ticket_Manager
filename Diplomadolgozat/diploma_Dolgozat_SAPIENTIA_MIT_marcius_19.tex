@@ -37,7 +37,7 @@
 
 
 \newcommand{\temavezetoAfokozat}{Egyetemi adjunktus}% Első konzulens neve
-\newcommand{\temavezetoAfokozatRo}{Lector universitar sau Șef de lucrări}
+\newcommand{\temavezetoAfokozatRo}{Șef de lucrări}
 \newcommand{\temavezetoAfokozatEn}{Lecturer}
 \newcommand{\temavezetoB}{Györfi Ágnes} % Második konzulens neve; hagyd üresen, ha egy konzulensed van.
 \newcommand{\temavezetoBfokozat}{Egyetemi tan\'arseg\'ed}
@@ -57,14 +57,16 @@
 % Table of contents and the main text
 %--------------------------------------------------------------------------------------
 \begin{document}
-	
+
 % CIMOLDALAK
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	\include{content/titlepage}
 	\include{content/titlepage-ro}
 	\include{content/titlepage-en}
 	
+	\includepdf[pages={1}]{content/Fisa-proiectului.pdf}
 	\includepdf[pages={1}]{content/Declaratie.pdf}
+
 	\include{abstract}
  
 % Tartalomjegyzek
