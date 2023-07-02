@@ -11,7 +11,7 @@ Az alkalmazás architektúrája három nagyobb komponensből áll. Mindhárom eg
 	\label{abra:architecture}
 \end{figure}
 
-Az rendszer fő komponense a weboldalt üzemeltető szerver, a \textbf{GitHub Pages}. Ez felel az oldal rendereléséért és valós időben elérhetőségéről. Erre azért van lehetőség, mivel a forráskód megtalálható a GitHub-on, amelyet összekötöttem a GitHub Pages-el. A deployment fázis során a GitHub egy optimalizált kódor generál és azt hosztolja \cite{Deploy}.
+Az rendszer fő komponense a weboldalt üzemeltető szerver, a \textbf{GitHub Pages}. Ez felel az oldal rendereléséért és valós időben elérhetőségéről. Erre azért van lehetőség, mivel a forráskód megtalálható a GitHub-on, amelyet összekötöttem a GitHub Pages-el. A deployment fázis során a GitHub egy optimalizált kódot generál és azt hosztolja \cite{Deploy}.
 
 A második komponens a \textbf{Google Firebase} CDN alapú felhőalapú szolgáltató. Segítségével meg lehet valósítani felhasználók autentikációját, adatok tárolását egy NoSQL adatbázis-kezelő rendszerben és még sok mást. Azért ezeket emeltem ki, mivel ezek a funkcionalitások játszanak szerepet a rendszerben. A weboldal folyamatosan kommunikál a Google Firebase-el, hogy valós időben és hatékonyan tudja kiszolgálni a felhasználókat. Az \textbf{F1 Ticket Manager} egyik központi eleme a jegyek kezelése, amely során titkosítási algoritmusok futnak a felhasználók adatainak biztonsága érdekében. Mivel ezeket az algoritmusokat nem lehetséges, hogy a Google Firebase ingyenes verziójával igénybe vegyem, ezért szükségem volt egy másik backend szerverre is, ahol el tudom végezni ezeket a műveleteket.
 
@@ -19,7 +19,7 @@ A harmadik és egyben utolsó komponens a \textbf{Vercel} felhőalapú szolgált
 
 \section {GitHub frontend architektúra} \label{frontend}
 
-A rendszer frontendjét szolgáló komponens, amelyet a GitHub Pages hosztol, egy \textbf{create-react-app} alkalmazás. Ez egy olyan \textbf{npm} (\ref{abra:npmLogo}) JavaScript futási környezet csomagkezelője \cite{WikiNpm} által forgalmazott projekt sablon, amely tartalmazza az alapvető konfigurációkat és fájlokat, amelyek szülségesek egy \textbf{React} alkalmazás készítéséhez.
+A rendszer frontendjét szolgáló komponens, amelyet a GitHub Pages hosztol, egy \textbf{create-react-app} alkalmazás. Ez egy olyan \textbf{npm} (\ref{abra:npmLogo}) JavaScript futási környezet csomagkezelője \cite{WikiNpm} által forgalmazott projekt sablon, amely tartalmazza az alapvető konfigurációkat és fájlokat, amelyek szükségesek egy \textbf{React} alkalmazás készítéséhez.
 
 \begin{figure}[!h]
 	\centering
@@ -81,7 +81,7 @@ A \ref{firebase} fejezetben is említett \textit{/compat/auth} modul által lehe
 
 \subsection {Cloud Firestore}
 
-A második, általam leghasználtabb, funckionalitás a \textbf{Cloud Firestore}. A Firestore egy dokumentum-orientált adatbázis, amely skálázhatóbb és rugalmasabb lehetőségeket kínál adatok tárolására és lekérdezésére. Firestore használatakor a fejlesztők strukturált gyűjteményeket és dokumentumokat hozhatnak létre, és lehetőségük van komplex lekérdezések végrehajtására és az adatok szűrésére. Ilyen dokumentumokban tárolom a felhasználói adatokat, amelyek nagyrésze meg is jelenik a felületen, a pályák és jegyek adatait, valamint a rendeléseket (\ref{abra:firestoreStructure}). A pályaadatokat egy JSON fájlban gyűjtöttem össze és abba lehetséges a módosításuk is, majd egy általam írt kód segítségével ebből a JSON adatcsomagból létrehozok egy többrétegű dokumentumrendszert a Firestoreban.
+A második, általam leghasználtabb, funkcionalitás a \textbf{Cloud Firestore}. A Firestore egy dokumentum-orientált adatbázis, amely skálázhatóbb és rugalmasabb lehetőségeket kínál adatok tárolására és lekérdezésére. Firestore használatakor a fejlesztők strukturált gyűjteményeket és dokumentumokat hozhatnak létre, és lehetőségük van komplex lekérdezések végrehajtására és az adatok szűrésére. Ilyen dokumentumokban tárolom a felhasználói adatokat, amelyek nagyrésze meg is jelenik a felületen, a pályák és jegyek adatait, valamint a rendeléseket (\ref{abra:firestoreStructure}). A pályaadatokat egy JSON fájlban gyűjtöttem össze és abba lehetséges a módosításuk is, majd egy általam írt kód segítségével ebből a JSON adatcsomagból létrehozok egy többrétegű dokumentumrendszert a Firestoreban.
 
 \begin{figure}[!h]
 	\centering
@@ -90,7 +90,7 @@ A második, általam leghasználtabb, funckionalitás a \textbf{Cloud Firestore}
 	\label{abra:firestoreStructure}
 \end{figure}
 
-A adatbázis megfelelő biztonságát a \textbf{szabályok} (Rules) beállításával lehet megadni. Ezen szabályok tudják biztonsítani, hogy az adott dokumentumokhoz milyen feltételek alapján lehet hozzáférni. Ilyen például, hogy egy felhasználó adataihoz mindig csak a \textit{Firebase Authentication} által bejelentkezett felhasználó férjen hozzá az egyedi azonosító alapján (auth.uid) (\ref{code:databaseRules}).
+A adatbázis megfelelő biztonságát a \textbf{szabályok} (Rules) beállításával lehet megadni. Ezen szabályok tudják biztosítani, hogy az adott dokumentumokhoz milyen feltételek alapján lehet hozzáférni. Ilyen például, hogy egy felhasználó adataihoz mindig csak a \textit{Firebase Authentication} által bejelentkezett felhasználó férjen hozzá az egyedi azonosító alapján (auth.uid) (\ref{code:databaseRules}).
 
 \begin{lstlisting}[caption={Firestore szabályok.}, captionpos=b, label={code:databaseRules}]
 match /databases/{database}/documents {

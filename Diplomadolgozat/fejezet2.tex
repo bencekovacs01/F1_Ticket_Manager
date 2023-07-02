@@ -2,7 +2,7 @@
 \chapter{Elméleti megalapozás és szakirodalmi áttekintő}
 %----------------------------------------------------------------------------
 
-\section {Webes alkalamazás felépítése}
+\section {Webes alkalmazás felépítése}
 
 Az F1TM a React JavaScript programozási nyelv keretrendszerével valósult meg a Microsoft Visual Studio Code IDE-ben. Az alkalmazás használ harmadik féltől származó könyvtárakat is, amelyek felgyorsítják a fejlesztési folyamatot, mivel előre le van implementálva számos funkcionalitás. Ezek általában több fejlesztő által vannak használva és tesztelve, ezért többségében gyorsabbak és biztonságosabbak.
 
@@ -41,7 +41,6 @@ Az elmúlt években a React JS jelentős népszerűségre tett szert a webfejles
 
 A React (\ref{abra:reactLogo}) rendkívül népszerűvé vált a fejlesztők körében számos előnye miatt. Elsőként említhetjük a hatékony Virtual DOM implementációját, amely lehetővé teszi az alkalmazások gyors és hatékony frissítését. A Virtual DOM a weboldal megjelenítéséhez használt valós DOM virtuális reprezentációja. Amikor változás történik az adatokban, a React a Virtual DOM-on keresztül kiszámítja az optimális frissítéseket, majd ezeket a változtatásokat csak a valós DOM-ra alkalmazza. Ez a megközelítés jelentős sebességjavulást eredményez a webalkalmazásokban.
 
-\pagebreak
 A második fontos előny a komponens alapú megközelítés, amely lehetővé teszi a fejlesztők számára a komponensek újra felhasználását és a kód modularizációját. A React komponensek önmagukban zárt egységek, amelyek különböző feladatokat elláthatnak a felhasználói felületeken, például gombok, űrlapok, listák stb. Az egyedi komponensek könnyedén kombinálhatók egymással, így a fejlesztőknek nem kell újra megírniuk a kódot, hanem egyszerűen felhasználhatják a meglévő komponenseket.
 
 Emellett más technológiai óriások is felfedezték a React előnyeit. Például a Netflix, a PayPal, az Airbnb és a Dropbox is a React-et használja az alkalmazásaik fejlesztéséhez. Ezek a vállalatok magas forgalommal és komplex felhasználói felületekkel rendelkeznek, és a React segítségével könnyedén kezelhetik ezeket a kihívásokat.
@@ -59,14 +58,12 @@ A JavaScript önmagában egy típusfüggetlen programozási nyelv, de egyes kere
 
 \section {A Google Firebase platform}
 
-Mivel a React a webes alkalmazások frontend-jének fejlesztésére szolgál, szükségem volt egy backend szerverre és egy adatbázis-kezelő rendszerre, amely kiszolgálja a frontend-et, a Google által fejlesztett Firebase platformot és API-kat építettem be az alkalmazásba.
-A Google Firebase (\ref{abra:firebaseLogo}) egy teljes körű fejlesztői platform, amely különféle eszközöket és szolgáltatásokat kínál a fejlesztőknek, hogy könnyedén hozzanak létre, teszteljenek és üzemeltessenek webes és mobilalkalmazásokat.
+Mivel a React a webes alkalmazások frontend-jének fejlesztésére szolgál, szükségem volt két backend szerverre és egy adatbázis-kezelő rendszerre, amely kiszolgálja a frontend-et. Az egyik a Google által fejlesztett Firebase platform, valamint a saját fejlesztésű, Vercel szerveren futó, NodeJS szerver. A Google Firebase (\ref{abra:firebaseLogo}) egy teljes körű fejlesztői platform, amely különféle eszközöket és szolgáltatásokat kínál a fejlesztőknek, hogy könnyedén hozzanak létre, teszteljenek és üzemeltessenek webes és mobilalkalmazásokat.
 
 A Firebase Realtime Database egy NoSQL alapú adatbázis, amely valós idejű adatszinkronizációt tesz lehetővé az alkalmazások között. Ez azt jelenti, hogy az adatok automatikusan frissülnek minden csatlakozott eszközön, így a felhasználók valós idejű élményt élvezhetnek. Ez különösen hasznos például csevegőalkalmazások vagy valós idejű játékok fejlesztésekor. 
 
 A Firebase Authentication lehetővé teszi a felhasználók egyszerű és biztonságos hitelesítését. Támogatja az e-mail és jelszó, a szociális média hitelesítés (pl. Google, Facebook, Twitter) és más autentikációs módokat is. A Firebase emellett lehetőséget biztosít a felhasználói fiókok-, profilok kezelésére és jogosultságkezelésre is. 
 
-\pagebreak
 A Firebase Cloud Storage segítségével könnyedén tárolhatóak és kezelhetőek az alkalmazásban használt fájlok, például képek, hangfájlok vagy videók. Az egyszerű API-k lehetővé teszik a fájlok feltöltését, letöltését és megosztását. Emellett a Firebase Hosting segítségével egyszerűen és gyorsan ki lehet szolgálni az alkalmazás statikus fájljait a világ bármely pontjáról.
 
 A Storage Bucket-ek egy nagy tárolóhelyet jelentenek a fájlok (például képek, hangfájlok, videók stb.) biztonságos tárolására a felhőben. A Firebase Storage lehetővé teszi a fájlok feltöltését, letöltését, törlését és megosztását egyszerű API-k segítségével. Emellett automatikusan kezeli a fájlok hozzáférési jogosultságait és a CDN révén biztosítja a gyors és megbízható fájlletöltést a felhasználóknak.
@@ -116,7 +113,7 @@ Az altranszformációk három típusúak lehetnek: AddRoundKey, SubBytes és Shi
 
 \section {RSA kulcscsere protokoll}
 
-Az \textbf{RSA (Rivest-Shamir-Adleman)} egy kriptográfiai algoritmus, amely nyilvános kulcsokkal dolgozik. Ezt a matematikai alapokon fekvő eljárást számos területen használják, mint a titkosítás, elektronikus aláírások és kulcscsere. Az RSA kulcscsere rendszerben mindkét félnek van egy \textbf{publikus}- és egy \textbf{privát} kulcsa. A nyilvános kulcsot a feladó közzéteszi, míg a privát kulcs titkos marad, amely csak a címzett számára ismert. Az üzenetek titkosításához a feladó használja a címzett nyilvános kulcsát, majd a címzett a saját privát kulcsával tudja megfejteni az üzenetet. Ez biztosítja a biztonságos kommunikációt, mivel csak a címzett képes elolvasni az üzenetet (\ref{abra:rsa}).
+Az \textbf{RSA (Rivest-Shamir-Adleman)} egy kriptográfiai algoritmus, amely nyilvános kulcsokkal dolgozik. Ezt a matematikai alapokon fekvő eljárást számos területen használják, mint a titkosítás, elektronikus aláírások és kulcscsere. Az RSA kulcscsere rendszerben mindkét félnek van egy \textbf{publikus} és egy \textbf{privát} kulcsa. A nyilvános kulcsot a feladó közzéteszi, míg a privát kulcs titkos marad, amely csak a címzett számára ismert. Az üzenetek titkosításához a feladó használja a címzett nyilvános kulcsát, majd a címzett a saját privát kulcsával tudja megfejteni az üzenetet. Ez biztosítja a biztonságos kommunikációt, mivel csak a címzett képes elolvasni az üzenetet (\ref{abra:rsa}).
 
 \begin{figure}[!h]
 	\centering
@@ -129,13 +126,13 @@ A RSA protokoll alapvetően a prímtényezőkre bontás nehézségén alapul. A 
 
 Fontos megjegyezni, hogy a nagyobb kulcsok használata növeli a számítási időt és az erőforrásigényt, ezért a RSA rendszer lassabb lehet a titkos kulcsú kriptográfiához képest.
 
-Az RSA-t a legtöbb esetben együtt használják olyan privát szimmetrikus kulcsú algoritmusokkal, mint az \textbf{AES} (Advanced Encryption Standard), \textbf{DES} (Data Encryption Standard), vagy a \textbf{Blowfish}. Az RSA titkosítja a szimmetrikus kulcsot, majd ezzel a titkosított kulccsal titkosítja az üzenetet. Ez azért hasznos, mert a szimmetrikus kulcsú algoritmusok hatékonyabbak a hosszú üzenetek titkosításában. Az F1 Ticket Managerben az RSA-t az AES-el együtt használóm a jegyek kódjainak titkosítására.
+Az RSA-t a legtöbb esetben együtt használják olyan privát szimmetrikus kulcsú algoritmusokkal, mint az \textbf{AES} (Advanced Encryption Standard), \textbf{DES} (Data Encryption Standard), vagy a \textbf{Blowfish}. Az RSA titkosítja a szimmetrikus kulcsot, majd ezzel a titkosított kulccsal titkosítja az üzenetet. Ez azért hasznos, mert a szimmetrikus kulcsú algoritmusok hatékonyabbak a hosszú üzenetek titkosításában. Az F1 Ticket Managerben az RSA-t az AES-el együtt használom a jegyek kódjainak titkosítására.
 
-Az alkalamzásomban minden vásárlás esetén generálok egy egyedi RSA kulcspárt, amelyet a Google Firestore-ban tárolok a felhasználók rendeléseinek dokumentumában. Ez nagyban lassítja az alkalmazás sebességét, mivel minden rendeléskor történik kulcsgenerálás, ami önmagában is egy időigényes folyamat. Továbbá a hitelesítés folyamatában meg kell keresni a felhasználó rendelései között az adott egyedi azonosítóval ellátott rendelést és ezáltal a hozzá tartozó kulcsokat, valamint az \textbf{orders} dokumentumon belül az adott versenypályához tartozó rendeléseket, ahol hasonlóan az egyedi azonosító alapján tudja lekérni a rendszer a titkosított kódot.
+Az alkalmzásomban minden vásárlás esetén generálok egy egyedi RSA kulcspárt, amelyet a Google Firestore-ban tárolok a felhasználók rendeléseinek dokumentumában. A hitelesítés folyamatában meg kell keresni a felhasználó rendelései között az adott egyedi azonosítóval ellátott rendelést és ezáltal a hozzá tartozó kulcsokat, valamint az \textbf{orders} dokumentumon belül az adott versenypályához tartozó rendeléseket, ahol hasonlóan az egyedi azonosító alapján tudja lekérni a rendszer a titkosított kódot.
 
-Fontos megjegyezni, hogy a \textit{gyorsaság} és a \textit{biztonság} nagy mértékben befolyásolják egymást. Ennek értelmében ha egy rendszer biztonságos, akkor a veszíteni fog a teljesítményéből a bonyolult és adott esetekben sok matematikai számítás során. Ha viszont gyors, akkor az a rendszer kevésbé biztonságos.
+Fontos megjegyezni, hogy a \textit{gyorsaság} és a \textit{biztonság} nagy mértékben befolyásolják egymást. Ennek értelmében, ha egy rendszer biztonságos, akkor a veszíteni fog a teljesítményéből a bonyolult és adott esetekben sok matematikai számítás során. Ha viszont gyors, akkor az a rendszer kevésbé biztonságos.
 
-Az \textit{F1 Ticket Manager}ben előtérbe helyeztem a biztonság mértékét a gyorsasággal szemben, mivel érzékeny adatokról van szó. Az alkalmazás teljesítményét ettől függetlenül lehet fejleszteni annak skálázásával, vagyis a szerverek mennyiségének és teherbírásuknak növelésével.
+Az \textit{F1 Ticket Manager}-ben előtérbe helyeztem a biztonság mértékét a gyorsasággal szemben, mivel érzékeny adatokról van szó. Az alkalmazás teljesítményét ettől függetlenül lehet fejleszteni annak skálázásával, vagyis a szerverek mennyiségének és teherbírásuknak növelésével.
 
 \section {Kutatási kérdések} \label{research}
 
@@ -152,9 +149,9 @@ Az alkalmazás fejlesztése során a következő kérdésekre próbáltam válas
 A kutatási kérdésekre keresett válaszok során felmerültek további kérdések, amelyek hozzájárulnak a céljaim pontosabb megfogalmazásában:
 \begin{itemize}
 	\item Hol és hogyan fogom tárolni a felhasználói- és alkalmazás adatokat?
-	\item Hogyan fogom kezelni a felhasználói jogosultságokat, hogy minden felhaszáló csak a saját adataihoz férjen hozzá?
-	\item Hogyan fogom megvalósítani a többlépcsős azonosítást a jegyek felhasználásásnál?
-	\item Hogyan fogom eljuttatni a felhasználóknak a megvásárolt termék(ek)ről és azok azonosításához szükséges információkat? 
+	\item Hogyan fogom kezelni a felhasználói jogosultságokat, hogy minden felhasználó csak a saját adataihoz férjen hozzá?
+	\item Hogyan fogom megvalósítani a többlépcsős azonosítást a jegyek validációjánál?
+	\item Hogyan fogom eljuttatni a felhasználóknak a megvásárolt termék(ek) azonosításához szükséges információkat? 
 	\item Hogyan tudom a felületet felhasználóbaráttá tenni?
 \end{itemize}
 
@@ -162,8 +159,8 @@ A megfogalmazott kérdések azt a legfontosabb célt hivatottak szolgálni, hogy
 
 Az előbbiek elérésére a kisebb célok egy még pontosabb képet tudnak biztosítani számomra, hogy megfelelő ütemben haladjon a fejlesztés anélkül. hogy kimaradjanak fontos részletek.
 
-A fent felsorolt kérdések felhívják a figyelmet arra a fontos tényezőre, hogy az egyre elterjedtebb körű internet használatának korszakában elengedhetetlen a felhasználók személyes adatainak a védelme. Ennek megvalósítására is érdemes számos megoldást kutatni és majd kiválasztani az alkalmazás szempontjából megfelelőt.
+A fent felsorolt kérdések felhívják a figyelmet arra a fontos tényezőre, hogy az egyre elterjedtebb körű internet használatának korszakában elengedhetetlen a felhasználók személyes adatainak a védelme. Ennek megvalósítására is érdemes számos megoldás után kutatni és kiválasztani az alkalmazás szempontjából megfelelőt.
 
-Továbbá a előzőek mellett megoldást kell kapjak arra a problémára, hogy a jelenleg is működő oldalak nagy része nem foglalkozik azzal a tényezővel, hogy egy elektronikus jegy nagyon sok veszélynek van kitéve és ennek ellenére nem alkalmaznak többlépcsős azonosítást a jegyek hitelesítésekor. Ennek egyszerűen az az oka, hogy bizonyos százalékban lassítaná a hitelesítési folyamatot és az eladók nem vállalnak felelősséget a jegyek esetleges elveszítése vagy ellopása esetén.
+Továbbá az előzőek mellett megoldást próbáltam kapni arra a problémára, hogy a jelenleg is működő oldalak nagy része nem foglalkozik azzal a tényezővel, hogy egy elektronikus jegy nagyon sok veszélynek van kitéve és ennek ellenére nem alkalmaznak többlépcsős azonosítást a jegyek hitelesítésekor. Ennek egyszerűen az az oka, hogy bizonyos százalékban lassítaná a hitelesítési folyamatot és az eladók nem vállalnak felelősséget a jegyek esetleges elveszítése vagy ellopása esetén.
 
 Végül de nem utolsó sorban fontos, hogy lehetőséget biztosítsak az alkalmazás viselkedésének monitorizálására, valamint az alkalmazás továbbfejleszthetőségére. Az alkalmazás működésének megfigyelése során olyan hibákról és ötletekre kaphatok visszajelzést, amivel tudom biztosítani az alkalmazás hosszútávú karbantartását és továbbfejlesztését.
