@@ -109,10 +109,13 @@ const QRCodeScanner = ({ collections }) => {
         onClick={async () => {
           setResult(0);
           if (pin.length === 6 && uid.length > 0) {
+            const snippedUserId = uid.split('*')[0];
+            const snippedUid = uid.split('*')[1];
             const res = await checkOrders({
               circuitId: selectedCurcuitId,
-              uid: uid,
+              uid: snippedUid,
               pin: pin,
+              userId: snippedUserId,
             });
             setResult(res);
             console.log('res', res);

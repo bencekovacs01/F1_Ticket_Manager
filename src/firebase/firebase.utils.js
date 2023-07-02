@@ -4,6 +4,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { getStorage } from 'firebase/storage';
 import {
+  _NODE_ChangePin,
   _NODE_Decrypt,
   _NODE_Encrypt,
   _NODE_GenerateKeyPair,
@@ -19,30 +20,6 @@ const firebaseConfig = {
   appId: '1:564345720934:web:10a6d0b290bbcde8265da7',
   measurementId: 'G-SCJ42E57EL',
 };
-
-const table = `
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>John Smith</td>
-        <td>john@example.com</td>
-        <td>(555) 555-1234</td>
-      </tr>
-      <tr>
-        <td>Jane Doe</td>
-        <td>jane@example.com</td>
-        <td>(555) 555-5678</td>
-      </tr>
-    </tbody>
-  </table>
-`;
 
 export const sendEmail = async (
   isAutoEmail,
@@ -80,7 +57,7 @@ export const sendEmail = async (
           ]
         : [{ name: 'F1 Ticket Manager', email: 'kbence55@gmail.com' }],
       // textContent: content,
-      textContent: `Here's the table:<br>${table}`,
+      // textContent: `Here's the table:<br>${table}`,
       subject: isAutoEmail
         ? auth?.currentUser?.providerId
         : `Contact message from ${displayName}`,
@@ -176,11 +153,11 @@ export const getUserCart = async () => {
   }
 };
 
-export const checkOrders = async ({ circuitId, pin, uid }) => {
-  if (!circuitId || !pin || !uid) return;
+export const checkOrders = async ({ circuitId, pin, uid, userId }) => {
+  if (!circuitId || !pin || !uid || !userId) return;
 
   const response = await _NODE_Decrypt({
-    userId: auth?.currentUser?.uid,
+    userId: userId,
     circuitId,
     uid,
     pin,
@@ -219,23 +196,30 @@ export const updatePin = async ({ circuitId, newPin, uid }) => {
   if (!newPin || !uid || newPin === '') {
     return;
   }
-  const cryptedUID = encryptData(uid + newPin);
-
-  const ordersRef = firestore
-    .collection('orders')
-    .doc(circuitId)
-    .collection('orders');
-
-  const querySnapshot = await ordersRef.where('uid', '==', uid).get();
-  querySnapshot.forEach(async doc => {
-    try {
-      await doc.ref.update({
-        cryptedUID: cryptedUID,
-      });
-    } catch (error) {
-      console.error('Error updating pin: ', error);
-    }
+  await _NODE_ChangePin({
+    userId: auth?.currentUser?.uid,
+    circuitId: circuitId,
+    data: uid + newPin,
+    uid: uid,
   });
+
+  // const cryptedUID = encryptData(uid + newPin);
+
+  // const ordersRef = firestore
+  //   .collection('orders')
+  //   .doc(circuitId)
+  //   .collection('orders');
+
+  // const querySnapshot = await ordersRef.where('uid', '==', uid).get();
+  // querySnapshot.forEach(async doc => {
+  //   try {
+  //     await doc.ref.update({
+  //       cryptedUID: cryptedUID,
+  //     });
+  //   } catch (error) {
+  //     console.error('Error updating pin: ', error);
+  //   }
+  // });
 };
 
 export const addOrder = async ({ cartItems, total, images, pin }) => {

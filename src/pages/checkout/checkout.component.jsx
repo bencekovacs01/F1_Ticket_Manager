@@ -6,7 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 import CustomButton from '../../components/custom-button/custom-button.component';
 import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
-import { addOrder } from '../../firebase/firebase.utils';
+import { addOrder, auth } from '../../firebase/firebase.utils';
 import { clearCart } from '../../redux/cart/cart.actions';
 
 import {
@@ -65,7 +65,7 @@ const CheckoutPage = ({ cartItems, total, clearCart }) => {
       <QRCodeCanvas
         hidden={true}
         id={item.uid}
-        value={item.uid}
+        value={auth?.currentUser?.uid + '*' + item.uid}
         size={300}
         bgColor={'transparent'}
         level={'H'}
