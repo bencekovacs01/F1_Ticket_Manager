@@ -56,3 +56,21 @@ export const _NODE_Decrypt = async ({ userId, circuitId, uid, pin }) => {
     return null;
   }
 };
+
+export const _NODE_ChangePin = async ({ userId, data, circuitId, uid }) => {
+  if (!userId || userId.length === 0 || !data || data?.length === 0) {
+    console.log('userId OR data OR circuitId is empty!');
+    return;
+  }
+  try {
+    return await axios.post(`${domain}/change-pin`, {
+      circuitId,
+      userId,
+      data,
+      uid,
+    });
+  } catch (error) {
+    console.error(error);
+    return -1;
+  }
+};
