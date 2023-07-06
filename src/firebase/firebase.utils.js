@@ -9,7 +9,6 @@ import {
   _NODE_Encrypt,
   _NODE_GenerateKeyPair,
 } from '../nodejs/api';
-import { encryptData } from '../pages/checkout/crypt/crypt.utils';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -24,14 +23,31 @@ const firebaseConfig = {
 export const sendEmail = async (
   isAutoEmail,
   email,
-  content,
   displayName,
+  elementTypes,
   images
 ) => {
   const attachmentData = images.map((image, index) => ({
     name: `order${index + 1}.png`,
-    content: image,
+    content: image.toString('base64'),
+    encoding: 'base64',
   }));
+
+  const qrCodeMarkup = attachmentData
+    .map(
+      (_, index) =>
+        `<div style="display: inline-block; width: max-content; margin-right: 20px; margin-bottom: 20px; border: 2px solid red; border-radius: 15px; padding: 15px;">
+          <div style="font-family: sans-serif; font-size: 20px;">
+            Circuit ID: ${elementTypes[index].circuitId}<br>
+            Ticket type: ${elementTypes[index].type}<br>
+            Quantity: ${elementTypes[index].quantity}
+          </div>
+          <img style="width: 100%; height: auto;" src="cid:order${
+            index + 1
+          }.png" alt="QR Code ${index + 1}">
+        </div>`
+    )
+    .join('');
 
   const options = {
     method: 'POST',
@@ -56,8 +72,10 @@ export const sendEmail = async (
             },
           ]
         : [{ name: 'F1 Ticket Manager', email: 'kbence55@gmail.com' }],
-      // textContent: content,
-      // textContent: `Here's the table:<br>${table}`,
+      htmlContent: `<div style="text-align: center; margin-bottom: 20px;">
+                      <span style="font-family: sans-serif; font-weight: bold; font-size: 30px;">Here are your QR codes for the tickets you ordered:</span>
+                    </div>
+                    ${qrCodeMarkup}`,
       subject: isAutoEmail
         ? auth?.currentUser?.providerId
         : `Contact message from ${displayName}`,
@@ -242,13 +260,19 @@ export const addOrder = async ({ cartItems, total, images, pin }) => {
       return;
     }
 
-    // sendEmail(
-    //   true,
-    //   auth.currentUser.email,
-    //   'QR CODE',
-    //   auth.currentUser.displayName,
-    //   images
-    // );
+    const elementTypes = cartItems.map(item => ({
+      type: item.type,
+      circuitId: item.circuitId,
+      quantity: item.quantity,
+    }));
+
+    sendEmail(
+      true,
+      auth.currentUser.email,
+      auth.currentUser.displayName,
+      elementTypes,
+      images
+    );
     if (!cartItems || cartItems.length === 0) {
       return;
     }

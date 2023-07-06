@@ -19,8 +19,8 @@ const StripeCheckoutButton = ({ total, cartItems, clearCart }) => {
 
   const onToken = token => {
     // console.log(token);
-    alert('Payment Successful');
     setShowPopup(true);
+    alert('Payment Successful');
   };
 
   const [showPopup, setShowPopup] = useState(false);

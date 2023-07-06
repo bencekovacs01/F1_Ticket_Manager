@@ -122,7 +122,7 @@ const CheckoutPage = ({ cartItems, total, clearCart }) => {
           <br />
           4242 4242 4242 4242 - Exp: 12/34 - CVV: 123
         </div>
-        <CustomButton
+        {/* <CustomButton
           className="test-order"
           onClick={() => {
             if (!cartItems || cartItems.length === 0) {
@@ -133,7 +133,7 @@ const CheckoutPage = ({ cartItems, total, clearCart }) => {
           }}
         >
           Test order
-        </CustomButton>
+        </CustomButton> */}
         {/* <CustomButton
         className="test-order"
         onClick={async () => {
