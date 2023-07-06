@@ -9,6 +9,7 @@ import {
   _NODE_Encrypt,
   _NODE_GenerateKeyPair,
 } from '../nodejs/api';
+import { encryptData } from '../pages/checkout/crypt/crypt.utils';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,

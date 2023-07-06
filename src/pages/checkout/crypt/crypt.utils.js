@@ -2,7 +2,7 @@ import CryptoJS, { enc } from 'crypto-js';
 import { v4 as uuidv4 } from 'uuid';
 import { Crypt, RSA } from 'hybrid-crypto-js';
 
-import JSChaCha20 from 'js-chacha20';
+// import JSChaCha20 from 'js-chacha20';
 
 const secretPass = process.env.REACT_APP_SECRET_PASS;
 
@@ -258,19 +258,19 @@ console.log('key12', key12);
 const nonce12 = generateRandomNonce();
 console.log('nonce12', nonce12);
 
-const chacha20ENCYPT = (key, nonce) => {
-  const message = convertTextToUint8Array('HELLO');
-  console.log('message', message);
-  return new JSChaCha20(key, nonce).encrypt(message);
-};
+// const chacha20ENCYPT = (key, nonce) => {
+//   const message = convertTextToUint8Array('HELLO');
+//   console.log('message', message);
+//   return new JSChaCha20(key, nonce).encrypt(message);
+// };
 
-const chacha20DECYPT = (key, nonce, encrypt) => {
-  return new JSChaCha20(key, nonce).decrypt(encrypt);
-};
+// const chacha20DECYPT = (key, nonce, encrypt) => {
+//   return new JSChaCha20(key, nonce).decrypt(encrypt);
+// };
 
-const ecrypted12 = chacha20ENCYPT(key12, nonce12);
-console.log('ecrypted12', ecrypted12);
-const decrypted12 = chacha20DECYPT(key12, nonce12, ecrypted12);
-console.log('decrypted12', decrypted12);
+// const ecrypted12 = chacha20ENCYPT(key12, nonce12);
+// console.log('ecrypted12', ecrypted12);
+// const decrypted12 = chacha20DECYPT(key12, nonce12, ecrypted12);
+// console.log('decrypted12', decrypted12);
 
-console.log(convertUint8ArrayToText(decrypted12));
+// console.log(convertUint8ArrayToText(decrypted12));
