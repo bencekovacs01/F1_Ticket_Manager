@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/F1_Ticket_Manager/static/css/main.642d592c.css",
-    "main.js": "/F1_Ticket_Manager/static/js/main.6ba958f2.js",
+    "main.css": "/F1_Ticket_Manager/static/css/main.72f60fc7.css",
+    "main.js": "/F1_Ticket_Manager/static/js/main.628a238e.js",
     "static/media/bg_22.jpg": "/F1_Ticket_Manager/static/media/bg_22.de65b7702a05aca3067e.jpg",
     "static/media/f1_3.ttf": "/F1_Ticket_Manager/static/media/f1_3.eb4817363f5ec9d88064.ttf",
     "static/media/facebook_logo.png": "/F1_Ticket_Manager/static/media/facebook_logo.15e9e015043c0c28a351.png",
@@ -17,14 +17,14 @@
     "static/media/show.png": "/F1_Ticket_Manager/static/media/show.180932f866861728bd41.png",
     "static/media/magic-wand.png": "/F1_Ticket_Manager/static/media/magic-wand.0b29b73aae77e6ec030a.png",
     "static/media/invalid.png": "/F1_Ticket_Manager/static/media/invalid.ffdafe3f0eceab67b7c2.png",
-    "static/media/F1_black.svg": "/F1_Ticket_Manager/static/media/F1_black.3a2a79156e6fc95e40068a692bf69d27.svg",
+    "static/media/F1_black.svg": "/F1_Ticket_Manager/static/media/F1_black.f086b4ab1562c76160ae29c3bd39fe76.svg",
     "static/media/shopping-bag.svg": "/F1_Ticket_Manager/static/media/shopping-bag.a688874f6f1507316bdfa420328a4a53.svg",
     "static/media/F1.svg": "/F1_Ticket_Manager/static/media/F1.071f00fcc01d19842d2863342f93dd65.svg",
     "static/media/sign_out.svg": "/F1_Ticket_Manager/static/media/sign_out.ec36decb8e3e21a1a51d4254fa949cc8.svg",
     "index.html": "/F1_Ticket_Manager/index.html"
   },
   "entrypoints": [
-    "static/css/main.642d592c.css",
-    "static/js/main.6ba958f2.js"
+    "static/css/main.72f60fc7.css",
+    "static/js/main.628a238e.js"
   ]
 }
