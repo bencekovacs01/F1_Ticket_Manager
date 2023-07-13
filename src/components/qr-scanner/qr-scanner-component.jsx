@@ -65,8 +65,7 @@ const QRCodeScanner = ({ collections }) => {
               },
             }}
             onResult={e => {
-              console.log(e.text);
-              setResult(e.text);
+              // setResult(e.text);
               setUid(e.text);
               if (scanning) {
                 setScanning(false);
