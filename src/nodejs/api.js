@@ -2,7 +2,11 @@ import axios from 'axios';
 
 const localhost = 'http://localhost:3002';
 const vercel = 'https://f1-ticket-manager-node-js.vercel.app';
-const domain = vercel;
+const domain = localhost;
+
+const getUserToken = () => {
+  return localStorage.getItem('token');
+};
 
 export const _NODE_Init = async () => {
   try {

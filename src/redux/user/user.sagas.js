@@ -26,6 +26,16 @@ export function* getSnapshotFromUserAuth(userAuth, additionalData) {
       additionalData
     );
     const userSnapshot = yield userRef.get();
+
+    const user = auth.currentUser;
+    user
+      ?.getIdToken(true)
+      .then(async function (token) {
+        localStorage.setItem('token', token);
+      })
+      .catch(function (e) {
+        return;
+      });
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
     yield put(signInFailure(error));
@@ -80,6 +90,7 @@ export function* isUserAuthenticated() {
 export function* signOut() {
   try {
     yield auth.signOut();
+    localStorage.removeItem('token');
     yield put(signOutSuccess());
   } catch (error) {
     yield put(signOutFailure(error));

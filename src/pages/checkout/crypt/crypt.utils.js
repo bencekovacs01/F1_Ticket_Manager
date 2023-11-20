@@ -253,10 +253,8 @@ const generateRandomNonce = () => {
 };
 
 // Usage example:
-const key12 = generateRandomKey();
-console.log('key12', key12);
-const nonce12 = generateRandomNonce();
-console.log('nonce12', nonce12);
+// const key12 = generateRandomKey();
+// const nonce12 = generateRandomNonce();
 
 // const chacha20ENCYPT = (key, nonce) => {
 //   const message = convertTextToUint8Array('HELLO');

@@ -27,27 +27,52 @@ const CheckoutPage = ({ cartItems, total, clearCart }) => {
   let qrCodeList = [];
 
   useEffect(() => {
-    const order = async () => {
-      cartItems.map(item => {
-        const canvas = document.getElementById(item.uid);
-        const pngUrl = canvas
-          .toDataURL('image/png')
-          .replace('image/png', 'image/octet-stream')
-          .substring(31);
-        qrCodeList.push(pngUrl);
+    const placeOrder = async () => {
+      const domain = 'http://localhost:3003';
+      const token = localStorage.getItem('token');
+
+      const response = await fetch(`${domain}/order`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          data: cartItems,
+          userId: auth?.currentUser?.uid,
+          pin: pin,
+        }),
       });
 
-      const res = await addOrder({
-        cartItems,
-        total,
-        images: qrCodeList,
-        pin: pin,
-      });
-      if (res) clearCart();
+      if (response?.ok) {
+        const responseData = await response.json();
+        setOrderResponse(responseData);
+      } else {
+        console.error('Request failed with status', response.status);
+        return -1;
+      }
     };
+    // const order = async () => {
+    //   cartItems.map(item => {
+    //     const canvas = document.getElementById(item.uid);
+    //     const pngUrl = canvas
+    //       .toDataURL('image/png')
+    //       .replace('image/png', 'image/octet-stream')
+    //       .substring(31);
+    //     qrCodeList.push(pngUrl);
+    //   });
+
+    //   const res = await addOrder({
+    //     cartItems,
+    //     total,
+    //     images: qrCodeList,
+    //     pin: pin,
+    //   });
+    //   if (res) clearCart();
+    // };
 
     if (pin) {
-      order();
+      placeOrder();
     }
   }, [pin]);
 
@@ -72,6 +97,46 @@ const CheckoutPage = ({ cartItems, total, clearCart }) => {
       />
     </div>
   ));
+
+  const [orderResponse, setOrderResponse] = useState(null);
+
+  const verifySignature = async () => {
+    const domain = 'http://localhost:3003';
+    const token = localStorage.getItem('token');
+
+    if (
+      !orderResponse ||
+      !orderResponse.publicKey ||
+      !orderResponse.digitalSignature
+    ) {
+      console.error('Order response is missing necessary data.');
+      return -1;
+    }
+
+    const response = await fetch(`${domain}/verify`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        userId: auth?.currentUser?.uid,
+        // publicKey: orderResponse.publicKey,
+        publicKey: orderResponse.publicKey,
+        digitalSignature: orderResponse.digitalSignature,
+        // digitalSignature: 'invalid',
+        originalData: cartItems,
+      }),
+    });
+
+    if (response?.ok) {
+      const responseData = await response.json();
+      setOrderResponse(responseData);
+    } else {
+      console.error('Request failed with status', response.status);
+      return -1;
+    }
+  };
 
   return (
     <>
@@ -122,18 +187,29 @@ const CheckoutPage = ({ cartItems, total, clearCart }) => {
           <br />
           4242 4242 4242 4242 - Exp: 12/34 - CVV: 123
         </div>
-        {/* <CustomButton
+        <CustomButton
           className="test-order"
           onClick={() => {
-            if (!cartItems || cartItems.length === 0) {
-              console.log('EMPTY CART!');
-              return;
-            }
-            setShowPopup(true);
+            // await placeOrder(cartItems);
+            // return;
+            return setShowPopup(true);
           }}
         >
           Test order
-        </CustomButton> */}
+        </CustomButton>
+
+        <CustomButton
+          className="test-order"
+          onClick={async () => {
+            // validateSignature(orderResponse);
+            await verifySignature();
+            return;
+            // setShowPopup(true);
+          }}
+        >
+          VALIADTE
+        </CustomButton>
+
         {/* <CustomButton
         className="test-order"
         onClick={async () => {

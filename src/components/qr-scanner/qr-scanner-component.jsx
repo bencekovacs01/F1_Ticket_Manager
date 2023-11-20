@@ -10,6 +10,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectCollectionsForPreview } from '../../redux/shop/shop.selectors';
 import './qr-scanner-styles.scss';
 import TrackSelector from './track-selector/track-selector.component';
+import { auth } from '../../firebase/firebase.utils';
 
 const QRCodeScanner = ({ collections }) => {
   const [result, setResult] = useState(0);
@@ -18,7 +19,7 @@ const QRCodeScanner = ({ collections }) => {
   const [uid, setUid] = useState('');
   const [pin, setPin] = useState('');
   const [selectedCurcuitId, setSelectedCurcuitId] = useState(
-    collections[0].circuitId
+    collections[collections?.length - 1].circuitId
   );
 
   const handleScanUidChange = event => {
@@ -35,6 +36,32 @@ const QRCodeScanner = ({ collections }) => {
   collections.map(track => {
     items.push({ image: track.url, circuitId: track.circuitId });
   });
+
+  const scan = async () => {
+    const domain = 'http://localhost:3003';
+    const token = localStorage.getItem('token');
+
+    const response = await fetch(`${domain}/scan`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        userId: auth?.currentUser?.uid,
+        uid: uid,
+        pin: pin,
+        circuitId: selectedCurcuitId,
+      }),
+    });
+
+    if (response?.ok) {
+      const responseData = await response.json();
+    } else {
+      console.error('Request failed with status', response.status);
+      return -1;
+    }
+  };
 
   return (
     <>
@@ -107,24 +134,27 @@ const QRCodeScanner = ({ collections }) => {
         className="submit"
         onClick={async () => {
           setResult(0);
-          if (pin.length === 6 && uid.length > 0) {
-            const snippedUserId = uid.split('*')[0];
-            const snippedUid = uid.split('*')[1];
-            const res = await checkOrders({
-              circuitId: selectedCurcuitId,
-              uid: snippedUid,
-              pin: pin,
-              userId: snippedUserId,
-            });
-            setResult(res);
-            console.log('res', res);
-          }
+          // if (pin.length === 6 && uid.length > 0) {
+          // const snippedUserId = uid.split('*')[0];
+          // console.log('snippedUserId', snippedUserId);
+          // const snippedUid = uid.split('*')[1];
+          return await scan();
+
+          // const res = await checkOrders({
+          //   circuitId: selectedCurcuitId,
+          //   uid: snippedUid,
+          //   pin: pin,
+          //   userId: snippedUserId,
+          // });
+          // setResult(res);
+          // console.log('res', res);
+          // }
         }}
       >
         VALIDATE
       </CustomButton>
 
-      <ValidationPopup isSuccessful={result} scanned={result !== 0} />
+      {/* <ValidationPopup isSuccessful={result} scanned={result !== 0} /> */}
 
       {/* {result !== 0 ? ( 
         <Popup isSuccessful={result > 0} scanned={true} />

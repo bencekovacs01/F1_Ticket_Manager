@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './track-selector.styles.scss';
 
 const TrackSelector = ({ items, onSelect }) => {
-  const [selectedItem, setSelectedItem] = useState(items[0]);
+  const [selectedItem, setSelectedItem] = useState(items[items.length - 1]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleItemClick = item => {
